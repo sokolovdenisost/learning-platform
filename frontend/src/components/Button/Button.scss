@@ -1,0 +1,55 @@
+@import '../../index.scss';
+
+.button {
+  padding: 10px 15px;
+  border-radius: $radius5;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &.bold {
+    border: none;
+    color: #fff;
+
+    &.primary {
+      background: $primary;
+    }
+
+    &.danger {
+      background: $danger;
+    }
+
+    &.main {
+      background: $blue-main;
+    }
+
+    &.success {
+      background: $success;
+    }
+  }
+
+  &.outline {
+    border: 2px solid;
+    background: #fff;
+
+    &.primary {
+      color: $primary;
+      border-color: $primary;
+    }
+
+    &.danger {
+      color: $danger;
+      border-color: $danger;
+    }
+
+    &.main {
+      color: $blue-main;
+      border-color: $blue-main;
+    }
+
+    &.success {
+      color: $success;
+      border-color: $success;
+    }
+  }
+}

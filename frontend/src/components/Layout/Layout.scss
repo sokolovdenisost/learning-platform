@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.layout {
+  width: 900px;
+  padding-top: 120px;
+  margin-left: 200px;
+
+  &-title {
+    font-size: 36px;
+    color: $blue-main;
+    font-weight: 900;
+  }
+
+  &-body {
+    margin-top: 50px;
+  }
+}

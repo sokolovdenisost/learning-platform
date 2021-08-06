@@ -1,0 +1,25 @@
+// colors
+$blue-main: #0d187d;
+$grey-main: #b3b3c1;
+$primary: #007bff;
+$danger: #f45555;
+$success: #00b74a;
+$warning: #ffa900;
+
+// Fonts
+$baloo: 'Baloo Bhai 2', cursive;
+
+// Radius
+$radius5: 5px;
+
+// transition
+$main-transition: all 0.3s ease;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: $baloo;
+  text-decoration: none;
+}

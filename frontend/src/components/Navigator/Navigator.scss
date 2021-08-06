@@ -1,0 +1,20 @@
+.navigator {
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+
+  .navigator-block {
+    padding: 35px 0;
+    width: 100px;
+    background: #fdfdfd;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+
+    .nav-button:last-child {
+      margin-top: 125px;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '../../../index.scss';
+
+.nav-button {
+  display: block;
+  margin-bottom: 10px;
+
+  .nav-block-icon {
+    width: 80px;
+    transition: $main-transition;
+    margin: 0 auto;
+    padding: 10px 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      transition: $main-transition;
+      color: $grey-main;
+    }
+  }
+
+  .nav-title {
+    transition: $main-transition;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: $grey-main;
+    height: 0;
+    transition-delay: 0.1s;
+    transform: scale(0);
+  }
+}
+
+.active {
+  .nav-block-icon {
+    background: #eeeff8;
+
+    svg {
+      color: $blue-main;
+    }
+  }
+
+  .nav-title {
+    height: 23px;
+    transform: scale(1);
+    color: $blue-main;
+  }
+}
