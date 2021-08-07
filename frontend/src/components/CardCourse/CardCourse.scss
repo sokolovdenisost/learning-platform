@@ -1,0 +1,113 @@
+@import '../../index.scss';
+
+.card-course {
+  width: 836px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  transition: all 1s ease, opacity 0.3s ease;
+
+  .image {
+    width: 250px;
+    height: 200px;
+    border-radius: $r15;
+    object-fit: cover;
+  }
+
+  .info {
+    min-width: 390px;
+    max-width: 390px;
+    margin: 0 25px;
+
+    .title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .description {
+      margin: 15px 0;
+      letter-spacing: 1.5px;
+      color: $grey-main;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .owner-course {
+      font-size: 16px;
+      font-weight: 600;
+      color: $grey-main;
+
+      span {
+        font-weight: 700;
+        color: #000;
+      }
+    }
+
+    .tags {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+  }
+
+  .interaction {
+    position: relative;
+    height: 191px;
+    min-width: 150px;
+    max-width: 150px;
+
+    .top {
+      position: absolute;
+      right: 0;
+      display: flex;
+
+      .button {
+        margin-right: 20px;
+        border: none;
+        background: transparent;
+        height: 24px;
+        cursor: pointer;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+
+      .rating {
+        display: flex;
+        align-items: center;
+
+        .stars {
+          width: 120px;
+          height: 24px;
+          margin-right: 5px;
+
+          .button {
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            height: 24px;
+          }
+        }
+
+        .avg {
+          font-size: 16px;
+          font-weight: 700;
+          color: $grey-main;
+        }
+      }
+
+      .how-many-rating {
+        text-align: right;
+        font-weight: 600;
+        font-size: 14px;
+        color: $grey-main;
+      }
+    }
+  }
+}

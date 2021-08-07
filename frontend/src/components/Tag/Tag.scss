@@ -1,0 +1,28 @@
+@import '../../index.scss';
+
+.tag-block {
+  padding: 3px 15px;
+  border-radius: $r15;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+
+  &.UI.Design {
+    color: $ui;
+    background: $ui-bg;
+  }
+
+  &.UX.Design {
+    color: $ux;
+    background: $ux-bg;
+  }
+
+  &.Web.design {
+    color: $web-design;
+    background: $web-design-bg;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

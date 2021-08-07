@@ -19,7 +19,7 @@ const routes = [
 
 export const Navigator = () => {
   const mapButtons = routes.map((r) => {
-    return <NavButton href={r.href} title={r.title} icon={r.icon} />;
+    return <NavButton key={r.title} href={r.href} title={r.title} icon={r.icon} />;
   });
 
   return (
