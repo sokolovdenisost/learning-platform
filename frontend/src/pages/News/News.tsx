@@ -7,6 +7,7 @@ export const News = () => {
   return (
     <Layout title="News">
       <Slider title="New courses" />
+      <Slider title="Most popular courses" />
     </Layout>
   );
 };

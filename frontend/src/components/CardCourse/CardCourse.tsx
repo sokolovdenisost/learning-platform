@@ -6,8 +6,8 @@ import { AiFillStar } from 'react-icons/ai';
 import './CardCourse.scss';
 
 interface Props {
-  title: string;
-  translateY: number;
+  title?: string;
+  translateY?: number;
   styles?: Styles;
 }
 
@@ -18,7 +18,9 @@ export const CardCourse = ({ title, translateY, styles }: Props) => {
         opacity: styles.opacity,
         visibility: styles.visibility,
       }
-    : undefined;
+    : {
+        marginBottom: 15,
+      };
 
   return (
     <a href="#" className="card-course" style={styleCard}>
@@ -28,7 +30,7 @@ export const CardCourse = ({ title, translateY, styles }: Props) => {
         className="image"
       />
       <div className="info">
-        <div className="title">{title}</div>
+        <div className="title">Strategy, Design, Development</div>
         <div className="description">Learn how to apply User Experience (UX) principles to your website designs, code ...</div>
         <div className="owner-course">
           Created by <span>John Davis</span>

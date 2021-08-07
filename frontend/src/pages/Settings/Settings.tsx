@@ -1,6 +1,11 @@
 import React from 'react';
+import { Layout } from '../../components/Layout/Layout';
 import './Settings.scss';
 
 export const Settings = () => {
-  return <div className="settings-page"></div>;
+  return (
+    <Layout title="Settings">
+      <div>settings</div>
+    </Layout>
+  );
 };

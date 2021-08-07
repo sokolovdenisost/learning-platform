@@ -1,6 +1,11 @@
 import React from 'react';
+import { Layout } from '../../components/Layout/Layout';
 import './MyCourses.scss';
 
 export const MyCourses = () => {
-  return <div className="mycourses-page"></div>;
+  return (
+    <Layout title="My courses">
+      <div>My courses</div>
+    </Layout>
+  );
 };
