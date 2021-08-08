@@ -1,6 +1,13 @@
 @import '../../index.scss';
 
 .settings-page {
+  display: flex;
+  justify-content: space-between;
+
+  .settings-item {
+    margin-bottom: 20px;
+  }
+
   .settings-form {
     .fullname {
       display: flex;

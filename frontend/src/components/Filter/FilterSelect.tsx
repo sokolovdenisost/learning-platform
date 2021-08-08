@@ -46,7 +46,7 @@ export const FilterSelect = ({ title, options }: Props) => {
       <div className={active.active ? 'wrapper active' : 'wrapper'}>
         {options.map((o) => {
           return (
-            <div data-value={o} className="option" onClick={(e) => setOption(e)}>
+            <div data-value={o} key={o} className="option" onClick={(e) => setOption(e)}>
               {getSelect(o)}
             </div>
           );
