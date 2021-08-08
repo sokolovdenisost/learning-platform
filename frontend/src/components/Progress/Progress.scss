@@ -1,0 +1,50 @@
+@import '../../index.scss';
+
+.progress {
+  width: 836px;
+  .progress-body {
+    width: 100%;
+
+    .progress-title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .progress-block {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+      min-width: 836px;
+
+      .progress-percent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        border: 4px solid $blue-main;
+        font-size: 36px;
+        font-weight: 700;
+        color: $blue-main;
+      }
+
+      .line {
+        margin: 0 30px;
+        height: 100px;
+        border: 1px solid #eaeaea;
+      }
+
+      .progress-text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .progress-button {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}

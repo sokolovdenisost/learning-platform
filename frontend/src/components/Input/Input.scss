@@ -1,0 +1,47 @@
+@import '../../index.scss';
+
+.input {
+  width: 100%;
+  position: relative;
+  margin-bottom: 5px;
+  height: 45px;
+
+  &-input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid $grey-main;
+    padding: 0 5px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    bottom: 0;
+
+    &:focus + .input-label,
+    &:valid + .input-label {
+      bottom: 50%;
+      left: 0;
+      font-size: 14px;
+    }
+
+    &:focus {
+      border-bottom: 2px solid $primary;
+    }
+
+    &:focus + .input-label {
+      color: $primary;
+    }
+  }
+
+  &-label {
+    cursor: text;
+    transition: all 0.3s ease;
+    left: 5px;
+    bottom: 0;
+    font-weight: 500;
+    color: $grey-main;
+    position: absolute;
+    font-size: 16px;
+  }
+}

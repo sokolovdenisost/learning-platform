@@ -1,0 +1,45 @@
+@import '../../index.scss';
+
+.profile-picture {
+  margin: 20px 0;
+
+  &-title {
+    font-size: 14px;
+    color: $grey-main;
+    font-weight: 500;
+  }
+
+  &-body {
+    margin-top: 5px;
+    border-radius: $r5;
+    border: 1px solid $grey-main;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      width: 70px;
+      height: 70px;
+      border-radius: $r5;
+      margin-right: 25px;
+      object-fit: cover;
+    }
+
+    .right {
+      position: relative;
+      .top {
+        width: 235px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        font-size: 13px;
+        font-weight: 500;
+        color: $grey-main;
+      }
+    }
+  }
+}

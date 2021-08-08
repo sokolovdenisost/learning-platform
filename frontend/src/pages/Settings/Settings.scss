@@ -1,0 +1,11 @@
+@import '../../index.scss';
+
+.settings-page {
+  .settings-form {
+    .fullname {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

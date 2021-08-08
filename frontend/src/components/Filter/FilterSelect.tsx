@@ -5,9 +5,10 @@ import './Filter.scss';
 
 interface Props {
   title: string;
+  options: Array<string>;
 }
 
-export const FilterSelect = ({ title }: Props) => {
+export const FilterSelect = ({ title, options }: Props) => {
   const [active, setActive] = useState<Active>({
     tags: [],
     active: false,
@@ -43,15 +44,13 @@ export const FilterSelect = ({ title }: Props) => {
         </div>
       </div>
       <div className={active.active ? 'wrapper active' : 'wrapper'}>
-        <div data-value="Front-end" className="option" onClick={(e) => setOption(e)}>
-          {getSelect('Front-end')}
-        </div>
-        <div data-value="Back-end" className="option" onClick={(e) => setOption(e)}>
-          {getSelect('Back-end')}
-        </div>
-        <div data-value="Design" className="option" onClick={(e) => setOption(e)}>
-          {getSelect('Design')}
-        </div>
+        {options.map((o) => {
+          return (
+            <div data-value={o} className="option" onClick={(e) => setOption(e)}>
+              {getSelect(o)}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
