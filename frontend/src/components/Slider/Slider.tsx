@@ -4,9 +4,10 @@ import './Slider.scss';
 
 interface Props {
   title: string;
+  link: string;
 }
 
-export const Slider = ({ title }: Props) => {
+export const Slider = ({ title, link }: Props) => {
   const [active, setActive] = useState<Dots>({
     1: true,
     2: false,
@@ -39,7 +40,9 @@ export const Slider = ({ title }: Props) => {
     <div className="slider">
       <div className="top">
         <div className="title">{title}</div>
-        <div className="see-all">See all</div>
+        <a className="see-all" href={link}>
+          See all
+        </a>
       </div>
       <div className="body">
         <CardCourse translateY={0} styles={getActiveValues('1')} />

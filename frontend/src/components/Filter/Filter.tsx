@@ -23,7 +23,7 @@ export const Filter = () => {
     <div className="filter">
       <div className="title">Filter by:</div>
       <div className="selects">
-        <FilterSelect options={SKILLS} title="Skills" />
+        <FilterSelect options={SKILLS} title="Categories" />
         <FilterSelect options={LANGUAGE} title="Language" />
         <FilterSelect options={LEVEL} title="Level" />
       </div>

@@ -15,8 +15,8 @@
   }
 
   &.connect {
-    background: #f6fdfa;
-    border: 1px solid #88e4b8;
+    background: $background-selected;
+    border: 1px solid $border-selected;
   }
 
   .social-left {

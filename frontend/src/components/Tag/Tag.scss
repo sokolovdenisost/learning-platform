@@ -26,3 +26,32 @@
     margin-right: 0;
   }
 }
+
+.tag-search-block {
+  cursor: pointer;
+  display: inline;
+  padding: 5px 15px;
+  background: #fff;
+  color: $grey-main;
+  border: 1px solid $grey-main;
+  border-radius: $r5;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  transition: $main-transition;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.selected {
+    color: $border-selected;
+    border: 1px solid $border-selected;
+    background: $background-selected;
+  }
+}

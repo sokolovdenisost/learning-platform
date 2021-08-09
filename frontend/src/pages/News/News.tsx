@@ -6,8 +6,8 @@ import './News.scss';
 export const News = () => {
   return (
     <Layout title="News">
-      <Slider title="New courses" />
-      <Slider title="Most popular courses" />
+      <Slider title="New courses" link="/new-courses" />
+      <Slider title="Most popular courses" link="/popular-courses" />
     </Layout>
   );
 };

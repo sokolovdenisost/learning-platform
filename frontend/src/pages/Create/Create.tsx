@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Block } from '../../components/Block/Block';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
+import { SearchTag } from '../../components/Tag/Tag';
 import './Create.scss';
 
+const TAGS = [
+  'Web-Design',
+  'Design',
+  'UI-Design',
+  'UX-Design',
+  'Web-development',
+  'Front-end',
+  'Back-end',
+  'Mobile-development',
+  'CMS',
+  'Gamedev',
+  'Testing',
+];
+
 export const Create = () => {
+  const [selected, setSelected] = useState<string[]>([]);
+
+  function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
+    const key = String(e.currentTarget.dataset.name);
+    const findKey = selected.find((c) => c === key);
+    if (findKey) {
+      setSelected(selected.filter((c) => c !== key));
+    } else if (selected.length > 2) {
+      selected.shift();
+      setSelected([...selected, key]);
+    } else if (!findKey && selected.length < 3) {
+      setSelected([...selected, key]);
+    }
+  }
+
+  function getSelected(title: string) {
+    return selected.find((c) => c === title) ? true : false;
+  }
+
   return (
     <Layout title="Create course">
       <div className="create-page">
@@ -30,8 +64,24 @@ export const Create = () => {
               <Input label="For what level intended course" id="level" />
             </Block>
           </div>
+          <div className="create-item">
+            <Block title="Search details" subtitle="Here you set a minimum 1 tag (maximum of 3 tags) to make it easier to find the course.">
+              <div className="course-tags">
+                {TAGS.map((t) => {
+                  return <SearchTag key={t} title={t} selected={getSelected(t)} onClick={(e: React.MouseEvent<HTMLDivElement>) => selectedTags(e)} />;
+                })}
+              </div>
+            </Block>
+          </div>
         </div>
       </div>
     </Layout>
   );
 };
+
+interface Selected {
+  selectedArray: string[];
+  selectedObj: {
+    [key: string]: boolean;
+  };
+}

@@ -17,9 +17,11 @@ export const FilterSelect = ({ title, options }: Props) => {
   function setOption(e: React.MouseEvent<HTMLDivElement>) {
     // Можно сделать чтобы не сразу же закрывалось
     if (active.tags.find((c) => c === e.currentTarget.dataset.value)) {
-      setActive({ ...active, tags: active.tags.filter((c) => c !== e.currentTarget.dataset.value), active: !active.active });
+      // setActive({ ...active, tags: active.tags.filter((c) => c !== e.currentTarget.dataset.value), active: !active.active });
+      setActive({ ...active, tags: active.tags.filter((c) => c !== e.currentTarget.dataset.value) });
     } else {
-      setActive({ ...active, tags: [...active.tags, e.currentTarget.dataset.value], active: !active.active });
+      // setActive({ ...active, tags: [...active.tags, e.currentTarget.dataset.value], active: !active.active });
+      setActive({ ...active, tags: [...active.tags, e.currentTarget.dataset.value] });
     }
   }
 

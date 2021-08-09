@@ -23,7 +23,7 @@ export const CardCourse = ({ title, translateY, styles }: Props) => {
       };
 
   return (
-    <a href="#" className="card-course" style={styleCard}>
+    <a href="/course/1" className="card-course" style={styleCard}>
       <img
         src="https://images.unsplash.com/photo-1628191081698-44f573462a03?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
         alt="course"

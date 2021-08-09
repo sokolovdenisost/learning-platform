@@ -45,7 +45,9 @@ export const Settings = () => {
               title="Two Factor Authentication"
               subtitle="You must setup a two factor authentication to go inline with our security guidelines."
               onSave={onSave}>
-              <div>test</div>
+              <div className="two-factor-form">
+                <Input label="Phone number" id="phone" />
+              </div>
             </Block>
           </div>
           <div className="settings-item">
