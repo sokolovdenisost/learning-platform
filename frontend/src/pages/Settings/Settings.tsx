@@ -1,9 +1,9 @@
 import React from 'react';
 import { Block } from '../../components/Block/Block';
-import { Button } from '../../components/Button/Button';
+import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
-import { ProfilePicture } from '../../components/ProfilePicture/ProfilePicture';
+import { Social } from '../../components/Social/Social';
 import './Settings.scss';
 
 export const Settings = () => {
@@ -16,7 +16,7 @@ export const Settings = () => {
         <div className="left">
           <div className="settings-item">
             <Block title="Personal Details" subtitle="Feel free to edit your basic information such as name, email etc." onSave={onSave}>
-              <ProfilePicture />
+              <ChangePicture title="Profile picture" />
               <div className="settings-form">
                 <div className="fullname">
                   <Input width={170} label="First name" id="firtsName" />
@@ -53,8 +53,15 @@ export const Settings = () => {
               title="Connect to Social Accounts"
               subtitle="Merge your facebook, vk.com, ok.ru accounts to log in quickly next time."
               onSave={onSave}>
-              <div className="merged-accounts"></div>
-              <div className="merge-accounts"></div>
+              <div className="merged-accounts">
+                <div className="title">Merged accounts</div>
+                <Social social="fb" connect={true} />
+              </div>
+              <div className="merge-accounts">
+                <div className="title">Merge more accounts</div>
+                <Social social="vk" connect={false} />
+                <Social social="ok" connect={false} />
+              </div>
             </Block>
           </div>
         </div>

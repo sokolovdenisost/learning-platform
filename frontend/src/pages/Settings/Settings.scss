@@ -15,4 +15,23 @@
       align-items: center;
     }
   }
+
+  .merged-accounts {
+    margin: 20px 0;
+
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $grey-main;
+    }
+  }
+
+  .merge-accounts {
+    margin: 20px 0;
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $grey-main;
+    }
+  }
 }

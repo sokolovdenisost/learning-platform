@@ -3,7 +3,6 @@
 .button {
   padding: 10px 15px;
   border-radius: $r5;
-  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
 
@@ -30,7 +29,7 @@
 
   &.outline {
     border: 2px solid;
-    background: #fff;
+    background: transparent;
 
     &.primary {
       color: $primary;

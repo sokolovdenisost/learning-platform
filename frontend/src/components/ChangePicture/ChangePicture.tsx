@@ -1,12 +1,16 @@
 import React from 'react';
 import { Button } from '../Button/Button';
-import './ProfilePicture.scss';
+import './ChangePicture.scss';
 
-export const ProfilePicture = () => {
+interface Props {
+  title: string;
+}
+
+export const ChangePicture = ({ title }: Props) => {
   return (
-    <div className="profile-picture">
-      <div className="profile-picture-title">Profile picture</div>
-      <div className="profile-picture-body">
+    <div className="change-picture">
+      <div className="change-picture-title">{title}</div>
+      <div className="change-picture-body">
         <img
           alt=""
           className="left"
