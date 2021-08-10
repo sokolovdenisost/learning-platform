@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { Button } from '../Button/Button';

@@ -6,7 +6,7 @@ interface Props {
   type: Types;
   color: Colors;
   fontSize: FontSize;
-  onClick?: () => void;
+  onClick?: any;
   width?: string;
 }
 

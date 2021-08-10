@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+.step {
+  background: #fff;
+  transition: all 0.3s ease;
+  opacity: 1;
+
+  &.noactive {
+    opacity: 0;
+  }
+
+  .step-body {
+    width: 836px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .step-next {
+    text-align: right;
+    margin-top: 50px;
+
+    .button:first-child {
+      margin-right: 10px;
+    }
+
+    .button:last-child {
+      margin-right: 0;
+    }
+  }
+}
