@@ -1,0 +1,54 @@
+@import '../../index.scss';
+
+.modal-overlay {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(179, 179, 193, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  transform: scale(0);
+  opacity: 0;
+
+  &.active {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .modal-block {
+    transform: translateY(-50px);
+    transition: all 0.3s ease;
+    width: 400px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: $r5;
+    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.1);
+
+    &.active {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      margin: 50px 0 0;
+
+      .sign-in-form {
+        margin-bottom: 50px;
+      }
+
+      .sign-up-form {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
 @import '../../index.scss';
 
 .button {
-  padding: 10px 15px;
   border-radius: $r5;
   font-weight: 700;
   cursor: pointer;
 
   &.bold {
+    padding: 10px 15px;
     border: none;
     color: #fff;
 
@@ -28,6 +28,7 @@
   }
 
   &.outline {
+    padding: 8px 15px;
     border: 2px solid;
     background: transparent;
 

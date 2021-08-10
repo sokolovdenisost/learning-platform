@@ -1,0 +1,45 @@
+@import '../../index.scss';
+
+.user-menu {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  margin-top: 10px;
+  transform: translateY(-15px);
+  transition: all 0.3s ease;
+  padding: 20px;
+  border-radius: $r5;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+  &.active {
+    transform: translateY(0);
+  }
+
+  &-link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &-text {
+      width: 100%;
+      color: $grey-main;
+      font-size: 14px;
+      font-weight: 700;
+      margin-left: 10px;
+      width: 61px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    svg {
+      min-height: 24px;
+      min-width: 24px;
+      color: $grey-main;
+    }
+  }
+}

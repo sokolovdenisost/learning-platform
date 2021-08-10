@@ -6,16 +6,17 @@ interface Props {
   type: Types;
   color: Colors;
   fontSize: FontSize;
-  onClick?: () => void
+  onClick?: () => void;
+  width?: string;
 }
 
 type FontSize = '14' | '16' | '18';
 type Types = 'bold' | 'outline';
 type Colors = 'main' | 'primary' | 'danger' | 'success';
 
-export const Button = ({ children, type, color, fontSize, onClick }: Props) => {
+export const Button = ({ children, type, color, fontSize, onClick, width }: Props) => {
   return (
-    <button className={`button ${type} ${color}`} style={{ fontSize: `${fontSize}px` }} onClick={onClick}>
+    <button className={`button ${type} ${color}`} style={{ fontSize: `${fontSize}px`, width: width }} onClick={onClick}>
       {children}
     </button>
   );

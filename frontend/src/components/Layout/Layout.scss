@@ -7,7 +7,8 @@
     justify-content: space-between;
     margin: 35px 40px 0;
 
-    .layout-user {
+    .layout-rigth {
+      position: relative;
       display: flex;
       align-items: center;
 
@@ -17,26 +18,38 @@
         margin-right: 25px;
       }
 
-      .layout-user-logo {
+      .layout-user {
         cursor: pointer;
-        display: flex;
-        align-items: center;
 
-        img {
-          width: 50px;
-          height: 50px;
-          border-radius: 100%;
-          border: 1px solid $blue-main;
-          object-fit: cover;
-        }
+        .layout-user-section {
+          display: flex;
+          align-items: center;
 
-        .arrow {
-          height: 30px;
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            border: 1px solid $blue-main;
+            object-fit: cover;
+          }
 
-          svg {
-            color: $blue-main;
+          .arrow {
+            height: 30px;
+
+            svg {
+              color: $blue-main;
+            }
           }
         }
+      }
+    }
+
+    .layout-auth {
+      display: flex;
+      align-items: center;
+
+      .button:first-child {
+        margin-right: 10px;
       }
     }
   }

@@ -53,7 +53,7 @@ const routesAuth = [
 export const routes = (auth: boolean) => {
   const mapAuthRoutes = routesAuth.map((c) => {
     return (
-      <Route path={c.path} exact>
+      <Route key={c.path} path={c.path} exact>
         {c.component}
       </Route>
     );
