@@ -25,6 +25,10 @@
     &.success {
       background: $success;
     }
+
+    &.cancel {
+      background: $cancel;
+    }
   }
 
   &.outline {
@@ -50,6 +54,11 @@
     &.success {
       color: $success;
       border-color: $success;
+    }
+
+    &.cancel {
+      color: $cancel;
+      border-color: $cancel;
     }
   }
 }

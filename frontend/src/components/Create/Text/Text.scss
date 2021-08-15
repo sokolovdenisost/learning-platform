@@ -1,0 +1,46 @@
+@import '../../../index.scss';
+
+.textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.3s ease;
+
+  &.active {
+    max-height: fit-content;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  textarea {
+    min-height: 150px;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: $r5;
+    border: 1px solid $grey-main;
+  }
+
+  &-buttons {
+    text-align: right;
+
+    .button:first-child {
+      margin-right: 10px;
+    }
+  }
+}
+
+.ready-textcourse {
+  font-size: 18px;
+  font-weight: 400;
+}

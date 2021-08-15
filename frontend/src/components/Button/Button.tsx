@@ -12,7 +12,7 @@ interface Props {
 
 type FontSize = '14' | '16' | '18';
 type Types = 'bold' | 'outline';
-type Colors = 'main' | 'primary' | 'danger' | 'success';
+type Colors = 'main' | 'primary' | 'danger' | 'success' | 'cancel';
 
 export const Button = ({ children, type, color, fontSize, onClick, width }: Props) => {
   return (

@@ -93,7 +93,7 @@ export const Create = () => {
   return (
     <Layout title="Create course">
       <div className="create-page">
-        <Step step="1" activeTransform={0} active={steps[1] ? steps[1].active : true} changeStep={changeStep}>
+        <Step type="normal" step="1" activeTransform={0} active={steps[1] ? steps[1].active : true} changeStep={changeStep}>
           <div className="left">
             <div className="create-item">
               <Block title="Main information on course" subtitle="In this block you  write main information on your course.">
@@ -128,15 +128,9 @@ export const Create = () => {
             </div>
           </div>
         </Step>
-        <Step step="2" activeTransform={-100} active={steps[2] ? steps[2].active : false} changeStep={changeStep}>
-          <div className="test">test</div>
-        </Step>
-        <Step step="3" activeTransform={-200} active={steps[3] ? steps[3].active : false} changeStep={changeStep}>
-          <div className="test">test</div>
-        </Step>
-        <Step step="4" activeTransform={-300} active={steps[4] ? steps[4].active : false} changeStep={changeStep}>
-          <div className="test">test</div>
-        </Step>
+        <Step type="lesson" step="2" activeTransform={-100} active={steps[2] ? steps[2].active : false} changeStep={changeStep} />
+        <Step type="lesson" step="3" activeTransform={-200} active={steps[3] ? steps[3].active : false} changeStep={changeStep} />
+        <Step type="lesson" step="4" activeTransform={-300} active={steps[4] ? steps[4].active : false} changeStep={changeStep} />
       </div>
     </Layout>
   );
