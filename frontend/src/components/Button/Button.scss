@@ -5,6 +5,14 @@
   font-weight: 700;
   cursor: pointer;
 
+  &.disable {
+    padding: 10px 15px;
+    border: none;
+    background: #e1e1e3;
+    color: #9696a0;
+    cursor: default;
+  }
+
   &.bold {
     padding: 10px 15px;
     border: none;

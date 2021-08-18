@@ -1,0 +1,36 @@
+@import '../../../index.scss';
+
+.video {
+  height: 100%;
+  .video-buttons {
+    text-align: right;
+
+    .button:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  &-ready {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: max-content;
+
+    & iframe {
+      margin-right: 10px;
+      border: none;
+      border-radius: $r5;
+    }
+
+    &:hover .ready-edit {
+      opacity: 1;
+    }
+
+    .ready-edit {
+      transition: $main-transition;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+}

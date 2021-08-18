@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Panel } from '../Create/Panel/Panel';
 import { Text } from '../Create/Text/Text';
+import { Video } from '../Create/Video/Video';
 import './Step.scss';
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 }
 
 type Types = 'normal' | 'lesson';
-type TypesForm = 'video' | 'text' | 'test' | 'code';
+type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const Step = ({ children, activeTransform, active, changeStep, step, type }: Props) => {
   const [stepForm, setStepForm] = useState<StepForm[]>([]);
@@ -56,6 +57,9 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
   const mapCreateForms = stepForm.map((form, index) => {
     if (form.type === 'text') {
       return <Text onCancel={() => cancelForm(index)} key={index} />;
+    }
+    if (form.type === 'video') {
+      return <Video onCancel={() => cancelForm(index)} key={index} />;
     }
   });
 

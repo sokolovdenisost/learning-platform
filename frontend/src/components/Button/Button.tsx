@@ -8,15 +8,17 @@ interface Props {
   fontSize: FontSize;
   onClick?: any;
   width?: string;
+  disable?: boolean;
 }
 
 type FontSize = '14' | '16' | '18';
 type Types = 'bold' | 'outline';
 type Colors = 'main' | 'primary' | 'danger' | 'success' | 'cancel';
 
-export const Button = ({ children, type, color, fontSize, onClick, width }: Props) => {
+export const Button = ({ children, type, color, fontSize, onClick, width, disable }: Props) => {
+  const styles = disable ? 'disable' : `${type} ${color}`;
   return (
-    <button className={`button ${type} ${color}`} style={{ fontSize: `${fontSize}px`, width: width }} onClick={onClick}>
+    <button disabled={disable} className={`button ${styles}`} style={{ fontSize: `${fontSize}px`, width: width }} onClick={onClick}>
       {children}
     </button>
   );

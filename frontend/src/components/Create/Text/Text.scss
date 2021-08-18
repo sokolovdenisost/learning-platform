@@ -1,25 +1,6 @@
 @import '../../../index.scss';
 
 .textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  max-height: 0;
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: all 0.3s ease;
-
-  &.active {
-    max-height: fit-content;
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  &-title {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
   textarea {
     min-height: 150px;
     min-width: 100%;
@@ -38,9 +19,26 @@
       margin-right: 10px;
     }
   }
-}
 
-.ready-textcourse {
-  font-size: 18px;
-  font-weight: 400;
+  .textarea-ready {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &:hover .ready-edit {
+      opacity: 1;
+    }
+
+    .ready-edit {
+      transition: $main-transition;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .ready-textcourse {
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
 }

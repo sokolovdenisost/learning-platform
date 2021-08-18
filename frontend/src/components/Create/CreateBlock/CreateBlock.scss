@@ -1,0 +1,30 @@
+@import '../../../index.scss';
+
+.create-block {
+  width: 100%;
+  margin-bottom: 10px;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.3s ease;
+
+  &.active {
+    max-height: fit-content;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &-buttons {
+    text-align: right;
+
+    .button:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  &-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
