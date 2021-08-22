@@ -59,16 +59,8 @@ export const Video = ({ onCancel }: Props) => {
   return (
     <div className="video">
       {activeEdit ? (
-        <CreateBlock title="Video course">
+        <CreateBlock title="Video course" disable={disable} onSave={onSave} onCancel={onCancel}>
           <Input label="" id="video" onChange={(e) => changeInput(e)} />
-          <div className="video-buttons">
-            <Button type="outline" color="cancel" fontSize="14" onClick={onCancel}>
-              Cancel
-            </Button>
-            <Button type="bold" color="primary" fontSize="14" onClick={onSave} disable={disable}>
-              Save
-            </Button>
-          </div>
         </CreateBlock>
       ) : (
         <div className="video-ready">

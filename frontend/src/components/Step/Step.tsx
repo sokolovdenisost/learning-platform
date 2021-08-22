@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Button } from '../Button/Button';
+import { Code } from '../Create/Code/Code';
 import { Panel } from '../Create/Panel/Panel';
+import { Test } from '../Create/Test/Test';
 import { Text } from '../Create/Text/Text';
+import { Title } from '../Create/Title/Title';
 import { Video } from '../Create/Video/Video';
 import './Step.scss';
 
@@ -60,6 +63,18 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     }
     if (form.type === 'video') {
       return <Video onCancel={() => cancelForm(index)} key={index} />;
+    }
+
+    if (form.type === 'title') {
+      return <Title onCancel={() => cancelForm(index)} key={index} />;
+    }
+
+    if (form.type === 'test') {
+      return <Test onCancel={() => cancelForm(index)} key={index} />;
+    }
+
+    if (form.type === 'code') {
+      return <Code onCancel={() => cancelForm(index)} key={index} />;
     }
   });
 

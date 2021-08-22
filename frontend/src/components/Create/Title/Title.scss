@@ -1,0 +1,27 @@
+@import '../../../index.scss';
+
+.title {
+  &-ready {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover .title-edit {
+      opacity: 1;
+    }
+
+    .title-value {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      width: 100%;
+    }
+
+    .title-edit {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      height: 24px;
+    }
+  }
+}

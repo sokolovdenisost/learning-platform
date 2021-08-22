@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { Button } from '../../Button/Button';
+import { Input } from '../../Input/Input';
 import { CreateBlock } from '../CreateBlock/CreateBlock';
-import './Text.scss';
+import './Title.scss';
 
 interface Props {
   onCancel: () => void;
 }
 
-export const Text = ({ onCancel }: Props) => {
+export const Title = ({ onCancel }: Props) => {
   const [value, setValue] = useState('');
   const [activeEdit, setActiveEdit] = useState(true);
   const [disable, setDisable] = useState(true);
 
   function onSave() {
-    if (value) {
+    if (!disable) {
       setActiveEdit(false);
     }
   }
 
-  useEffect(() => {
-    console.log(value, disable);
-  }, [value, disable]);
-
-  function changeInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
+  function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
     if (e.target.value) {
       console.log(e.target.value);
@@ -39,15 +35,15 @@ export const Text = ({ onCancel }: Props) => {
   }
 
   return (
-    <div className="textarea">
+    <div className="title">
       {activeEdit ? (
-        <CreateBlock title="Text course" disable={disable} onCancel={onCancel} onSave={onSave}>
-          <textarea defaultValue={value} placeholder="Text course" onChange={(e) => changeInput(e)}></textarea>
+        <CreateBlock title="Title course" disable={disable} onSave={onSave} onCancel={onCancel}>
+          <Input label="" id="title" onChange={changeInput} />
         </CreateBlock>
       ) : (
-        <div className="textarea-ready">
-          <div className="ready-textcourse">{value}</div>
-          <div className="ready-edit" onClick={onEdit}>
+        <div className="title-ready">
+          <div className="title-value">{value}</div>
+          <div className="title-edit" onClick={onEdit}>
             <BiEdit size={24} color="#007bff" />
           </div>
         </div>
