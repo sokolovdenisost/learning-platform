@@ -1,25 +1,6 @@
 @import '../../../index.scss';
 
 .textarea {
-  textarea {
-    min-height: 150px;
-    min-width: 100%;
-    max-width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: $r5;
-    border: 1px solid $grey-main;
-  }
-
-  &-buttons {
-    text-align: right;
-
-    .button:first-child {
-      margin-right: 10px;
-    }
-  }
-
   .textarea-ready {
     display: flex;
     justify-content: space-between;

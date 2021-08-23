@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Textarea } from '../../Textarea/Textarea';
 import { CreateBlock } from '../CreateBlock/CreateBlock';
 import './Test.scss';
 
@@ -13,10 +14,17 @@ export const Test = ({ onCancel }: Props) => {
 
   function onSave() {}
 
+  function changeInput(e: React.ChangeEvent<HTMLTextAreaElement>) {}
+
   return (
     <div className="test">
       <CreateBlock title="Test course" onCancel={onCancel} onSave={onSave} disable={disable}>
-        <div>test</div>
+        <div className="test-block">
+          <div className="test-question">
+            <Textarea placeholder="Test course" value={value} onChange={changeInput} />
+          </div>
+          <div className="test-answers"></div>
+        </div>
       </CreateBlock>
     </div>
   );

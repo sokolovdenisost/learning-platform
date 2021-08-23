@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { Button } from '../../Button/Button';
+import { Textarea } from '../../Textarea/Textarea';
 import { CreateBlock } from '../CreateBlock/CreateBlock';
 import './Text.scss';
 
@@ -42,7 +43,7 @@ export const Text = ({ onCancel }: Props) => {
     <div className="textarea">
       {activeEdit ? (
         <CreateBlock title="Text course" disable={disable} onCancel={onCancel} onSave={onSave}>
-          <textarea defaultValue={value} placeholder="Text course" onChange={(e) => changeInput(e)}></textarea>
+          <Textarea placeholder="Text course" value={value} onChange={changeInput} />
         </CreateBlock>
       ) : (
         <div className="textarea-ready">

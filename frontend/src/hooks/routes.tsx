@@ -9,6 +9,7 @@ import { MyCourses } from '../pages/MyCourses/MyCourses';
 import { NewCourses } from '../pages/NewCourses/NewCourses';
 import { News } from '../pages/News/News';
 import { PopularCourses } from '../pages/PopularCourses/PopularCourses';
+import { Profile } from '../pages/Profile/Profile';
 import { Settings } from '../pages/Settings/Settings';
 
 const routesAuth = [
@@ -47,6 +48,10 @@ const routesAuth = [
   {
     path: '/course/:id',
     component: <Course />,
+  },
+  {
+    path: '/profile',
+    component: <Profile />,
   },
 ];
 
