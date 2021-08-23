@@ -7,6 +7,7 @@ import { Test } from '../Create/Test/Test';
 import { Text } from '../Create/Text/Text';
 import { Title } from '../Create/Title/Title';
 import { Video } from '../Create/Video/Video';
+import { CreateModal } from '../Modal/Modal';
 import './Step.scss';
 
 interface Props {
@@ -23,6 +24,7 @@ type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const Step = ({ children, activeTransform, active, changeStep, step, type }: Props) => {
   const [stepForm, setStepForm] = useState<StepForm[]>([]);
+  const [createModal, setCreateModal] = useState({ type: '', active: false });
   const styleTypeNormal = {
     display: type === 'normal' ? 'flex' : 'block',
     justifyContent: type === 'normal' ? 'space-between' : '',
@@ -70,7 +72,8 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     }
 
     if (form.type === 'test') {
-      return <Test onCancel={() => cancelForm(index)} key={index} />;
+      console.log(index, 'test');
+      return <Test onOpen={() => setCreateModal({ ...createModal, active: !createModal.active })} onCancel={() => cancelForm(index)} key={index} />;
     }
 
     if (form.type === 'code') {
@@ -79,30 +82,33 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
   });
 
   return (
-    <div
-      className={active ? 'step' : 'step noactive'}
-      style={{ transform: `translateX(${activeTransform}%) scale(${getActiveValues(active).scale})`, ...getActiveValues(active) }}>
-      <div className="step-body" style={styleTypeNormal}>
-        {type === 'normal' ? (
-          children
-        ) : (
-          <>
-            {mapCreateForms}
-            <Panel onCreate={createForm} />{' '}
-          </>
-        )}
-      </div>
-      <div className="step-next">
-        {step === '1' ? null : (
-          <Button type="outline" color="primary" fontSize="16" onClick={() => changeStep(step, 'back')}>
-            Back step
+    <>
+      <div
+        className={active ? 'step' : 'step noactive'}
+        style={{ transform: `translateX(${activeTransform}%) scale(${getActiveValues(active).scale})`, ...getActiveValues(active) }}>
+        <div className="step-body" style={styleTypeNormal}>
+          {type === 'normal' ? (
+            children
+          ) : (
+            <>
+              {mapCreateForms}
+              <Panel onCreate={createForm} />{' '}
+            </>
+          )}
+        </div>
+        <div className="step-next">
+          {step === '1' ? null : (
+            <Button type="outline" color="primary" fontSize="16" onClick={() => changeStep(step, 'back')}>
+              Back step
+            </Button>
+          )}
+          <Button type="bold" color="primary" fontSize="16" onClick={() => changeStep(step, 'next')}>
+            Next step
           </Button>
-        )}
-        <Button type="bold" color="primary" fontSize="16" onClick={() => changeStep(step, 'next')}>
-          Next step
-        </Button>
+        </div>
       </div>
-    </div>
+      {createModal.active ? <CreateModal modal={createModal} setModal={setCreateModal} /> : null}
+    </>
   );
 };
 
@@ -113,6 +119,5 @@ interface GetStyle {
 }
 
 interface StepForm {
-  type: string;
-  value: '';
+  [key: string]: any;
 }

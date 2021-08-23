@@ -17,7 +17,7 @@ export const Layout = ({ title, children }: Props) => {
     active: false,
   });
   const [active, setActive] = useState(false);
-  const auth = false;
+  const auth = true;
 
   function setModalOptions(type: string) {
     setAuthModal({ ...authModal, active: !authModal.active, type: type });

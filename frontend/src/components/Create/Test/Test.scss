@@ -3,12 +3,24 @@
 .test {
   .test-block {
     width: 100%;
+    border-radius: $r5;
     margin-bottom: 5px;
+    border: 1px solid $grey-main;
+    padding: 10px 20px;
 
-    .test-questions {
+    .test-questions-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
     }
 
-    .test-answers {
+    .test-questions {
+      margin: 10px 0;
+
+      .test-questions-no {
+        font-size: 16px;
+        font-weight: 500;
+      }
     }
   }
 }

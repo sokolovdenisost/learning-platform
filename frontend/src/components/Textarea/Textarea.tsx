@@ -2,7 +2,7 @@ import React from 'react';
 import './Textarea.scss';
 
 interface Props {
-  value: string;
+  value?: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder: string;
 }
