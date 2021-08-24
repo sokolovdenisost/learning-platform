@@ -58,7 +58,7 @@ export const SignUpModal = ({ modal, setModal }: Props) => {
         <Input label="First name" id="firstName" />
         <Input label="Last name" id="lastName" />
         <Input label="Email address" id="email" />
-        <Input label="Password" id="password" />
+        <Input label="Password" id="password" type="password" />
       </div>
       <Button type="bold" color="main" fontSize="14" width="100%">
         Sign up

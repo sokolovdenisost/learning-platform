@@ -5,11 +5,10 @@ import { CreateBlock } from '../CreateBlock/CreateBlock';
 import './Test.scss';
 
 interface Props {
-  onOpen: () => void;
   onCancel: () => void;
 }
 
-export const Test = ({ onCancel, onOpen }: Props) => {
+export const Test = ({ onCancel }: Props) => {
   const [questions, setQuestions] = useState<Questions[]>([]);
   const [activeEdit, setActiveEdit] = useState(true);
   const [createModal, setCreateModal] = useState({ type: '', active: false });
@@ -27,14 +26,14 @@ export const Test = ({ onCancel, onOpen }: Props) => {
             <div className="test-questions-title">All questions</div>
             <div className="test-questions">{questions.length ? questions : <div className="test-questions-no">No questions</div>}</div>
             <div className="test-add-questions">
-              <Button type="bold" color="success" fontSize="16" onClick={onOpen}>
+              <Button type="bold" color="success" fontSize="16" onClick={() => setCreateModal({ ...createModal, active: !createModal.active })}>
                 Add question
               </Button>
             </div>
           </div>
         </CreateBlock>
       </div>
-      {/* {createModal.active ? <CreateModal modal={createModal} setModal={setCreateModal} onClick={onCreate} index={index} /> : null} */}
+      {createModal.active ? <CreateModal modal={createModal} setModal={setCreateModal} /> : null}
     </>
   );
 };

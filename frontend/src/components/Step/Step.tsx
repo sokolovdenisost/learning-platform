@@ -47,14 +47,12 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     if (active) {
       return {
         opacity: 1,
-        scale: 1,
         visibility: 'visible',
       };
     }
 
     return {
       opacity: 0,
-      scale: 0.8,
       visibility: 'hidden',
     };
   }
@@ -72,8 +70,7 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     }
 
     if (form.type === 'test') {
-      console.log(index, 'test');
-      return <Test onOpen={() => setCreateModal({ ...createModal, active: !createModal.active })} onCancel={() => cancelForm(index)} key={index} />;
+      return <Test onCancel={() => cancelForm(index)} key={index} />;
     }
 
     if (form.type === 'code') {
@@ -83,9 +80,7 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
 
   return (
     <>
-      <div
-        className={active ? 'step' : 'step noactive'}
-        style={{ transform: `translateX(${activeTransform}%) scale(${getActiveValues(active).scale})`, ...getActiveValues(active) }}>
+      <div className={active ? 'step' : 'step noactive'} style={{ position: 'absolute', left: 0, ...getActiveValues(active) }}>
         <div className="step-body" style={styleTypeNormal}>
           {type === 'normal' ? (
             children
@@ -107,13 +102,12 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
           </Button>
         </div>
       </div>
-      {createModal.active ? <CreateModal modal={createModal} setModal={setCreateModal} /> : null}
     </>
   );
 };
 
 interface GetStyle {
-  scale: number;
+  // scale: number;
   opacity: number;
   visibility: VisibilityState;
 }
