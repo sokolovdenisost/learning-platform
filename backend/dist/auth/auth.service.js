@@ -34,8 +34,9 @@ let AuthService = class AuthService {
                     session.isAuth = true;
                     await session.save((err) => {
                         if (err)
-                            throw err;
+                            console.log(err);
                     });
+                    console.log(session);
                     return { code: 200, type: 'Success', text: 'Signed into account' };
                 }
                 else {

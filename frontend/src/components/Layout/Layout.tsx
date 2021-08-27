@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import { API_URL } from '../../consts';
+import { useAuth } from '../../hooks/auth';
 import { Button } from '../Button/Button';
 import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -17,7 +20,7 @@ export const Layout = ({ title, children }: Props) => {
     active: false,
   });
   const [active, setActive] = useState(false);
-  const auth = false;
+  const auth = useAuth();
 
   function setModalOptions(type: string) {
     setAuthModal({ ...authModal, active: !authModal.active, type: type });
@@ -28,7 +31,7 @@ export const Layout = ({ title, children }: Props) => {
       <div className="layout">
         <div className="layout-top">
           <div className="layout-logo"></div>
-          {auth ? (
+          {auth.auth.firstName ? (
             <div className="layout-rigth">
               <div className="layout-notification">
                 <IoNotificationsOutline size={30} />

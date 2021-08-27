@@ -9,6 +9,7 @@ export class AuthController {
 
   @Get('')
   async getAuth(@Res() res: Response, @Session() session): Promise<void> {
+    console.log(session);
     if (session.user) {
       res.json(await this.authService.findUserById(session.user._id)).status(200);
     } else {

@@ -23,9 +23,9 @@ export class AuthService {
           session.user = user;
           session.isAuth = true;
           await session.save((err) => {
-            if (err) throw err;
+            if (err) console.log(err);
           });
-
+          console.log(session);
           return { code: 200, type: 'Success', text: 'Signed into account' };
         } else {
           return { code: 400, type: 'Error', text: 'Data is incorrect' };

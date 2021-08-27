@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { loginHandler, registerHandler } from '../../utils/auth';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Textarea } from '../Textarea/Textarea';
+import { Notification } from '../Notification/Notification';
 import './Modal.scss';
 
 interface Props {
@@ -38,32 +40,118 @@ interface IModal {
 }
 
 export const SignInModal = ({ modal, setModal }: Props) => {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [result, setResult] = useState({
+    type: '',
+    text: '',
+    code: 0,
+  });
+
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setData({ ...data, [e.currentTarget.id]: e.currentTarget.value });
+  }
+
+  async function loginUserHandler() {
+    setResult({
+      type: '',
+      text: '',
+      code: 0,
+    });
+    const result = await loginHandler(data);
+    setResult(result);
+
+    // if (result.type === 'Success') {
+    //   window.location.reload(true);
+    // }
+
+    setTimeout(
+      () =>
+        setResult({
+          type: '',
+          text: '',
+          code: 0,
+        }),
+      5000,
+    );
+  }
+
   return (
-    <Modal title="Sign In" modal={modal} setModal={setModal}>
-      <div className="sign-in-form">
-        <Input label="Email address" id="email" />
-        <Input label="Password" id="password" />
-      </div>
-      <Button type="bold" color="main" fontSize="14" width="100%">
-        Sign in
-      </Button>
-    </Modal>
+    <>
+      <Modal title="Sign In" modal={modal} setModal={setModal}>
+        <div className="sign-in-form">
+          <Input label="Email address" id="email" value={data.email} onChange={changeHandler} />
+          <Input label="Password" id="password" type="password" value={data.password} onChange={changeHandler} />
+        </div>
+        <Button type="bold" color="main" fontSize="14" width="100%" onClick={loginUserHandler}>
+          Sign in
+        </Button>
+      </Modal>
+      {result.type ? <Notification type={result.type} text={result.text} /> : null}
+    </>
   );
 };
 
 export const SignUpModal = ({ modal, setModal }: Props) => {
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  const [result, setResult] = useState({
+    type: '',
+    text: '',
+    code: 0,
+  });
+
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setData({ ...data, [e.currentTarget.id]: e.currentTarget.value });
+  }
+
+  async function registerUserHandler() {
+    setResult({
+      type: '',
+      text: '',
+      code: 0,
+    });
+    const result = await registerHandler(data);
+    setResult(result);
+
+    if (result.type === 'Success') {
+      Object.keys(data).forEach((c) => setData((prevState) => ({ ...prevState, [c]: '' })));
+    }
+
+    setTimeout(
+      () =>
+        setResult({
+          type: '',
+          text: '',
+          code: 0,
+        }),
+      5000,
+    );
+  }
+
   return (
-    <Modal title="Sign up" modal={modal} setModal={setModal}>
-      <div className="sign-up-form">
-        <Input label="First name" id="firstName" />
-        <Input label="Last name" id="lastName" />
-        <Input label="Email address" id="email" />
-        <Input label="Password" id="password" type="password" />
-      </div>
-      <Button type="bold" color="main" fontSize="14" width="100%">
-        Sign up
-      </Button>
-    </Modal>
+    <>
+      <Modal title="Sign up" modal={modal} setModal={setModal}>
+        <div className="sign-up-form">
+          <Input label="First name" id="firstName" value={data.firstName} onChange={changeHandler} />
+          <Input label="Last name" id="lastName" value={data.lastName} onChange={changeHandler} />
+          <Input label="Email address" id="email" value={data.email} onChange={changeHandler} />
+          <Input label="Password" id="password" type="password" value={data.password} onChange={changeHandler} />
+        </div>
+        <Button type="bold" color="main" fontSize="14" width="100%" onClick={registerUserHandler}>
+          Sign up
+        </Button>
+      </Modal>
+      {result.type ? <Notification type={result.type} text={result.text} /> : null}
+    </>
   );
 };
 

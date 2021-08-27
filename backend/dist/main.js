@@ -7,9 +7,10 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(session({
         secret: 'my-secret',
-        resave: false,
+        resave: true,
         saveUninitialized: true,
     }));
+    app.enableCors();
     await app.listen(3001);
 }
 bootstrap();

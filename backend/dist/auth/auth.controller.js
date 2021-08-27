@@ -21,6 +21,7 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async getAuth(res, session) {
+        console.log(session);
         if (session.user) {
             res.json(await this.authService.findUserById(session.user._id)).status(200);
         }

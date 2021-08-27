@@ -7,10 +7,11 @@ async function bootstrap() {
   app.use(
     session({
       secret: 'my-secret',
-      resave: false,
+      resave: true,
       saveUninitialized: true,
     }),
   );
+  app.enableCors();
   await app.listen(3001);
 }
 bootstrap();

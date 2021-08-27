@@ -1,0 +1,33 @@
+@import '../../index.scss';
+
+.notification {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  padding: 30px 40px;
+  border-radius: $r5;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+
+    &.noactive {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+  }
+
+  &.Error {
+    background: $danger;
+  }
+
+  &.Success {
+    background: $success;
+  }
+}
