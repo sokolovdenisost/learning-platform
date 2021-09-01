@@ -30,14 +30,12 @@ let AuthService = class AuthService {
             if (user) {
                 const checkPassword = bcrypt.compareSync(data.password, user.password);
                 if (checkPassword) {
+                    console.log('checkPassword', checkPassword);
                     session.user = user;
                     session.isAuth = true;
-                    await session.save((err) => {
-                        if (err)
-                            console.log(err);
-                    });
+                    await session.save();
                     console.log(session);
-                    return { code: 200, type: 'Success', text: 'Signed into account' };
+                    return { code: 200, type: 'Success', text: 'Signed into account', user_id: user._id };
                 }
                 else {
                     return { code: 400, type: 'Error', text: 'Data is incorrect' };

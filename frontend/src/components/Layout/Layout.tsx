@@ -5,6 +5,7 @@ import { RiArrowDownSLine } from 'react-icons/ri';
 import { API_URL } from '../../consts';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../Button/Button';
+import { Loader } from '../Loader/Loader';
 import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
 import './Layout.scss';
@@ -22,6 +23,10 @@ export const Layout = ({ title, children }: Props) => {
   const [active, setActive] = useState(false);
   const auth = useAuth();
 
+  if (auth.loading) {
+    return null;
+  }
+
   function setModalOptions(type: string) {
     setAuthModal({ ...authModal, active: !authModal.active, type: type });
   }
@@ -31,7 +36,7 @@ export const Layout = ({ title, children }: Props) => {
       <div className="layout">
         <div className="layout-top">
           <div className="layout-logo"></div>
-          {auth.auth.firstName ? (
+          {auth.user.firstName ? (
             <div className="layout-rigth">
               <div className="layout-notification">
                 <IoNotificationsOutline size={30} />

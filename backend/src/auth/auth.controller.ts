@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Req, Session } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { CreateUserDTO, LoginUserDTO } from './dto/auth.dto';
 import { AuthService } from './auth.service';
@@ -8,10 +8,10 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Get('')
-  async getAuth(@Res() res: Response, @Session() session): Promise<void> {
-    console.log(session);
-    if (session.user) {
-      res.json(await this.authService.findUserById(session.user._id)).status(200);
+  async getAuth(@Req() req: Request, @Res() res: Response): Promise<void> {
+    const user_id = req.get('authorization').split(' ')[1];
+    if (user_id) {
+      res.json(await this.authService.findUserById(user_id)).status(200);
     } else {
       res.json({ code: 401, type: 'Error', text: 'Unauthorized' }).status(401);
     }

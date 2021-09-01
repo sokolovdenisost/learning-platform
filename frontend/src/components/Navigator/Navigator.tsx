@@ -8,7 +8,7 @@ import { FiSettings } from 'react-icons/fi';
 import { NavButton } from './Button/NavButton';
 import './Navigator.scss';
 
-const routes = [
+const authRoutes = [
   { title: 'News', icon: <BiNews size={30} />, href: '/' },
   { title: 'Courses', icon: <HiOutlineBookOpen size={30} />, href: '/courses' },
   { title: 'My courses', icon: <TiMortarBoard size={30} />, href: '/my-courses' },
@@ -17,14 +17,27 @@ const routes = [
   { title: 'Settings', icon: <FiSettings size={30} />, href: '/settings' },
 ];
 
-export const Navigator = () => {
-  const mapButtons = routes.map((r) => {
+const noAuthRoutes = [
+  { title: 'News', icon: <BiNews size={30} />, href: '/' },
+  { title: 'Courses', icon: <HiOutlineBookOpen size={30} />, href: '/courses' },
+];
+
+interface Props {
+  auth: any;
+}
+
+export const Navigator = ({ auth }: Props) => {
+  const mapButtonsAuth = authRoutes.map((r) => {
+    return <NavButton key={r.title} href={r.href} title={r.title} icon={r.icon} />;
+  });
+
+  const mapButtonsNoAuth = noAuthRoutes.map((r) => {
     return <NavButton key={r.title} href={r.href} title={r.title} icon={r.icon} />;
   });
 
   return (
     <div className="navigator">
-      <div className="navigator-block">{mapButtons}</div>
+      <div className="navigator-block">{auth ? mapButtonsAuth : mapButtonsNoAuth}</div>
     </div>
   );
 };

@@ -18,5 +18,12 @@ export interface IError {
     code: number;
     text: string;
 }
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    avatar: string;
+    _id: string;
+}
 declare type TypeResponse = 'Error' | 'Success';
 export {};

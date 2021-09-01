@@ -14,7 +14,7 @@ export async function registerHandler(data: IRegister): Promise<ISuccess | IErro
   return result;
 }
 
-export async function loginHandler(data: ILogin): Promise<ISuccess | IError> {
+export async function loginHandler(data: ILogin): Promise<any> {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     body: JSON.stringify({ ...data }),
@@ -25,6 +25,9 @@ export async function loginHandler(data: ILogin): Promise<ISuccess | IError> {
   });
 
   const result = await response.json();
+
+  localStorage.setItem('user_id', result.user_id);
+
   return result;
 }
 

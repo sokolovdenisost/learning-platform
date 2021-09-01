@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { MongoDBStore } from 'connect-mongodb-session';
 import * as session from 'express-session';
 import { AppModule } from './app.module';
 
@@ -7,7 +8,7 @@ async function bootstrap() {
   app.use(
     session({
       secret: 'my-secret',
-      resave: true,
+      resave: false,
       saveUninitialized: true,
     }),
   );

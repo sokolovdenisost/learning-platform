@@ -4,7 +4,7 @@ import { ICreateUser, IError, ILoginUser, ISuccess } from './interface/auth.inte
 export declare class AuthService {
     private userModel;
     constructor(userModel: Model<UserDocument>);
-    loginUser(data: ILoginUser, session: any): Promise<ISuccess | IError>;
+    loginUser(data: ILoginUser, session: any): Promise<any>;
     createUser(data: ICreateUser): Promise<ISuccess | IError>;
     findUserByEmail(email: string): Promise<UserDocument>;
     findUserById(id: string): Promise<UserDocument>;

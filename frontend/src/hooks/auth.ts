@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from '../consts';
 
-export const useAuth = () => {
+export const useAuth = (): AuthSuccess => {
   const [auth, setAuth] = useState<IUser>({
     firstName: '',
     lastName: '',
     email: '',
+    avatar: '',
+    _id: '',
   });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
+  const user_id = localStorage.getItem('user_id');
 
   useEffect(() => {
-    fetch(`${API_URL}/auth`)
+    fetch(`${API_URL}/auth`, {
+      headers: {
+        Authorization: `USER_ID ${user_id}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         if (res._id) {
@@ -21,21 +28,25 @@ export const useAuth = () => {
           setError(res);
           setLoading(false);
         }
-        console.log(res);
       });
   }, []);
 
-  return { loading, auth };
+  console.log(auth, 'auth');
+
+  return { loading, user: auth };
 };
 
-// interface IAuth {
-//   user: IUser
-// }
+interface AuthSuccess {
+  loading: boolean;
+  user: IUser;
+}
 
 interface IUser {
   firstName: string;
   lastName: string;
   email: string;
+  avatar: string;
+  _id: string;
 }
 
 interface ISuccess {

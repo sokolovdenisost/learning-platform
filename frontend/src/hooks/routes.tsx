@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { Loader } from '../components/Loader/Loader';
 import { Navigator } from '../components/Navigator/Navigator';
 import { Course } from '../pages/Course/Course';
 import { Courses } from '../pages/Courses/Courses';
@@ -11,6 +12,7 @@ import { News } from '../pages/News/News';
 import { PopularCourses } from '../pages/PopularCourses/PopularCourses';
 import { Profile } from '../pages/Profile/Profile';
 import { Settings } from '../pages/Settings/Settings';
+import { useAuth } from './auth';
 
 const routesAuth = [
   {
@@ -55,7 +57,7 @@ const routesAuth = [
   },
 ];
 
-export const routes = (auth: boolean) => {
+export const routes = (loading: boolean, auth: any) => {
   const mapAuthRoutes = routesAuth.map((c) => {
     return (
       <Route key={c.path} path={c.path} exact>
@@ -63,10 +65,15 @@ export const routes = (auth: boolean) => {
       </Route>
     );
   });
+
+  if (loading) {
+    return <Loader />;
+  }
+
   if (auth) {
     return (
       <>
-        <Navigator />
+        <Navigator auth={auth} />
         <Switch>
           {mapAuthRoutes}
           <Redirect to="/" />
@@ -76,7 +83,7 @@ export const routes = (auth: boolean) => {
   }
   return (
     <>
-      <Navigator />
+      <Navigator auth={auth} />
       <Switch>
         {mapAuthRoutes}
         <Redirect to="/" />

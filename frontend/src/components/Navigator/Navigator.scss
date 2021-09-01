@@ -1,4 +1,6 @@
 .navigator {
+  top: 0;
+  bottom: 0;
   position: fixed;
   height: 100vh;
   display: flex;
@@ -12,9 +14,9 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 100px;
 
-    .nav-button:last-child {
-      margin-top: 125px;
-      margin-bottom: 0;
-    }
+    // .nav-button:last-child {
+    //   margin-top: 125px;
+    //   margin-bottom: 0;
+    // }
   }
 }

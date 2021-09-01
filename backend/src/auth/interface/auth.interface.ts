@@ -22,4 +22,12 @@ export interface IError {
   text: string;
 }
 
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar: string;
+  _id: string;
+}
+
 type TypeResponse = 'Error' | 'Success';

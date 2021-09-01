@@ -20,10 +20,10 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    async getAuth(res, session) {
-        console.log(session);
-        if (session.user) {
-            res.json(await this.authService.findUserById(session.user._id)).status(200);
+    async getAuth(req, res) {
+        const user_id = req.get('authorization').split(' ')[1];
+        if (user_id) {
+            res.json(await this.authService.findUserById(user_id)).status(200);
         }
         else {
             res.json({ code: 401, type: 'Error', text: 'Unauthorized' }).status(401);
@@ -40,8 +40,8 @@ let AuthController = class AuthController {
 };
 __decorate([
     common_1.Get(''),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Session()),
+    __param(0, common_1.Req()),
+    __param(1, common_1.Res()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

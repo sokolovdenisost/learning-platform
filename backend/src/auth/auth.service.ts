@@ -12,7 +12,7 @@ const saltOrRounds = 10;
 export class AuthService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async loginUser(data: ILoginUser, session): Promise<ISuccess | IError> {
+  async loginUser(data: ILoginUser, session: any): Promise<any> {
     if (data.email && data.password) {
       const user = await this.findUserByEmail(data.email);
 
@@ -20,13 +20,12 @@ export class AuthService {
         const checkPassword = bcrypt.compareSync(data.password, user.password);
 
         if (checkPassword) {
+          console.log('checkPassword', checkPassword);
           session.user = user;
           session.isAuth = true;
-          await session.save((err) => {
-            if (err) console.log(err);
-          });
+          await session.save();
           console.log(session);
-          return { code: 200, type: 'Success', text: 'Signed into account' };
+          return { code: 200, type: 'Success', text: 'Signed into account', user_id: user._id };
         } else {
           return { code: 400, type: 'Error', text: 'Data is incorrect' };
         }
