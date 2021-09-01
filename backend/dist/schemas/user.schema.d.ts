@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 export declare type UserDocument = User & Document;
 export declare class User {
+    avatar: string;
     firstName: string;
     lastName: string;
     email: string;

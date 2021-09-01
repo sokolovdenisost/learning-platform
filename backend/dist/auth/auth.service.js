@@ -24,17 +24,12 @@ let AuthService = class AuthService {
     constructor(userModel) {
         this.userModel = userModel;
     }
-    async loginUser(data, session) {
+    async loginUser(data) {
         if (data.email && data.password) {
             const user = await this.findUserByEmail(data.email);
             if (user) {
                 const checkPassword = bcrypt.compareSync(data.password, user.password);
                 if (checkPassword) {
-                    console.log('checkPassword', checkPassword);
-                    session.user = user;
-                    session.isAuth = true;
-                    await session.save();
-                    console.log(session);
                     return { code: 200, type: 'Success', text: 'Signed into account', user_id: user._id };
                 }
                 else {

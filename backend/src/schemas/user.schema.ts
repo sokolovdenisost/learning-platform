@@ -6,6 +6,9 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
+  @Prop({ type: String, default: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png' })
+  avatar: string;
+
   @Prop({ type: String, required: true })
   firstName: string;
 

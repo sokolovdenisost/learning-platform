@@ -14,6 +14,10 @@ const mongoose_1 = require("@nestjs/mongoose");
 let User = class User {
 };
 __decorate([
+    mongoose_1.Prop({ type: String, default: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png' }),
+    __metadata("design:type", String)
+], User.prototype, "avatar", void 0);
+__decorate([
     mongoose_1.Prop({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);

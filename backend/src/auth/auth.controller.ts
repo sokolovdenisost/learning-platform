@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, Req, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Req } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { CreateUserDTO, LoginUserDTO } from './dto/auth.dto';
 import { AuthService } from './auth.service';
@@ -24,8 +24,8 @@ export class AuthController {
   }
 
   @Post('login')
-  async loginUser(@Res() res: Response, @Body() body: LoginUserDTO, @Session() session): Promise<void> {
-    const result = await this.authService.loginUser(body, session);
+  async loginUser(@Res() res: Response, @Body() body: LoginUserDTO): Promise<void> {
+    const result = await this.authService.loginUser(body);
     res.json(result).status(result.code);
   }
 }

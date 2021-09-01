@@ -10,18 +10,6 @@ export interface ILoginUser {
   password: string;
 }
 
-export interface ISuccess {
-  type: TypeResponse;
-  code: number;
-  text: string;
-}
-
-export interface IError {
-  type: TypeResponse;
-  code: number;
-  text: string;
-}
-
 export interface User {
   firstName: string;
   lastName: string;
@@ -29,5 +17,3 @@ export interface User {
   avatar: string;
   _id: string;
 }
-
-type TypeResponse = 'Error' | 'Success';

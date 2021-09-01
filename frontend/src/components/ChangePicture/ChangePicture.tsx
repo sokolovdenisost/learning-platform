@@ -4,9 +4,10 @@ import './ChangePicture.scss';
 
 interface Props {
   title: string;
+  img?: string;
 }
 
-export const ChangePicture = ({ title }: Props) => {
+export const ChangePicture = ({ title, img }: Props) => {
   return (
     <div className="change-picture">
       <div className="change-picture-title">{title}</div>
@@ -14,7 +15,11 @@ export const ChangePicture = ({ title }: Props) => {
         <img
           alt=""
           className="left"
-          src="https://images.unsplash.com/photo-1628344806892-11873eba7974?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Nnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          src={
+            img
+              ? img
+              : 'https://images.unsplash.com/photo-1628344806892-11873eba7974?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Nnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+          }
         />
         <div className="right">
           <div className="top">

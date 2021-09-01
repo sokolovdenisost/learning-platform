@@ -33,8 +33,8 @@ let AuthController = class AuthController {
         const result = await this.authService.createUser(body);
         res.json(result).status(result.code);
     }
-    async loginUser(res, body, session) {
-        const result = await this.authService.loginUser(body, session);
+    async loginUser(res, body) {
+        const result = await this.authService.loginUser(body);
         res.json(result).status(result.code);
     }
 };
@@ -58,9 +58,8 @@ __decorate([
     common_1.Post('login'),
     __param(0, common_1.Res()),
     __param(1, common_1.Body()),
-    __param(2, common_1.Session()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, auth_dto_1.LoginUserDTO, Object]),
+    __metadata("design:paramtypes", [Object, auth_dto_1.LoginUserDTO]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "loginUser", null);
 AuthController = __decorate([

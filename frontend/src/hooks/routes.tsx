@@ -14,50 +14,50 @@ import { Profile } from '../pages/Profile/Profile';
 import { Settings } from '../pages/Settings/Settings';
 import { useAuth } from './auth';
 
-const routesAuth = [
-  {
-    path: '/',
-    component: <News />,
-  },
-  {
-    path: '/courses',
-    component: <Courses />,
-  },
-  {
-    path: '/my-courses',
-    component: <MyCourses />,
-  },
-  {
-    path: '/favorites',
-    component: <Favorites />,
-  },
-  {
-    path: '/create',
-    component: <Create />,
-  },
-  {
-    path: '/settings',
-    component: <Settings />,
-  },
-  {
-    path: '/new-courses',
-    component: <NewCourses />,
-  },
-  {
-    path: '/popular-courses',
-    component: <PopularCourses />,
-  },
-  {
-    path: '/course/:id',
-    component: <Course />,
-  },
-  {
-    path: '/profile',
-    component: <Profile />,
-  },
-];
-
 export const routes = (loading: boolean, auth: any) => {
+  const routesAuth = [
+    {
+      path: '/',
+      component: <News />,
+    },
+    {
+      path: '/courses',
+      component: <Courses />,
+    },
+    {
+      path: '/my-courses',
+      component: <MyCourses />,
+    },
+    {
+      path: '/favorites',
+      component: <Favorites />,
+    },
+    {
+      path: '/create',
+      component: <Create />,
+    },
+    {
+      path: '/settings',
+      component: <Settings user={auth} />,
+    },
+    {
+      path: '/new-courses',
+      component: <NewCourses />,
+    },
+    {
+      path: '/popular-courses',
+      component: <PopularCourses />,
+    },
+    {
+      path: '/course/:id',
+      component: <Course />,
+    },
+    {
+      path: '/profile',
+      component: <Profile />,
+    },
+  ];
+
   const mapAuthRoutes = routesAuth.map((c) => {
     return (
       <Route key={c.path} path={c.path} exact>

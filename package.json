@@ -1,0 +1,23 @@
+{
+  "name": "learning-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm start --prefix frontend\" \"npm run start:dev --prefix backend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sokolovdenisost/learning-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sokolovdenisost/learning-platform/issues"
+  },
+  "homepage": "https://github.com/sokolovdenisost/learning-platform#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
