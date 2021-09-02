@@ -11,13 +11,22 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const auth_module_1 = require("./auth/auth.module");
 const settings_module_1 = require("./settings/settings.module");
+const course_module_1 = require("./course/course.module");
+const cloudinary_module_1 = require("./cloudinary/cloudinary.module");
+const cloudinary_provider_1 = require("./cloudinary/cloudinary.provider");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [mongoose_1.MongooseModule.forRoot('mongodb+srv://admin:admin@cluster0.dv9wr.mongodb.net/learningPlatform'), auth_module_1.AuthModule, settings_module_1.SettingsModule],
+        imports: [
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://admin:admin@cluster0.dv9wr.mongodb.net/learningPlatform'),
+            auth_module_1.AuthModule,
+            settings_module_1.SettingsModule,
+            course_module_1.CourseModule,
+            cloudinary_module_1.CloudinaryModule,
+        ],
         controllers: [],
-        providers: [],
+        providers: [cloudinary_provider_1.CloudinaryProvider],
     })
 ], AppModule);
 exports.AppModule = AppModule;

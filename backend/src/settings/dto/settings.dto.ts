@@ -1,11 +1,11 @@
-export class ChangePersonalData {
+export class ChangePersonalDataDTO {
   firstName: string;
   lastName: string;
   email: string;
   _id: string;
 }
 
-export class ChangePassword {
+export class ChangePasswordDTO {
   oldPassword: string;
   newPassword: string;
   _id: string;

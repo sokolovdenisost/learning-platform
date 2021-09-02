@@ -6,7 +6,7 @@ import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
 import { Notification } from '../../components/Notification/Notification';
 import { Social } from '../../components/Social/Social';
-import { changePersonalData } from '../../utils/settings';
+import { changePassword, changePersonalData } from '../../utils/settings';
 import './Settings.scss';
 
 interface Props {
@@ -25,19 +25,24 @@ export const Settings = ({ user }: Props) => {
     lastName: user.lastName,
     email: user.email,
   });
+  const [formP, setFormP] = useState({
+    oldPassword: '',
+    newPassword: '',
+    rNewPassword: '',
+  });
   const [result, setResult] = useState({
     type: '',
     text: '',
     code: 0,
   });
 
-  async function changePersonalDataHandler() {
+  async function fetchChangeSettings(body: any, fn: any) {
     setResult({
       type: '',
       text: '',
       code: 0,
     });
-    const result = await changePersonalData(formPD);
+    const result = await fn(body);
 
     setResult(result);
 
@@ -53,8 +58,8 @@ export const Settings = ({ user }: Props) => {
   }
 
   useEffect(() => {
-    console.log(formPD);
-  }, [formPD]);
+    console.log(formP);
+  }, [formP]);
 
   function onSave() {}
 
@@ -70,7 +75,7 @@ export const Settings = ({ user }: Props) => {
             <Block
               title="Personal Details"
               subtitle="Feel free to edit your basic information such as name, email etc."
-              onSave={changePersonalDataHandler}>
+              onSave={() => fetchChangeSettings(formPD, changePersonalData)}>
               <ChangePicture img={user.avatar} title="Profile picture" />
               <div className="settings-form">
                 <div className="fullname">
@@ -85,11 +90,11 @@ export const Settings = ({ user }: Props) => {
             <Block
               title="Security Details"
               subtitle="Passwords must be at least 16 characters long and contain a combination of numbers, symbols, uppercase and lowercase letters, and spaces."
-              onSave={onSave}>
+              onSave={() => fetchChangeSettings(formP, changePassword)}>
               <div className="security-form">
-                <Input label="Old password" id="oldPassword" type="password" />
-                <Input label="New password" id="newPassword" type="password" />
-                <Input label="Repeat new password" id="rNewPassword" type="password" />
+                <Input label="Old password" id="oldPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
+                <Input label="New password" id="newPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
+                <Input label="Repeat new password" id="rNewPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
               </div>
             </Block>
           </div>

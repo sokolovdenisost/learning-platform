@@ -31,8 +31,6 @@ export const useAuth = (): AuthSuccess => {
       });
   }, []);
 
-  console.log(auth, 'auth');
-
   return { loading, user: auth };
 };
 
