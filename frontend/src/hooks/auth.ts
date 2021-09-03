@@ -16,11 +16,12 @@ export const useAuth = (): AuthSuccess => {
   useEffect(() => {
     fetch(`${API_URL}/auth`, {
       headers: {
-        Authorization: `USER_ID ${user_id}`,
+        Authorization: `USER_ID ${user_id ? user_id : ''}`,
       },
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         if (res._id) {
           setAuth(res);
           setLoading(false);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { IoMdLogOut } from 'react-icons/io';
+import { logoutHandler } from '../../utils/auth';
 import './UserMenu.scss';
 
 interface Props {
@@ -42,7 +43,7 @@ export const UserMenu = ({ active, setActive }: Props) => {
         }
 
         return (
-          <div className="user-menu-link" key={c.title}>
+          <div className="user-menu-link" onClick={logoutHandler} key={c.title}>
             {c.icon}
             <span className="user-menu-link-text">{c.title}</span>
           </div>

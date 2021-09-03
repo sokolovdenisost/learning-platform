@@ -9,7 +9,7 @@ export class AuthController {
 
   @Get('')
   async getAuth(@Req() req: Request, @Res() res: Response): Promise<void> {
-    const user_id = req.get('authorization').split(' ')[1];
+    const user_id = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
     if (user_id) {
       res.json(await this.authService.findUserById(user_id)).status(200);
     } else {

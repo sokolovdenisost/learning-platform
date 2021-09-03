@@ -5,6 +5,9 @@ import { Navigator } from '../components/Navigator/Navigator';
 import { Course } from '../pages/Course/Course';
 import { Courses } from '../pages/Courses/Courses';
 import { Create } from '../pages/Create/Create';
+import { CreateCourseLesson } from '../pages/CreateCourseLesson/CreateCourseLesson';
+import { EditCourse } from '../pages/EditCourse/EditCourse';
+import { EditCourseLesson } from '../pages/EditCourseLesson/EditCourseLesson';
 import { Favorites } from '../pages/Favorites/Favorites';
 import { MyCourses } from '../pages/MyCourses/MyCourses';
 import { NewCourses } from '../pages/NewCourses/NewCourses';
@@ -55,6 +58,18 @@ export const routes = (loading: boolean, auth: any) => {
     {
       path: '/profile',
       component: <Profile />,
+    },
+    {
+      path: '/edit/:id',
+      component: <EditCourse />,
+    },
+    {
+      path: '/edit/:id/lesson/:id',
+      component: <EditCourseLesson />,
+    },
+    {
+      path: '/create/:id/lesson',
+      component: <CreateCourseLesson />,
     },
   ];
 

@@ -26,9 +26,18 @@ export async function loginHandler(data: ILogin): Promise<any> {
 
   const result = await response.json();
 
+  if (result.type === 'Success') {
+    window.location.reload();
+  }
+
   localStorage.setItem('user_id', result.user_id);
 
   return result;
+}
+
+export async function logoutHandler(): Promise<void> {
+  localStorage.removeItem('user_id');
+  window.location.reload();
 }
 
 interface IRegister {

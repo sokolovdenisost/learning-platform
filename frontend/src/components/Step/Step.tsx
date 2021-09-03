@@ -14,6 +14,7 @@ interface Props {
   children?: JSX.Element | JSX.Element[];
   activeTransform: number;
   active: boolean;
+  onClick?: any;
   changeStep: (step: string, type: string) => void;
   step: string;
   type: Types;
@@ -22,7 +23,7 @@ interface Props {
 type Types = 'normal' | 'lesson';
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
-export const Step = ({ children, activeTransform, active, changeStep, step, type }: Props) => {
+export const Step = ({ children, activeTransform, active, changeStep, step, type, onClick }: Props) => {
   const [stepForm, setStepForm] = useState<StepForm[]>([]);
   const [createModal, setCreateModal] = useState({ type: '', active: false });
   const styleTypeNormal = {
@@ -78,6 +79,11 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     }
   });
 
+  function changeHandler() {
+    onClick();
+    changeStep(step, 'next');
+  }
+
   return (
     <>
       <div className={active ? 'step' : 'step noactive'} style={{ position: 'absolute', left: 0, ...getActiveValues(active) }}>
@@ -97,7 +103,7 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
               Back step
             </Button>
           )}
-          <Button type="bold" color="primary" fontSize="16" onClick={() => changeStep(step, 'next')}>
+          <Button type="bold" color="primary" fontSize="16" onClick={changeHandler}>
             Next step
           </Button>
         </div>

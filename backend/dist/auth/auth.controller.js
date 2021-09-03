@@ -21,7 +21,7 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async getAuth(req, res) {
-        const user_id = req.get('authorization').split(' ')[1];
+        const user_id = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
         if (user_id) {
             res.json(await this.authService.findUserById(user_id)).status(200);
         }

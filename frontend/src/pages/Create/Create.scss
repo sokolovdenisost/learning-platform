@@ -1,34 +1,65 @@
 @import '../../index.scss';
 
 .create-page {
-  .create-steps {
-    position: relative;
-    overflow: inherit;
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  overflow: inherit;
 
-    .step {
-      .step-body {
-        .create-item {
-          margin-bottom: 20px;
+  .rigth {
+    .create-item {
+      margin-bottom: 20px;
 
-          &:last-child {
-            margin-bottom: 0;
-          }
+      &:last-child {
+        margin-bottom: 0;
+      }
 
-          .course-inputs {
-            display: flex;
-            justify-content: space-between;
-          }
+      .course-inputs {
+        display: flex;
+        justify-content: space-between;
+      }
 
-          .course-tags {
-            display: flex;
-            align-items: center;
-            flex-flow: wrap;
-            margin-top: 20px;
-          }
-        }
+      .course-tags {
+        display: flex;
+        align-items: center;
+        flex-flow: wrap;
+        margin-top: 20px;
       }
     }
+
+    .create-course-buttons {
+      margin-top: 50px;
+      text-align: right;
+    }
   }
+
+  // .create-steps {
+  //   position: relative;
+  //   overflow: inherit;
+  //   display: flex;
+  //   justify-content: space-between;
+
+  //   .step {
+  //     .step-body {
+  // .create-item {
+  //   margin-bottom: 20px;
+
+  //   &:last-child {
+  //     margin-bottom: 0;
+  //   }
+
+  //   .course-inputs {
+  //     display: flex;
+  //     justify-content: space-between;
+  //   }
+
+  // .course-tags {
+  //   display: flex;
+  //   align-items: center;
+  //   flex-flow: wrap;
+  //   margin-top: 20px;
+  // }
+  //       }
+  //     }
+  //   }
+  // }
 }
