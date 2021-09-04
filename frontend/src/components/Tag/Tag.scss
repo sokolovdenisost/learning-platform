@@ -7,6 +7,11 @@
   font-weight: 600;
   margin-right: 10px;
 
+  &.Design {
+    color: $design;
+    background: $design-bg;
+  }
+
   &.UI.Design {
     color: $ui;
     background: $ui-bg;

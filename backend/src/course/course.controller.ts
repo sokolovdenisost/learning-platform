@@ -9,7 +9,8 @@ export class CourseController {
 
   @Get(':id')
   async getCourseById(@Res() res: Response, @Param('id') id: string): Promise<void> {
-    return;
+    const result = await this.courseService.getCourseById(id);
+    res.json(result).status(result.code);
   }
 
   @Post('create')

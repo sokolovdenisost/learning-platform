@@ -5,6 +5,7 @@ import { SettingsModule } from './settings/settings.module';
 import { CourseModule } from './course/course.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CloudinaryProvider } from './cloudinary/cloudinary.provider';
+import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CloudinaryProvider } from './cloudinary/cloudinary.provider';
     SettingsModule,
     CourseModule,
     CloudinaryModule,
+    CoursesModule,
   ],
   controllers: [],
   providers: [CloudinaryProvider],
