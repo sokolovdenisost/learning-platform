@@ -1,0 +1,50 @@
+@import '../../index.scss';
+
+.edit-course-page {
+  .edit-course-info {
+    display: flex;
+    justify-content: space-between;
+    .edit-course-left {
+      width: 410px;
+    }
+
+    .edit-course-right {
+      width: 410px;
+
+      .edit-course-item {
+        margin-top: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        .edit-course-inputs {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .edit-course-tags {
+          display: flex;
+          align-items: center;
+          flex-flow: wrap;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  .edit-course-lessons {
+    margin-top: 20px;
+
+    .edit-course-lessons-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .edit-course-lessons-title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+    }
+  }
+}
