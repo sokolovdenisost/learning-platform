@@ -10,46 +10,45 @@ import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
 
 const TAGS = [
-  'Web-Design',
+  'Web Design',
   'Design',
-  'UI-Design',
-  'UX-Design',
-  'Web-development',
+  'UI Design',
+  'UX Design',
+  'Web development',
   'Front-end',
   'Back-end',
-  'Mobile-development',
+  'Mobile development',
   'CMS',
   'Gamedev',
   'Testing',
 ];
 
 export const Create = () => {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IForm>({
     image:
       'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
     title: '',
     description: '',
-    certificate: true,
-    level: 'Junior',
-    tags: ['Web-Design', 'Design', 'UI-Design'],
+    certificate: '',
+    level: '',
+    tags: [],
   });
-  const [selected, setSelected] = useState<string[]>([]);
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);
-    const findKey = selected.find((c) => c === key);
+    const findKey = form.tags.find((c) => c === key);
     if (findKey) {
-      setSelected(selected.filter((c) => c !== key));
-    } else if (selected.length > 2) {
-      selected.shift();
-      setSelected([...selected, key]);
-    } else if (!findKey && selected.length < 3) {
-      setSelected([...selected, key]);
+      setForm({ ...form, tags: form.tags.filter((c) => c !== key) });
+    } else if (form.tags.length > 2) {
+      form.tags.shift();
+      setForm({ ...form, tags: [...form.tags, key] });
+    } else if (!findKey && form.tags.length < 3) {
+      setForm({ ...form, tags: [...form.tags, key] });
     }
   }
 
   function getSelected(title: string) {
-    return selected.find((c) => c === title) ? true : false;
+    return form.tags.find((c) => c === title) ? true : false;
   }
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -79,7 +78,7 @@ export const Create = () => {
               subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
               <div className="course-inputs">
                 <Input label="How many lessons" width={170} id="lessons" onChange={(e) => changeInput(e)} />
-                <Input label="Is there any certification" width={170} id="certification" onChange={(e) => changeInput(e)} />
+                <Input label="Is there any certification" width={170} id="certificate" onChange={(e) => changeInput(e)} />
               </div>
               <Input label="For what level intended course" id="level" onChange={(e) => changeInput(e)} />
             </Block>
@@ -103,3 +102,12 @@ export const Create = () => {
     </Layout>
   );
 };
+
+interface IForm {
+  image: string;
+  title: string;
+  description: string;
+  certificate: string;
+  level: string;
+  tags: string[];
+}

@@ -8,9 +8,11 @@ import './Text.scss';
 
 interface Props {
   onCancel: () => void;
+  onChange: (index: number, body: string) => void;
+  index: number;
 }
 
-export const Text = ({ onCancel }: Props) => {
+export const Text = ({ onCancel, onChange, index }: Props) => {
   const [value, setValue] = useState('');
   const [activeEdit, setActiveEdit] = useState(true);
   const [disable, setDisable] = useState(true);
@@ -27,6 +29,7 @@ export const Text = ({ onCancel }: Props) => {
 
   function changeInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setValue(e.target.value);
+    onChange(index, e.target.value);
     if (e.target.value) {
       console.log(e.target.value);
       setDisable(false);

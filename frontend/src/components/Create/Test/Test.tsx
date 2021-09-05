@@ -6,6 +6,8 @@ import './Test.scss';
 
 interface Props {
   onCancel: () => void;
+  onChange: any;
+  index: number;
 }
 
 export const Test = ({ onCancel }: Props) => {

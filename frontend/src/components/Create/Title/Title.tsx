@@ -7,9 +7,11 @@ import './Title.scss';
 
 interface Props {
   onCancel: () => void;
+  onChange: (index: number, body: string) => void;
+  index: number;
 }
 
-export const Title = ({ onCancel }: Props) => {
+export const Title = ({ onCancel, onChange, index }: Props) => {
   const [value, setValue] = useState('');
   const [activeEdit, setActiveEdit] = useState(true);
   const [disable, setDisable] = useState(true);
@@ -22,6 +24,7 @@ export const Title = ({ onCancel }: Props) => {
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
+    onChange(index, e.currentTarget.value);
     if (e.target.value) {
       console.log(e.target.value);
       setDisable(false);

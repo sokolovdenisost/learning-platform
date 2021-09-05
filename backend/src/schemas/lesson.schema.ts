@@ -6,16 +6,13 @@ export type LessonDocument = Lesson & Document;
 
 @Schema()
 export class Lesson {
-  @Prop({ type: String, required: true })
-  title: string;
-
-  @Prop({ type: [{ type: String, text: String }] })
+  @Prop({ type: [{ typeForm: String, text: String }] })
   array: IArray[];
 }
 
 export const LessonSchema = SchemaFactory.createForClass(Lesson);
 
 interface IArray {
-  type: string;
+  typeForm: string;
   text: string;
 }

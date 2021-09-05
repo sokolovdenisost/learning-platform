@@ -8,6 +8,8 @@ import './Video.scss';
 
 interface Props {
   onCancel: () => void;
+  onChange: (index: number, body: string) => void;
+  index: number;
 }
 
 interface IUrl {
@@ -15,7 +17,7 @@ interface IUrl {
   id: string | null;
 }
 
-export const Video = ({ onCancel }: Props) => {
+export const Video = ({ onCancel, onChange, index }: Props) => {
   const [url, setUrl] = useState<IUrl>({
     url: '',
     id: '',
@@ -26,7 +28,7 @@ export const Video = ({ onCancel }: Props) => {
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setUrl({ ...url, url: e.currentTarget.value });
-
+    onChange(index, e.currentTarget.value);
     if (e.currentTarget.value.trim() && isUrl(e.currentTarget.value)) {
       const params = new URL(e.currentTarget.value).searchParams;
       if (params.get('v')) {

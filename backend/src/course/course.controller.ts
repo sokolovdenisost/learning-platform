@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CourseService } from './course.service';
-import { CreateCourseDTO } from './dto/course.dto';
+import { CreateCourseDTO, CreateLessonDTO } from './dto/course.dto';
 
 @Controller('course')
 export class CourseController {
@@ -21,7 +21,17 @@ export class CourseController {
   }
 
   @Post('create-lesson')
-  async createLesson(@Res() res: Response, @Body() body): Promise<void> {
-    return;
+  async createLesson(@Res() res: Response, @Body() body: CreateLessonDTO): Promise<void> {
+    const result = await this.courseService.createLesson(body);
+
+    res.json(result).status(result.code);
+  }
+
+  @Delete(':id')
+  async deleteCourse(@Res() res: Response, @Param('id') id: string): Promise<void> {
+    // нужно проверять что его удаляет точно создатель курса
+    const result = await this.courseService.deleteCourse(id);
+
+    res.json(result).status(result.code);
   }
 }

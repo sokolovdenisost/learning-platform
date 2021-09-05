@@ -4,6 +4,7 @@ import { Button } from '../../components/Button/Button';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
+import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
 import { SearchTag } from '../../components/Tag/Tag';
 import { API_URL } from '../../consts';
 import './EditCourse.scss';
@@ -24,6 +25,7 @@ const TAGS = [
 
 export const EditCourse = () => {
   const [course, setCourse] = useState<ICourse>({
+    _id: '',
     certificate: false,
     description: '',
     image: '',
@@ -31,6 +33,7 @@ export const EditCourse = () => {
     owner: '',
     tags: [],
     title: '',
+    lessons: [],
   });
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -64,6 +67,10 @@ export const EditCourse = () => {
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     console.log(e.currentTarget.value);
   }
+
+  const mapLessons = course.lessons.map((lesson) => {
+    return <LessonBlock key={lesson} />;
+  });
 
   return (
     <Layout title="Edit course">
@@ -113,11 +120,14 @@ export const EditCourse = () => {
           <div className="edit-course-lessons-top">
             <div className="edit-course-lessons-title">Lessons</div>
             <div className="edit-course-lessons-button">
-              <Button type="outline" color="primary" fontSize="14">
-                Add lesson
-              </Button>
+              <a href={`/create/${course._id}/lesson`}>
+                <Button type="outline" color="primary" fontSize="14">
+                  Add lesson
+                </Button>
+              </a>
             </div>
           </div>
+          <div className="edit-course-lessons-body">{mapLessons}</div>
         </div>
       </div>
     </Layout>
@@ -125,6 +135,7 @@ export const EditCourse = () => {
 };
 
 interface ICourse {
+  _id: string;
   certificate: boolean;
   description: string;
   image: string;
@@ -132,4 +143,5 @@ interface ICourse {
   owner: string;
   tags: string[];
   title: string;
+  lessons: any[];
 }

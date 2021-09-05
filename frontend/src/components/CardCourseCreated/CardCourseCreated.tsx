@@ -1,4 +1,5 @@
 import React from 'react';
+import { deleteCourseHandler } from '../../utils/course';
 import { Button } from '../Button/Button';
 import { Tag } from '../Tag/Tag';
 import './CardCourseCreated.scss';
@@ -25,7 +26,7 @@ export const CardCourseCreated = ({ course }: Props) => {
             Edit course
           </Button>
         </a>
-        <Button type="bold" color="danger" fontSize="16">
+        <Button type="bold" color="danger" fontSize="16" onClick={() => deleteCourseHandler(course._id)}>
           Delete course
         </Button>
       </div>

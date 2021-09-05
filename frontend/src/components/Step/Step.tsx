@@ -58,26 +58,26 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
     };
   }
 
-  const mapCreateForms = stepForm.map((form, index) => {
-    if (form.type === 'text') {
-      return <Text onCancel={() => cancelForm(index)} key={index} />;
-    }
-    if (form.type === 'video') {
-      return <Video onCancel={() => cancelForm(index)} key={index} />;
-    }
+  // const mapCreateForms = stepForm.map((form, index) => {
+  //   if (form.type === 'text') {
+  //     return <Text onCancel={() => cancelForm(index)} key={index} />;
+  //   }
+  //   if (form.type === 'video') {
+  //     return <Video onCancel={() => cancelForm(index)} key={index} />;
+  //   }
 
-    if (form.type === 'title') {
-      return <Title onCancel={() => cancelForm(index)} key={index} />;
-    }
+  //   if (form.type === 'title') {
+  //     return <Title onCancel={() => cancelForm(index)} key={index} />;
+  //   }
 
-    if (form.type === 'test') {
-      return <Test onCancel={() => cancelForm(index)} key={index} />;
-    }
+  //   if (form.type === 'test') {
+  //     return <Test onCancel={() => cancelForm(index)} key={index} />;
+  //   }
 
-    if (form.type === 'code') {
-      return <Code onCancel={() => cancelForm(index)} key={index} />;
-    }
-  });
+  //   if (form.type === 'code') {
+  //     return <Code onCancel={() => cancelForm(index)} key={index} />;
+  //   }
+  // });
 
   function changeHandler() {
     onClick();
@@ -92,7 +92,7 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
             children
           ) : (
             <>
-              {mapCreateForms}
+              {/* {mapCreateForms} */}
               <Panel onCreate={createForm} />{' '}
             </>
           )}

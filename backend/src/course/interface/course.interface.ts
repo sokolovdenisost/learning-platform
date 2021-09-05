@@ -3,9 +3,14 @@ export interface ICreateCourse {
   image: string;
   title: string;
   description: string;
-  certificate: boolean;
+  certificate: string;
   level: LevelCourse;
   tags: string[];
+}
+
+export interface ICreateLesson {
+  _id: string;
+  array: Array<{ typeForm: string; text: string }>;
 }
 
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

@@ -3,12 +3,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
-import { ICreateCourse } from './interface/course.interface';
+import { ICreateCourse, ICreateLesson } from './interface/course.interface';
 import { ISuccess, IError } from '../error.interface';
+import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
 
 @Injectable()
 export class CourseService {
-  constructor(@InjectModel(Course.name) private courseModel: Model<CourseDocument>) {}
+  constructor(
+    @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
+    @InjectModel(Lesson.name) private lessonModel: Model<LessonDocument>,
+  ) {}
 
   async getCourseById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
@@ -36,5 +40,28 @@ export class CourseService {
     } else {
       return { code: 400, text: 'Not all fields are filled', type: 'Error' };
     }
+  }
+
+  async createLesson(body: ICreateLesson): Promise<ISuccess | IError> {
+    const course = await this.courseModel.findById(body._id);
+    console.log(body);
+    const lesson = await new this.lessonModel({ array: body.array });
+
+    await lesson.save();
+
+    course.lessons.push(lesson);
+    await course.save();
+
+    return { code: 200, text: 'Lesson is added', type: 'Success' };
+  }
+
+  async deleteCourse(id: string): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(id)) {
+      await this.courseModel.findByIdAndDelete(id);
+
+      return { code: 200, text: 'Course is delete', type: 'Success' };
+    }
+
+    return { code: 404, text: 'Course is not found', type: 'Error' };
   }
 }
