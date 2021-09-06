@@ -132,7 +132,7 @@ export const EditCourse = () => {
             <div className="edit-course-lessons-title">Lessons</div>
             <div className="edit-course-lessons-button">
               <a href={`/create/${course._id}/lesson`}>
-                <Button type="outline" color="primary" fontSize="14">
+                <Button type="bold" color="primary" fontSize="14">
                   Add lesson
                 </Button>
               </a>

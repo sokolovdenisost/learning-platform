@@ -15,23 +15,14 @@ interface Props {
 export const Title = ({ onCancel, onChange, index, value }: Props) => {
   const [text, setText] = useState(value);
   const [activeEdit, setActiveEdit] = useState(true);
-  const [disable, setDisable] = useState(true);
 
   function onSave() {
-    if (!disable) {
-      setActiveEdit(false);
-    }
+    setActiveEdit(false);
   }
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setText(e.target.value);
     onChange(index, e.currentTarget.value);
-    if (e.target.value) {
-      console.log(e.target.value);
-      setDisable(false);
-    } else if (!e.target.value) {
-      setDisable(true);
-    }
   }
 
   function onEdit() {
@@ -41,7 +32,7 @@ export const Title = ({ onCancel, onChange, index, value }: Props) => {
   return (
     <div className="title">
       {activeEdit ? (
-        <CreateBlock title="Title course" disable={disable} onSave={onSave} onCancel={onCancel}>
+        <CreateBlock title="Title course" disable={text ? false : true} onSave={onSave} onCancel={onCancel}>
           <Input value={text} label="" id="title" onChange={changeInput} />
         </CreateBlock>
       ) : (

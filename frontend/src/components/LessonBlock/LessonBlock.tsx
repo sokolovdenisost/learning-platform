@@ -1,4 +1,5 @@
 import React from 'react';
+import { deleteLessonHandler } from '../../utils/course';
 import { Button } from '../Button/Button';
 import './LessonBlock.scss';
 
@@ -14,11 +15,11 @@ export const LessonBlock = ({ title, _id, course }: Props) => {
       <div className="lesson-title">{title}</div>
       <div className="lesson-buttons">
         <a href={`/edit/${course}/lesson/${_id}`}>
-          <Button type="bold" color="primary" fontSize="14">
+          <Button type="outline" color="primary" fontSize="14">
             Edit
           </Button>
         </a>
-        <Button type="outline" color="danger" fontSize="14">
+        <Button type="outline" color="danger" fontSize="14" onClick={() => deleteLessonHandler(course, _id)}>
           Delete
         </Button>
       </div>

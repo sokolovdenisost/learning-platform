@@ -6,6 +6,7 @@ import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { ICreateCourse, ICreateLesson } from './interface/course.interface';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
+import { CreateCourseDTO, CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/course.dto';
 
 @Injectable()
 export class CourseService {
@@ -51,6 +52,42 @@ export class CourseService {
     }
   }
 
+  async editLesson(body: EditLessonDTO): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.lesson_id)) {
+      const course = await this.courseModel.findById(body.course_id);
+      if (course) {
+        const check = course.lessons.find((lesson) => String(lesson) === body.lesson_id);
+
+        if (check) {
+          await this.lessonModel.findByIdAndUpdate(body.lesson_id, { array: body.array });
+
+          return { code: 200, text: 'Lesson is update', type: 'Success' };
+        } else {
+          return { code: 404, text: 'Course is not found', type: 'Error' };
+        }
+      } else {
+        return { code: 404, text: 'Course is not found', type: 'Error' };
+      }
+    }
+  }
+
+  async deleteLesson(body: DeleteLessonDTO): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.lesson_id)) {
+      const course = await this.courseModel.findById(body.course_id);
+      if (course) {
+        await this.lessonModel.findByIdAndDelete(body.lesson_id);
+
+        course.lessons = course.lessons.filter((lesson) => String(lesson) !== body.lesson_id);
+
+        await course.save();
+
+        return { code: 200, text: 'Lesson is deleted', type: 'Success' };
+      } else {
+        return { code: 404, text: 'Course is not found', type: 'Error' };
+      }
+    }
+  }
+
   async getCourseById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
       const course = await this.courseModel.findById(id);
@@ -65,7 +102,7 @@ export class CourseService {
     }
   }
 
-  async createCourse(body: ICreateCourse): Promise<any> {
+  async createCourse(body: CreateCourseDTO): Promise<any> {
     const { _id, certificate, description, image, level, tags, title } = body;
     if (_id.trim() && certificate && description.trim() && image && level && tags && title.trim()) {
       const course = await new this.courseModel({ owner: _id, certificate, description, image, level, tags, title });
@@ -79,7 +116,7 @@ export class CourseService {
     }
   }
 
-  async createLesson(body: ICreateLesson): Promise<ISuccess | IError> {
+  async createLesson(body: CreateLessonDTO): Promise<ISuccess | IError> {
     const course = await this.courseModel.findById(body._id);
     console.log(body);
     const lesson = await new this.lessonModel({ course: body._id, array: body.array });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { Button } from '../../Button/Button';
@@ -30,16 +30,16 @@ export const Video = ({ onCancel, onChange, index, value }: Props) => {
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setUrl({ ...url, url: e.currentTarget.value });
     onChange(index, e.currentTarget.value);
-    if (e.currentTarget.value.trim() && isUrl(e.currentTarget.value)) {
-      const params = new URL(e.currentTarget.value).searchParams;
-      if (params.get('v')) {
-        setDisable(false);
-      } else {
-        setDisable(true);
-      }
-    } else {
-      setDisable(true);
-    }
+    // if (url.url.trim() && isUrl(url.url)) {
+    //   const params = new URL(url.url).searchParams;
+    //   if (params.get('v')) {
+    //     setDisable(false);
+    //   } else {
+    //     setDisable(true);
+    //   }
+    // } else {
+    //   setDisable(true);
+    // }
   }
 
   function isUrl(s: string) {
@@ -62,7 +62,7 @@ export const Video = ({ onCancel, onChange, index, value }: Props) => {
   return (
     <div className="video">
       {activeEdit ? (
-        <CreateBlock title="Video course" disable={disable} onSave={onSave} onCancel={onCancel}>
+        <CreateBlock title="Video course" disable={url.url ? false : true} onSave={onSave} onCancel={onCancel}>
           <Input value={url.url} label="" id="video" onChange={(e) => changeInput(e)} />
         </CreateBlock>
       ) : (

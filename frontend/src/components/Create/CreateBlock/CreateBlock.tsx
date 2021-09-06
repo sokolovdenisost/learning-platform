@@ -23,11 +23,11 @@ export const CreateBlock = ({ title, children, onCancel, onSave, disable }: Prop
       <div className="create-block-title">{title}</div>
       {children}
       <div className="create-block-buttons">
-        <Button type="outline" color="cancel" fontSize="14" onClick={onCancel}>
-          Cancel
+        <Button type="outline" color="danger" fontSize="14" onClick={onCancel}>
+          Delete
         </Button>
-        <Button type="bold" color="primary" fontSize="14" onClick={onSave} disable={disable}>
-          Save
+        <Button type="outline" color="primary" fontSize="14" onClick={onSave} disable={disable}>
+          Preview
         </Button>
       </div>
     </div>

@@ -1,0 +1,15 @@
+@import '../../index.scss';
+
+.edit-lesson-page {
+  .edit-lesson-forms {
+    margin-bottom: 20px;
+  }
+
+  .edit-lesson-buttons {
+    text-align: center;
+
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+}

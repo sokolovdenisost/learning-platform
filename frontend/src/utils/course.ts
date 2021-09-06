@@ -65,6 +65,46 @@ export async function createLesson(body: ILessonBody[], _id: string): Promise<an
   return result;
 }
 
+export async function deleteLessonHandler(course_id: string, lesson_id: string): Promise<any> {
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/delete-lesson`, {
+    method: 'POST',
+    body: JSON.stringify({ course_id, lesson_id }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+
+  if (result.type === 'Success') {
+    window.location.reload();
+  }
+
+  return result;
+}
+
+export async function editLessonHandler(body: IEditLesson): Promise<any> {
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/edit-lesson`, {
+    method: 'POST',
+    body: JSON.stringify({ course_id: body.course, lesson_id: body._id, array: body.array }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+
+  if (result.type === 'Success') {
+    window.location.reload();
+  }
+
+  return result;
+}
+
 interface ICreateCourse {
   image: string;
   title: string;
@@ -77,6 +117,12 @@ interface ICreateCourse {
 interface ILessonBody {
   typeForm: string;
   text: string;
+}
+
+interface IEditLesson {
+  _id: string;
+  course: string;
+  array: Array<{ typeForm: string; text: string }>;
 }
 
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

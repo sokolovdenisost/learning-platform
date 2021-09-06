@@ -7,6 +7,9 @@ import { Title } from '../../components/Create/Title/Title';
 import { Code } from '../../components/Create/Code/Code';
 import { Test } from '../../components/Create/Test/Test';
 import './EditCourseLesson.scss';
+import { Button } from '../../components/Button/Button';
+import { Panel } from '../../components/Create/Panel/Panel';
+import { editLessonHandler } from '../../utils/course';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
@@ -67,7 +70,20 @@ export const EditCourseLesson = () => {
 
   return (
     <Layout title="Edit course lesson">
-      <div className="edit-lesson">{mapCreateForms}</div>
+      <div className="edit-lesson-page">
+        <div className="edit-lesson-forms">
+          {mapCreateForms}
+          <Panel onCreate={createForm} />
+        </div>
+        <div className="edit-lesson-buttons">
+          <Button color="danger" type="bold" fontSize="14">
+            Delete
+          </Button>
+          <Button color="primary" type="bold" fontSize="14" onClick={() => editLessonHandler(lesson)}>
+            Save
+          </Button>
+        </div>
+      </div>
     </Layout>
   );
 };
