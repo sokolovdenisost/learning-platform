@@ -2,14 +2,18 @@ import React from 'react';
 import { Button } from '../Button/Button';
 import './LessonBlock.scss';
 
-export const LessonBlock = () => {
-  const id = '123123';
-  const less_id = '213445';
+interface Props {
+  title: string;
+  _id: string;
+  course: string;
+}
+
+export const LessonBlock = ({ title, _id, course }: Props) => {
   return (
     <div className="lesson-block">
-      <div className="lesson-title">Title</div>
+      <div className="lesson-title">{title}</div>
       <div className="lesson-buttons">
-        <a href={`/edit/${id}/lesson/${less_id}`}>
+        <a href={`/edit/${course}/lesson/${_id}`}>
           <Button type="bold" color="primary" fontSize="14">
             Edit
           </Button>

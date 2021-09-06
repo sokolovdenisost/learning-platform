@@ -9,10 +9,11 @@ interface Props {
   onCancel: () => void;
   onChange: (index: number, body: string) => void;
   index: number;
+  value: string;
 }
 
-export const Title = ({ onCancel, onChange, index }: Props) => {
-  const [value, setValue] = useState('');
+export const Title = ({ onCancel, onChange, index, value }: Props) => {
+  const [text, setText] = useState(value);
   const [activeEdit, setActiveEdit] = useState(true);
   const [disable, setDisable] = useState(true);
 
@@ -23,7 +24,7 @@ export const Title = ({ onCancel, onChange, index }: Props) => {
   }
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+    setText(e.target.value);
     onChange(index, e.currentTarget.value);
     if (e.target.value) {
       console.log(e.target.value);
@@ -41,11 +42,11 @@ export const Title = ({ onCancel, onChange, index }: Props) => {
     <div className="title">
       {activeEdit ? (
         <CreateBlock title="Title course" disable={disable} onSave={onSave} onCancel={onCancel}>
-          <Input label="" id="title" onChange={changeInput} />
+          <Input value={text} label="" id="title" onChange={changeInput} />
         </CreateBlock>
       ) : (
         <div className="title-ready">
-          <div className="title-value">{value}</div>
+          <div className="title-value">{text}</div>
           <div className="title-edit" onClick={onEdit}>
             <BiEdit size={24} color="#007bff" />
           </div>

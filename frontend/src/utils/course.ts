@@ -26,7 +26,8 @@ export async function createCourseHandler(body: ICreateCourse): Promise<any> {
 export async function deleteCourseHandler(id: string): Promise<any> {
   const user_id = localStorage.getItem('user_id');
   const response = await fetch(`${API_URL}/course/${id}`, {
-    method: 'DELETE',
+    method: 'Post',
+    body: JSON.stringify({ user_id }),
     headers: {
       Accept: '*/*',
       'Content-Type': 'application/json',
@@ -34,6 +35,8 @@ export async function deleteCourseHandler(id: string): Promise<any> {
   });
 
   const result = await response.json();
+
+  console.log(result);
 
   if (result.type === 'Success') {
     window.location.reload();

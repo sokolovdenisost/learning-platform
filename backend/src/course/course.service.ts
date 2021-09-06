@@ -14,6 +14,43 @@ export class CourseService {
     @InjectModel(Lesson.name) private lessonModel: Model<LessonDocument>,
   ) {}
 
+  async getCourseByIdAndUserId(id: string, user_id: string): Promise<any> {
+    if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
+      const course = await this.courseModel.findById(id).populate('lessons');
+      console.log(course, user_id);
+
+      if (String(course.owner) === user_id) {
+        console.log('String(course.owner) === user_id', String(course.owner) === user_id);
+        return { code: 200, text: `Course ${id}`, type: 'Success', course };
+      } else {
+        console.log('String(course.owner) !== user_id', String(course.owner) !== user_id);
+        return { code: 404, text: 'Course is not found', type: 'Error' };
+      }
+    } else {
+      return { code: 404, text: 'Course is not found', type: 'Error' };
+    }
+  }
+
+  async getLessonByCourse(course_id: string, lesson_id: string): Promise<any> {
+    if (mongoose.isValidObjectId(course_id) && mongoose.isValidObjectId(lesson_id)) {
+      const course = await this.courseModel.findById(course_id);
+      const lesson = await this.lessonModel.findById(lesson_id);
+      const check = course.lessons.find((c) => String(c) === lesson_id);
+
+      if (lesson) {
+        if (check) {
+          return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
+        } else {
+          return { code: 404, text: `Lesson is not found`, type: 'Error' };
+        }
+      } else {
+        return { code: 404, text: 'Lesson is not found', type: 'Error' };
+      }
+    } else {
+      return { code: 404, text: 'Lesson is not found', type: 'Error' };
+    }
+  }
+
   async getCourseById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
       const course = await this.courseModel.findById(id);
@@ -45,7 +82,7 @@ export class CourseService {
   async createLesson(body: ICreateLesson): Promise<ISuccess | IError> {
     const course = await this.courseModel.findById(body._id);
     console.log(body);
-    const lesson = await new this.lessonModel({ array: body.array });
+    const lesson = await new this.lessonModel({ course: body._id, array: body.array });
 
     await lesson.save();
 
@@ -55,11 +92,16 @@ export class CourseService {
     return { code: 200, text: 'Lesson is added', type: 'Success' };
   }
 
-  async deleteCourse(id: string): Promise<ISuccess | IError> {
-    if (mongoose.isValidObjectId(id)) {
-      await this.courseModel.findByIdAndDelete(id);
+  async deleteCourse(id: string, user_id: string): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
+      const course = await this.courseModel.findById(id);
+      if (course && String(course.owner) === user_id) {
+        await this.courseModel.findByIdAndDelete(id);
 
-      return { code: 200, text: 'Course is delete', type: 'Success' };
+        return { code: 200, text: 'Course is delete', type: 'Success' };
+      } else {
+        return { code: 400, text: 'Course is not found', type: 'Error' };
+      }
     }
 
     return { code: 404, text: 'Course is not found', type: 'Error' };

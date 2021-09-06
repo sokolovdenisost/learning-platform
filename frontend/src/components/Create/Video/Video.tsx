@@ -10,6 +10,7 @@ interface Props {
   onCancel: () => void;
   onChange: (index: number, body: string) => void;
   index: number;
+  value: string;
 }
 
 interface IUrl {
@@ -17,9 +18,9 @@ interface IUrl {
   id: string | null;
 }
 
-export const Video = ({ onCancel, onChange, index }: Props) => {
+export const Video = ({ onCancel, onChange, index, value }: Props) => {
   const [url, setUrl] = useState<IUrl>({
-    url: '',
+    url: value,
     id: '',
   });
   const [activeEdit, setActiveEdit] = useState(true);
@@ -62,7 +63,7 @@ export const Video = ({ onCancel, onChange, index }: Props) => {
     <div className="video">
       {activeEdit ? (
         <CreateBlock title="Video course" disable={disable} onSave={onSave} onCancel={onCancel}>
-          <Input label="" id="video" onChange={(e) => changeInput(e)} />
+          <Input value={url.url} label="" id="video" onChange={(e) => changeInput(e)} />
         </CreateBlock>
       ) : (
         <div className="video-ready">

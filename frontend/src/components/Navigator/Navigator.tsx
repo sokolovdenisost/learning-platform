@@ -37,7 +37,7 @@ export const Navigator = ({ auth }: Props) => {
 
   return (
     <div className="navigator">
-      <div className="navigator-block">{auth ? mapButtonsAuth : mapButtonsNoAuth}</div>
+      <div className="navigator-block">{auth._id ? mapButtonsAuth : mapButtonsNoAuth}</div>
     </div>
   );
 };

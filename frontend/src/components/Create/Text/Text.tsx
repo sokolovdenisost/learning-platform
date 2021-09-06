@@ -10,25 +10,26 @@ interface Props {
   onCancel: () => void;
   onChange: (index: number, body: string) => void;
   index: number;
+  value: string;
 }
 
-export const Text = ({ onCancel, onChange, index }: Props) => {
-  const [value, setValue] = useState('');
+export const Text = ({ onCancel, onChange, index, value }: Props) => {
+  const [text, setText] = useState(value);
   const [activeEdit, setActiveEdit] = useState(true);
   const [disable, setDisable] = useState(true);
 
   function onSave() {
-    if (value) {
+    if (text) {
       setActiveEdit(false);
     }
   }
 
   useEffect(() => {
-    console.log(value, disable);
-  }, [value, disable]);
+    console.log(text, disable);
+  }, [text, disable]);
 
   function changeInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    setValue(e.target.value);
+    setText(e.target.value);
     onChange(index, e.target.value);
     if (e.target.value) {
       console.log(e.target.value);
@@ -46,11 +47,11 @@ export const Text = ({ onCancel, onChange, index }: Props) => {
     <div className="textarea">
       {activeEdit ? (
         <CreateBlock title="Text course" disable={disable} onCancel={onCancel} onSave={onSave}>
-          <Textarea placeholder="Text course" value={value} onChange={changeInput} />
+          <Textarea placeholder="Text course" value={text} onChange={changeInput} />
         </CreateBlock>
       ) : (
         <div className="textarea-ready">
-          <div className="ready-textcourse">{value}</div>
+          <div className="ready-textcourse">{text}</div>
           <div className="ready-edit" onClick={onEdit}>
             <BiEdit size={24} color="#007bff" />
           </div>

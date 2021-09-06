@@ -13,4 +13,8 @@ export class CreateLessonDTO {
   array: Array<{ typeForm: string; text: string }>;
 }
 
+export class DeleteCourseDTO {
+  user_id: string;
+}
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

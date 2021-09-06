@@ -1,0 +1,20 @@
+@import '../../index.scss';
+
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+
+  .error-code {
+    font-size: 250px;
+    font-weight: 900;
+    line-height: 100%;
+  }
+
+  .error-text {
+    font-size: 50px;
+    font-weight: 500;
+  }
+}

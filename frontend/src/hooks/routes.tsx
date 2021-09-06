@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Loader } from '../components/Loader/Loader';
 import { Navigator } from '../components/Navigator/Navigator';
+import { Error404 } from '../pages/404/404';
 import { Course } from '../pages/Course/Course';
 import { Courses } from '../pages/Courses/Courses';
 import { Create } from '../pages/Create/Create';
@@ -15,9 +16,35 @@ import { News } from '../pages/News/News';
 import { PopularCourses } from '../pages/PopularCourses/PopularCourses';
 import { Profile } from '../pages/Profile/Profile';
 import { Settings } from '../pages/Settings/Settings';
-import { useAuth } from './auth';
 
 export const routes = (loading: boolean, auth: any) => {
+  const routesNoAuth = [
+    {
+      path: '/',
+      component: <News />,
+    },
+    {
+      path: '/courses',
+      component: <Courses />,
+    },
+    {
+      path: '/new-courses',
+      component: <NewCourses />,
+    },
+    {
+      path: '/popular-courses',
+      component: <PopularCourses />,
+    },
+    {
+      path: '/course/:id',
+      component: <Course />,
+    },
+    {
+      path: '/404',
+      component: <Error404 />,
+    },
+  ];
+
   const routesAuth = [
     {
       path: '/',
@@ -71,6 +98,10 @@ export const routes = (loading: boolean, auth: any) => {
       path: '/create/:id/lesson',
       component: <CreateCourseLesson />,
     },
+    {
+      path: '/404',
+      component: <Error404 />,
+    },
   ];
 
   const mapAuthRoutes = routesAuth.map((c) => {
@@ -81,9 +112,19 @@ export const routes = (loading: boolean, auth: any) => {
     );
   });
 
+  const mapNoAuthRoutes = routesNoAuth.map((c) => {
+    return (
+      <Route key={c.path} path={c.path} exact>
+        {c.component}
+      </Route>
+    );
+  });
+
   if (loading) {
     return <Loader />;
   }
+
+  console.log(auth);
 
   if (auth) {
     return (
@@ -100,7 +141,7 @@ export const routes = (loading: boolean, auth: any) => {
     <>
       <Navigator auth={auth} />
       <Switch>
-        {mapAuthRoutes}
+        {mapNoAuthRoutes}
         <Redirect to="/" />
       </Switch>
     </>

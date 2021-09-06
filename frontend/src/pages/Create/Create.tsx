@@ -10,7 +10,7 @@ import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
 
 const TAGS = [
-  'Web Design',
+  'Web design',
   'Design',
   'UI Design',
   'UX Design',

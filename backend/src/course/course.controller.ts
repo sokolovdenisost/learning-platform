@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CourseService } from './course.service';
-import { CreateCourseDTO, CreateLessonDTO } from './dto/course.dto';
+import { CreateCourseDTO, CreateLessonDTO, DeleteCourseDTO } from './dto/course.dto';
 
 @Controller('course')
 export class CourseController {
@@ -10,6 +10,12 @@ export class CourseController {
   @Get(':id')
   async getCourseById(@Res() res: Response, @Param('id') id: string): Promise<void> {
     const result = await this.courseService.getCourseById(id);
+    res.json(result).status(result.code);
+  }
+
+  @Get('/edit/:id/:user_id')
+  async getCourseByIdAndUserId(@Res() res: Response, @Param() params): Promise<void> {
+    const result = await this.courseService.getCourseByIdAndUserId(params.id, params.user_id);
     res.json(result).status(result.code);
   }
 
@@ -27,10 +33,17 @@ export class CourseController {
     res.json(result).status(result.code);
   }
 
-  @Delete(':id')
-  async deleteCourse(@Res() res: Response, @Param('id') id: string): Promise<void> {
+  @Get(':id/edit-lesson/:lesson')
+  async getLessonByCourse(@Res() res: Response, @Param() params): Promise<void> {
+    const result = await this.courseService.getLessonByCourse(params.id, params.lesson);
+
+    res.json(result).status(result.code);
+  }
+
+  @Post(':id')
+  async deleteCourse(@Res() res: Response, @Param('id') id: string, @Body() body: DeleteCourseDTO): Promise<void> {
     // нужно проверять что его удаляет точно создатель курса
-    const result = await this.courseService.deleteCourse(id);
+    const result = await this.courseService.deleteCourse(id, body.user_id);
 
     res.json(result).status(result.code);
   }

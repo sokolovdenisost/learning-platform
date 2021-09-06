@@ -38,14 +38,14 @@ export const CreateCourseLesson = () => {
 
   const mapCreateForms = stepForm.map((form, index) => {
     if (form.typeForm === 'text') {
-      return <Text onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
+      return <Text value={form.text} onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
     }
     if (form.typeForm === 'video') {
-      return <Video onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
+      return <Video value={form.text} onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
     }
 
     if (form.typeForm === 'title') {
-      return <Title onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
+      return <Title value={form.text} onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
     }
 
     if (form.typeForm === 'test') {

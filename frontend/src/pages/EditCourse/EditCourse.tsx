@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
@@ -7,6 +8,7 @@ import { Layout } from '../../components/Layout/Layout';
 import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
 import { SearchTag } from '../../components/Tag/Tag';
 import { API_URL } from '../../consts';
+import { Error404 } from '../404/404';
 import './EditCourse.scss';
 
 const TAGS = [
@@ -35,15 +37,20 @@ export const EditCourse = () => {
     title: '',
     lessons: [],
   });
-  const [selected, setSelected] = useState<string[]>([]);
+  const [error, setError] = useState();
+  const user_id = localStorage.getItem('user_id');
 
   useEffect(() => {
     const id = window.location.pathname.split('/')[2];
-    fetch(`${API_URL}/course/${id}`)
+    fetch(`${API_URL}/course/edit/${id}/${user_id}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setCourse(res.course);
+        if (res.type === 'Error') {
+          setError(res);
+        } else {
+          console.log(res);
+          setCourse(res.course);
+        }
       });
   }, []);
 
@@ -68,9 +75,13 @@ export const EditCourse = () => {
     console.log(e.currentTarget.value);
   }
 
-  const mapLessons = course.lessons.map((lesson) => {
-    return <LessonBlock key={lesson} />;
+  const mapLessons = course.lessons.map((lesson, index) => {
+    return <LessonBlock _id={lesson._id} course={lesson.course} title={`Lesson #${index}`} key={index} />;
   });
+
+  if (error) {
+    return <Redirect from="/edit/:id" to="/404" />;
+  }
 
   return (
     <Layout title="Edit course">
