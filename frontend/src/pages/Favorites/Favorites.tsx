@@ -7,8 +7,8 @@ export const Favorites = () => {
   return (
     <Layout title="Favorite courses">
       <div className="favorite-page">
-        <CardCourse />
-        <CardCourse />
+        {/* <CardCourse />
+        <CardCourse /> */}
       </div>
     </Layout>
   );

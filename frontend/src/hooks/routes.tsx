@@ -124,9 +124,8 @@ export const routes = (loading: boolean, auth: any) => {
     return <Loader />;
   }
 
-  console.log(auth);
-
-  if (auth) {
+  if (auth._id) {
+    console.log('hello');
     return (
       <>
         <Navigator auth={auth} />
@@ -137,6 +136,8 @@ export const routes = (loading: boolean, auth: any) => {
       </>
     );
   }
+
+  console.log(auth);
   return (
     <>
       <Navigator auth={auth} />

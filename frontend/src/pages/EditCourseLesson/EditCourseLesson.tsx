@@ -9,7 +9,8 @@ import { Test } from '../../components/Create/Test/Test';
 import './EditCourseLesson.scss';
 import { Button } from '../../components/Button/Button';
 import { Panel } from '../../components/Create/Panel/Panel';
-import { editLessonHandler } from '../../utils/course';
+import { deleteLessonHandler, editLessonHandler } from '../../utils/course';
+import { Redirect } from 'react-router';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
@@ -19,15 +20,18 @@ export const EditCourseLesson = () => {
     _id: '',
     course: '',
   });
+  const [error, setError] = useState();
+  const params = window.location.pathname.split('/');
 
   useEffect(() => {
-    const params = window.location.pathname.split('/');
-    console.log(params[2], params[4]);
-
     fetch(`${API_URL}/course/${params[2]}/edit-lesson/${params[4]}`)
       .then((res) => res.json())
       .then((res) => {
-        setLesson(res.lesson);
+        if (res.type === 'Success') {
+          setLesson(res.lesson);
+        } else {
+          setError(res);
+        }
       });
   }, []);
 
@@ -68,6 +72,10 @@ export const EditCourseLesson = () => {
     }
   });
 
+  if (error) {
+    return <Redirect to="/404" />;
+  }
+
   return (
     <Layout title="Edit course lesson">
       <div className="edit-lesson-page">
@@ -76,11 +84,11 @@ export const EditCourseLesson = () => {
           <Panel onCreate={createForm} />
         </div>
         <div className="edit-lesson-buttons">
-          <Button color="danger" type="bold" fontSize="14">
-            Delete
-          </Button>
           <Button color="primary" type="bold" fontSize="14" onClick={() => editLessonHandler(lesson)}>
             Save
+          </Button>
+          <Button color="danger" type="bold" fontSize="14" onClick={() => deleteLessonHandler(params[2], params[4])}>
+            Delete
           </Button>
         </div>
       </div>

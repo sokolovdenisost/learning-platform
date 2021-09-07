@@ -8,6 +8,7 @@ import { Layout } from '../../components/Layout/Layout';
 import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
 import { SearchTag } from '../../components/Tag/Tag';
 import { API_URL } from '../../consts';
+import { deleteCourseHandler } from '../../utils/course';
 import { Error404 } from '../404/404';
 import './EditCourse.scss';
 
@@ -32,7 +33,11 @@ export const EditCourse = () => {
     description: '',
     image: '',
     level: '',
-    owner: '',
+    owner: {
+      _id: '',
+      firstName: '',
+      lastName: '',
+    },
     tags: [],
     title: '',
     lessons: [],
@@ -80,7 +85,7 @@ export const EditCourse = () => {
   });
 
   if (error) {
-    return <Redirect from="/edit/:id" to="/404" />;
+    return <Redirect to="/404" />;
   }
 
   return (
@@ -140,6 +145,14 @@ export const EditCourse = () => {
           </div>
           <div className="edit-course-lessons-body">{mapLessons}</div>
         </div>
+        <div className="edit-course-buttons">
+          <Button type="bold" color="primary" fontSize="14">
+            Save course
+          </Button>
+          <Button type="bold" color="danger" fontSize="14" onClick={() => deleteCourseHandler(course._id)}>
+            Delete course
+          </Button>
+        </div>
       </div>
     </Layout>
   );
@@ -147,12 +160,16 @@ export const EditCourse = () => {
 
 interface ICourse {
   _id: string;
+  tags: string[];
+  level: string;
   certificate: boolean;
   description: string;
-  image: string;
-  level: string;
-  owner: string;
-  tags: string[];
   title: string;
+  image: string;
   lessons: any[];
+  owner: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
 }

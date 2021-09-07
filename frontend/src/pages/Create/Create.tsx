@@ -55,10 +55,6 @@ export const Create = () => {
     setForm({ ...form, [e.currentTarget.id]: e.currentTarget.value });
   }
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
-
   return (
     <Layout title="Create course">
       <div className="create-page">

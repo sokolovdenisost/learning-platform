@@ -6,7 +6,7 @@ import './Progress.scss';
 export const Progress = () => {
   return (
     <div className="progress">
-      <CardCourse />
+      {/* <CardCourse /> */}
       <div className="progress-body">
         <div className="progress-title">Course passed on</div>
         <div className="progress-block">

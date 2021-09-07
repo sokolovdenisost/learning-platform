@@ -9,9 +9,10 @@ interface Props {
   title?: string;
   translateY?: number;
   styles?: Styles;
+  course: ICourse;
 }
 
-export const CardCourse = ({ title, translateY, styles }: Props) => {
+export const CardCourse = ({ title, translateY, styles, course }: Props) => {
   const styleCard = styles
     ? {
         transform: `translateY(-${translateY}px) scale(${styles.scale})`,
@@ -22,24 +23,20 @@ export const CardCourse = ({ title, translateY, styles }: Props) => {
         marginBottom: 15,
       };
 
+  const mapTags = course.tags.map((tag) => {
+    return <Tag title={tag} key={tag} />;
+  });
+
   return (
     <a href="/course/1" className="card-course" style={styleCard}>
-      <img
-        src="https://images.unsplash.com/photo-1628191081698-44f573462a03?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        alt="course"
-        className="image"
-      />
+      <img src={course.image} alt="course" className="image" />
       <div className="info">
-        <div className="title">Strategy, Design, Development</div>
-        <div className="description">Learn how to apply User Experience (UX) principles to your website designs, code ...</div>
+        <div className="title">{course.title}</div>
+        <div className="description">{course.description}</div>
         <div className="owner-course">
-          Created by <span>John Davis</span>
+          Created by <span>{course.owner.firstName + ' ' + course.owner.lastName}</span>
         </div>
-        <div className="tags">
-          <Tag title="UX Design" />
-          <Tag title="UI Design" />
-          <Tag title="Web design" />
-        </div>
+        <div className="tags">{mapTags}</div>
       </div>
       <div className="interaction">
         <div className="top">
@@ -82,4 +79,19 @@ interface Styles {
   scale: number;
   opacity: number;
   visibility: VisibilityState;
+}
+
+interface ICourse {
+  _id: string;
+  tags: string[];
+  level: string;
+  certificate: boolean;
+  description: string;
+  title: string;
+  image: string;
+  owner: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
 }

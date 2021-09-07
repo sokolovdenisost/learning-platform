@@ -45,5 +45,9 @@ interface ICourse {
   description: string;
   title: string;
   image: string;
-  owner: string;
+  owner: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
 }

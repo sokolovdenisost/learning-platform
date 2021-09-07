@@ -9,12 +9,14 @@ import { Code } from '../../components/Create/Code/Code';
 import './CreateCourseLesson.scss';
 import { Button } from '../../components/Button/Button';
 import { createLesson } from '../../utils/course';
+import { useHistory } from 'react-router';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const CreateCourseLesson = () => {
   const [stepForm, setStepForm] = useState<StepForm[]>([]);
   const course_id = window.location.pathname.split('/')[2];
+  const history = useHistory();
 
   useEffect(() => {
     console.log(stepForm);
@@ -63,7 +65,10 @@ export const CreateCourseLesson = () => {
         <div className="create-lesson-forms">{mapCreateForms}</div>
         <Panel onCreate={createForm} />
         <div className="create-lesson-buttons">
-          <Button type="outline" color="primary" fontSize="16" onClick={() => createLesson(stepForm, course_id)}>
+          <Button type="bold" color="cancel" fontSize="14" onClick={() => history.goBack()}>
+            Cancel
+          </Button>
+          <Button type="bold" color="primary" fontSize="14" onClick={() => createLesson(stepForm, course_id)}>
             Create lesson
           </Button>
         </div>

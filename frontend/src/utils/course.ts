@@ -39,7 +39,7 @@ export async function deleteCourseHandler(id: string): Promise<any> {
   console.log(result);
 
   if (result.type === 'Success') {
-    window.location.reload();
+    window.location.pathname = '/my-courses';
   }
 
   return result;
@@ -79,7 +79,7 @@ export async function deleteLessonHandler(course_id: string, lesson_id: string):
   const result = await response.json();
 
   if (result.type === 'Success') {
-    window.location.reload();
+    window.location.pathname = `/edit/${course_id}`;
   }
 
   return result;

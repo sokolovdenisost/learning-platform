@@ -23,7 +23,7 @@ export const ChangePicture = ({ title, img }: Props) => {
         />
         <div className="right">
           <div className="top">
-            <Button fontSize="14" type="bold" color="primary">
+            <Button fontSize="14" type="outline" color="primary">
               Upload new photo
             </Button>
             <Button fontSize="14" type="outline" color="danger">

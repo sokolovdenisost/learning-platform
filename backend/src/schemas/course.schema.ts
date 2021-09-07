@@ -9,7 +9,7 @@ export type CourseDocument = Course & Document;
 @Schema()
 export class Course {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  owner: User;
+  owner: string;
 
   @Prop({ type: String, required: true })
   image: string;
@@ -31,12 +31,18 @@ export class Course {
 
   @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Lesson' })
   lessons: Lesson[];
+
+  @Prop({ type: [{ user: { type: mongoose.Types.ObjectId, ref: 'User' }, ratingNum: Number }] })
+  rating: IRating[];
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);
 
-// interface Lesson {
-//   title: string;
-//   array: Array<{ type: string; text: string }>;
-// }
+interface IRating {
+  user: string;
+  ratingNum: RatingNum;
+}
+
+type RatingNum = 1 | 2 | 3 | 4 | 5;
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

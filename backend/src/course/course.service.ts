@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
-import { ICreateCourse, ICreateLesson } from './interface/course.interface';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
 import { CreateCourseDTO, CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/course.dto';
@@ -20,11 +19,13 @@ export class CourseService {
       const course = await this.courseModel.findById(id).populate('lessons');
       console.log(course, user_id);
 
-      if (String(course.owner) === user_id) {
-        console.log('String(course.owner) === user_id', String(course.owner) === user_id);
-        return { code: 200, text: `Course ${id}`, type: 'Success', course };
+      if (course) {
+        if (String(course.owner) === user_id) {
+          return { code: 200, text: `Course ${id}`, type: 'Success', course };
+        } else {
+          return { code: 404, text: 'Course is not found', type: 'Error' };
+        }
       } else {
-        console.log('String(course.owner) !== user_id', String(course.owner) !== user_id);
         return { code: 404, text: 'Course is not found', type: 'Error' };
       }
     } else {
@@ -35,14 +36,19 @@ export class CourseService {
   async getLessonByCourse(course_id: string, lesson_id: string): Promise<any> {
     if (mongoose.isValidObjectId(course_id) && mongoose.isValidObjectId(lesson_id)) {
       const course = await this.courseModel.findById(course_id);
-      const lesson = await this.lessonModel.findById(lesson_id);
-      const check = course.lessons.find((c) => String(c) === lesson_id);
+      if (course) {
+        const lesson = await this.lessonModel.findById(lesson_id);
 
-      if (lesson) {
-        if (check) {
-          return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
+        if (lesson) {
+          const check = course.lessons.find((c) => String(c) === lesson_id);
+
+          if (check) {
+            return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
+          } else {
+            return { code: 404, text: `Lesson is not found`, type: 'Error' };
+          }
         } else {
-          return { code: 404, text: `Lesson is not found`, type: 'Error' };
+          return { code: 404, text: 'Lesson is not found', type: 'Error' };
         }
       } else {
         return { code: 404, text: 'Lesson is not found', type: 'Error' };

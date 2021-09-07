@@ -45,11 +45,11 @@ export const Slider = ({ title, link }: Props) => {
         </a>
       </div>
       <div className="body">
-        <CardCourse translateY={0} styles={getActiveValues('1')} />
+        {/* <CardCourse translateY={0} styles={getActiveValues('1')} />
         <CardCourse translateY={200} styles={getActiveValues('2')} />
         <CardCourse translateY={400} styles={getActiveValues('3')} />
         <CardCourse translateY={600} styles={getActiveValues('4')} />
-        <CardCourse translateY={800} styles={getActiveValues('5')} />
+        <CardCourse translateY={800} styles={getActiveValues('5')} /> */}
       </div>
       <div className="bottom">
         <div id="1" className={active['1'] ? 'dot active' : 'dot'} onClick={(e) => changeDots(e)} />

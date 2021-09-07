@@ -1,52 +1,21 @@
 @import '../../index.scss';
 
 .card-course-created {
-  position: relative;
-  padding: 15px 20px;
-  border-radius: $r5;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $grey-main;
+  margin-bottom: 20px;
 
-  .course-image {
-    width: 170px;
-    height: 170px;
-    border-radius: $r5;
-    object-fit: cover;
-  }
-
-  .course-info {
-    width: 360px;
-    margin-left: 25px;
-
-    .course-title {
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .course-description {
-      font-size: 16px;
-      font-weight: 500;
-      margin: 15px 0 30px;
-      letter-spacing: 1.5px;
-      color: $grey-main;
-    }
-
-    .course-tags {
-      display: flex;
-    }
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
   }
 
   .course-buttons {
-    position: absolute;
-    right: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
 
-    .course-button-edit {
-      display: block;
-      width: 100%;
-      margin-bottom: 5px;
+    a:first-child {
+      margin-right: 10px;
     }
   }
 }
