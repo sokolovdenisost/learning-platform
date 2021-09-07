@@ -20,16 +20,23 @@
     margin: 0 25px;
 
     .title {
+      text-overflow: ellipsis;
+      overflow: hidden;
       font-size: 24px;
       font-weight: 900;
     }
 
     .description {
+      word-wrap: break-word;
       margin: 15px 0;
       letter-spacing: 1.5px;
       color: $grey-main;
       font-size: 16px;
       font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 38px;
+      line-height: 18px;
     }
 
     .owner-course {

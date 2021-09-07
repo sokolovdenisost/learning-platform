@@ -1,0 +1,94 @@
+@import '../../index.scss';
+
+.course-page {
+  .course-info {
+    display: flex;
+    align-items: center;
+
+    .course-left {
+      width: 150px;
+
+      .course-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 1px solid $blue-main;
+      }
+
+      .course-rating {
+        text-align: center;
+
+        .course-rating-number {
+          font-size: 16px;
+          font-weight: 700;
+          color: $grey-main;
+        }
+
+        .course-rating-stars {
+        }
+
+        .course-rating-votes {
+          font-size: 14px;
+          font-weight: 500;
+          color: $grey-main;
+        }
+      }
+    }
+
+    .course-right {
+      width: 626px;
+      margin-left: 20px;
+
+      .course-title {
+        word-wrap: break-word;
+        font-size: 20px;
+        font-weight: 900;
+      }
+
+      .course-description {
+        width: 100%;
+        word-wrap: break-word;
+        font-size: 16px;
+        margin: 20px 0;
+      }
+
+      .course-created-by {
+        font-size: 16px;
+
+        span {
+          font-weight: 700;
+        }
+      }
+
+      .course-bottom {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .course-tags {
+          display: flex;
+        }
+
+        .course-buttons {
+          text-align: right;
+
+          button:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .course-lessons {
+    margin-top: 25px;
+
+    .course-lessons-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  }
+}

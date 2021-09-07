@@ -96,7 +96,7 @@ export class CourseService {
 
   async getCourseById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
-      const course = await this.courseModel.findById(id);
+      const course = await this.courseModel.findById(id).populate('owner', 'firstName lastName');
 
       if (course) {
         return { code: 200, text: `Course ${id}`, type: 'Success', course };

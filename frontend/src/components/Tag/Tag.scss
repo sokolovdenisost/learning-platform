@@ -27,6 +27,41 @@
     background: $web-design-bg;
   }
 
+  &.Web.development {
+    color: $webdev;
+    background: $webdev-bg;
+  }
+
+  &.Front-end {
+    color: $frontend;
+    background: $frontend-bg;
+  }
+
+  &.Back-end {
+    color: $backend;
+    background: $backend-bg;
+  }
+
+  &.Mobile.development {
+    color: $mobiledev;
+    background: $mobiledev-bg;
+  }
+
+  &.CMS {
+    color: $cms;
+    background: $cms-bg;
+  }
+
+  &.Gamedev {
+    color: $gamedev;
+    background: $gamedev-bg;
+  }
+
+  &.Testing {
+    color: $testing;
+    background: $testing-bg;
+  }
+
   &:last-child {
     margin-right: 0;
   }

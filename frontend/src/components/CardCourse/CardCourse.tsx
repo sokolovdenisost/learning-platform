@@ -28,7 +28,7 @@ export const CardCourse = ({ title, translateY, styles, course }: Props) => {
   });
 
   return (
-    <a href="/course/1" className="card-course" style={styleCard}>
+    <a href={`/course/${course._id}`} className="card-course" style={styleCard}>
       <img src={course.image} alt="course" className="image" />
       <div className="info">
         <div className="title">{course.title}</div>
