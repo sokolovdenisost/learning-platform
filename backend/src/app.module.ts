@@ -6,6 +6,8 @@ import { CourseModule } from './course/course.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CloudinaryProvider } from './cloudinary/cloudinary.provider';
 import { CoursesModule } from './courses/courses.module';
+import { ValidateService } from './validate/validate.service';
+import { ValidateModule } from './validate/validate.module';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { CoursesModule } from './courses/courses.module';
     CourseModule,
     CloudinaryModule,
     CoursesModule,
+    ValidateModule,
   ],
   controllers: [],
   providers: [CloudinaryProvider],

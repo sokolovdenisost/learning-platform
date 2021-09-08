@@ -12,7 +12,6 @@ export const MyCourses = () => {
     fetch(`${API_URL}/courses/${user_id}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.courses);
         setMyCreatedCourses(res.courses);
       });
   }, []);

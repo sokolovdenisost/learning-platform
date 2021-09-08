@@ -4,6 +4,7 @@ import { Button } from '../../components/Button/Button';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
+import { Notification } from '../../components/Notification/Notification';
 import { Step } from '../../components/Step/Step';
 import { SearchTag } from '../../components/Tag/Tag';
 import { createCourseHandler } from '../../utils/course';
@@ -33,6 +34,11 @@ export const Create = () => {
     level: '',
     tags: [],
   });
+  const [result, setResult] = useState({
+    type: '',
+    text: '',
+    code: 0,
+  });
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);
@@ -53,6 +59,30 @@ export const Create = () => {
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.currentTarget.id]: e.currentTarget.value });
+  }
+
+  async function createCourse() {
+    setResult({
+      type: '',
+      text: '',
+      code: 0,
+    });
+
+    const result = await createCourseHandler(form);
+
+    if (result.type === 'Error') {
+      setResult(result);
+    }
+
+    setTimeout(
+      () =>
+        setResult({
+          type: '',
+          text: '',
+          code: 0,
+        }),
+      5000,
+    );
   }
 
   return (
@@ -89,11 +119,12 @@ export const Create = () => {
             </Block>
           </div>
           <div className="create-course-buttons">
-            <Button type="bold" color="primary" fontSize="16" onClick={() => createCourseHandler(form)}>
+            <Button type="bold" color="primary" fontSize="16" onClick={createCourse}>
               Create course
             </Button>
           </div>
         </div>
+        {result.type ? <Notification type={result.type} text={result.text} /> : null}
       </div>
     </Layout>
   );

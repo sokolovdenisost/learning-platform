@@ -21,7 +21,6 @@ export const useAuth = (): AuthSuccess => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res._id) {
           setAuth(res);
           setLoading(false);

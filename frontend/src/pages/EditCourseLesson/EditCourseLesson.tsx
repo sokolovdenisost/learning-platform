@@ -40,7 +40,6 @@ export const EditCourseLesson = () => {
   }
 
   function cancelForm(index: number) {
-    console.log(index);
     setLesson({ ...lesson, array: [...lesson.array.filter((_, idx) => index !== idx)] });
   }
 

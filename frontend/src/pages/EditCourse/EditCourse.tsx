@@ -8,7 +8,7 @@ import { Layout } from '../../components/Layout/Layout';
 import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
 import { SearchTag } from '../../components/Tag/Tag';
 import { API_URL } from '../../consts';
-import { deleteCourseHandler } from '../../utils/course';
+import { deleteCourseHandler, editCourseHandler } from '../../utils/course';
 import { Error404 } from '../404/404';
 import './EditCourse.scss';
 
@@ -29,7 +29,7 @@ const TAGS = [
 export const EditCourse = () => {
   const [course, setCourse] = useState<ICourse>({
     _id: '',
-    certificate: false,
+    certificate: '',
     description: '',
     image: '',
     level: '',
@@ -53,7 +53,6 @@ export const EditCourse = () => {
         if (res.type === 'Error') {
           setError(res);
         } else {
-          console.log(res);
           setCourse(res.course);
         }
       });
@@ -77,7 +76,7 @@ export const EditCourse = () => {
   }
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.currentTarget.value);
+    setCourse({ ...course, [e.currentTarget.id]: e.currentTarget.value });
   }
 
   const mapLessons = course.lessons.map((lesson, index) => {
@@ -146,7 +145,7 @@ export const EditCourse = () => {
           <div className="edit-course-lessons-body">{mapLessons}</div>
         </div>
         <div className="edit-course-buttons">
-          <Button type="bold" color="primary" fontSize="14">
+          <Button type="bold" color="primary" fontSize="14" onClick={() => editCourseHandler(course, course._id)}>
             Save course
           </Button>
           <Button type="bold" color="danger" fontSize="14" onClick={() => deleteCourseHandler(course._id)}>
@@ -162,7 +161,7 @@ interface ICourse {
   _id: string;
   tags: string[];
   level: string;
-  certificate: boolean;
+  certificate: string;
   description: string;
   title: string;
   image: string;

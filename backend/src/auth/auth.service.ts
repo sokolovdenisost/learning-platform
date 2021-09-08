@@ -6,12 +6,13 @@ import * as bcrypt from 'bcrypt';
 import { User, UserDocument } from 'src/schemas/user.schema';
 import { ICreateUser, ILoginUser } from './interface/auth.interface';
 import { IError, ISuccess } from '../error.interface';
+import { ValidateService } from 'src/validate/validate.service';
 
 const saltOrRounds = 10;
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private validateService: ValidateService) {}
 
   async loginUser(data: ILoginUser): Promise<any> {
     if (data.email && data.password) {
@@ -37,7 +38,7 @@ export class AuthService {
   async createUser(data: ICreateUser): Promise<ISuccess | IError> {
     if (data.firstName && data.lastName && data.email && data.password) {
       if (!(await this.findUserByEmail(data.email))) {
-        if (data.password.length >= 10) {
+        if (this.validateService.validateLength(data.password, 50, 10)) {
           const hashPassword = await bcrypt.hashSync(data.password, saltOrRounds);
           const user = new this.userModel({ ...data, password: hashPassword });
 

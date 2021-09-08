@@ -57,10 +57,6 @@ export const Settings = ({ user }: Props) => {
     );
   }
 
-  useEffect(() => {
-    console.log(formP);
-  }, [formP]);
-
   function onSave() {}
 
   function changeInput(e: React.ChangeEvent<HTMLInputElement>, state: any, setState: any) {

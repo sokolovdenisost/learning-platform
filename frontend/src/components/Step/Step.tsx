@@ -36,13 +36,8 @@ export const Step = ({ children, activeTransform, active, changeStep, step, type
   }
 
   function cancelForm(index: number) {
-    console.log(index);
     setStepForm([...stepForm.filter((_, idx) => index !== idx)]);
   }
-
-  useEffect(() => {
-    console.log(stepForm);
-  }, [stepForm]);
 
   function getActiveValues(active: boolean): GetStyle {
     if (active) {

@@ -18,16 +18,11 @@ export const CreateCourseLesson = () => {
   const course_id = window.location.pathname.split('/')[2];
   const history = useHistory();
 
-  useEffect(() => {
-    console.log(stepForm);
-  }, [stepForm]);
-
   function createForm(typeForm: TypesForm) {
     setStepForm([...stepForm, { typeForm, text: '' }]);
   }
 
   function cancelForm(index: number) {
-    console.log(index);
     setStepForm([...stepForm.filter((_, idx) => index !== idx)]);
   }
 

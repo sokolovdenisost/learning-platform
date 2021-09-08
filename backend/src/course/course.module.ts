@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Course, CourseSchema } from 'src/schemas/course.schema';
 import { Lesson, LessonSchema } from 'src/schemas/lesson.schema';
+import { ValidateModule } from 'src/validate/validate.module';
 import { CourseController } from './course.controller';
 import { CourseService } from './course.service';
 
@@ -11,6 +12,7 @@ import { CourseService } from './course.service';
       { name: Course.name, schema: CourseSchema },
       { name: Lesson.name, schema: LessonSchema },
     ]),
+    ValidateModule,
   ],
   controllers: [CourseController],
   providers: [CourseService],

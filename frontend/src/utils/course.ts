@@ -1,6 +1,6 @@
 import { API_URL } from '../consts';
 
-export async function createCourseHandler(body: ICreateCourse): Promise<any> {
+export async function createCourseHandler(body: ICourse): Promise<any> {
   const user_id = localStorage.getItem('user_id');
   const response = await fetch(`${API_URL}/course/create`, {
     method: 'POST',
@@ -15,10 +15,7 @@ export async function createCourseHandler(body: ICreateCourse): Promise<any> {
 
   if (result.type === 'Success') {
     window.location.pathname = `edit/${result.course_id}`;
-    console.log(window.location.href);
   }
-
-  console.log(result);
 
   return result;
 }
@@ -36,10 +33,28 @@ export async function deleteCourseHandler(id: string): Promise<any> {
 
   const result = await response.json();
 
+  if (result.type === 'Success') {
+    window.location.pathname = '/my-courses';
+  }
+
+  return result;
+}
+
+export async function editCourseHandler(body: ICourse, id: string): Promise<any> {
+  const response = await fetch(`${API_URL}/course/edit-course/${id}`, {
+    method: 'POST',
+    body: JSON.stringify({ ...body }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
   console.log(result);
 
   if (result.type === 'Success') {
-    window.location.pathname = '/my-courses';
+    window.location.reload();
   }
 
   return result;
@@ -105,7 +120,7 @@ export async function editLessonHandler(body: IEditLesson): Promise<any> {
   return result;
 }
 
-interface ICreateCourse {
+interface ICourse {
   image: string;
   title: string;
   description: string;

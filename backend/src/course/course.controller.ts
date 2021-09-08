@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CourseService } from './course.service';
-import { CreateCourseDTO, CreateLessonDTO, DeleteCourseDTO, DeleteLessonDTO, EditLessonDTO } from './dto/course.dto';
+import { CreateCourseDTO, CreateLessonDTO, DeleteCourseDTO, DeleteLessonDTO, EditCourseDTO, EditLessonDTO } from './dto/course.dto';
 
 @Controller('course')
 export class CourseController {
@@ -22,6 +22,13 @@ export class CourseController {
   @Post('create')
   async createCourse(@Res() res: Response, @Body() body: CreateCourseDTO): Promise<void> {
     const result = await this.courseService.createCourse(body);
+
+    res.json(result).status(result.code);
+  }
+
+  @Post('edit-course/:id')
+  async editCourse(@Res() res: Response, @Body() body: EditCourseDTO, @Param('id') id: string): Promise<void> {
+    const result = await this.courseService.editCourseById(body, id);
 
     res.json(result).status(result.code);
   }

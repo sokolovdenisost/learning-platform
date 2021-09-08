@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button } from '../Button/Button';
 import './ChangePicture.scss';
 
@@ -8,6 +8,12 @@ interface Props {
 }
 
 export const ChangePicture = ({ title, img }: Props) => {
+  const input = useRef<HTMLInputElement | null>(null);
+
+  function onClickInput() {
+    input.current?.click();
+  }
+
   return (
     <div className="change-picture">
       <div className="change-picture-title">{title}</div>
@@ -23,9 +29,11 @@ export const ChangePicture = ({ title, img }: Props) => {
         />
         <div className="right">
           <div className="top">
-            <Button fontSize="14" type="outline" color="primary">
+            <Button fontSize="14" type="outline" color="primary" onClick={onClickInput}>
               Upload new photo
             </Button>
+            <input type="file" name="photo" id="upload-photo" hidden ref={input} />
+
             <Button fontSize="14" type="outline" color="danger">
               Remove
             </Button>

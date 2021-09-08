@@ -12,7 +12,6 @@ export const Courses = () => {
     fetch(`${API_URL}/courses`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setCourses(res.courses);
       });
   }, []);

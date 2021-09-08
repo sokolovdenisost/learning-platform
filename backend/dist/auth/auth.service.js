@@ -19,10 +19,12 @@ const mongoose_2 = require("mongoose");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const user_schema_1 = require("../schemas/user.schema");
+const validate_service_1 = require("../validate/validate.service");
 const saltOrRounds = 10;
 let AuthService = class AuthService {
-    constructor(userModel) {
+    constructor(userModel, validateService) {
         this.userModel = userModel;
+        this.validateService = validateService;
     }
     async loginUser(data) {
         if (data.email && data.password) {
@@ -47,7 +49,7 @@ let AuthService = class AuthService {
     async createUser(data) {
         if (data.firstName && data.lastName && data.email && data.password) {
             if (!(await this.findUserByEmail(data.email))) {
-                if (data.password.length >= 10) {
+                if (this.validateService.validateLength(data.password, 50, 10)) {
                     const hashPassword = await bcrypt.hashSync(data.password, saltOrRounds);
                     const user = new this.userModel(Object.assign(Object.assign({}, data), { password: hashPassword }));
                     await user.save();
@@ -78,7 +80,7 @@ let AuthService = class AuthService {
 AuthService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel(user_schema_1.User.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model, validate_service_1.ValidateService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

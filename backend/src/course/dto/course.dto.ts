@@ -13,6 +13,15 @@ export class CreateLessonDTO {
   array: Array<{ typeForm: string; text: string }>;
 }
 
+export class EditCourseDTO {
+  image: string;
+  title: string;
+  description: string;
+  certificate: string;
+  level: LevelCourse;
+  tags: string[];
+}
+
 export class EditLessonDTO {
   course_id: string;
   lesson_id: string;
