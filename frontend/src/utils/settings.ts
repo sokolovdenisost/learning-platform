@@ -28,7 +28,25 @@ export async function changePassword(body: IChangePassword): Promise<ISuccess | 
   const result = await response.json();
 
   if (result.type === 'Success') {
-    window.location.reload(true);
+    window.location.reload();
+  }
+
+  return result;
+}
+
+export async function changePhoto(body: any): Promise<ISuccess | IError | void> {
+  const formData = new FormData();
+  formData.append('file', body.photo.photo['0']);
+  formData.append('user_id', body._id);
+
+  const response = await fetch(`${API_URL}/settings/change-photo`, {
+    method: 'POST',
+    body: formData,
+  });
+  const result = await response.json();
+
+  if (result.type === 'Success') {
+    window.location.reload();
   }
 
   return result;
@@ -43,6 +61,11 @@ interface IChangePersonalData {
 interface IChangePassword {
   oldPassword: string;
   newPassword: string;
+}
+
+interface IChangePhoto {
+  _id: string;
+  photo: FileList;
 }
 
 interface ISuccess {

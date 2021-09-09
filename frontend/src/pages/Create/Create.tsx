@@ -25,9 +25,9 @@ const TAGS = [
 ];
 
 export const Create = () => {
+  const [file, setFile] = useState<any>({});
   const [form, setForm] = useState<IForm>({
-    image:
-      'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    image: [],
     title: '',
     description: '',
     certificate: '',
@@ -68,7 +68,7 @@ export const Create = () => {
       code: 0,
     });
 
-    const result = await createCourseHandler(form);
+    const result = await createCourseHandler(form, file.photo);
 
     if (result.type === 'Error') {
       setResult(result);
@@ -85,13 +85,30 @@ export const Create = () => {
     );
   }
 
+  useEffect(() => {
+    console.log(form);
+    if (file.photo) {
+      console.log(file.photo['0']);
+    }
+  }, [form, file]);
+
+  function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
+    setFile({ [e.currentTarget.id]: e.currentTarget.files });
+  }
+
   return (
     <Layout title="Create course">
       <div className="create-page">
         <div className="left">
           <div className="create-item">
             <Block title="Main information on course" subtitle="In this block you  write main information on your course.">
-              <ChangePicture title="Course picture" />
+              <ChangePicture
+                title="Course picture"
+                onChange={changeFile}
+                img={
+                  file.photo ? URL.createObjectURL(file.photo['0']) : 'https://speceurotech.by/upload/iblock/1ba/1ba350f7d1ffadc026daee2a85028106.jpg'
+                }
+              />
               <Input label="Name course" id="title" onChange={(e) => changeInput(e)} />
               <Input label="Description course" id="description" onChange={(e) => changeInput(e)} />
             </Block>
@@ -131,7 +148,7 @@ export const Create = () => {
 };
 
 interface IForm {
-  image: string;
+  image: any;
   title: string;
   description: string;
   certificate: string;

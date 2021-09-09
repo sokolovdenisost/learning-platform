@@ -1,11 +1,10 @@
 export class CreateCourseDTO {
   _id: string;
-  image: string;
   title: string;
   description: string;
   certificate: string;
   level: LevelCourse;
-  tags: string[];
+  tags: string;
 }
 
 export class CreateLessonDTO {
@@ -14,7 +13,6 @@ export class CreateLessonDTO {
 }
 
 export class EditCourseDTO {
-  image: string;
   title: string;
   description: string;
   certificate: string;

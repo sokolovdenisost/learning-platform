@@ -4,6 +4,7 @@ import { HiOutlineBookmark } from 'react-icons/hi';
 import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import './CardCourse.scss';
+import { ICourse } from '../../interfaces/course';
 
 interface Props {
   title?: string;
@@ -29,7 +30,7 @@ export const CardCourse = ({ title, translateY, styles, course }: Props) => {
 
   return (
     <a href={`/course/${course._id}`} className="card-course" style={styleCard}>
-      <img src={course.image} alt="course" className="image" />
+      <img src={course.image.photo_url} alt="course" className="image" />
       <div className="info">
         <div className="title">{course.title}</div>
         <div className="description">{course.description}</div>
@@ -79,19 +80,4 @@ interface Styles {
   scale: number;
   opacity: number;
   visibility: VisibilityState;
-}
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: boolean;
-  description: string;
-  title: string;
-  image: string;
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
 }

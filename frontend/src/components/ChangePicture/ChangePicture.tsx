@@ -5,9 +5,10 @@ import './ChangePicture.scss';
 interface Props {
   title: string;
   img?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const ChangePicture = ({ title, img }: Props) => {
+export const ChangePicture = ({ title, img, onChange }: Props) => {
   const input = useRef<HTMLInputElement | null>(null);
 
   function onClickInput() {
@@ -18,21 +19,13 @@ export const ChangePicture = ({ title, img }: Props) => {
     <div className="change-picture">
       <div className="change-picture-title">{title}</div>
       <div className="change-picture-body">
-        <img
-          alt=""
-          className="left"
-          src={
-            img
-              ? img
-              : 'https://images.unsplash.com/photo-1628344806892-11873eba7974?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Nnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-          }
-        />
+        <img alt="" className="left" src={img} />
         <div className="right">
           <div className="top">
             <Button fontSize="14" type="outline" color="primary" onClick={onClickInput}>
               Upload new photo
             </Button>
-            <input type="file" name="photo" id="upload-photo" hidden ref={input} />
+            <input type="file" name="photo" id="photo" hidden ref={input} onChange={(e) => onChange(e)} />
 
             <Button fontSize="14" type="outline" color="danger">
               Remove

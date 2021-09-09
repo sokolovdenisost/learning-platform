@@ -1,14 +1,24 @@
 import { API_URL } from '../consts';
 
-export async function createCourseHandler(body: ICourse): Promise<any> {
+export async function createCourseHandler(body: ICourse, file: any): Promise<any> {
+  const formData = new FormData();
+  console.log('test', body, file);
+
+  for (let elem in body) {
+    if (elem === 'tags') {
+      formData.append(elem, JSON.stringify(body[elem]));
+    } else {
+      formData.append(elem, body[elem]);
+    }
+  }
+
   const user_id = localStorage.getItem('user_id');
+  formData.append('_id', user_id + '');
+  formData.append('file', file['0']);
+
   const response = await fetch(`${API_URL}/course/create`, {
     method: 'POST',
-    body: JSON.stringify({ ...body, _id: user_id }),
-    headers: {
-      Accept: '*/*',
-      'Content-Type': 'application/json',
-    },
+    body: formData,
   });
 
   const result = await response.json();
@@ -121,7 +131,8 @@ export async function editLessonHandler(body: IEditLesson): Promise<any> {
 }
 
 interface ICourse {
-  image: string;
+  [key: string]: any;
+  image: any;
   title: string;
   description: string;
   certificate: string;

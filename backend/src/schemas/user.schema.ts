@@ -1,13 +1,20 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
+import { Photo } from './photo.schema';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop({ type: String, default: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png' })
-  avatar: string;
+  @Prop({
+    type: Photo,
+    default: {
+      public_id: '',
+      photo_url: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png',
+    },
+  })
+  avatar: Photo;
 
   @Prop({ type: String, required: true })
   firstName: string;

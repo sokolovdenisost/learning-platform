@@ -11,11 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
+const photo_schema_1 = require("./photo.schema");
 let User = class User {
 };
 __decorate([
-    mongoose_1.Prop({ type: String, default: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png' }),
-    __metadata("design:type", String)
+    mongoose_1.Prop({
+        type: photo_schema_1.Photo,
+        default: {
+            public_id: '',
+            photo_url: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png',
+        },
+    }),
+    __metadata("design:type", photo_schema_1.Photo)
 ], User.prototype, "avatar", void 0);
 __decorate([
     mongoose_1.Prop({ type: String, required: true }),

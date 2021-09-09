@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from '../consts';
+import { IUser } from '../interfaces/user';
 
 export const useAuth = (): AuthSuccess => {
   const [auth, setAuth] = useState<IUser>({
     firstName: '',
     lastName: '',
     email: '',
-    avatar: '',
+    avatar: {
+      photo_url: '',
+      public_id: '',
+    },
     _id: '',
   });
   const [error, setError] = useState();
@@ -37,14 +41,6 @@ export const useAuth = (): AuthSuccess => {
 interface AuthSuccess {
   loading: boolean;
   user: IUser;
-}
-
-interface IUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatar: string;
-  _id: string;
 }
 
 interface ISuccess {

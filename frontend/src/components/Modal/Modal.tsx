@@ -5,6 +5,7 @@ import { Input } from '../Input/Input';
 import { Textarea } from '../Textarea/Textarea';
 import { Notification } from '../Notification/Notification';
 import './Modal.scss';
+import { changeInputHandler } from '../../hooks/change';
 
 interface Props {
   modal: IModal;
@@ -51,10 +52,6 @@ export const SignInModal = ({ modal, setModal }: Props) => {
     code: 0,
   });
 
-  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setData({ ...data, [e.currentTarget.id]: e.currentTarget.value });
-  }
-
   async function loginUserHandler() {
     setResult({
       type: '',
@@ -83,8 +80,8 @@ export const SignInModal = ({ modal, setModal }: Props) => {
     <>
       <Modal title="Sign In" modal={modal} setModal={setModal}>
         <div className="sign-in-form">
-          <Input label="Email address" id="email" value={data.email} onChange={changeHandler} />
-          <Input label="Password" id="password" type="password" value={data.password} onChange={changeHandler} />
+          <Input label="Email address" id="email" value={data.email} onChange={(e) => changeInputHandler(e, data, setData)} />
+          <Input label="Password" id="password" type="password" value={data.password} onChange={(e) => changeInputHandler(e, data, setData)} />
         </div>
         <Button type="bold" color="main" fontSize="14" width="100%" onClick={loginUserHandler}>
           Sign in
@@ -108,10 +105,6 @@ export const SignUpModal = ({ modal, setModal }: Props) => {
     text: '',
     code: 0,
   });
-
-  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setData({ ...data, [e.currentTarget.id]: e.currentTarget.value });
-  }
 
   async function registerUserHandler() {
     setResult({
@@ -141,10 +134,10 @@ export const SignUpModal = ({ modal, setModal }: Props) => {
     <>
       <Modal title="Sign up" modal={modal} setModal={setModal}>
         <div className="sign-up-form">
-          <Input label="First name" id="firstName" value={data.firstName} onChange={changeHandler} />
-          <Input label="Last name" id="lastName" value={data.lastName} onChange={changeHandler} />
-          <Input label="Email address" id="email" value={data.email} onChange={changeHandler} />
-          <Input label="Password" id="password" type="password" value={data.password} onChange={changeHandler} />
+          <Input label="First name" id="firstName" value={data.firstName} onChange={(e) => changeInputHandler(e, data, setData)} />
+          <Input label="Last name" id="lastName" value={data.lastName} onChange={(e) => changeInputHandler(e, data, setData)} />
+          <Input label="Email address" id="email" value={data.email} onChange={(e) => changeInputHandler(e, data, setData)} />
+          <Input label="Password" id="password" type="password" value={data.password} onChange={(e) => changeInputHandler(e, data, setData)} />
         </div>
         <Button type="bold" color="main" fontSize="14" width="100%" onClick={registerUserHandler}>
           Sign up

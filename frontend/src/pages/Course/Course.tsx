@@ -7,21 +7,26 @@ import './Course.scss';
 import { API_URL } from '../../consts';
 import { Redirect } from 'react-router';
 import { Tag } from '../../components/Tag/Tag';
+import { ICourse } from '../../interfaces/course';
 
 export const Course = () => {
   const [course, setCourse] = useState<ICourse>({
     _id: '',
     tags: [],
     level: '',
-    certificate: false,
+    certificate: '',
     description: '',
     title: '',
-    image: '',
+    image: {
+      photo_url: '',
+      public_id: '',
+    },
     owner: {
       _id: '',
       firstName: '',
       lastName: '',
     },
+    lessons: [],
   });
   const [error, setError] = useState();
   const params = window.location.pathname.split('/');
@@ -52,7 +57,7 @@ export const Course = () => {
         <Block width="100%">
           <div className="course-info">
             <div className="course-left">
-              <img className="course-image" alt="" src={course.image} />
+              <img className="course-image" alt="" src={course.image.photo_url} />
               <div className="course-rating">
                 <div className="course-rating-number">5,0</div>
                 <div className="course-rating-stars">
@@ -92,18 +97,3 @@ export const Course = () => {
     </Layout>
   );
 };
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: boolean;
-  description: string;
-  title: string;
-  image: string;
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-}

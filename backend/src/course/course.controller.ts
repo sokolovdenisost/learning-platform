@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { CourseService } from './course.service';
 import { CreateCourseDTO, CreateLessonDTO, DeleteCourseDTO, DeleteLessonDTO, EditCourseDTO, EditLessonDTO } from './dto/course.dto';
@@ -20,8 +21,10 @@ export class CourseController {
   }
 
   @Post('create')
-  async createCourse(@Res() res: Response, @Body() body: CreateCourseDTO): Promise<void> {
-    const result = await this.courseService.createCourse(body);
+  @UseInterceptors(FileInterceptor('file'))
+  async createCourse(@Res() res: Response, @Body() body: CreateCourseDTO, @UploadedFile('file') file: Express.Multer.File): Promise<void> {
+    console.log(body, file);
+    const result = await this.courseService.createCourse(body, file);
 
     res.json(result).status(result.code);
   }

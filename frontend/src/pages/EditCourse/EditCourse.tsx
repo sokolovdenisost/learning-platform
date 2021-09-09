@@ -10,7 +10,9 @@ import { SearchTag } from '../../components/Tag/Tag';
 import { API_URL } from '../../consts';
 import { deleteCourseHandler, editCourseHandler } from '../../utils/course';
 import { Error404 } from '../404/404';
+import { changeInputHandler } from '../../hooks/change';
 import './EditCourse.scss';
+import { ICourse } from '../../interfaces/course';
 
 const TAGS = [
   'Web design',
@@ -31,7 +33,10 @@ export const EditCourse = () => {
     _id: '',
     certificate: '',
     description: '',
-    image: '',
+    image: {
+      photo_url: '',
+      public_id: '',
+    },
     level: '',
     owner: {
       _id: '',
@@ -55,8 +60,14 @@ export const EditCourse = () => {
         } else {
           setCourse(res.course);
         }
+        console.log(res);
       });
   }, []);
+
+  function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
+    // setFile(e.currentTarget.files)
+    console.log(e.currentTarget.files);
+  }
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);
@@ -75,10 +86,6 @@ export const EditCourse = () => {
     return course.tags.find((c) => c === title) ? true : false;
   }
 
-  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setCourse({ ...course, [e.currentTarget.id]: e.currentTarget.value });
-  }
-
   const mapLessons = course.lessons.map((lesson, index) => {
     return <LessonBlock _id={lesson._id} course={lesson.course} title={`Lesson #${index}`} key={index} />;
   });
@@ -94,9 +101,14 @@ export const EditCourse = () => {
           <div className="edit-course-left">
             <div className="edit-course-item">
               <Block title="Main information on course" subtitle="In this block you  write main information on your course.">
-                <ChangePicture title="Course picture" img={course.image} />
-                <Input label="Name course" id="title" value={course.title} onChange={(e) => onChangeHandler(e)} />
-                <Input label="Description course" id="description" value={course.description} onChange={(e) => onChangeHandler(e)} />
+                <ChangePicture title="Course picture" img={course.image.photo_url} onChange={changeFile} />
+                <Input label="Name course" id="title" value={course.title} onChange={(e) => changeInputHandler(e, course, setCourse)} />
+                <Input
+                  label="Description course"
+                  id="description"
+                  value={course.description}
+                  onChange={(e) => changeInputHandler(e, course, setCourse)}
+                />
               </Block>
             </div>
           </div>
@@ -106,16 +118,21 @@ export const EditCourse = () => {
                 title="Characteristic about course"
                 subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
                 <div className="edit-course-inputs">
-                  <Input label="How many lessons" width={170} id="lessons" onChange={(e) => onChangeHandler(e)} />
+                  <Input label="How many lessons" width={170} id="lessons" onChange={(e) => changeInputHandler(e, course, setCourse)} />
                   <Input
                     label="Is there any certification"
                     width={170}
                     id="certification"
                     value={course.certificate ? 'Yes' : 'No'}
-                    onChange={(e) => onChangeHandler(e)}
+                    onChange={(e) => changeInputHandler(e, course, setCourse)}
                   />
                 </div>
-                <Input label="For what level intended course" id="level" value={course.level} onChange={(e) => onChangeHandler(e)} />
+                <Input
+                  label="For what level intended course"
+                  id="level"
+                  value={course.level}
+                  onChange={(e) => changeInputHandler(e, course, setCourse)}
+                />
               </Block>
             </div>
             <div className="edit-course-item">
@@ -156,19 +173,3 @@ export const EditCourse = () => {
     </Layout>
   );
 };
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: string;
-  description: string;
-  title: string;
-  image: string;
-  lessons: any[];
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-}

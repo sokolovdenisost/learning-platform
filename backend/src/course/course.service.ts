@@ -7,13 +7,17 @@ import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
 import { CreateCourseDTO, CreateLessonDTO, DeleteLessonDTO, EditCourseDTO, EditLessonDTO } from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
+import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class CourseService {
   constructor(
     @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
     @InjectModel(Lesson.name) private lessonModel: Model<LessonDocument>,
+    @InjectModel(Photo.name) private photoModel: Model<PhotoDocument>,
     private validateService: ValidateService,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   async getCourseByIdAndUserId(id: string, user_id: string): Promise<any> {
@@ -36,7 +40,6 @@ export class CourseService {
 
   async editCourseById(body: EditCourseDTO, id: string): Promise<ISuccess | IError> {
     if (mongoose.isValidObjectId(id)) {
-      console.log(body, id);
       await this.courseModel.findByIdAndUpdate(id, body);
 
       return { code: 200, text: 'Course is update', type: 'Success' };
@@ -118,24 +121,34 @@ export class CourseService {
     }
   }
 
-  async createCourse(body: CreateCourseDTO): Promise<any> {
-    const { _id, certificate, description, image, level, tags, title } = body;
-    if (_id.trim() && certificate && description.trim() && image && level && tags && title.trim()) {
-      if (!this.validateService.validateLength(title, 50, 10)) {
-        return { code: 400, text: 'Title must have more than 10 characters but less than 50', type: 'Error' };
+  async createCourse(body: CreateCourseDTO, file: Express.Multer.File): Promise<any> {
+    const { _id, certificate, description, level, tags, title } = body;
+    if (file) {
+      if (_id.trim() && certificate && description.trim() && level && tags && title.trim()) {
+        if (!this.validateService.validateLength(title, 50, 10)) {
+          return { code: 400, text: 'Title must have more than 10 characters but less than 50', type: 'Error' };
+        }
+
+        if (!this.validateService.validateLength(description, 1000, 100)) {
+          return { code: 400, text: 'Description must have more than 100 characters but less than 1000', type: 'Error' };
+        }
+        const uploadFile = await this.cloudinaryService.uploadImage(file);
+        const photo = await new this.photoModel({
+          photo_url: uploadFile.url,
+          public_id: uploadFile.public_id,
+        });
+        await photo.save();
+
+        const course = await new this.courseModel({ owner: _id, certificate, description, image: photo, level, tags: JSON.parse(tags), title });
+
+        await course.save();
+
+        return { code: 200, text: 'Course is created', type: 'Success', course_id: course._id.toString() };
+      } else {
+        return { code: 400, text: 'Not all fields are filled', type: 'Error' };
       }
-
-      if (!this.validateService.validateLength(description, 1000, 100)) {
-        return { code: 400, text: 'Description must have more than 100 characters but less than 1000', type: 'Error' };
-      }
-
-      const course = await new this.courseModel({ owner: _id, certificate, description, image, level, tags, title });
-
-      await course.save();
-
-      return { code: 200, text: 'Course is created', type: 'Success', course_id: course._id.toString() };
     } else {
-      return { code: 400, text: 'Not all fields are filled', type: 'Error' };
+      return { code: 400, text: 'Not image found', type: 'Error' };
     }
   }
 

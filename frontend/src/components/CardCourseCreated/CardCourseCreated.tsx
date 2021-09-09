@@ -1,4 +1,5 @@
 import React from 'react';
+import { ICourse } from '../../interfaces/course';
 import { deleteCourseHandler } from '../../utils/course';
 import { Button } from '../Button/Button';
 import { CardCourse } from '../CardCourse/CardCourse';
@@ -26,18 +27,3 @@ export const CardCourseCreated = ({ course }: Props) => {
     </div>
   );
 };
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: boolean;
-  description: string;
-  title: string;
-  image: string;
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-}

@@ -43,7 +43,7 @@ export const Layout = ({ title, children }: Props) => {
               </div>
               <div className="layout-user">
                 <div className="layout-user-section" onClick={() => setActive(!active)}>
-                  <img src={auth.user.avatar} alt="" />
+                  <img src={auth.user.avatar.photo_url} alt="" />
                   <div className="arrow">
                     <RiArrowDownSLine size={30} />
                   </div>

@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Block } from '../../components/Block/Block';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
 import { Notification } from '../../components/Notification/Notification';
 import { Social } from '../../components/Social/Social';
-import { changePassword, changePersonalData } from '../../utils/settings';
+import { changeInputHandler } from '../../hooks/change';
+import { IUser } from '../../interfaces/user';
+import { changePassword, changePersonalData, changePhoto } from '../../utils/settings';
 import './Settings.scss';
 
 interface Props {
-  user: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    avatar: string;
-    _id: string;
-  };
+  user: IUser;
 }
 
 export const Settings = ({ user }: Props) => {
+  const [file, setFile] = useState<any>({});
   const [formPD, setFormPD] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
+    avatar: {
+      public_id: user.avatar.public_id,
+      photo_url: user.avatar.photo_url,
+    },
+    photo: [],
   });
   const [formP, setFormP] = useState({
     oldPassword: '',
@@ -59,9 +60,17 @@ export const Settings = ({ user }: Props) => {
 
   function onSave() {}
 
-  function changeInput(e: React.ChangeEvent<HTMLInputElement>, state: any, setState: any) {
-    setState({ ...state, [e.currentTarget.id]: e.currentTarget.value });
+  async function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
+    setFile({ [e.currentTarget.id]: e.currentTarget.files });
+    console.log(file.photo);
   }
+
+  useEffect(() => {
+    console.log(file.photo);
+    if (file.photo) {
+      console.log(URL.createObjectURL(file.photo['0']));
+    }
+  }, [file]);
 
   return (
     <Layout title="Settings">
@@ -72,13 +81,24 @@ export const Settings = ({ user }: Props) => {
               title="Personal Details"
               subtitle="Feel free to edit your basic information such as name, email etc."
               onSave={() => fetchChangeSettings(formPD, changePersonalData)}>
-              <ChangePicture img={user.avatar} title="Profile picture" />
               <div className="settings-form">
                 <div className="fullname">
-                  <Input width={170} label="First name" id="firstName" value={formPD.firstName} onChange={(e) => changeInput(e, formPD, setFormPD)} />
-                  <Input width={170} label="Last name" id="lastName" value={formPD.lastName} onChange={(e) => changeInput(e, formPD, setFormPD)} />
+                  <Input
+                    width={170}
+                    label="First name"
+                    id="firstName"
+                    value={formPD.firstName}
+                    onChange={(e) => changeInputHandler(e, formPD, setFormPD)}
+                  />
+                  <Input
+                    width={170}
+                    label="Last name"
+                    id="lastName"
+                    value={formPD.lastName}
+                    onChange={(e) => changeInputHandler(e, formPD, setFormPD)}
+                  />
                 </div>
-                <Input label="Email address" id="email" value={formPD.email} onChange={(e) => changeInput(e, formPD, setFormPD)} />
+                <Input label="Email address" id="email" value={formPD.email} onChange={(e) => changeInputHandler(e, formPD, setFormPD)} />
               </div>
             </Block>
           </div>
@@ -88,15 +108,27 @@ export const Settings = ({ user }: Props) => {
               subtitle="Passwords must be at least 16 characters long and contain a combination of numbers, symbols, uppercase and lowercase letters, and spaces."
               onSave={() => fetchChangeSettings(formP, changePassword)}>
               <div className="security-form">
-                <Input label="Old password" id="oldPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
-                <Input label="New password" id="newPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
-                <Input label="Repeat new password" id="rNewPassword" type="password" onChange={(e) => changeInput(e, formP, setFormP)} />
+                <Input label="Old password" id="oldPassword" type="password" onChange={(e) => changeInputHandler(e, formP, setFormP)} />
+                <Input label="New password" id="newPassword" type="password" onChange={(e) => changeInputHandler(e, formP, setFormP)} />
+                <Input label="Repeat new password" id="rNewPassword" type="password" onChange={(e) => changeInputHandler(e, formP, setFormP)} />
               </div>
             </Block>
           </div>
         </div>
         <div className="rigth">
           <div className="settings-item">
+            <Block
+              title="Photo details"
+              subtitle="The photo is intended for a person viewing your profile to see how you look"
+              onSave={() => fetchChangeSettings({ photo: file, _id: user._id }, changePhoto)}>
+              <ChangePicture
+                img={file.photo ? URL.createObjectURL(file.photo['0']) : user.avatar.photo_url}
+                title="Profile picture"
+                onChange={changeFile}
+              />
+            </Block>
+          </div>
+          {/* <div className="settings-item">
             <Block
               title="Two Factor Authentication"
               subtitle="You must setup a two factor authentication to go inline with our security guidelines."
@@ -105,7 +137,7 @@ export const Settings = ({ user }: Props) => {
                 <Input label="Phone number" id="phone" />
               </div>
             </Block>
-          </div>
+          </div> */}
           <div className="settings-item">
             <Block
               title="Connect to Social Accounts"

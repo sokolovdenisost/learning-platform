@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Lesson } from './lesson.schema';
+import { Photo } from './photo.schema';
 import { User } from './user.schema';
 
 export type CourseDocument = Course & Document;
@@ -11,8 +12,8 @@ export class Course {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   owner: string;
 
-  @Prop({ type: String, required: true })
-  image: string;
+  @Prop({ type: Photo, required: true })
+  image: Photo;
 
   @Prop({ type: String, required: true })
   title: string;

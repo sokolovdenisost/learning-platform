@@ -1,8 +1,9 @@
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
+import { Photo } from './photo.schema';
 export declare type UserDocument = User & Document;
 export declare class User {
-    avatar: string;
+    avatar: Photo;
     firstName: string;
     lastName: string;
     email: string;

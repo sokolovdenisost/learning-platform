@@ -3,6 +3,7 @@ import { CardCourseCreated } from '../../components/CardCourseCreated/CardCourse
 import { Layout } from '../../components/Layout/Layout';
 import { Progress } from '../../components/Progress/Progress';
 import { API_URL } from '../../consts';
+import { ICourse } from '../../interfaces/course';
 import './MyCourses.scss';
 
 export const MyCourses = () => {
@@ -35,18 +36,3 @@ export const MyCourses = () => {
     </Layout>
   );
 };
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: boolean;
-  description: string;
-  title: string;
-  image: string;
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-}

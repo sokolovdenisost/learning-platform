@@ -3,6 +3,7 @@ import { CardCourse } from '../../components/CardCourse/CardCourse';
 import { Filter } from '../../components/Filter/Filter';
 import { Layout } from '../../components/Layout/Layout';
 import { API_URL } from '../../consts';
+import { ICourse } from '../../interfaces/course';
 import './Courses.scss';
 
 export const Courses = () => {
@@ -29,18 +30,3 @@ export const Courses = () => {
     </Layout>
   );
 };
-
-interface ICourse {
-  _id: string;
-  tags: string[];
-  level: string;
-  certificate: boolean;
-  description: string;
-  title: string;
-  image: string;
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-}

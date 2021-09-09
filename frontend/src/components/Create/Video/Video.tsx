@@ -63,7 +63,7 @@ export const Video = ({ onCancel, onChange, index, value }: Props) => {
     <div className="video">
       {activeEdit ? (
         <CreateBlock title="Video course" disable={url.url ? false : true} onSave={onSave} onCancel={onCancel}>
-          <Input value={url.url} label="" id="video" onChange={(e) => changeInput(e)} />
+          <Input value={url.url} label="" id="url" onChange={(e) => changeInput(e)} />
         </CreateBlock>
       ) : (
         <div className="video-ready">

@@ -10,3 +10,7 @@ export class ChangePasswordDTO {
   newPassword: string;
   _id: string;
 }
+
+export class ChangePhotoDTO {
+  user_id: string;
+}
