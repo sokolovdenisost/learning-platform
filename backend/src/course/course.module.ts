@@ -4,6 +4,7 @@ import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 import { Course, CourseSchema } from 'src/schemas/course.schema';
 import { Lesson, LessonSchema } from 'src/schemas/lesson.schema';
 import { Photo, PhotoSchema } from 'src/schemas/photo.schema';
+import { User, UserSchema } from 'src/schemas/user.schema';
 import { ValidateModule } from 'src/validate/validate.module';
 import { CourseController } from './course.controller';
 import { CourseService } from './course.service';
@@ -14,6 +15,7 @@ import { CourseService } from './course.service';
       { name: Course.name, schema: CourseSchema },
       { name: Lesson.name, schema: LessonSchema },
       { name: Photo.name, schema: PhotoSchema },
+      { name: User.name, schema: UserSchema },
     ]),
     ValidateModule,
     CloudinaryModule,

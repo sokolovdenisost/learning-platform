@@ -13,7 +13,7 @@ interface Props {
 
 type FontSize = '14' | '16' | '18';
 type Types = 'bold' | 'outline';
-type Colors = 'main' | 'primary' | 'danger' | 'success' | 'cancel';
+type Colors = 'main' | 'primary' | 'danger' | 'success' | 'cancel' | 'noactive';
 
 export const Button = ({ children, type, color, fontSize, onClick, width, disable }: Props) => {
   const styles = disable ? 'disable' : `${type} ${color}`;

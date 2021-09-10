@@ -6,42 +6,45 @@ import vk from '../../assets/vkontakte.png';
 import ok from '../../assets/odnoklasniki.png';
 import fb from '../../assets/facebook.png';
 
-interface Props {
+interface SProps {
   social: Socials;
   connect: boolean;
 }
 
 type Socials = 'vk' | 'fb' | 'ok';
 
-export const Social = ({ social, connect }: Props) => {
-  function getSocialInfo(social: string): SocialInfo {
-    if (social === 'vk') {
-      return {
-        icon: vk,
-        title: 'ВКонтакте',
-      };
-    }
-
-    if (social === 'ok') {
-      return {
-        icon: ok,
-        title: 'Однокласники',
-      };
-    }
-
-    if (social === 'fb') {
-      return {
-        icon: fb,
-        title: 'Facebook',
-      };
-    }
-
+function getSocialInfo(social: string): SocialInfo {
+  if (social === 'vk') {
     return {
-      icon: '',
-      title: '',
+      icon: vk,
+      title: 'ВКонтакте',
+      shortTitle: 'VKontakte',
     };
   }
 
+  if (social === 'ok') {
+    return {
+      icon: ok,
+      title: 'Однокласники',
+      shortTitle: 'OK',
+    };
+  }
+
+  if (social === 'fb') {
+    return {
+      icon: fb,
+      title: 'Facebook',
+      shortTitle: 'Facebook',
+    };
+  }
+
+  return {
+    icon: '',
+    title: '',
+  };
+}
+
+export const Social = ({ social, connect }: SProps) => {
   return (
     <div className={connect ? 'social connect' : 'social'}>
       <div className="social-left">
@@ -57,7 +60,21 @@ export const Social = ({ social, connect }: Props) => {
   );
 };
 
+interface SBProps {
+  social: string;
+}
+
+export const SocialButton = ({ social }: SBProps) => {
+  return (
+    <div className="social-button">
+      <img src={getSocialInfo(social).icon} alt={getSocialInfo(social).shortTitle} />
+      <div className="social-title">{getSocialInfo(social).shortTitle}</div>
+    </div>
+  );
+};
+
 interface SocialInfo {
   icon: string;
   title: string;
+  shortTitle?: string;
 }

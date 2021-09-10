@@ -37,6 +37,11 @@
     &.cancel {
       background: $cancel;
     }
+
+    &.noactive {
+      background: $noactive;
+      color: $noactive-color;
+    }
   }
 
   &.outline {

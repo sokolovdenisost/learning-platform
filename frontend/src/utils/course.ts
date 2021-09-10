@@ -130,6 +130,27 @@ export async function editLessonHandler(body: IEditLesson): Promise<any> {
   return result;
 }
 
+export async function favoriteCourseHandler(course_id: string): Promise<any> {
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/favorite`, {
+    method: 'POST',
+    body: JSON.stringify({ course_id, user_id }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  console.log(result);
+
+  // if (result.type === 'Success') {
+  //   window.location.reload();
+  // }
+
+  return result;
+}
+
 interface ICourse {
   [key: string]: any;
   image: any;

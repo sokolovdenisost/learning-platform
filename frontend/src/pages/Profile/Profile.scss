@@ -1,0 +1,59 @@
+@import '../../index.scss';
+
+.profile-page {
+  .profile-top {
+    display: flex;
+    justify-content: space-between;
+
+    .profile-left {
+      display: flex;
+      align-items: center;
+      width: 380px;
+
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+        border: 1px solid $blue-main;
+      }
+
+      .profile-info {
+        margin-left: 20px;
+
+        .profile-fullname {
+          font-size: 20px;
+          font-weight: 900;
+          margin-bottom: 10px;
+        }
+
+        .profile-registered {
+          color: $grey-main;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 18px;
+
+          span {
+            color: #000;
+          }
+        }
+      }
+    }
+
+    .profile-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 380px;
+    }
+  }
+
+  .profile-body {
+    margin-top: 25px;
+
+    .profile-sections-buttons {
+      button {
+        margin-right: 10px;
+      }
+    }
+  }
+}

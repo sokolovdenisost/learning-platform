@@ -76,20 +76,26 @@ export const Course = () => {
               <div className="course-created-by">
                 Created by <span>{course.owner.firstName + ' ' + course.owner.lastName}</span>
               </div>
+              <div className="course-level">
+                This level for course - <span>{course.level}</span>
+              </div>
+              <div className="course-certificate">
+                Certificate - <span>{course.certificate}</span>
+              </div>
               <div className="course-bottom">
                 <div className="course-tags">{mapTags}</div>
-                <div className="course-buttons">
-                  <Button type="bold" color="primary" fontSize="16">
-                    Join course
-                  </Button>
-                  <Button type="bold" color="danger" fontSize="16">
-                    Report course
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
         </Block>
+        <div className="course-buttons">
+          <Button type="bold" color="primary" fontSize="16">
+            Join course
+          </Button>
+          <Button type="bold" color="danger" fontSize="16">
+            Report course
+          </Button>
+        </div>
         <div className="course-lessons">
           <div className="course-lessons-title">Lessons</div>
         </div>

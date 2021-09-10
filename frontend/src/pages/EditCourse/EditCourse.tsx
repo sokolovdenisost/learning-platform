@@ -13,6 +13,7 @@ import { Error404 } from '../404/404';
 import { changeInputHandler } from '../../hooks/change';
 import './EditCourse.scss';
 import { ICourse } from '../../interfaces/course';
+import { Select } from '../../components/Select/Select';
 
 const TAGS = [
   'Web design',
@@ -117,22 +118,8 @@ export const EditCourse = () => {
               <Block
                 title="Characteristic about course"
                 subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
-                <div className="edit-course-inputs">
-                  <Input label="How many lessons" width={170} id="lessons" onChange={(e) => changeInputHandler(e, course, setCourse)} />
-                  <Input
-                    label="Is there any certification"
-                    width={170}
-                    id="certification"
-                    value={course.certificate ? 'Yes' : 'No'}
-                    onChange={(e) => changeInputHandler(e, course, setCourse)}
-                  />
-                </div>
-                <Input
-                  label="For what level intended course"
-                  id="level"
-                  value={course.level}
-                  onChange={(e) => changeInputHandler(e, course, setCourse)}
-                />
+                <Select title="Certificate" id="certificate" options={['Yes', 'No']} />
+                <Select title="Level" id="level" options={['Trainee', 'Junior', 'Middle', 'Senior']} />
               </Block>
             </div>
             <div className="edit-course-item">

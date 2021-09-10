@@ -7,6 +7,9 @@ $success: #00b74a;
 $warning: #ffa900;
 $cancel: #b7b7b7;
 
+$noactive: #f1f2f2;
+$noactive-color: #808285;
+
 // colors selected
 $border-selected: #88e4b8;
 $background-selected: #f6fdfa;
@@ -50,6 +53,7 @@ a {
 }
 
 * {
+  line-height: 18px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

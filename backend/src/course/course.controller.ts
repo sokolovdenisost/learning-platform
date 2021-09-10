@@ -2,7 +2,15 @@ import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInter
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { CourseService } from './course.service';
-import { CreateCourseDTO, CreateLessonDTO, DeleteCourseDTO, DeleteLessonDTO, EditCourseDTO, EditLessonDTO } from './dto/course.dto';
+import {
+  CreateCourseDTO,
+  CreateLessonDTO,
+  DeleteCourseDTO,
+  DeleteLessonDTO,
+  EditCourseDTO,
+  EditLessonDTO,
+  FavoriteCourseDTO,
+} from './dto/course.dto';
 
 @Controller('course')
 export class CourseController {
@@ -60,6 +68,13 @@ export class CourseController {
   @Post('delete-lesson')
   async deleteLesson(@Res() res: Response, @Body() body: DeleteLessonDTO): Promise<void> {
     const result = await this.courseService.deleteLesson(body);
+
+    res.json(result).status(result.code);
+  }
+
+  @Post('/favorite')
+  async toggleFavoriteCourse(@Res() res: Response, @Body() body: FavoriteCourseDTO): Promise<void> {
+    const result = await this.courseService.toggleFavorite(body);
 
     res.json(result).status(result.code);
   }

@@ -3,7 +3,6 @@
 .course-page {
   .course-info {
     display: flex;
-    align-items: center;
 
     .course-left {
       width: 150px;
@@ -50,7 +49,7 @@
         width: 100%;
         word-wrap: break-word;
         font-size: 16px;
-        margin: 20px 0;
+        margin: 20px 0 10px;
       }
 
       .course-created-by {
@@ -61,8 +60,25 @@
         }
       }
 
+      .course-level {
+        font-size: 16px;
+        margin: 10px 0;
+
+        span {
+          font-weight: 700;
+        }
+      }
+
+      .course-certificate {
+        font-size: 16px;
+        margin: 10px 0;
+
+        span {
+          font-weight: 700;
+        }
+      }
+
       .course-bottom {
-        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -70,21 +86,20 @@
         .course-tags {
           display: flex;
         }
-
-        .course-buttons {
-          text-align: right;
-
-          button:first-child {
-            margin-right: 10px;
-          }
-        }
       }
     }
   }
 
-  .course-lessons {
-    margin-top: 25px;
+  .course-buttons {
+    margin: 20px 0;
+    text-align: right;
 
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  .course-lessons {
     .course-lessons-title {
       font-size: 20px;
       font-weight: 700;

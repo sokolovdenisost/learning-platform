@@ -7,4 +7,6 @@ export interface IUser {
     public_id: string;
   };
   _id: string;
+  favorites: string[];
+  registered: string;
 }

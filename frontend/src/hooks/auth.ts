@@ -12,6 +12,8 @@ export const useAuth = (): AuthSuccess => {
       public_id: '',
     },
     _id: '',
+    favorites: [],
+    registered: '',
   });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);

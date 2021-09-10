@@ -3,7 +3,6 @@ import { ICourse } from '../../interfaces/course';
 import { deleteCourseHandler } from '../../utils/course';
 import { Button } from '../Button/Button';
 import { CardCourse } from '../CardCourse/CardCourse';
-import { Tag } from '../Tag/Tag';
 import './CardCourseCreated.scss';
 
 interface Props {

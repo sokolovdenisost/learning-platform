@@ -1,10 +1,12 @@
 import React from 'react';
 import { Tag } from '../Tag/Tag';
-import { HiOutlineBookmark } from 'react-icons/hi';
+import { HiOutlineBookmark, HiBookmark } from 'react-icons/hi';
 import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import './CardCourse.scss';
 import { ICourse } from '../../interfaces/course';
+import { favoriteCourseHandler } from '../../utils/course';
+import { useFavorite } from '../../hooks/favorite';
 
 interface Props {
   title?: string;
@@ -28,6 +30,17 @@ export const CardCourse = ({ title, translateY, styles, course }: Props) => {
     return <Tag title={tag} key={tag} />;
   });
 
+  async function toggleFavoriteCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    await favoriteCourseHandler(course._id);
+  }
+
+  function moreCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+  }
+
+  const favorite = useFavorite(course._id);
+
   return (
     <a href={`/course/${course._id}`} className="card-course" style={styleCard}>
       <img src={course.image.photo_url} alt="course" className="image" />
@@ -41,10 +54,10 @@ export const CardCourse = ({ title, translateY, styles, course }: Props) => {
       </div>
       <div className="interaction">
         <div className="top">
-          <button className="button">
-            <HiOutlineBookmark size={24} />
+          <button className="button" onClick={(e) => toggleFavoriteCourse(e)}>
+            {favorite ? <HiBookmark size={25} color="#EE0000" /> : <HiOutlineBookmark size={24} />}
           </button>
-          <button className="button">
+          <button className="button" onClick={(e) => moreCourse(e)}>
             <FiMoreVertical size={24} />
           </button>
         </div>

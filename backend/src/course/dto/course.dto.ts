@@ -35,4 +35,9 @@ export class DeleteLessonDTO {
   lesson_id: string;
 }
 
+export class FavoriteCourseDTO {
+  user_id: string;
+  course_id: string;
+}
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

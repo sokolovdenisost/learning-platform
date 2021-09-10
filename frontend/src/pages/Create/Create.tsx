@@ -5,6 +5,7 @@ import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
 import { Notification } from '../../components/Notification/Notification';
+import { Select } from '../../components/Select/Select';
 import { Step } from '../../components/Step/Step';
 import { SearchTag } from '../../components/Tag/Tag';
 import { createCourseHandler } from '../../utils/course';
@@ -119,11 +120,8 @@ export const Create = () => {
             <Block
               title="Characteristic about course"
               subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
-              <div className="course-inputs">
-                <Input label="How many lessons" width={170} id="lessons" onChange={(e) => changeInput(e)} />
-                <Input label="Is there any certification" width={170} id="certificate" onChange={(e) => changeInput(e)} />
-              </div>
-              <Input label="For what level intended course" id="level" onChange={(e) => changeInput(e)} />
+              <Select title="Certification" id="certificate" options={['Yes', 'No']} />
+              <Select title="Level" id="level" options={['Trainee', 'Junior', 'Middle', 'Senior']} />
             </Block>
           </div>
           <div className="create-item">
