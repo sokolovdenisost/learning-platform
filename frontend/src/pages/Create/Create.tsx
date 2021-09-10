@@ -31,8 +31,8 @@ export const Create = () => {
     image: [],
     title: '',
     description: '',
-    certificate: '',
-    level: '',
+    certificate: 'yes',
+    level: 'junior',
     tags: [],
   });
   const [result, setResult] = useState({

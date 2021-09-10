@@ -10,7 +10,6 @@ export class CoursesService {
 
   async getCoursesByUserId(id: string): Promise<any> {
     if (isValidObjectId(id)) {
-      const user_id = new mongoose.Types.ObjectId(id);
       const courses = await this.courseModel.find({ owner: id }).populate('owner', 'firstName lastName');
       // const coursesById = courses.filter((c) => String(c.owner) === id);
 
@@ -21,6 +20,7 @@ export class CoursesService {
   }
 
   async getAllCourses(): Promise<any> {
-    return { code: 200, text: 'This all courses', courses: await this.courseModel.find({}).populate('owner', 'firstName lastName') };
+    const courses = await this.courseModel.find({}).populate('owner', '_id firstName lastName');
+    return { code: 200, text: 'This all courses', courses: courses.reverse() };
   }
 }

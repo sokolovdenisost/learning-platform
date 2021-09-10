@@ -60,7 +60,7 @@ export const routes = (loading: boolean, auth: any) => {
     },
     {
       path: '/favorites',
-      component: <Favorites />,
+      component: <Favorites courses={auth.favorites} />,
     },
     {
       path: '/create',

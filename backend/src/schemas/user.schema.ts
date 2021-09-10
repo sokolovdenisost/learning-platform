@@ -32,7 +32,7 @@ export class User {
   @Prop({ type: String, default: new Date().toLocaleDateString() })
   registered: string;
 
-  @Prop({ type: [mongoose.Types.ObjectId] })
+  @Prop({ type: [mongoose.Types.ObjectId], ref: 'Course' })
   favorites: Course[];
 }
 

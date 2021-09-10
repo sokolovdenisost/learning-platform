@@ -46,7 +46,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "registered", void 0);
 __decorate([
-    mongoose_1.Prop({ type: [mongoose.Types.ObjectId] }),
+    mongoose_1.Prop({ type: [mongoose.Types.ObjectId], ref: 'Course' }),
     __metadata("design:type", Array)
 ], User.prototype, "favorites", void 0);
 User = __decorate([

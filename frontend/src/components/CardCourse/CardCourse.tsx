@@ -9,13 +9,12 @@ import { favoriteCourseHandler } from '../../utils/course';
 import { useFavorite } from '../../hooks/favorite';
 
 interface Props {
-  title?: string;
   translateY?: number;
   styles?: Styles;
   course: ICourse;
 }
 
-export const CardCourse = ({ title, translateY, styles, course }: Props) => {
+export const CardCourse = ({ translateY, styles, course }: Props) => {
   const styleCard = styles
     ? {
         transform: `translateY(-${translateY}px) scale(${styles.scale})`,

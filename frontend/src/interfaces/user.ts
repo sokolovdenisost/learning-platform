@@ -1,3 +1,5 @@
+import { ICourse } from './course';
+
 export interface IUser {
   firstName: string;
   lastName: string;
@@ -7,6 +9,6 @@ export interface IUser {
     public_id: string;
   };
   _id: string;
-  favorites: string[];
+  favorites: ICourse[];
   registered: string;
 }

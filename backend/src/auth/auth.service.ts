@@ -66,7 +66,10 @@ export class AuthService {
 
   async findUserById(id: string): Promise<UserDocument> {
     if (mongoose.isValidObjectId(id)) {
-      return await this.userModel.findById(id);
+      return await this.userModel.findById(id).populate({
+        path: 'favorites',
+        populate: { path: 'owner', select: '_id lastName firstName' },
+      });
     }
   }
 }

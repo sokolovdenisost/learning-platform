@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { ICourse } from '../../interfaces/course';
 import { CardCourse } from '../CardCourse/CardCourse';
 import './Slider.scss';
 
 interface Props {
   title: string;
   link: string;
+  courses: ICourse[];
 }
 
-export const Slider = ({ title, link }: Props) => {
+export const Slider = ({ title, link, courses }: Props) => {
   const [active, setActive] = useState<Dots>({
     1: true,
     2: false,
@@ -17,7 +19,8 @@ export const Slider = ({ title, link }: Props) => {
   });
 
   function changeDots(e: React.MouseEvent<HTMLDivElement>) {
-    setActive({ [e.currentTarget.id]: !active[e.currentTarget.id] });
+    Object.keys(active).forEach((c) => (active[c] = false));
+    setActive({ [e.currentTarget.id]: true });
   }
 
   function getActiveValues(num: string): GetStyle {
@@ -36,6 +39,11 @@ export const Slider = ({ title, link }: Props) => {
     };
   }
 
+  const mapCourses = courses.map((course, index) => {
+    console.log(course);
+    return <CardCourse key={course._id} course={course} translateY={index * 200} styles={getActiveValues(String(index + 1))} />;
+  });
+
   return (
     <div className="slider">
       <div className="top">
@@ -45,6 +53,7 @@ export const Slider = ({ title, link }: Props) => {
         </a>
       </div>
       <div className="body">
+        {mapCourses}
         {/* <CardCourse translateY={0} styles={getActiveValues('1')} />
         <CardCourse translateY={200} styles={getActiveValues('2')} />
         <CardCourse translateY={400} styles={getActiveValues('3')} />
