@@ -10,6 +10,9 @@ import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
 import './Layout.scss';
 
+import ru_flag from '../../assets/ru_flag.png';
+import en_flag from '../../assets/en_flag.png';
+
 interface Props {
   title: string;
   children: JSX.Element | JSX.Element[];
@@ -22,6 +25,7 @@ export const Layout = ({ title, children }: Props) => {
   });
   const [active, setActive] = useState(false);
   const auth = useAuth();
+  const language = localStorage.getItem('language');
 
   if (auth.loading) {
     return null;
@@ -31,6 +35,11 @@ export const Layout = ({ title, children }: Props) => {
     setAuthModal({ ...authModal, active: !authModal.active, type: type });
   }
 
+  function changeLanguage(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+    localStorage.setItem('language', e.currentTarget.dataset.flag + '');
+    window.location.reload();
+  }
+
   return (
     <>
       <div className="layout">
@@ -38,6 +47,13 @@ export const Layout = ({ title, children }: Props) => {
           <div className="layout-logo"></div>
           {auth.user.firstName ? (
             <div className="layout-rigth">
+              <div className="layout-language">
+                {language === 'ru' ? (
+                  <img alt="" src={ru_flag} className="language-flag" data-flag="en" onClick={(e) => changeLanguage(e)} />
+                ) : (
+                  <img alt="" src={en_flag} className="language-flag" data-flag="ru" onClick={(e) => changeLanguage(e)} />
+                )}
+              </div>
               <div className="layout-notification">
                 <IoNotificationsOutline size={30} />
               </div>

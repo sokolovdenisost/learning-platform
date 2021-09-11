@@ -1,4 +1,5 @@
 export interface ICourse {
+  [key: string]: any;
   _id: string;
   tags: string[];
   level: string;
@@ -15,4 +16,10 @@ export interface ICourse {
     firstName: string;
     lastName: string;
   };
+  rating: IRating[];
+}
+
+interface IRating {
+  user: string;
+  ratingNum: number;
 }

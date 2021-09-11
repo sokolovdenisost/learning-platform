@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { Layout } from '../../components/Layout/Layout';
+import { Completed } from '../../components/ProfileSections/Completed/Completed';
+import { Created } from '../../components/ProfileSections/Created/Created';
+import { Take } from '../../components/ProfileSections/Take/Take';
 import { Select } from '../../components/Select/Select';
 import { SocialButton } from '../../components/Social/Social';
+import { API_URL } from '../../consts';
 import { useData } from '../../hooks/data';
+import { ICourse } from '../../interfaces/course';
 import { IUser } from '../../interfaces/user';
 import './Profile.scss';
 
@@ -59,6 +64,7 @@ export const Profile = ({ user }: Props) => {
               Created courses
             </Button>
           </div>
+          <div className="profile-sections">{section.completed ? <Completed /> : section.take ? <Take /> : section.created ? <Created /> : null}</div>
         </div>
       </div>
     </Layout>

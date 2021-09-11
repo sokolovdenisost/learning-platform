@@ -23,6 +23,7 @@ const linksUserMenu = [
 
 export const UserMenu = ({ active, setActive }: Props) => {
   const [activeMenu, setActiveMenu] = useState(false);
+  const rootEl = useRef<any>(null);
 
   if (active) {
     setTimeout(() => {
@@ -30,8 +31,14 @@ export const UserMenu = ({ active, setActive }: Props) => {
     }, 0);
   }
 
+  useEffect(() => {
+    const onClick = (e: any) => rootEl.current.contains(e.target) || setActive(false);
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
-    <div className={activeMenu ? 'user-menu active' : 'user-menu'}>
+    <div ref={rootEl} className={activeMenu ? 'user-menu active' : 'user-menu'}>
       {linksUserMenu.map((c) => {
         if (c.href) {
           return (

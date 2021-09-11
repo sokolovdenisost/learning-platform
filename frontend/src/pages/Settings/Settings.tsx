@@ -62,15 +62,7 @@ export const Settings = ({ user }: Props) => {
 
   async function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
     setFile({ [e.currentTarget.id]: e.currentTarget.files });
-    console.log(file.photo);
   }
-
-  useEffect(() => {
-    console.log(file.photo);
-    if (file.photo) {
-      console.log(URL.createObjectURL(file.photo['0']));
-    }
-  }, [file]);
 
   return (
     <Layout title="Settings">

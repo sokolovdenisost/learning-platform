@@ -5,8 +5,9 @@ import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import './CardCourse.scss';
 import { ICourse } from '../../interfaces/course';
-import { favoriteCourseHandler } from '../../utils/course';
+import { favoriteCourseHandler, setRatingForCourseHandler } from '../../utils/course';
 import { useFavorite } from '../../hooks/favorite';
+import { useRating } from '../../hooks/rating';
 
 interface Props {
   translateY?: number;
@@ -24,21 +25,26 @@ export const CardCourse = ({ translateY, styles, course }: Props) => {
     : {
         marginBottom: 15,
       };
+  const favorite = useFavorite(course._id);
+  const rating = useRating(course.rating);
 
   const mapTags = course.tags.map((tag) => {
     return <Tag title={tag} key={tag} />;
   });
 
-  async function toggleFavoriteCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function toggleFavoriteCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    await favoriteCourseHandler(course._id);
+    favoriteCourseHandler(course._id);
   }
 
   function moreCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
   }
 
-  const favorite = useFavorite(course._id);
+  function setRatingForCourse(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, rating: number) {
+    e.preventDefault();
+    setRatingForCourseHandler(course._id, rating);
+  }
 
   return (
     <a href={`/course/${course._id}`} className="card-course" style={styleCard}>
@@ -63,25 +69,25 @@ export const CardCourse = ({ translateY, styles, course }: Props) => {
         <div className="bottom">
           <div className="rating">
             <div className="stars">
-              <button className="button">
+              <button className="button" onClick={(e) => setRatingForCourse(e, 1)}>
                 <AiFillStar size={24} color="#fadf6b" />
               </button>
-              <button className="button">
+              <button className="button" onClick={(e) => setRatingForCourse(e, 2)}>
                 <AiFillStar size={24} color="#fadf6b" />
               </button>
-              <button className="button">
+              <button className="button" onClick={(e) => setRatingForCourse(e, 3)}>
                 <AiFillStar size={24} color="#fadf6b" />
               </button>
-              <button className="button">
+              <button className="button" onClick={(e) => setRatingForCourse(e, 4)}>
                 <AiFillStar size={24} color="#fadf6b" />
               </button>
-              <button className="button">
+              <button className="button" onClick={(e) => setRatingForCourse(e, 5)}>
                 <AiFillStar size={24} color="#b3b3c1" />
               </button>
             </div>
-            <div className="avg">4,0</div>
+            <div className="avg">{rating.rating}</div>
           </div>
-          <div className="how-many-rating">(36.420 raitings)</div>
+          <div className="how-many-rating">({rating.ratings} ratings)</div>
         </div>
       </div>
     </a>

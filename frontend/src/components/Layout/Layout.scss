@@ -12,6 +12,11 @@
       display: flex;
       align-items: center;
 
+      .layout-language {
+        margin-right: 25px;
+        cursor: pointer;
+      }
+
       .layout-notification {
         cursor: pointer;
         height: 30px;

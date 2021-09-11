@@ -10,6 +10,7 @@ import {
   EditCourseDTO,
   EditLessonDTO,
   FavoriteCourseDTO,
+  RatingForCourseDTO,
 } from './dto/course.dto';
 
 @Controller('course')
@@ -74,6 +75,13 @@ export class CourseController {
   @Post('/favorite')
   async toggleFavoriteCourse(@Res() res: Response, @Body() body: FavoriteCourseDTO): Promise<void> {
     const result = await this.courseService.toggleFavorite(body);
+
+    res.json(result).status(result.code);
+  }
+
+  @Post('/rating/:id')
+  async setRatingForCourse(@Res() res: Response, @Body() body: RatingForCourseDTO, @Param('id') id: string): Promise<void> {
+    const result = await this.courseService.ratingForCourse(body, id);
 
     res.json(result).status(result.code);
   }

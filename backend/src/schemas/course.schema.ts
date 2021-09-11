@@ -41,9 +41,7 @@ export const CourseSchema = SchemaFactory.createForClass(Course);
 
 interface IRating {
   user: string;
-  ratingNum: RatingNum;
+  ratingNum: number;
 }
-
-type RatingNum = 1 | 2 | 3 | 4 | 5;
 
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

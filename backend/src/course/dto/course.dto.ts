@@ -40,4 +40,9 @@ export class FavoriteCourseDTO {
   course_id: string;
 }
 
+export class RatingForCourseDTO {
+  rating: number;
+  user: string;
+}
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

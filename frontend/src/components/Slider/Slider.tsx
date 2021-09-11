@@ -40,7 +40,6 @@ export const Slider = ({ title, link, courses }: Props) => {
   }
 
   const mapCourses = courses.map((course, index) => {
-    console.log(course);
     return <CardCourse key={course._id} course={course} translateY={index * 200} styles={getActiveValues(String(index + 1))} />;
   });
 

@@ -34,7 +34,6 @@ export const useAuth = (): AuthSuccess => {
           setError(res);
           setLoading(false);
         }
-        console.log(res);
       });
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import { BiCheck } from 'react-icons/bi';
 import './Filter.scss';
@@ -13,6 +13,17 @@ export const FilterSelect = ({ title, options }: Props) => {
     tags: [],
     active: false,
   });
+  const rootEl = useRef<any>(null);
+
+  useEffect(() => {
+    const onClick = (e: any) => {
+      if (rootEl.current) {
+        return rootEl.current.contains(e.target) || setActive({ ...active, active: false });
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   function setOption(e: React.MouseEvent<HTMLDivElement>) {
     // Можно сделать чтобы не сразу же закрывалось
@@ -38,7 +49,7 @@ export const FilterSelect = ({ title, options }: Props) => {
   }
 
   return (
-    <div className="filter-block">
+    <div ref={rootEl} className="filter-block">
       <div className={active.active ? 'filter-select active' : 'filter-select'} onClick={() => setActive({ ...active, active: !active.active })}>
         <div className="title">{title}</div>
         <div className="arrow">

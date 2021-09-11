@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CardCourseCreated } from '../../components/CardCourseCreated/CardCourseCreated';
 import { Layout } from '../../components/Layout/Layout';
+import { Loader } from '../../components/Loader/Loader';
 import { Progress } from '../../components/Progress/Progress';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
@@ -8,18 +9,24 @@ import './MyCourses.scss';
 
 export const MyCourses = () => {
   const [myCreatedCourses, setMyCreatedCourses] = useState<ICourse[]>([]);
+  const [loading, setLoading] = useState(true);
   const user_id = localStorage.getItem('user_id');
   useEffect(() => {
     fetch(`${API_URL}/courses/${user_id}`)
       .then((res) => res.json())
       .then((res) => {
         setMyCreatedCourses(res.courses);
+        setLoading(false);
       });
   }, []);
 
   const mapCreatedCourses = myCreatedCourses.map((course) => {
     return <CardCourseCreated course={course} key={course._id} />;
   });
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Layout title="My courses">

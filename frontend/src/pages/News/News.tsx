@@ -14,10 +14,9 @@ export const News = () => {
     fetch(`${API_URL}/courses`)
       .then((res) => res.json())
       .then((res) => {
-        setLoading(false);
-        console.log(res);
         setNewCourses(res.courses);
         newCourses.splice(5);
+        setLoading(false);
       });
   }, []);
 

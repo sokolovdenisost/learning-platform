@@ -27,6 +27,7 @@ export const Course = () => {
       lastName: '',
     },
     lessons: [],
+    rating: [],
   });
   const [error, setError] = useState();
   const params = window.location.pathname.split('/');
@@ -40,6 +41,7 @@ export const Course = () => {
         } else {
           setCourse(res.course);
         }
+        console.log(res);
       });
   }, []);
 

@@ -5,7 +5,15 @@ import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
-import { CreateCourseDTO, CreateLessonDTO, DeleteLessonDTO, EditCourseDTO, EditLessonDTO, FavoriteCourseDTO } from './dto/course.dto';
+import {
+  CreateCourseDTO,
+  CreateLessonDTO,
+  DeleteLessonDTO,
+  EditCourseDTO,
+  EditLessonDTO,
+  FavoriteCourseDTO,
+  RatingForCourseDTO,
+} from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
@@ -206,6 +214,34 @@ export class CourseService {
           }
         } else {
           return { code: 404, text: 'User is not found', type: 'Error' };
+        }
+      } else {
+        return { code: 404, text: 'Course is not found', type: 'Error' };
+      }
+    } else {
+      return { code: 400, text: 'Invalid data', type: 'Error' };
+    }
+  }
+
+  async ratingForCourse(body: RatingForCourseDTO, course_id: string): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(body.user) && mongoose.isValidObjectId(course_id)) {
+      const course = await this.courseModel.findById(course_id);
+
+      if (course) {
+        const check = course.rating.filter((r) => String(r.user) === body.user);
+        console.log(check);
+
+        if (check.length) {
+          return { code: 200, text: 'The rating is already', type: 'Success' };
+        } else {
+          course.rating.push({
+            user: body.user,
+            ratingNum: body.rating,
+          });
+
+          await course.save();
+
+          return { code: 200, text: 'Successfully rated', type: 'Success' };
         }
       } else {
         return { code: 404, text: 'Course is not found', type: 'Error' };

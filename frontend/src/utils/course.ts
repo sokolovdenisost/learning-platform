@@ -2,7 +2,6 @@ import { API_URL } from '../consts';
 
 export async function createCourseHandler(body: ICourse, file: any): Promise<any> {
   const formData = new FormData();
-  console.log('test', body, file);
 
   for (let elem in body) {
     if (elem === 'tags') {
@@ -61,7 +60,6 @@ export async function editCourseHandler(body: ICourse, id: string): Promise<any>
   });
 
   const result = await response.json();
-  console.log(result);
 
   if (result.type === 'Success') {
     window.location.reload();
@@ -135,6 +133,26 @@ export async function favoriteCourseHandler(course_id: string): Promise<any> {
   const response = await fetch(`${API_URL}/course/favorite`, {
     method: 'POST',
     body: JSON.stringify({ course_id, user_id }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+
+  if (result.type === 'Success') {
+    window.location.reload();
+  }
+
+  return result;
+}
+
+export async function setRatingForCourseHandler(course_id: string, rating: number): Promise<any> {
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/rating/${course_id}`, {
+    method: 'POST',
+    body: JSON.stringify({ rating, user: user_id }),
     headers: {
       Accept: '*/*',
       'Content-Type': 'application/json',

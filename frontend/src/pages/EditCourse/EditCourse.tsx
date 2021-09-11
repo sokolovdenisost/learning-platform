@@ -47,6 +47,7 @@ export const EditCourse = () => {
     tags: [],
     title: '',
     lessons: [],
+    rating: [],
   });
   const [error, setError] = useState();
   const user_id = localStorage.getItem('user_id');
@@ -61,7 +62,6 @@ export const EditCourse = () => {
         } else {
           setCourse(res.course);
         }
-        console.log(res);
       });
   }, []);
 

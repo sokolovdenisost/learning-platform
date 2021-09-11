@@ -86,13 +86,6 @@ export const Create = () => {
     );
   }
 
-  useEffect(() => {
-    console.log(form);
-    if (file.photo) {
-      console.log(file.photo['0']);
-    }
-  }, [form, file]);
-
   function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
     setFile({ [e.currentTarget.id]: e.currentTarget.files });
   }
