@@ -1,10 +1,18 @@
-import React from 'react';
-import { useAuth } from './hooks/auth';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { routes } from './hooks/routes';
+import { getAuth } from './store/actions/userAction';
 
 function App() {
-  const auth = useAuth();
-  return <>{routes(auth.loading, auth.user)}</>;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAuth());
+  }, []);
+
+  const user = useSelector((state: any) => state.user);
+
+  return <>{routes(user.loading, user)}</>;
 }
 
 export default App;

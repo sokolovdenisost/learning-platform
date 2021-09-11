@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
@@ -8,6 +9,7 @@ import { Notification } from '../../components/Notification/Notification';
 import { Select } from '../../components/Select/Select';
 import { Step } from '../../components/Step/Step';
 import { SearchTag } from '../../components/Tag/Tag';
+import { changeParams } from '../../store/actions/courseAction';
 import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
 
@@ -27,14 +29,16 @@ const TAGS = [
 
 export const Create = () => {
   const [file, setFile] = useState<any>({});
-  const [form, setForm] = useState<IForm>({
-    image: [],
-    title: '',
-    description: '',
-    certificate: 'yes',
-    level: 'junior',
-    tags: [],
-  });
+  const dispatch = useDispatch();
+  const course = useSelector((state: any) => state.course.course);
+  // const [form, setForm] = useState<IForm>({
+  //   image: [],
+  //   title: '',
+  //   description: '',
+  //   certificate: 'yes',
+  //   level: 'junior',
+  //   tags: [],
+  // });
   const [result, setResult] = useState({
     type: '',
     text: '',
@@ -43,24 +47,32 @@ export const Create = () => {
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);
-    const findKey = form.tags.find((c) => c === key);
+    const findKey = course.tags.find((c: string) => c === key);
     if (findKey) {
-      setForm({ ...form, tags: form.tags.filter((c) => c !== key) });
-    } else if (form.tags.length > 2) {
-      form.tags.shift();
-      setForm({ ...form, tags: [...form.tags, key] });
-    } else if (!findKey && form.tags.length < 3) {
-      setForm({ ...form, tags: [...form.tags, key] });
+      dispatch(
+        changeParams(
+          'tags',
+          course.tags.filter((c: string) => c !== key),
+        ),
+      );
+      // setForm({ ...form, tags: form.tags.filter((c) => c !== key) });
+    } else if (course.tags.length > 2) {
+      course.tags.shift();
+      dispatch(changeParams('tags', [...course.tags, key]));
+      // setForm({ ...form, tags: [...form.tags, key] });
+    } else if (!findKey && course.tags.length < 3) {
+      dispatch(changeParams('tags', [...course.tags, key]));
+      // setForm({ ...form, tags: [...form.tags, key] });
     }
   }
 
   function getSelected(title: string) {
-    return form.tags.find((c) => c === title) ? true : false;
+    return course.tags.find((c: string) => c === title) ? true : false;
   }
 
-  function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm({ ...form, [e.currentTarget.id]: e.currentTarget.value });
-  }
+  // function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
+  //   setForm({ ...form, [e.currentTarget.id]: e.currentTarget.value });
+  // }
 
   async function createCourse() {
     setResult({
@@ -69,7 +81,7 @@ export const Create = () => {
       code: 0,
     });
 
-    const result = await createCourseHandler(form, file.photo);
+    const result = await createCourseHandler(course, file.photo);
 
     if (result.type === 'Error') {
       setResult(result);
@@ -103,8 +115,12 @@ export const Create = () => {
                   file.photo ? URL.createObjectURL(file.photo['0']) : 'https://speceurotech.by/upload/iblock/1ba/1ba350f7d1ffadc026daee2a85028106.jpg'
                 }
               />
-              <Input label="Name course" id="title" onChange={(e) => changeInput(e)} />
-              <Input label="Description course" id="description" onChange={(e) => changeInput(e)} />
+              <Input label="Name course" id="title" onChange={(e) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))} />
+              <Input
+                label="Description course"
+                id="description"
+                onChange={(e) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+              />
             </Block>
           </div>
         </div>
@@ -113,8 +129,18 @@ export const Create = () => {
             <Block
               title="Characteristic about course"
               subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
-              <Select title="Certification" id="certificate" options={['Yes', 'No']} />
-              <Select title="Level" id="level" options={['Trainee', 'Junior', 'Middle', 'Senior']} />
+              <Select
+                title="Certification"
+                id="certificate"
+                options={['Yes', 'No']}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+              />
+              <Select
+                title="Level"
+                id="level"
+                options={['Trainee', 'Junior', 'Middle', 'Senior']}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+              />
             </Block>
           </div>
           <div className="create-item">

@@ -1,0 +1,34 @@
+@import '../../index.scss';
+
+.lesson-page {
+  .lesson-course-progress {
+    .course-progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .course-progress-title,
+      .course-progress-procent {
+        font-size: 24px;
+        font-weight: 700;
+      }
+    }
+
+    .course-progress-lines {
+      position: relative;
+      margin-top: 10px;
+
+      .course-progress-line-fullprocent {
+        position: absolute;
+        width: 100%;
+        border: 2px solid $grey-main;
+      }
+
+      .course-progress-line-procent {
+        position: absolute;
+        width: 90%;
+        border: 2px solid $blue-main;
+      }
+    }
+  }
+}

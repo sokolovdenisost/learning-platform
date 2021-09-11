@@ -8,49 +8,32 @@ import { API_URL } from '../../consts';
 import { Redirect } from 'react-router';
 import { Tag } from '../../components/Tag/Tag';
 import { ICourse } from '../../interfaces/course';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourse } from '../../store/actions/courseAction';
+import { Loader } from '../../components/Loader/Loader';
 
 export const Course = () => {
-  const [course, setCourse] = useState<ICourse>({
-    _id: '',
-    tags: [],
-    level: '',
-    certificate: '',
-    description: '',
-    title: '',
-    image: {
-      photo_url: '',
-      public_id: '',
-    },
-    owner: {
-      _id: '',
-      firstName: '',
-      lastName: '',
-    },
-    lessons: [],
-    rating: [],
-  });
-  const [error, setError] = useState();
+  const dispatch = useDispatch();
+  const course = useSelector((state: any) => state.course.course);
+  const loading = useSelector((state: any) => state.course.loading);
+  const error = useSelector((state: any) => state.course.error);
   const params = window.location.pathname.split('/');
+  console.log(error);
 
   useEffect(() => {
-    fetch(`${API_URL}/course/${params[2]}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.type === 'Error') {
-          setError(res);
-        } else {
-          setCourse(res.course);
-        }
-        console.log(res);
-      });
+    dispatch(getCourse(params[2]));
   }, []);
 
-  const mapTags = course.tags.map((tag) => {
+  const mapTags = course.tags.map((tag: string) => {
     return <Tag title={tag} key={tag} />;
   });
 
   if (error) {
     return <Redirect to="/404" />;
+  }
+
+  if (loading) {
+    return <Loader />;
   }
 
   return (

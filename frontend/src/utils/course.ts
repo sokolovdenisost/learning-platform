@@ -6,13 +6,15 @@ export async function createCourseHandler(body: ICourse, file: any): Promise<any
   for (let elem in body) {
     if (elem === 'tags') {
       formData.append(elem, JSON.stringify(body[elem]));
+    } else if (elem === '_id') {
+      console.log('');
     } else {
       formData.append(elem, body[elem]);
     }
   }
 
   const user_id = localStorage.getItem('user_id');
-  formData.append('_id', user_id + '');
+  formData.append('_id', String(user_id));
   formData.append('file', file['0']);
 
   const response = await fetch(`${API_URL}/course/create`, {

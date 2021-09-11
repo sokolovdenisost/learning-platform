@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Block } from '../../components/Block/Block';
 import { ChangePicture } from '../../components/ChangePicture/ChangePicture';
 import { Input } from '../../components/Input/Input';
 import { Layout } from '../../components/Layout/Layout';
+import { Loader } from '../../components/Loader/Loader';
 import { Notification } from '../../components/Notification/Notification';
 import { Social } from '../../components/Social/Social';
 import { changeInputHandler } from '../../hooks/change';
@@ -10,11 +12,8 @@ import { IUser } from '../../interfaces/user';
 import { changePassword, changePersonalData, changePhoto } from '../../utils/settings';
 import './Settings.scss';
 
-interface Props {
-  user: IUser;
-}
-
-export const Settings = ({ user }: Props) => {
+export const Settings = () => {
+  const user = useSelector((state: any) => state.user);
   const [file, setFile] = useState<any>({});
   const [formPD, setFormPD] = useState({
     firstName: user.firstName,
@@ -62,6 +61,10 @@ export const Settings = ({ user }: Props) => {
 
   async function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
     setFile({ [e.currentTarget.id]: e.currentTarget.files });
+  }
+
+  if (user.loading) {
+    return <Loader />;
   }
 
   return (

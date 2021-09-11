@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { Layout } from '../../components/Layout/Layout';
+import { Loader } from '../../components/Loader/Loader';
 import { Completed } from '../../components/ProfileSections/Completed/Completed';
 import { Created } from '../../components/ProfileSections/Created/Created';
 import { Take } from '../../components/ProfileSections/Take/Take';
-import { Select } from '../../components/Select/Select';
 import { SocialButton } from '../../components/Social/Social';
-import { API_URL } from '../../consts';
 import { useData } from '../../hooks/data';
-import { ICourse } from '../../interfaces/course';
-import { IUser } from '../../interfaces/user';
 import './Profile.scss';
 
-interface Props {
-  user: IUser;
-}
-
-export const Profile = ({ user }: Props) => {
+export const Profile = () => {
+  const user = useSelector((state: any) => state.user);
   const [section, setSection] = useState<ISection>({
     completed: true,
     take: false,

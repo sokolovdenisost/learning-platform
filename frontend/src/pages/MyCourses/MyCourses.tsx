@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CardCourseCreated } from '../../components/CardCourseCreated/CardCourseCreated';
 import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { Progress } from '../../components/Progress/Progress';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
+import { getMyCreatedCourses } from '../../store/actions/coursesAction';
 import './MyCourses.scss';
 
 export const MyCourses = () => {
-  const [myCreatedCourses, setMyCreatedCourses] = useState<ICourse[]>([]);
-  const [loading, setLoading] = useState(true);
-  const user_id = localStorage.getItem('user_id');
+  const dispatch = useDispatch();
+  const courses = useSelector((state: any) => state.courses);
   useEffect(() => {
-    fetch(`${API_URL}/courses/${user_id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setMyCreatedCourses(res.courses);
-        setLoading(false);
-      });
+    dispatch(getMyCreatedCourses());
   }, []);
 
-  const mapCreatedCourses = myCreatedCourses.map((course) => {
+  const mapCreatedCourses = courses.createdCourses.map((course: ICourse) => {
     return <CardCourseCreated course={course} key={course._id} />;
   });
 
-  if (loading) {
+  if (courses.loading) {
     return <Loader />;
   }
 
@@ -33,11 +29,12 @@ export const MyCourses = () => {
       <div className="my-courses-page">
         <div className="my-courses-learning">
           <div className="my-courses-title">My learning courses</div>
-          <Progress />
+          {/* <Progress /> */}
+          no courses
         </div>
         <div className="my-courses-created">
           <div className="my-courses-title">My created courses</div>
-          {myCreatedCourses.length ? mapCreatedCourses : 'Not created courses'}
+          {courses.createdCourses.length ? mapCreatedCourses : 'Not created courses'}
         </div>
       </div>
     </Layout>

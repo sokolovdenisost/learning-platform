@@ -10,6 +10,7 @@ import { CreateCourseLesson } from '../pages/CreateCourseLesson/CreateCourseLess
 import { EditCourse } from '../pages/EditCourse/EditCourse';
 import { EditCourseLesson } from '../pages/EditCourseLesson/EditCourseLesson';
 import { Favorites } from '../pages/Favorites/Favorites';
+import { Lesson } from '../pages/Lesson/Lesson';
 import { MyCourses } from '../pages/MyCourses/MyCourses';
 import { NewCourses } from '../pages/NewCourses/NewCourses';
 import { News } from '../pages/News/News';
@@ -60,7 +61,7 @@ export const routes = (loading: boolean, auth: any) => {
     },
     {
       path: '/favorites',
-      component: <Favorites courses={auth.favorites} />,
+      component: <Favorites />,
     },
     {
       path: '/create',
@@ -68,7 +69,7 @@ export const routes = (loading: boolean, auth: any) => {
     },
     {
       path: '/settings',
-      component: <Settings user={auth} />,
+      component: <Settings />,
     },
     {
       path: '/new-courses',
@@ -84,7 +85,7 @@ export const routes = (loading: boolean, auth: any) => {
     },
     {
       path: '/profile',
-      component: <Profile user={auth} />,
+      component: <Profile />,
     },
     {
       path: '/edit/:id',
@@ -101,6 +102,10 @@ export const routes = (loading: boolean, auth: any) => {
     {
       path: '/404',
       component: <Error404 />,
+    },
+    {
+      path: '/lesson/:id',
+      component: <Lesson />,
     },
   ];
 

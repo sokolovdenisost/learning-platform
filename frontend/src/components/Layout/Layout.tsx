@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { API_URL } from '../../consts';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../Button/Button';
-import { Loader } from '../Loader/Loader';
 import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
 import './Layout.scss';
@@ -14,7 +11,7 @@ import ru_flag from '../../assets/ru_flag.png';
 import en_flag from '../../assets/en_flag.png';
 
 interface Props {
-  title: string;
+  title?: string;
   children: JSX.Element | JSX.Element[];
 }
 
@@ -79,7 +76,7 @@ export const Layout = ({ title, children }: Props) => {
           )}
         </div>
         <div className="layout-block">
-          <div className="layout-title">{title}</div>
+          {title ? <div className="layout-title">{title}</div> : null}
           <div className="layout-body">{children}</div>
         </div>
       </div>

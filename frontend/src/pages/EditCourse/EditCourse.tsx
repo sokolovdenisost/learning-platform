@@ -14,6 +14,9 @@ import { changeInputHandler } from '../../hooks/change';
 import './EditCourse.scss';
 import { ICourse } from '../../interfaces/course';
 import { Select } from '../../components/Select/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeParams, getEditCourse } from '../../store/actions/courseAction';
+import { Loader } from '../../components/Loader/Loader';
 
 const TAGS = [
   'Web design',
@@ -30,66 +33,53 @@ const TAGS = [
 ];
 
 export const EditCourse = () => {
-  const [course, setCourse] = useState<ICourse>({
-    _id: '',
-    certificate: '',
-    description: '',
-    image: {
-      photo_url: '',
-      public_id: '',
-    },
-    level: '',
-    owner: {
-      _id: '',
-      firstName: '',
-      lastName: '',
-    },
-    tags: [],
-    title: '',
-    lessons: [],
-    rating: [],
-  });
-  const [error, setError] = useState();
-  const user_id = localStorage.getItem('user_id');
+  const dispatch = useDispatch();
+  const id = window.location.pathname.split('/')[2];
+  const course: ICourse = useSelector((state: any) => state.course.course);
+  const loading = useSelector((state: any) => state.course.loading);
+  const error = useSelector((state: any) => state.course.error);
 
   useEffect(() => {
-    const id = window.location.pathname.split('/')[2];
-    fetch(`${API_URL}/course/edit/${id}/${user_id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.type === 'Error') {
-          setError(res);
-        } else {
-          setCourse(res.course);
-        }
-      });
+    dispatch(getEditCourse(id));
+    console.log(course);
   }, []);
 
   function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
-    // setFile(e.currentTarget.files)
     console.log(e.currentTarget.files);
   }
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);
-    const findKey = course.tags.find((c) => c === key);
+    const findKey = course.tags.find((c: string) => c === key);
     if (findKey) {
-      setCourse({ ...course, tags: course.tags.filter((c) => c !== key) });
+      dispatch(
+        changeParams(
+          'tags',
+          course.tags.filter((c: string) => c !== key),
+        ),
+      );
+      // setCourse({ ...course, tags: course.tags.filter((c: string) => c !== key) });
     } else if (course.tags.length > 2) {
       course.tags.shift();
-      setCourse({ ...course, tags: [...course.tags, key] });
+      dispatch(changeParams('tags', [...course.tags, key]));
+      // setCourse({ ...course, tags: [...course.tags, key] });
     } else if (!findKey && course.tags.length < 3) {
-      setCourse({ ...course, tags: [...course.tags, key] });
+      dispatch(changeParams('tags', [...course.tags, key]));
+      // setCourse({ ...course, tags: [...course.tags, key] });
     }
   }
 
   function getSelected(title: string) {
-    return course.tags.find((c) => c === title) ? true : false;
+    return course.tags.find((c: string) => c === title) ? true : false;
   }
 
-  const mapLessons = course.lessons.map((lesson, index) => {
+  const mapLessons = course.lessons.map((lesson, index: number) => {
     return <LessonBlock _id={lesson._id} course={lesson.course} title={`Lesson #${index}`} key={index} />;
   });
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (error) {
     return <Redirect to="/404" />;
@@ -103,12 +93,17 @@ export const EditCourse = () => {
             <div className="edit-course-item">
               <Block title="Main information on course" subtitle="In this block you  write main information on your course.">
                 <ChangePicture title="Course picture" img={course.image.photo_url} onChange={changeFile} />
-                <Input label="Name course" id="title" value={course.title} onChange={(e) => changeInputHandler(e, course, setCourse)} />
+                <Input
+                  label="Name course"
+                  id="title"
+                  value={course.title}
+                  onChange={(e) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+                />
                 <Input
                   label="Description course"
                   id="description"
                   value={course.description}
-                  onChange={(e) => changeInputHandler(e, course, setCourse)}
+                  onChange={(e) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
                 />
               </Block>
             </div>
@@ -118,8 +113,20 @@ export const EditCourse = () => {
               <Block
                 title="Characteristic about course"
                 subtitle="Here you describe characteristic for course: how many lessons, who is the course for, Is there any certification.">
-                <Select title="Certificate" id="certificate" options={['Yes', 'No']} />
-                <Select title="Level" id="level" options={['Trainee', 'Junior', 'Middle', 'Senior']} />
+                <Select
+                  title="Certificate"
+                  id="certificate"
+                  options={['Yes', 'No']}
+                  value={course.certificate}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+                />
+                <Select
+                  title="Level"
+                  id="level"
+                  options={['Trainee', 'Junior', 'Middle', 'Senior']}
+                  value={course.level}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(changeParams(e.currentTarget.id, e.currentTarget.value))}
+                />
               </Block>
             </div>
             <div className="edit-course-item">

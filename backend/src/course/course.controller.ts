@@ -32,6 +32,7 @@ export class CourseController {
   @Post('create')
   @UseInterceptors(FileInterceptor('file'))
   async createCourse(@Res() res: Response, @Body() body: CreateCourseDTO, @UploadedFile('file') file: Express.Multer.File): Promise<void> {
+    console.log(body);
     const result = await this.courseService.createCourse(body, file);
 
     res.json(result).status(result.code);

@@ -6,13 +6,15 @@ interface Props {
   options: string[];
   id: string;
   width?: string;
+  onChange: any;
+  value?: string;
 }
 
-export const Select = ({ title, options, width = '100%', id }: Props) => {
+export const Select = ({ title, options, width = '100%', id, onChange, value }: Props) => {
   return (
     <div className="select-block">
       <div className="select-title">{title}</div>
-      <select className="select" defaultValue="Please select" style={{ width }} id={id}>
+      <select className="select" defaultValue={value ? value : 'Please select'} style={{ width }} id={id} onChange={onChange}>
         <option className="select-option" value="Please select" disabled>
           Please select
         </option>
