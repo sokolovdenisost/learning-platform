@@ -5,3 +5,4 @@ export const GET_EDIT_COURSE = 'GET_EDIT_COURSE';
 export const CHANGE_PARAMS = 'CHANGE_PARAMS';
 export const GET_COURSE = 'GET_COURSE';
 export const ERROR = 'ERROR';
+export const GET_LESSON = 'GET_LESSON';

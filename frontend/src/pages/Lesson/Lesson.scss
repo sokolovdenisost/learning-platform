@@ -31,4 +31,38 @@
       }
     }
   }
+
+  .lesson-course-body {
+    margin: 40px 0 20px;
+
+    .lesson-course-body-buttons {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+  }
+
+  .lesson-course-comments {
+    .lesson-comments-top {
+      width: 100%;
+
+      .lesson-comments-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .lesson-comments-line {
+        border: 1px solid $grey-main;
+      }
+    }
+  }
+
+  .lesson-comments-body {
+    margin: 20px 0;
+
+    .lesson-comments-buttons {
+      text-align: right;
+      margin-top: 10px;
+    }
+  }
 }

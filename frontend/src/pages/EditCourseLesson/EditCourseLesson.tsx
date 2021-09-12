@@ -11,6 +11,7 @@ import { Button } from '../../components/Button/Button';
 import { Panel } from '../../components/Create/Panel/Panel';
 import { deleteLessonHandler, editLessonHandler } from '../../utils/course';
 import { Redirect } from 'react-router';
+import { Error404 } from '../404/404';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
@@ -72,7 +73,7 @@ export const EditCourseLesson = () => {
   });
 
   if (error) {
-    return <Redirect to="/404" />;
+    return <Error404 />;
   }
 
   return (

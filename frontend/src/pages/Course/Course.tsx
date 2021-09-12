@@ -11,6 +11,7 @@ import { ICourse } from '../../interfaces/course';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourse } from '../../store/actions/courseAction';
 import { Loader } from '../../components/Loader/Loader';
+import { Error404 } from '../404/404';
 
 export const Course = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const Course = () => {
   });
 
   if (error) {
-    return <Redirect to="/404" />;
+    return <Error404 />;
   }
 
   if (loading) {

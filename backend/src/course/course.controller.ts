@@ -66,6 +66,13 @@ export class CourseController {
     res.json(result).status(result.code);
   }
 
+  @Get('/lesson/:id')
+  async getLessonById(@Res() res: Response, @Param('id') id: string): Promise<void> {
+    const result = await this.courseService.getLessonById(id);
+
+    res.json(result).status(result.status);
+  }
+
   @Post('delete-lesson')
   async deleteLesson(@Res() res: Response, @Body() body: DeleteLessonDTO): Promise<void> {
     const result = await this.courseService.deleteLesson(body);

@@ -82,7 +82,7 @@ export const EditCourse = () => {
   }
 
   if (error) {
-    return <Redirect to="/404" />;
+    return <Error404 />;
   }
 
   return (

@@ -131,6 +131,20 @@ export class CourseService {
     }
   }
 
+  async getLessonById(id: string): Promise<any> {
+    if (mongoose.isValidObjectId(id)) {
+      const lesson = await this.lessonModel.findById(id).populate('course');
+
+      if (lesson) {
+        return { code: 200, text: `Lesson ${id}`, type: 'Success', lesson };
+      } else {
+        return { code: 404, text: 'Lesson is not found', type: 'Error' };
+      }
+    } else {
+      return { code: 404, text: 'Lesson is not found', type: 'Error' };
+    }
+  }
+
   async createCourse(body: CreateCourseDTO, file: Express.Multer.File): Promise<any> {
     const { _id, certificate, description, level, tags, title } = body;
     if (file) {
