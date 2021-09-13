@@ -1,19 +1,30 @@
 import React from 'react';
+import { ICourse } from '../../interfaces/course';
 import { Button } from '../Button/Button';
 import { CardCourse } from '../CardCourse/CardCourse';
 import './Progress.scss';
 
-export const Progress = () => {
+interface Props {
+  takeCourse: {
+    course: ICourse;
+    currentLesson: number;
+    _id: string;
+  };
+}
+
+export const Progress = ({ takeCourse }: Props) => {
   return (
     <div className="progress">
-      {/* <CardCourse /> */}
+      <CardCourse course={takeCourse.course} />
       <div className="progress-body">
         <div className="progress-title">Course passed on</div>
         <div className="progress-block">
           <div className="progress-percent">75%</div>
           <div className="line" />
           <div className="progress-info">
-            <div className="progress-text">3 out of 14 - Lessons</div>
+            <div className="progress-text">
+              {takeCourse.currentLesson} out of {takeCourse.course.lessons.length} - Lessons
+            </div>
             <div className="progress-text">50 out of 100 - Stars received</div>
             <div className="progress-text">10 out of 14 - Tasks completed</div>
           </div>

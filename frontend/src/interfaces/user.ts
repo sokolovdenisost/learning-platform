@@ -11,4 +11,10 @@ export interface IUser {
   _id: string;
   favorites: ICourse[];
   registered: string;
+  takeCourses: TakeCourses[];
+}
+
+interface TakeCourses {
+  course: string;
+  currentLesson: number;
 }

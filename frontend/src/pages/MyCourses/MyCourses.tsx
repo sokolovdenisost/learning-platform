@@ -6,18 +6,25 @@ import { Loader } from '../../components/Loader/Loader';
 import { Progress } from '../../components/Progress/Progress';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
-import { getMyCreatedCourses } from '../../store/actions/coursesAction';
+import { getMyCreatedCourses, getMyTakeCourses } from '../../store/actions/coursesAction';
 import './MyCourses.scss';
 
 export const MyCourses = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state: any) => state.courses);
+
   useEffect(() => {
     dispatch(getMyCreatedCourses());
+    dispatch(getMyTakeCourses());
+    console.log(courses);
   }, []);
 
   const mapCreatedCourses = courses.createdCourses.map((course: ICourse) => {
     return <CardCourseCreated course={course} key={course._id} />;
+  });
+
+  const mapTakeCourses = courses.takeCourses.map((takeCourse: TakeCourse) => {
+    return <Progress key={takeCourse._id} takeCourse={takeCourse} />;
   });
 
   if (courses.loading) {
@@ -29,14 +36,20 @@ export const MyCourses = () => {
       <div className="my-courses-page">
         <div className="my-courses-learning">
           <div className="my-courses-title">My learning courses</div>
-          {/* <Progress /> */}
-          no courses
+          {courses.takeCourses.length ? mapTakeCourses : 'Not take courses'}
         </div>
         <div className="my-courses-created">
           <div className="my-courses-title">My created courses</div>
           {courses.createdCourses.length ? mapCreatedCourses : 'Not created courses'}
         </div>
+        <button onClick={() => console.log(courses)}>Click</button>
       </div>
     </Layout>
   );
 };
+
+interface TakeCourse {
+  course: ICourse;
+  currentLesson: number;
+  _id: string;
+}

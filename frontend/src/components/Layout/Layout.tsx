@@ -9,6 +9,7 @@ import './Layout.scss';
 
 import ru_flag from '../../assets/ru_flag.png';
 import en_flag from '../../assets/en_flag.png';
+import { useSelector } from 'react-redux';
 
 interface Props {
   title?: string;
@@ -16,15 +17,16 @@ interface Props {
 }
 
 export const Layout = ({ title, children }: Props) => {
+  const user = useSelector((state: any) => state.user);
+
   const [authModal, setAuthModal] = useState({
     type: '',
     active: false,
   });
   const [active, setActive] = useState(false);
-  const auth = useAuth();
   const language = localStorage.getItem('language');
 
-  if (auth.loading) {
+  if (user.loading) {
     return null;
   }
 
@@ -42,7 +44,7 @@ export const Layout = ({ title, children }: Props) => {
       <div className="layout">
         <div className="layout-top">
           <div className="layout-logo"></div>
-          {auth.user.firstName ? (
+          {user.firstName ? (
             <div className="layout-rigth">
               <div className="layout-language">
                 {language === 'ru' ? (
@@ -56,7 +58,7 @@ export const Layout = ({ title, children }: Props) => {
               </div>
               <div className="layout-user">
                 <div className="layout-user-section" onClick={() => setActive(!active)}>
-                  <img src={auth.user.avatar.photo_url} alt="" />
+                  <img src={user.avatar.photo_url} alt="" />
                   <div className="arrow">
                     <RiArrowDownSLine size={30} />
                   </div>

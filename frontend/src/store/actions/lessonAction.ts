@@ -6,7 +6,6 @@ export const getLesson = (lesson_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/course/lesson/${lesson_id}`);
 
   const result = await response.json();
-  console.log(result);
 
   if (result.type === 'Error') {
     dispatch({

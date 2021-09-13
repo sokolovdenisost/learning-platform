@@ -13,6 +13,7 @@ const initialState = {
   _id: '',
   favorites: [],
   registered: '',
+  takeCourses: [],
   loading: true,
 };
 

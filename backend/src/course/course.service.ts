@@ -12,6 +12,7 @@ import {
   EditCourseDTO,
   EditLessonDTO,
   FavoriteCourseDTO,
+  JoinCourseDTO,
   RatingForCourseDTO,
 } from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
@@ -56,16 +57,15 @@ export class CourseService {
     }
   }
 
-  async getLessonByCourse(course_id: string, lesson_id: string): Promise<any> {
+  async getEditLessonByCourse(course_id: string, lesson_id: string): Promise<any> {
     if (mongoose.isValidObjectId(course_id) && mongoose.isValidObjectId(lesson_id)) {
       const course = await this.courseModel.findById(course_id);
       if (course) {
         const lesson = await this.lessonModel.findById(lesson_id);
 
         if (lesson) {
-          const check = course.lessons.find((c) => String(c) === lesson_id);
-
-          if (check) {
+          const check = course.lessons.filter((c) => String(c) === lesson_id);
+          if (check.length) {
             return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
           } else {
             return { code: 404, text: `Lesson is not found`, type: 'Error' };
@@ -134,8 +134,9 @@ export class CourseService {
   async getLessonById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
       const lesson = await this.lessonModel.findById(id).populate('course');
+      const course = await this.courseModel.findById(lesson.course);
 
-      if (lesson) {
+      if (course && lesson) {
         return { code: 200, text: `Lesson ${id}`, type: 'Success', lesson };
       } else {
         return { code: 404, text: 'Lesson is not found', type: 'Error' };
@@ -227,7 +228,7 @@ export class CourseService {
             return { code: 200, text: 'Add favorite', type: 'Success' };
           }
         } else {
-          return { code: 404, text: 'User is not found', type: 'Error' };
+          return { code: 401, text: 'Unauthorized', type: 'Error' };
         }
       } else {
         return { code: 404, text: 'Course is not found', type: 'Error' };
@@ -239,11 +240,15 @@ export class CourseService {
 
   async ratingForCourse(body: RatingForCourseDTO, course_id: string): Promise<ISuccess | IError> {
     if (mongoose.isValidObjectId(body.user) && mongoose.isValidObjectId(course_id)) {
+      const user = await this.userModel.findById(body.user);
       const course = await this.courseModel.findById(course_id);
 
-      if (course) {
+      if (!user) {
+        return { code: 400, text: 'Unauthorized', type: 'Error' };
+      }
+
+      if (course && user) {
         const check = course.rating.filter((r) => String(r.user) === body.user);
-        console.log(check);
 
         if (check.length) {
           return { code: 200, text: 'The rating is already', type: 'Success' };
@@ -262,6 +267,33 @@ export class CourseService {
       }
     } else {
       return { code: 400, text: 'Invalid data', type: 'Error' };
+    }
+  }
+
+  async joinCourse(body: JoinCourseDTO): Promise<ISuccess | IError> {
+    if (mongoose.isValidObjectId(body.user_id) && mongoose.isValidObjectId(body.course_id)) {
+      const user = await this.userModel.findById(body.user_id);
+      const course = await this.courseModel.findById(body.course_id);
+      if (user && course) {
+        const check = user.takeCourses.filter((c) => String(c.course) === String(course._id));
+        console.log(check);
+        if (check.length) {
+          return { code: 200, text: 'You are already taking this course', type: 'Success' };
+        } else {
+          user.takeCourses.push({
+            course: course,
+            currentLesson: 1,
+          });
+
+          await user.save();
+
+          return { code: 200, text: 'Joined the course', type: 'Success' };
+        }
+      } else {
+        return { code: 404, text: 'User and course is not found', type: 'Error' };
+      }
+    } else {
+      return { code: 400, text: 'For user and course is not valid id', type: 'Error' };
     }
   }
 }

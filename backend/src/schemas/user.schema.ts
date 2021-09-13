@@ -34,6 +34,14 @@ export class User {
 
   @Prop({ type: [mongoose.Types.ObjectId], ref: 'Course' })
   favorites: Course[];
+
+  @Prop({ type: [{ course: { type: mongoose.Types.ObjectId, ref: 'Course' }, currentLesson: Number }] })
+  takeCourses: TakeCourse[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+interface TakeCourse {
+  course: Course;
+  currentLesson: number;
+}

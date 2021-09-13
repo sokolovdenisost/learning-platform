@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { Slider } from '../../components/Slider/Slider';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
+import { getAllCourses } from '../../store/actions/coursesAction';
 import './News.scss';
 
 export const News = () => {
-  const [newCourses, setNewCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const newCourses = useSelector((state: any) => state.courses.allCourses);
+  const loading = useSelector((state: any) => state.courses.loading);
+  newCourses.splice(5);
 
   useEffect(() => {
-    fetch(`${API_URL}/courses`)
-      .then((res) => res.json())
-      .then((res) => {
-        setNewCourses(res.courses);
-        newCourses.splice(5);
-        setLoading(false);
-      });
+    dispatch(getAllCourses());
   }, []);
 
   if (loading) {

@@ -32,7 +32,11 @@ export const UserMenu = ({ active, setActive }: Props) => {
   }
 
   useEffect(() => {
-    const onClick = (e: any) => rootEl.current.contains(e.target) || setActive(false);
+    const onClick = (e: any) => {
+      if (rootEl.current) {
+        return rootEl.current.contains(e.target) || setActive(false);
+      }
+    };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
   }, []);

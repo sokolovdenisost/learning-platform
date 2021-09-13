@@ -10,6 +10,7 @@ import {
   EditCourseDTO,
   EditLessonDTO,
   FavoriteCourseDTO,
+  JoinCourseDTO,
   RatingForCourseDTO,
 } from './dto/course.dto';
 
@@ -23,9 +24,16 @@ export class CourseController {
     res.json(result).status(result.code);
   }
 
-  @Get('/edit/:id/:user_id')
+  @Get('edit/:id/:user_id')
   async getCourseByIdAndUserId(@Res() res: Response, @Param() params): Promise<void> {
     const result = await this.courseService.getCourseByIdAndUserId(params.id, params.user_id);
+    res.json(result).status(result.code);
+  }
+
+  @Post('join')
+  async joinCourse(@Res() res: Response, @Body() body: JoinCourseDTO): Promise<void> {
+    const result = await this.courseService.joinCourse(body);
+
     res.json(result).status(result.code);
   }
 
@@ -60,13 +68,13 @@ export class CourseController {
   }
 
   @Get(':id/edit-lesson/:lesson')
-  async getLessonByCourse(@Res() res: Response, @Param() params): Promise<void> {
-    const result = await this.courseService.getLessonByCourse(params.id, params.lesson);
+  async getEditLessonByCourse(@Res() res: Response, @Param() params): Promise<void> {
+    const result = await this.courseService.getEditLessonByCourse(params.id, params.lesson);
 
     res.json(result).status(result.code);
   }
 
-  @Get('/lesson/:id')
+  @Get('lesson/:id')
   async getLessonById(@Res() res: Response, @Param('id') id: string): Promise<void> {
     const result = await this.courseService.getLessonById(id);
 
@@ -80,14 +88,14 @@ export class CourseController {
     res.json(result).status(result.code);
   }
 
-  @Post('/favorite')
+  @Post('favorite')
   async toggleFavoriteCourse(@Res() res: Response, @Body() body: FavoriteCourseDTO): Promise<void> {
     const result = await this.courseService.toggleFavorite(body);
 
     res.json(result).status(result.code);
   }
 
-  @Post('/rating/:id')
+  @Post('rating/:id')
   async setRatingForCourse(@Res() res: Response, @Body() body: RatingForCourseDTO, @Param('id') id: string): Promise<void> {
     const result = await this.courseService.ratingForCourse(body, id);
 

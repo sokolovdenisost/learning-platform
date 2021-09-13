@@ -22,7 +22,6 @@ export const lessonReducer = (state = initialState, action: AnyAction) => {
     case ERROR:
       return {
         ...state,
-        lesson: {},
         loading: false,
         error: action.payload,
       };

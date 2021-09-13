@@ -14,6 +14,7 @@ export const useAuth = (): AuthSuccess => {
     _id: '',
     favorites: [],
     registered: '',
+    takeCourses: [],
   });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);

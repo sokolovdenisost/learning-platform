@@ -45,4 +45,9 @@ export class RatingForCourseDTO {
   user: string;
 }
 
+export class JoinCourseDTO {
+  user_id: string;
+  course_id: string;
+}
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

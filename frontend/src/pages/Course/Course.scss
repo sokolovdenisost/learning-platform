@@ -25,6 +25,20 @@
         }
 
         .course-rating-stars {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .button {
+            background: #fff;
+            border: none;
+            outline: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: scale(1.2);
+            }
+          }
         }
 
         .course-rating-votes {
@@ -100,6 +114,7 @@
   }
 
   .course-lessons {
+    margin-top: 20px;
     .course-lessons-title {
       font-size: 20px;
       font-weight: 700;

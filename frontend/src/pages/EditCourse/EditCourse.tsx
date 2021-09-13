@@ -74,7 +74,7 @@ export const EditCourse = () => {
   }
 
   const mapLessons = course.lessons.map((lesson, index: number) => {
-    return <LessonBlock _id={lesson._id} course={lesson.course} title={`Lesson #${index}`} key={index} />;
+    return <LessonBlock type="edit" _id={lesson._id} course={lesson.course} title={`Lesson #${index}`} key={index} />;
   });
 
   if (loading) {

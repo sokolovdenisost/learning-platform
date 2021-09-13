@@ -1,8 +1,9 @@
 export const useRating = (rating: IRating[]): Rating => {
   let sumRating = 0;
   rating.forEach((r) => (sumRating += r.ratingNum));
+  const avgRating = isNaN(sumRating / rating.length) ? 0 : sumRating / rating.length;
 
-  return { rating: sumRating, ratings: rating.length };
+  return { rating: avgRating.toFixed(1), ratings: rating.length };
 };
 
 interface IRating {
@@ -11,6 +12,6 @@ interface IRating {
 }
 
 interface Rating {
-  rating: number;
+  rating: string;
   ratings: number;
 }

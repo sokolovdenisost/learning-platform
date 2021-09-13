@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CardCourse } from '../../components/CardCourse/CardCourse';
 import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
+import { getAllCourses } from '../../store/actions/coursesAction';
 import './NewCourses.scss';
 
 export const NewCourses = () => {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const courses = useSelector((state: any) => state.courses.allCourses);
+  const loading = useSelector((state: any) => state.courses.loading);
 
   useEffect(() => {
-    fetch(`${API_URL}/courses`)
-      .then((res) => res.json())
-      .then((res) => {
-        setLoading(false);
-        setCourses(res.courses);
-      });
+    dispatch(getAllCourses());
   }, []);
 
   const mapCourses = courses.map((course: ICourse) => {
