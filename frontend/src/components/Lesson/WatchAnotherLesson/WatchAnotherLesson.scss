@@ -1,0 +1,22 @@
+@import '../../../index.scss';
+
+.another-lessons {
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px;
+  grid-column-gap: 6.7px;
+  grid-row-gap: 10px;
+
+  .another-lesson {
+    width: 40px;
+    cursor: pointer;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $blue-main;
+    border-radius: $r5;
+    font-size: 16px;
+    font-weight: 700;
+    color: $blue-main;
+  }
+}

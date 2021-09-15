@@ -16,7 +16,6 @@ export const MyCourses = () => {
   useEffect(() => {
     dispatch(getMyCreatedCourses());
     dispatch(getMyTakeCourses());
-    console.log(courses);
   }, []);
 
   const mapCreatedCourses = courses.createdCourses.map((course: ICourse) => {

@@ -13,6 +13,12 @@ interface Props {
 }
 
 export const Progress = ({ takeCourse }: Props) => {
+  function continueLearningCourse() {
+    const lessonId = takeCourse.course.lessons[takeCourse.currentLesson - 1];
+
+    window.location.pathname = `/lesson/${lessonId}`;
+  }
+
   return (
     <div className="progress">
       <CardCourse course={takeCourse.course} />
@@ -29,7 +35,7 @@ export const Progress = ({ takeCourse }: Props) => {
             <div className="progress-text">10 out of 14 - Tasks completed</div>
           </div>
           <div className="progress-button">
-            <Button fontSize="14" type="bold" color="main">
+            <Button fontSize="14" type="bold" color="main" onClick={continueLearningCourse}>
               CONTINUE
             </Button>
           </div>
