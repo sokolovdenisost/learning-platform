@@ -3,7 +3,8 @@ import { API_URL } from '../../consts';
 import { ERROR, GET_LESSON } from '../types';
 
 export const getLesson = (lesson_id: string) => async (dispatch: Dispatch) => {
-  const response = await fetch(`${API_URL}/course/lesson/${lesson_id}`);
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/lesson/${lesson_id}/${user_id}`);
 
   const result = await response.json();
 

@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { Layout } from '../../components/Layout/Layout';
 import { AiFillStar } from 'react-icons/ai';
 import './Course.scss';
-import { API_URL } from '../../consts';
-import { Redirect } from 'react-router';
 import { Tag } from '../../components/Tag/Tag';
-import { ICourse } from '../../interfaces/course';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourse } from '../../store/actions/courseAction';
 import { Loader } from '../../components/Loader/Loader';
@@ -24,7 +21,6 @@ export const Course = () => {
   const error = useSelector((state: any) => state.course.error);
   const params = window.location.pathname.split('/');
   const rating = useRating(course.rating);
-  console.log(course);
 
   useEffect(() => {
     dispatch(getCourse(params[2]));

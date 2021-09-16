@@ -9,7 +9,7 @@ import { Test } from '../../components/Create/Test/Test';
 import './EditCourseLesson.scss';
 import { Button } from '../../components/Button/Button';
 import { Panel } from '../../components/Create/Panel/Panel';
-import { deleteLessonHandler, editLessonHandler } from '../../utils/course';
+import { deleteLessonHandler, editLessonHandler } from '../../utils/lesson';
 import { Redirect } from 'react-router';
 import { Error404 } from '../404/404';
 

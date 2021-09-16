@@ -18,9 +18,9 @@
     height: max-content;
 
     & iframe {
-      margin-right: 10px;
       border: none;
       border-radius: $r5;
+      margin-bottom: 20px;
     }
 
     &:hover .ready-edit {

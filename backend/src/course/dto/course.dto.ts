@@ -7,11 +7,6 @@ export class CreateCourseDTO {
   tags: string;
 }
 
-export class CreateLessonDTO {
-  _id: string;
-  array: Array<{ typeForm: string; text: string }>;
-}
-
 export class EditCourseDTO {
   title: string;
   description: string;
@@ -20,19 +15,8 @@ export class EditCourseDTO {
   tags: string[];
 }
 
-export class EditLessonDTO {
-  course_id: string;
-  lesson_id: string;
-  array: Array<{ typeForm: string; text: string }>;
-}
-
 export class DeleteCourseDTO {
   user_id: string;
-}
-
-export class DeleteLessonDTO {
-  course_id: string;
-  lesson_id: string;
 }
 
 export class FavoriteCourseDTO {

@@ -67,7 +67,7 @@ export const Video = ({ onCancel, onChange, index, value }: Props) => {
         </CreateBlock>
       ) : (
         <div className="video-ready">
-          <iframe ref={videoRef} width="100%" height="100%" style={{ minHeight: '100%' }} src={`https://www.youtube.com/embed/${url.id}`} />
+          <iframe ref={videoRef} width="100%" height="450px" style={{ minHeight: '100%' }} src={`https://www.youtube.com/embed/${url.id}`} />
           <div className="ready-edit" onClick={onEdit}>
             <BiEdit size={24} color="#007bff" />
           </div>

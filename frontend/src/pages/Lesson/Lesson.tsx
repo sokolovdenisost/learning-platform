@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
 import { Button } from '../../components/Button/Button';
 import { Comment } from '../../components/Comment/Comment';
 import { Layout } from '../../components/Layout/Layout';
-import { Link } from '../../components/Lesson/Link/Link';
 import { Text } from '../../components/Lesson/Text/Text';
 import { Title } from '../../components/Lesson/Title/Title';
 import { Video } from '../../components/Lesson/Video/Video';
@@ -24,6 +22,8 @@ export const Lesson = () => {
   const lesson = useSelector((state: any) => state.lesson.lesson);
   const loading = useSelector((state: any) => state.lesson.loading);
   const error = useSelector((state: any) => state.lesson.error);
+  const user = useSelector((state: any) => state.user);
+  const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
   const params = window.location.pathname.split('/');
 
   useEffect(() => {
@@ -101,7 +101,9 @@ export const Lesson = () => {
           <Comment />
           <Comment />
         </div>
-        {active.active ? <WatchAnotherLesson active={active} setActive={setActive} /> : null}
+        {active.active ? (
+          <WatchAnotherLesson currentLesson={infoLesson[0].currentLesson} course={lesson.course} active={active} setActive={setActive} />
+        ) : null}
       </div>
     </Layout>
   );

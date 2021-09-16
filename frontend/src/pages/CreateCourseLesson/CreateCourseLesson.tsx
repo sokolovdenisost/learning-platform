@@ -8,7 +8,7 @@ import { Test } from '../../components/Create/Test/Test';
 import { Code } from '../../components/Create/Code/Code';
 import './CreateCourseLesson.scss';
 import { Button } from '../../components/Button/Button';
-import { createLesson } from '../../utils/course';
+import { createLesson } from '../../utils/lesson';
 import { useHistory } from 'react-router';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';

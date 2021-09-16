@@ -19,7 +19,7 @@ export const Favorites = () => {
 
   return (
     <Layout title="Favorite courses">
-      <div className="favorite-page">{mapCourses}</div>
+      <div className="favorite-page">{user.favorites.length ? mapCourses : 'No favorites courses'}</div>
     </Layout>
   );
 };

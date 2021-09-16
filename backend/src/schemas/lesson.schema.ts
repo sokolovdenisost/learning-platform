@@ -12,6 +12,9 @@ export class Lesson {
 
   @Prop({ type: [{ typeForm: String, text: String }] })
   array: IArray[];
+
+  @Prop({ type: [{ user: { type: mongoose.Types.ObjectId, ref: 'User' }, comment: String }] })
+  comments: IComment[];
 }
 
 export const LessonSchema = SchemaFactory.createForClass(Lesson);
@@ -19,4 +22,9 @@ export const LessonSchema = SchemaFactory.createForClass(Lesson);
 interface IArray {
   typeForm: string;
   text: string;
+}
+
+interface IComment {
+  user: mongoose.Types.ObjectId;
+  comment: string;
 }

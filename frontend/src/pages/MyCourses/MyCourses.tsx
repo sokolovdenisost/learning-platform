@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardCourseCreated } from '../../components/CardCourseCreated/CardCourseCreated';
 import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { Progress } from '../../components/Progress/Progress';
-import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
 import { getMyCreatedCourses, getMyTakeCourses } from '../../store/actions/coursesAction';
 import './MyCourses.scss';
@@ -41,7 +40,6 @@ export const MyCourses = () => {
           <div className="my-courses-title">My created courses</div>
           {courses.createdCourses.length ? mapCreatedCourses : 'Not created courses'}
         </div>
-        <button onClick={() => console.log(courses)}>Click</button>
       </div>
     </Layout>
   );

@@ -5,16 +5,7 @@ import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
-import {
-  CreateCourseDTO,
-  CreateLessonDTO,
-  DeleteLessonDTO,
-  EditCourseDTO,
-  EditLessonDTO,
-  FavoriteCourseDTO,
-  JoinCourseDTO,
-  RatingForCourseDTO,
-} from './dto/course.dto';
+import { CreateCourseDTO, EditCourseDTO, FavoriteCourseDTO, JoinCourseDTO, RatingForCourseDTO } from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
@@ -57,66 +48,6 @@ export class CourseService {
     }
   }
 
-  async getEditLessonByCourse(course_id: string, lesson_id: string): Promise<any> {
-    if (mongoose.isValidObjectId(course_id) && mongoose.isValidObjectId(lesson_id)) {
-      const course = await this.courseModel.findById(course_id);
-      if (course) {
-        const lesson = await this.lessonModel.findById(lesson_id);
-
-        if (lesson) {
-          const check = course.lessons.filter((c) => String(c) === lesson_id);
-          if (check.length) {
-            return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
-          } else {
-            return { code: 404, text: `Lesson is not found`, type: 'Error' };
-          }
-        } else {
-          return { code: 404, text: 'Lesson is not found', type: 'Error' };
-        }
-      } else {
-        return { code: 404, text: 'Lesson is not found', type: 'Error' };
-      }
-    } else {
-      return { code: 404, text: 'Lesson is not found', type: 'Error' };
-    }
-  }
-
-  async editLesson(body: EditLessonDTO): Promise<ISuccess | IError> {
-    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.lesson_id)) {
-      const course = await this.courseModel.findById(body.course_id);
-      if (course) {
-        const check = course.lessons.find((lesson) => String(lesson) === body.lesson_id);
-
-        if (check) {
-          await this.lessonModel.findByIdAndUpdate(body.lesson_id, { array: body.array });
-
-          return { code: 200, text: 'Lesson is update', type: 'Success' };
-        } else {
-          return { code: 404, text: 'Course is not found', type: 'Error' };
-        }
-      } else {
-        return { code: 404, text: 'Course is not found', type: 'Error' };
-      }
-    }
-  }
-
-  async deleteLesson(body: DeleteLessonDTO): Promise<ISuccess | IError> {
-    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.lesson_id)) {
-      const course = await this.courseModel.findById(body.course_id);
-      if (course) {
-        await this.lessonModel.findByIdAndDelete(body.lesson_id);
-
-        course.lessons = course.lessons.filter((lesson) => String(lesson) !== body.lesson_id);
-
-        await course.save();
-
-        return { code: 200, text: 'Lesson is deleted', type: 'Success' };
-      } else {
-        return { code: 404, text: 'Course is not found', type: 'Error' };
-      }
-    }
-  }
-
   async getCourseById(id: string): Promise<any> {
     if (mongoose.isValidObjectId(id)) {
       const course = await this.courseModel.findById(id).populate('owner', 'firstName lastName');
@@ -128,21 +59,6 @@ export class CourseService {
       }
     } else {
       return { code: 404, text: 'Course not found', type: 'Error' };
-    }
-  }
-
-  async getLessonById(id: string): Promise<any> {
-    if (mongoose.isValidObjectId(id)) {
-      const lesson = await this.lessonModel.findById(id).populate('course');
-      const course = await this.courseModel.findById(lesson.course);
-
-      if (course && lesson) {
-        return { code: 200, text: `Lesson ${id}`, type: 'Success', lesson };
-      } else {
-        return { code: 404, text: 'Lesson is not found', type: 'Error' };
-      }
-    } else {
-      return { code: 404, text: 'Lesson is not found', type: 'Error' };
     }
   }
 
@@ -175,18 +91,6 @@ export class CourseService {
     } else {
       return { code: 400, text: 'Not image found', type: 'Error' };
     }
-  }
-
-  async createLesson(body: CreateLessonDTO): Promise<ISuccess | IError> {
-    const course = await this.courseModel.findById(body._id);
-    const lesson = await new this.lessonModel({ course: body._id, array: body.array });
-
-    await lesson.save();
-
-    course.lessons.push(lesson);
-    await course.save();
-
-    return { code: 200, text: 'Lesson is added', type: 'Success' };
   }
 
   async deleteCourse(id: string, user_id: string): Promise<ISuccess | IError> {

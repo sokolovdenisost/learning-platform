@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
-import { deleteLessonHandler } from '../../utils/course';
+import { deleteLessonHandler } from '../../utils/lesson';
 import { Button } from '../Button/Button';
 import './LessonBlock.scss';
 

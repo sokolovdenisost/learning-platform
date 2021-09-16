@@ -35,6 +35,6 @@ export const getMyTakeCourses = () => async (dispatch: Dispatch) => {
 
   dispatch({
     type: GET_MY_TAKE_COURSES,
-    payload: result.courses,
+    payload: result.courses.reverse(),
   });
 };
