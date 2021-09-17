@@ -84,7 +84,7 @@ export const routes = (loading: boolean, auth: any) => {
       component: <Course />,
     },
     {
-      path: '/profile',
+      path: '/user/:id',
       component: <Profile />,
     },
     {
@@ -109,7 +109,6 @@ export const routes = (loading: boolean, auth: any) => {
     },
   ];
 
-  console.log(auth);
   const mapAuthRoutes = routesAuth.map((c) => {
     return (
       <Route key={c.path} path={c.path} exact>

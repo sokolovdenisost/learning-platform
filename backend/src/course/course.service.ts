@@ -180,7 +180,6 @@ export class CourseService {
       const course = await this.courseModel.findById(body.course_id);
       if (user && course) {
         const check = user.takeCourses.filter((c) => String(c.course) === String(course._id));
-        console.log(check);
         if (check.length) {
           return { code: 200, text: 'You are already taking this course', type: 'Success' };
         } else {

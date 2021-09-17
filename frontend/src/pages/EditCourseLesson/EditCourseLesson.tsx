@@ -12,46 +12,37 @@ import { Panel } from '../../components/Create/Panel/Panel';
 import { deleteLessonHandler, editLessonHandler } from '../../utils/lesson';
 import { Redirect } from 'react-router';
 import { Error404 } from '../404/404';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLesson, getEditLesson } from '../../store/actions/lessonAction';
+import { Loader } from '../../components/Loader/Loader';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const EditCourseLesson = () => {
-  const [lesson, setLesson] = useState<ILesson>({
-    array: [],
-    _id: '',
-    course: '',
-  });
-  const [error, setError] = useState();
   const params = window.location.pathname.split('/');
+  const dispatch = useDispatch();
+  const lesson = useSelector((state: any) => state.lesson.lesson);
+  const loading = useSelector((state: any) => state.lesson.loading);
+  const error = useSelector((state: any) => state.lesson.error);
 
   useEffect(() => {
-    fetch(`${API_URL}/course/${params[2]}/edit-lesson/${params[4]}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.type === 'Success') {
-          setLesson(res.lesson);
-        } else {
-          setError(res);
-        }
-      });
+    dispatch(getEditLesson(params[4]));
   }, []);
 
   function createForm(typeForm: TypesForm) {
-    setLesson({ ...lesson, array: [...lesson.array, { typeForm, text: '' }] });
+    dispatch(changeLesson('array', [...lesson.array, { typeForm, text: '' }]));
   }
 
   function cancelForm(index: number) {
-    setLesson({ ...lesson, array: [...lesson.array.filter((_, idx) => index !== idx)] });
+    dispatch(changeLesson('array', [...lesson.array.filter((_: any, idx: number) => index !== idx)]));
   }
 
   function setFormText(index: number, body: string) {
-    lesson.array[index] = {
-      ...lesson.array[index],
-      text: body,
-    };
+    lesson.array[index] = { ...lesson.array[index], text: body };
+    dispatch(changeLesson('array', [...lesson.array]));
   }
 
-  const mapCreateForms = lesson.array.map((form, index) => {
+  const mapCreateForms = lesson.array.map((form: Form, index: number) => {
     if (form.typeForm === 'text') {
       return <Text value={form.text} onChange={setFormText} index={index} onCancel={() => cancelForm(index)} key={index} />;
     }
@@ -74,6 +65,10 @@ export const EditCourseLesson = () => {
 
   if (error) {
     return <Error404 />;
+  }
+
+  if (loading) {
+    return <Loader />;
   }
 
   return (
@@ -103,6 +98,11 @@ interface ILesson {
 }
 
 interface ILessonForm {
+  typeForm: string;
+  text: string;
+}
+
+interface Form {
   typeForm: string;
   text: string;
 }

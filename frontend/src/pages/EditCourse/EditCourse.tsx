@@ -41,7 +41,6 @@ export const EditCourse = () => {
 
   useEffect(() => {
     dispatch(getEditCourse(id));
-    console.log(course);
   }, []);
 
   function changeFile(e: React.ChangeEvent<HTMLInputElement>) {

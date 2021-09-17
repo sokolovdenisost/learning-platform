@@ -8,6 +8,7 @@ import { CloudinaryProvider } from './cloudinary/cloudinary.provider';
 import { CoursesModule } from './courses/courses.module';
 import { ValidateModule } from './validate/validate.module';
 import { LessonModule } from './lesson/lesson.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { LessonModule } from './lesson/lesson.module';
     CoursesModule,
     ValidateModule,
     LessonModule,
+    UserModule,
   ],
   controllers: [],
   providers: [CloudinaryProvider],

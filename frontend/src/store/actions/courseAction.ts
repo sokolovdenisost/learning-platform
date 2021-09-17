@@ -7,7 +7,6 @@ export const getEditCourse = (course_id: string) => async (dispatch: Dispatch) =
   const response = await fetch(`${API_URL}/course/edit/${course_id}/${user_id}`);
 
   const result = await response.json();
-  console.log('result', result);
 
   if (result.type === 'Error') {
     dispatch({

@@ -11,9 +11,8 @@ function App() {
   }, []);
 
   const user = useSelector((state: any) => state.user);
-  console.log(user);
 
-  return <>{routes(user.loading, user)}</>;
+  return <>{routes(user.loading, user.user)}</>;
 }
 
 export default App;

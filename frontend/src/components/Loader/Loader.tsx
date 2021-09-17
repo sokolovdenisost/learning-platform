@@ -11,3 +11,14 @@ export const Loader = () => {
     </div>
   );
 };
+
+export const LoaderSection = () => {
+  return (
+    <div className="loader-section">
+      <div className="lds-ripple">
+        <div />
+        <div />
+      </div>
+    </div>
+  );
+};

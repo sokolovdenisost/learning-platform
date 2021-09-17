@@ -9,7 +9,7 @@ import './Favorites.scss';
 export const Favorites = () => {
   const user = useSelector((state: any) => state.user);
 
-  const mapCourses = user.favorites.map((course: ICourse) => {
+  const mapCourses = user.user.favorites.map((course: ICourse) => {
     return <CardCourse key={course._id} course={course} />;
   });
 
@@ -19,7 +19,7 @@ export const Favorites = () => {
 
   return (
     <Layout title="Favorite courses">
-      <div className="favorite-page">{user.favorites.length ? mapCourses : 'No favorites courses'}</div>
+      <div className="favorite-page">{user.user.favorites.length ? mapCourses : 'No favorites courses'}</div>
     </Layout>
   );
 };

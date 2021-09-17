@@ -44,7 +44,7 @@ export const Layout = ({ title, children }: Props) => {
       <div className="layout">
         <div className="layout-top">
           <div className="layout-logo"></div>
-          {user.firstName ? (
+          {user.user.firstName ? (
             <div className="layout-rigth">
               <div className="layout-language">
                 {language === 'ru' ? (
@@ -58,7 +58,7 @@ export const Layout = ({ title, children }: Props) => {
               </div>
               <div className="layout-user">
                 <div className="layout-user-section" onClick={() => setActive(!active)}>
-                  <img src={user.avatar.photo_url} alt="" />
+                  <img src={user.user.avatar.photo_url} alt="" />
                   <div className="arrow">
                     <RiArrowDownSLine size={30} />
                   </div>

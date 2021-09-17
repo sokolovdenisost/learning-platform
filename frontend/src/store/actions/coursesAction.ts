@@ -13,28 +13,30 @@ export const getAllCourses = () => async (dispatch: Dispatch) => {
   });
 };
 
-export const getMyCreatedCourses = () => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
-  const response = await fetch(`${API_URL}/courses/${user_id}/created-courses`);
+export const getCreatedCourses =
+  (id: string | null = null) =>
+  async (dispatch: Dispatch) => {
+    const user_id = localStorage.getItem('user_id');
+    const response = await fetch(`${API_URL}/courses/${id ? id : user_id}/created-courses`);
 
-  const result = await response.json();
+    const result = await response.json();
 
-  dispatch({
-    type: GET_MY_CREATED_COURSES,
-    payload: result.courses,
-  });
-};
+    dispatch({
+      type: GET_MY_CREATED_COURSES,
+      payload: result.courses,
+    });
+  };
 
-export const getMyTakeCourses = () => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
-  const response = await fetch(`${API_URL}/courses/${user_id}/take-courses`);
+export const getTakeCourses =
+  (id: string | null = null) =>
+  async (dispatch: Dispatch) => {
+    const user_id = localStorage.getItem('user_id');
+    const response = await fetch(`${API_URL}/courses/${id ? id : user_id}/take-courses`);
 
-  const result = await response.json();
+    const result = await response.json();
 
-  console.log(result);
-
-  dispatch({
-    type: GET_MY_TAKE_COURSES,
-    payload: result.courses.reverse(),
-  });
-};
+    dispatch({
+      type: GET_MY_TAKE_COURSES,
+      payload: result.courses.reverse(),
+    });
+  };

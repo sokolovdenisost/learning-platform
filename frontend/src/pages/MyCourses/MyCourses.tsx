@@ -5,7 +5,7 @@ import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { Progress } from '../../components/Progress/Progress';
 import { ICourse } from '../../interfaces/course';
-import { getMyCreatedCourses, getMyTakeCourses } from '../../store/actions/coursesAction';
+import { getCreatedCourses, getTakeCourses } from '../../store/actions/coursesAction';
 import './MyCourses.scss';
 
 export const MyCourses = () => {
@@ -13,8 +13,8 @@ export const MyCourses = () => {
   const courses = useSelector((state: any) => state.courses);
 
   useEffect(() => {
-    dispatch(getMyCreatedCourses());
-    dispatch(getMyTakeCourses());
+    dispatch(getCreatedCourses());
+    dispatch(getTakeCourses());
   }, []);
 
   const mapCreatedCourses = courses.createdCourses.map((course: ICourse) => {

@@ -46,12 +46,12 @@ export const Lesson = () => {
     }
   });
 
-  if (loading) {
-    return <Loader />;
-  }
-
   if (error) {
     return <Error404 />;
+  }
+
+  if (loading) {
+    return <Loader />;
   }
 
   return (

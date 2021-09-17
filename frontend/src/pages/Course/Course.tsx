@@ -15,7 +15,7 @@ import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
 
 export const Course = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user.user);
   const course = useSelector((state: any) => state.course.course);
   const loading = useSelector((state: any) => state.course.loading);
   const error = useSelector((state: any) => state.course.error);

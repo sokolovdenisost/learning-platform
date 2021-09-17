@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Block } from '../../components/Block/Block';
 import { Button } from '../../components/Button/Button';
 import { Layout } from '../../components/Layout/Layout';
@@ -9,20 +9,27 @@ import { Created } from '../../components/ProfileSections/Created/Created';
 import { Take } from '../../components/ProfileSections/Take/Take';
 import { SocialButton } from '../../components/Social/Social';
 import { useData } from '../../hooks/data';
+import { getUser } from '../../store/actions/userAction';
 import './Profile.scss';
 
 export const Profile = () => {
-  const user = useSelector((state: any) => state.user);
+  const profile = useSelector((state: any) => state.user.profile);
   const [section, setSection] = useState<ISection>({
     completed: true,
     take: false,
     created: false,
   });
+  const dispatch = useDispatch();
 
   function changeSection(newSection: string) {
     Object.keys(section).forEach((c) => (section[c] = false));
     setSection({ ...section, [newSection]: !section[newSection] });
   }
+  const id = window.location.pathname.split('/')[2];
+
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, []);
 
   return (
     <Layout title="Profile">
@@ -30,11 +37,11 @@ export const Profile = () => {
         <Block width="100%">
           <div className="profile-top">
             <div className="profile-left">
-              <img src={user.avatar.photo_url} alt="" className="profile-image" />
+              <img src={profile.avatar.photo_url} alt="" className="profile-image" />
               <div className="profile-info">
-                <div className="profile-fullname">{user.firstName + ' ' + user.lastName}</div>
+                <div className="profile-fullname">{profile.firstName + ' ' + profile.lastName}</div>
                 <div className="profile-registered">
-                  Registered <br /> <span>{useData(user.registered)}</span>
+                  Registered <br /> <span>{useData(profile.registered)}</span>
                 </div>
               </div>
             </div>
@@ -59,7 +66,9 @@ export const Profile = () => {
               Created courses
             </Button>
           </div>
-          <div className="profile-sections">{section.completed ? <Completed /> : section.take ? <Take /> : section.created ? <Created /> : null}</div>
+          <div className="profile-sections">
+            {section.completed ? <Completed /> : section.take ? <Take id={id} /> : section.created ? <Created id={id} /> : null}
+          </div>
         </div>
       </div>
     </Layout>

@@ -9,19 +9,19 @@ interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const linksUserMenu = [
-  {
-    icon: <CgProfile size={24} />,
-    title: 'Profile',
-    href: '/profile',
-  },
-  {
-    icon: <IoMdLogOut size={24} />,
-    title: 'Logout',
-  },
-];
-
 export const UserMenu = ({ active, setActive }: Props) => {
+  const user_id = localStorage.getItem('user_id');
+  const linksUserMenu = [
+    {
+      icon: <CgProfile size={24} />,
+      title: 'Profile',
+      href: `/user/${user_id}`,
+    },
+    {
+      icon: <IoMdLogOut size={24} />,
+      title: 'Logout',
+    },
+  ];
   const [activeMenu, setActiveMenu] = useState(false);
   const rootEl = useRef<any>(null);
 

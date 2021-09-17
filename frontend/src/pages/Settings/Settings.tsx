@@ -13,7 +13,7 @@ import { changePassword, changePersonalData, changePhoto } from '../../utils/set
 import './Settings.scss';
 
 export const Settings = () => {
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user.user);
   const [file, setFile] = useState<any>({});
   const [formPD, setFormPD] = useState({
     firstName: user.firstName,

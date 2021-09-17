@@ -17,6 +17,7 @@ const cloudinary_provider_1 = require("./cloudinary/cloudinary.provider");
 const courses_module_1 = require("./courses/courses.module");
 const validate_module_1 = require("./validate/validate.module");
 const lesson_module_1 = require("./lesson/lesson.module");
+const user_module_1 = require("./user/user.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -30,6 +31,7 @@ AppModule = __decorate([
             courses_module_1.CoursesModule,
             validate_module_1.ValidateModule,
             lesson_module_1.LessonModule,
+            user_module_1.UserModule,
         ],
         controllers: [],
         providers: [cloudinary_provider_1.CloudinaryProvider],

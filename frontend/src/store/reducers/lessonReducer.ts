@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { ERROR, GET_LESSON } from '../types';
+import { CHANGE_PARAMS, ERROR, GET_EDIT_LESSON, GET_LESSON } from '../types';
 
 const initialState = {
   loading: true,
@@ -25,6 +25,16 @@ export const lessonReducer = (state = initialState, action: AnyAction) => {
         loading: false,
         error: action.payload,
       };
+
+    case GET_EDIT_LESSON:
+      return {
+        ...state,
+        loading: false,
+        lesson: action.payload.lesson,
+      };
+
+    case CHANGE_PARAMS:
+      return { ...state, lesson: { ...state.lesson, [action.payload.key]: action.payload.value } };
 
     default:
       return state;

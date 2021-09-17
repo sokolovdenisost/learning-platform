@@ -6,11 +6,17 @@ export async function createCourseHandler(body: ICourse, file: any): Promise<any
   for (let elem in body) {
     if (elem === 'tags') {
       formData.append(elem, JSON.stringify(body[elem]));
-    } else if (elem === '_id') {
-      console.log('');
-    } else {
+    } else if (elem !== '_id') {
       formData.append(elem, body[elem]);
     }
+
+    // if (elem === 'tags') {
+    //   formData.append(elem, JSON.stringify(body[elem]));
+    // } else if (elem === '_id') {
+    //   console.log('');
+    // } else {
+    //   formData.append(elem, body[elem]);
+    // }
   }
 
   const user_id = localStorage.getItem('user_id');
@@ -102,7 +108,6 @@ export async function setRatingForCourseHandler(course_id: string, rating: numbe
   });
 
   const result = await response.json();
-  console.log(result);
 
   // if (result.type === 'Success') {
   //   window.location.reload();
@@ -123,7 +128,6 @@ export async function joinCourseHandler(course_id: string): Promise<any> {
   });
 
   const result = await response.json();
-  console.log(result);
 
   if (result.type === 'Success') {
     window.location.pathname = '/my-courses';

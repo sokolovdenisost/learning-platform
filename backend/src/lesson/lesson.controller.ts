@@ -21,9 +21,9 @@ export class LessonController {
     res.json(result).status(result.code);
   }
 
-  @Get(':course_id/edit-lesson/:lesson_id')
+  @Get('edit-lesson/:lesson_id/:user_id')
   async getEditLessonByCourse(@Res() res: Response, @Param() params): Promise<void> {
-    const result = await this.lessonService.getEditLessonByCourse(params.course_id, params.lesson_id);
+    const result = await this.lessonService.getEditLessonByCourse(params.lesson_id, params.user_id);
 
     res.json(result).status(result.code);
   }
