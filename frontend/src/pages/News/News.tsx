@@ -7,9 +7,11 @@ import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
 import { IState, IStateCourses } from '../../interfaces/state';
 import { getAllCourses } from '../../store/actions/coursesAction';
+import { useTranslation } from 'react-i18next';
 import './News.scss';
 
 export const News = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { allCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
   allCourses.splice(5);

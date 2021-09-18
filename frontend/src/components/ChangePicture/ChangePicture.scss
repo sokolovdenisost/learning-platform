@@ -6,7 +6,7 @@
   &-title {
     font-size: 14px;
     color: $grey-main;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   &-body {
@@ -31,13 +31,17 @@
         width: 235px;
         display: flex;
         justify-content: space-between;
+
+        button:first-child {
+          margin-right: 5px;
+        }
       }
 
       .bottom {
         position: absolute;
         bottom: 0;
         font-size: 13px;
-        font-weight: 500;
+        font-weight: 400;
         color: $grey-main;
       }
     }

@@ -7,10 +7,12 @@ import { Loader } from '../../components/Loader/Loader';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
 import { IState, IStateCourses } from '../../interfaces/state';
+import { useTranslation } from 'react-i18next';
 import { getAllCourses } from '../../store/actions/coursesAction';
 import './Courses.scss';
 
 export const Courses = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { allCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
 

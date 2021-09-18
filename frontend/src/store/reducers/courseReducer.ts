@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE } from '../types';
+import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from '../types';
 
 const initialState = {
   loading: true,
@@ -35,6 +35,30 @@ export const courseReducer = (state = initialState, action: AnyAction) => {
 
     case GET_COURSE:
       return { ...state, course: action.payload, loading: false };
+
+    case GO_EMPTY:
+      return {
+        ...state,
+        course: {
+          _id: '',
+          tags: [],
+          level: '',
+          certificate: '',
+          description: '',
+          title: '',
+          image: {
+            public_id: '',
+            photo_url: '',
+          },
+          lessons: [],
+          owner: {
+            _id: '',
+            firstName: '',
+            lastName: '',
+          },
+          rating: [],
+        },
+      };
 
     case ERROR:
       return { ...state, loading: false, error: action.payload };

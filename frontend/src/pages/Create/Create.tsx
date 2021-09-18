@@ -10,7 +10,8 @@ import { Select } from '../../components/Select/Select';
 import { Step } from '../../components/Step/Step';
 import { SearchTag } from '../../components/Tag/Tag';
 import { IState, IStateCourse } from '../../interfaces/state';
-import { changeParams } from '../../store/actions/courseAction';
+import { changeParams, goEmpty } from '../../store/actions/courseAction';
+import { useTranslation } from 'react-i18next';
 import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
 
@@ -29,22 +30,20 @@ const TAGS = [
 ];
 
 export const Create = () => {
+  const { t } = useTranslation();
+
   const [file, setFile] = useState<any>({});
   const dispatch = useDispatch();
   const { course }: IStateCourse = useSelector((state: IState) => state.course);
-  // const [form, setForm] = useState<IForm>({
-  //   image: [],
-  //   title: '',
-  //   description: '',
-  //   certificate: 'yes',
-  //   level: 'junior',
-  //   tags: [],
-  // });
   const [result, setResult] = useState({
     type: '',
     text: '',
     code: 0,
   });
+
+  useEffect(() => {
+    dispatch(goEmpty());
+  }, []);
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
     const key = String(e.currentTarget.dataset.name);

@@ -4,6 +4,7 @@ import { RiArrowDownSLine } from 'react-icons/ri';
 import { Button } from '../Button/Button';
 import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
+import { useTranslation } from 'react-i18next';
 import './Layout.scss';
 
 import ru_flag from '../../assets/ru_flag.png';
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const Layout = ({ title, children }: Props) => {
+  const { t, i18n } = useTranslation();
   const user: IStateUser = useSelector((state: IState) => state.user);
 
   const [authModal, setAuthModal] = useState({
@@ -24,7 +26,7 @@ export const Layout = ({ title, children }: Props) => {
     active: false,
   });
   const [active, setActive] = useState(false);
-  const language = localStorage.getItem('language');
+  const lang = localStorage.getItem('lang');
 
   if (user.loading) {
     return null;
@@ -34,10 +36,11 @@ export const Layout = ({ title, children }: Props) => {
     setAuthModal({ ...authModal, active: !authModal.active, type: type });
   }
 
-  function changeLanguage(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    localStorage.setItem('language', e.currentTarget.dataset.flag + '');
+  const changeLanguage = (lang: string) => {
+    localStorage.setItem('lang', lang);
     window.location.reload();
-  }
+    i18n.changeLanguage(lang);
+  };
 
   return (
     <>
@@ -47,10 +50,10 @@ export const Layout = ({ title, children }: Props) => {
           {user.user.firstName ? (
             <div className="layout-rigth">
               <div className="layout-language">
-                {language === 'ru' ? (
-                  <img alt="" src={ru_flag} className="language-flag" data-flag="en" onClick={(e) => changeLanguage(e)} />
+                {lang === 'ru' ? (
+                  <img alt="" src={ru_flag} className="language-flag" data-flag="en" onClick={() => changeLanguage('en')} />
                 ) : (
-                  <img alt="" src={en_flag} className="language-flag" data-flag="ru" onClick={(e) => changeLanguage(e)} />
+                  <img alt="" src={en_flag} className="language-flag" data-flag="ru" onClick={() => changeLanguage('ru')} />
                 )}
               </div>
               <div className="layout-notification">

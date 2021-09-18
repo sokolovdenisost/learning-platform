@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { API_URL } from '../../consts';
-import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE } from '../types';
+import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from '../types';
 
 export const getEditCourse = (course_id: string) => async (dispatch: Dispatch) => {
   const user_id = localStorage.getItem('user_id');
@@ -45,5 +45,12 @@ export const changeParams = (key: string, value: any) => async (dispatch: Dispat
       key,
       value,
     },
+  });
+};
+
+export const goEmpty = () => async (dispatch: Dispatch) => {
+  dispatch({
+    type: GO_EMPTY,
+    payload: null,
   });
 };

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeParams, getEditCourse } from '../../store/actions/courseAction';
 import { Loader } from '../../components/Loader/Loader';
 import { IState, IStateCourse } from '../../interfaces/state';
+import { useTranslation } from 'react-i18next';
 
 const TAGS = [
   'Web design',
@@ -34,6 +35,7 @@ const TAGS = [
 ];
 
 export const EditCourse = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const id = window.location.pathname.split('/')[2];
   const { course, loading, error }: IStateCourse = useSelector((state: IState) => state.course);

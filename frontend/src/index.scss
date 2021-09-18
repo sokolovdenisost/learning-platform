@@ -40,6 +40,9 @@ $testing: #455a64;
 
 // Fonts
 $baloo: 'Baloo Bhai 2', cursive;
+$balso: 'Balsamiq Sans', cursive;
+$nunito: 'Nunito', sans-serif;
+$comfort: 'Comfortaa', cursive;
 
 // Radius
 $r5: 5px;
@@ -53,11 +56,20 @@ a {
 }
 
 * {
-  line-height: 18px;
+  line-height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   list-style: none;
-  font-family: $baloo;
   text-decoration: none;
+}
+
+.app {
+  &.en {
+    font-family: $baloo;
+  }
+
+  &.ru {
+    font-family: $nunito;
+  }
 }

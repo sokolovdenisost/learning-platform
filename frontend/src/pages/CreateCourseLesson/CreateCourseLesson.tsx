@@ -10,10 +10,12 @@ import './CreateCourseLesson.scss';
 import { Button } from '../../components/Button/Button';
 import { createLesson } from '../../utils/lesson';
 import { useHistory } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const CreateCourseLesson = () => {
+  const { t } = useTranslation();
   const [stepForm, setStepForm] = useState<StepForm[]>([]);
   const course_id = window.location.pathname.split('/')[2];
   const history = useHistory();
@@ -55,7 +57,7 @@ export const CreateCourseLesson = () => {
   });
 
   return (
-    <Layout title="Create course lesson">
+    <Layout title="Create lesson">
       <div className="create-lesson-page">
         <div className="create-lesson-forms">{mapCreateForms}</div>
         <Panel onCreate={createForm} />
