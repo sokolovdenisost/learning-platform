@@ -6,6 +6,7 @@ const initialState = {
   lesson: {
     array: [],
     course: {},
+    comments: [],
   },
   error: false,
 };

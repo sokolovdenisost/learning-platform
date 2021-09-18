@@ -9,22 +9,24 @@ import { Video } from '../../components/Lesson/Video/Video';
 import { WatchAnotherLesson } from '../../components/Lesson/WatchAnotherLesson/WatchAnotherLesson';
 import { Loader } from '../../components/Loader/Loader';
 import { Textarea } from '../../components/Textarea/Textarea';
+import { IState, IStateLesson } from '../../interfaces/state';
+import { IUser } from '../../interfaces/user';
 import { getLesson } from '../../store/actions/lessonAction';
+import { addCommentInLessonHandler } from '../../utils/lesson';
 import { Error404 } from '../404/404';
 import './Lesson.scss';
 
 export const Lesson = () => {
-  const dispatch = useDispatch();
+  const [comment, setComment] = useState('');
   const [active, setActive] = useState({
     type: '',
     active: false,
   });
-  const lesson = useSelector((state: any) => state.lesson.lesson);
-  const loading = useSelector((state: any) => state.lesson.loading);
-  const error = useSelector((state: any) => state.lesson.error);
-  const user = useSelector((state: any) => state.user);
-  const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
+  const dispatch = useDispatch();
+  const { lesson, loading, error }: IStateLesson = useSelector((state: IState) => state.lesson);
+  const user: IUser = useSelector((state: IState) => state.user.user);
   const params = window.location.pathname.split('/');
+  const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
 
   useEffect(() => {
     dispatch(getLesson(params[2]));
@@ -32,6 +34,10 @@ export const Lesson = () => {
 
   function watchAnotherLessons() {
     setActive({ ...active, active: true });
+  }
+
+  function changeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setComment(e.currentTarget.value);
   }
 
   const mapBlocks = lesson.array.map((block: IBlock) => {
@@ -45,6 +51,12 @@ export const Lesson = () => {
     } else if (block.typeForm === '') {
     }
   });
+
+  const mapComments = lesson.comments
+    .map((com: any) => {
+      return <Comment info={com} key={com._id} />;
+    })
+    .reverse();
 
   if (error) {
     return <Error404 />;
@@ -82,25 +94,19 @@ export const Lesson = () => {
         </div>
         <div className="lesson-course-comments">
           <div className="lesson-comments-top">
-            <div className="lesson-comments-title">100.000 comments</div>
+            <div className="lesson-comments-title">{lesson.comments.length} comments</div>
             <div className="lesson-comments-line" />
           </div>
           <div className="lesson-comments-body">
-            <Textarea placeholder="Leave a comment" onChange={(e) => console.log(e)} />
+            <Textarea placeholder="Leave a comment" onChange={changeTextarea} />
             <div className="lesson-comments-buttons">
-              <Button type="bold" color="primary" fontSize="14">
+              <Button type="bold" color="primary" fontSize="14" onClick={() => addCommentInLessonHandler(params[2], comment)}>
                 Send comment
               </Button>
             </div>
           </div>
         </div>
-        <div className="lesson-comments-all">
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-        </div>
+        <div className="lesson-comments-all">{mapComments}</div>
         {active.active ? (
           <WatchAnotherLesson currentLesson={infoLesson[0].currentLesson} course={lesson.course} active={active} setActive={setActive} />
         ) : null}

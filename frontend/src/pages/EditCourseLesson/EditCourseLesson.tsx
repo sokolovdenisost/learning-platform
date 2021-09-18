@@ -15,15 +15,14 @@ import { Error404 } from '../404/404';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeLesson, getEditLesson } from '../../store/actions/lessonAction';
 import { Loader } from '../../components/Loader/Loader';
+import { IState, IStateLesson } from '../../interfaces/state';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const EditCourseLesson = () => {
   const params = window.location.pathname.split('/');
   const dispatch = useDispatch();
-  const lesson = useSelector((state: any) => state.lesson.lesson);
-  const loading = useSelector((state: any) => state.lesson.loading);
-  const error = useSelector((state: any) => state.lesson.error);
+  const { lesson, loading, error }: IStateLesson = useSelector((state: IState) => state.lesson);
 
   useEffect(() => {
     dispatch(getEditLesson(params[4]));

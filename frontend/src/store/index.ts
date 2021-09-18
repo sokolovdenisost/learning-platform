@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, CombinedState, Reducer, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import { courseReducer } from './reducers/courseReducer';
 import { coursesReducer } from './reducers/coursesReducer';

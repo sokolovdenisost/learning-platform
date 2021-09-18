@@ -40,7 +40,7 @@ export async function deleteLessonHandler(course_id: string, lesson_id: string):
   return result;
 }
 
-export async function editLessonHandler(body: IEditLesson): Promise<any> {
+export async function editLessonHandler(body: any): Promise<any> {
   const user_id = localStorage.getItem('user_id');
   const response = await fetch(`${API_URL}/lesson/edit-lesson`, {
     method: 'POST',
@@ -60,13 +60,30 @@ export async function editLessonHandler(body: IEditLesson): Promise<any> {
   return result;
 }
 
+export async function addCommentInLessonHandler(lesson_id: string, comment: string): Promise<any> {
+  const user_id = localStorage.getItem('user_id');
+  if (comment.trim()) {
+    const response = await fetch(`${API_URL}/lesson/${lesson_id}/add-comment`, {
+      method: 'POST',
+      body: JSON.stringify({ user: user_id, comment }),
+      headers: {
+        Accept: '*/*',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (result.type === 'Success') {
+      window.location.reload();
+    }
+
+    return result;
+  }
+}
+
 interface ILessonBody {
   typeForm: string;
   text: string;
-}
-
-interface IEditLesson {
-  _id: string;
-  course: string;
-  array: Array<{ typeForm: string; text: string }>;
 }

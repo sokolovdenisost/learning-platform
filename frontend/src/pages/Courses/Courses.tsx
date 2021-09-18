@@ -6,18 +6,19 @@ import { Layout } from '../../components/Layout/Layout';
 import { Loader } from '../../components/Loader/Loader';
 import { API_URL } from '../../consts';
 import { ICourse } from '../../interfaces/course';
+import { IState, IStateCourses } from '../../interfaces/state';
 import { getAllCourses } from '../../store/actions/coursesAction';
 import './Courses.scss';
 
 export const Courses = () => {
   const dispatch = useDispatch();
-  const courses = useSelector((state: any) => state.courses.allCourses);
-  const loading = useSelector((state: any) => state.courses.loading);
+  const { allCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
+
   useEffect(() => {
     dispatch(getAllCourses());
   }, []);
 
-  const mapCourses = courses.map((course: ICourse) => {
+  const mapCourses = allCourses.map((course: ICourse) => {
     return <CardCourse course={course} key={course._id} />;
   });
 

@@ -1,23 +1,30 @@
 import React from 'react';
 import './Comment.scss';
 
-export const Comment = () => {
+interface Props {
+  info: {
+    user: {
+      firstName: string;
+      lastName: string;
+      _id: string;
+      avatar: {
+        public_id: string;
+        photo_url: string;
+      };
+    };
+    comment: string;
+  };
+}
+
+export const Comment = ({ info }: Props) => {
   return (
     <div className="comment-block">
       <div className="comment-left">
-        <img
-          src="https://images.unsplash.com/photo-1628191011993-69070758764f?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt=""
-          className="comment-user-image"
-        />
+        <img src={info.user.avatar.photo_url} alt="" className="comment-user-image" />
       </div>
       <div className="comment-right">
-        <div className="comment-top">Denis Sokolov</div>
-        <div className="comment-body">
-          Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-          с начала XVI века. Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для
-          текстов на латинице с начала XVI века.{' '}
-        </div>
+        <div className="comment-top">{info.user.firstName + ' ' + info.user.lastName}</div>
+        <div className="comment-body">{info.comment}</div>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ import { Select } from '../../components/Select/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeParams, getEditCourse } from '../../store/actions/courseAction';
 import { Loader } from '../../components/Loader/Loader';
+import { IState, IStateCourse } from '../../interfaces/state';
 
 const TAGS = [
   'Web design',
@@ -35,9 +36,7 @@ const TAGS = [
 export const EditCourse = () => {
   const dispatch = useDispatch();
   const id = window.location.pathname.split('/')[2];
-  const course: ICourse = useSelector((state: any) => state.course.course);
-  const loading = useSelector((state: any) => state.course.loading);
-  const error = useSelector((state: any) => state.course.error);
+  const { course, loading, error }: IStateCourse = useSelector((state: IState) => state.course);
 
   useEffect(() => {
     dispatch(getEditCourse(id));

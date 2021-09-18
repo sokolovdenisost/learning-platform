@@ -5,11 +5,12 @@
   width: 100%;
   top: 50px;
   margin-top: 10px;
-  transform: translateY(-15px);
+  transform: translateY(-10px);
   transition: all 0.3s ease;
   padding: 20px;
   border-radius: $r5;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
 
   &.active {
     transform: translateY(0);

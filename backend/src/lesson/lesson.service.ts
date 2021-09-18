@@ -6,7 +6,7 @@ import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { User, UserDocument } from 'src/schemas/user.schema';
-import { CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/lesson.dto';
+import { AddCommentIdLessonDTO, CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/lesson.dto';
 
 @Injectable()
 export class LessonService {
@@ -85,13 +85,23 @@ export class LessonService {
 
   async getLessonById(lesson_id: string, user_id: string): Promise<any> {
     if (isValidObjectId(lesson_id) && isValidObjectId(user_id)) {
-      const lesson = await this.lessonModel.findById(lesson_id).populate({
-        path: 'course',
-        populate: {
-          path: 'owner',
-          select: '_id firstName lastName',
-        },
-      });
+      const lesson = await this.lessonModel
+        .findById(lesson_id)
+        .populate({
+          path: 'course',
+          populate: {
+            path: 'owner',
+            select: '_id firstName lastName',
+          },
+        })
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '_id firstName lastName avatar',
+          },
+        });
+
       const course = await this.courseModel.findById(lesson.course);
       const user = await this.userModel.findById(user_id);
 
@@ -116,6 +126,27 @@ export class LessonService {
       }
     } else {
       return { code: 404, text: 'Lesson is not found', type: 'Error' };
+    }
+  }
+
+  async addCommentInLesson(lesson_id: string, body: AddCommentIdLessonDTO): Promise<any> {
+    if (isValidObjectId(lesson_id) && body.user.trim() && body.comment.trim().length >= 5) {
+      const lesson = await this.lessonModel.findById(lesson_id);
+
+      if (lesson) {
+        lesson.comments.push({
+          user: body.user,
+          comment: body.comment,
+        });
+
+        await lesson.save();
+
+        return { code: 200, text: 'Add comment in lesson', type: 'Success' };
+      } else {
+        return { code: 404, text: 'Lesson not found', type: 'Error' };
+      }
+    } else {
+      return { code: 400, text: 'Invalid data', type: 'Error' };
     }
   }
 }

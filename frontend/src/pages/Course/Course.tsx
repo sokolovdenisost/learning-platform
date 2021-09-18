@@ -12,13 +12,13 @@ import { Error404 } from '../404/404';
 import { joinCourseHandler, setRatingForCourseHandler } from '../../utils/course';
 import { useRating } from '../../hooks/rating';
 import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
+import { IState, IStateCourse } from '../../interfaces/state';
+import { IUser } from '../../interfaces/user';
 
 export const Course = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user.user);
-  const course = useSelector((state: any) => state.course.course);
-  const loading = useSelector((state: any) => state.course.loading);
-  const error = useSelector((state: any) => state.course.error);
+  const user: IUser = useSelector((state: IState) => state.user.user);
+  const { course, error, loading }: IStateCourse = useSelector((state: IState) => state.course);
   const params = window.location.pathname.split('/');
   const rating = useRating(course.rating);
 
@@ -31,12 +31,12 @@ export const Course = () => {
     return check.length ? true : false;
   }
 
-  const mapTags = course.tags.map((tag: string) => {
-    return <Tag title={tag} key={tag} />;
+  const mapTags = course.tags.map((tag: string, index: number) => {
+    return <Tag title={tag} key={tag + index} />;
   });
 
-  const mapLessons = course.lessons.map((lesson: any, index: number) => {
-    return <LessonBlock key={lesson._id} course={course} _id={lesson._id} title={`Lesson #${index + 1}`} type="" />;
+  const mapLessons = course.lessons.map((lesson: string, index: number) => {
+    return <LessonBlock key={lesson} course={course._id} _id={lesson} title={`Lesson #${index + 1}`} type="" />;
   });
 
   if (error) {

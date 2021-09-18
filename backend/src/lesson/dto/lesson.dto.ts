@@ -13,3 +13,8 @@ export class CreateLessonDTO {
   _id: string;
   array: Array<{ typeForm: string; text: string }>;
 }
+
+export class AddCommentIdLessonDTO {
+  user: string;
+  comment: string;
+}

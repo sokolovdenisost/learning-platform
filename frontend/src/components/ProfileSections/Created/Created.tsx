@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../../consts';
 import { ICourse } from '../../../interfaces/course';
+import { IState, IStateCourses } from '../../../interfaces/state';
 import { getCreatedCourses } from '../../../store/actions/coursesAction';
 import { CardCourse } from '../../CardCourse/CardCourse';
 import { Loader } from '../../Loader/Loader';
@@ -13,21 +14,20 @@ interface Props {
 
 export const Created = ({ id }: Props) => {
   const dispatch = useDispatch();
-  const createdCourses = useSelector((state: any) => state.courses.createdCourses);
-  const loading = useSelector((state: any) => state.courses.loading);
+  const courses: IStateCourses = useSelector((state: IState) => state.courses);
   const user_id = localStorage.getItem('user_id');
 
   useEffect(() => {
     dispatch(getCreatedCourses(id));
   }, [user_id]);
 
-  const mapCreatedCourses = createdCourses.map((course: ICourse) => {
+  const mapCreatedCourses = courses.createdCourses.map((course: ICourse) => {
     return <CardCourse course={course} key={course._id} />;
   });
 
-  if (loading) {
+  if (courses.loading) {
     return <Loader />;
   }
 
-  return <div>{createdCourses.length ? mapCreatedCourses : 'No created courses'}</div>;
+  return <div>{courses.createdCourses.length ? mapCreatedCourses : 'No created courses'}</div>;
 };

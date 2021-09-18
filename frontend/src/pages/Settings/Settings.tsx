@@ -8,12 +8,13 @@ import { Loader } from '../../components/Loader/Loader';
 import { Notification } from '../../components/Notification/Notification';
 import { Social } from '../../components/Social/Social';
 import { changeInputHandler } from '../../hooks/change';
+import { IState, IStateUser } from '../../interfaces/state';
 import { IUser } from '../../interfaces/user';
 import { changePassword, changePersonalData, changePhoto } from '../../utils/settings';
 import './Settings.scss';
 
 export const Settings = () => {
-  const user = useSelector((state: any) => state.user.user);
+  const { user, loading }: IStateUser = useSelector((state: IState) => state.user);
   const [file, setFile] = useState<any>({});
   const [formPD, setFormPD] = useState({
     firstName: user.firstName,
@@ -63,7 +64,7 @@ export const Settings = () => {
     setFile({ [e.currentTarget.id]: e.currentTarget.files });
   }
 
-  if (user.loading) {
+  if (loading) {
     return <Loader />;
   }
 

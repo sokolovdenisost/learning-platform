@@ -9,6 +9,7 @@ import { Notification } from '../../components/Notification/Notification';
 import { Select } from '../../components/Select/Select';
 import { Step } from '../../components/Step/Step';
 import { SearchTag } from '../../components/Tag/Tag';
+import { IState, IStateCourse } from '../../interfaces/state';
 import { changeParams } from '../../store/actions/courseAction';
 import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
@@ -30,7 +31,7 @@ const TAGS = [
 export const Create = () => {
   const [file, setFile] = useState<any>({});
   const dispatch = useDispatch();
-  const course = useSelector((state: any) => state.course.course);
+  const { course }: IStateCourse = useSelector((state: IState) => state.course);
   // const [form, setForm] = useState<IForm>({
   //   image: [],
   //   title: '',

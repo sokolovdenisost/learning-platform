@@ -9,11 +9,13 @@ import { Created } from '../../components/ProfileSections/Created/Created';
 import { Take } from '../../components/ProfileSections/Take/Take';
 import { SocialButton } from '../../components/Social/Social';
 import { useData } from '../../hooks/data';
+import { IState } from '../../interfaces/state';
+import { IUser } from '../../interfaces/user';
 import { getUser } from '../../store/actions/userAction';
 import './Profile.scss';
 
 export const Profile = () => {
-  const profile = useSelector((state: any) => state.user.profile);
+  const profile: IUser = useSelector((state: IState) => state.user.profile);
   const [section, setSection] = useState<ISection>({
     completed: true,
     take: false,

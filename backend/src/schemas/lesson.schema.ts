@@ -25,6 +25,6 @@ interface IArray {
 }
 
 interface IComment {
-  user: mongoose.Types.ObjectId;
+  user: string;
   comment: string;
 }

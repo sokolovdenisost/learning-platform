@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
-import { CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/lesson.dto';
+import { AddCommentIdLessonDTO, CreateLessonDTO, DeleteLessonDTO, EditLessonDTO } from './dto/lesson.dto';
 import { LessonService } from './lesson.service';
 import { Response } from 'express';
 
@@ -39,6 +39,13 @@ export class LessonController {
   async getLessonById(@Res() res: Response, @Param() params: any): Promise<void> {
     const result = await this.lessonService.getLessonById(params.lesson_id, params.user_id);
 
-    res.json(result).status(result.status);
+    res.json(result).status(result.code);
+  }
+
+  @Post(':lesson_id/add-comment')
+  async addCommentInLesson(@Res() res: Response, @Param('lesson_id') id: string, @Body() body: AddCommentIdLessonDTO): Promise<any> {
+    const result = await this.lessonService.addCommentInLesson(id, body);
+
+    res.json(result).status(result.code);
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { useAuth } from '../../hooks/auth';
 import { Button } from '../Button/Button';
 import { SignInModal, SignUpModal } from '../Modal/Modal';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -10,6 +9,7 @@ import './Layout.scss';
 import ru_flag from '../../assets/ru_flag.png';
 import en_flag from '../../assets/en_flag.png';
 import { useSelector } from 'react-redux';
+import { IState, IStateUser } from '../../interfaces/state';
 
 interface Props {
   title?: string;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const Layout = ({ title, children }: Props) => {
-  const user = useSelector((state: any) => state.user);
+  const user: IStateUser = useSelector((state: IState) => state.user);
 
   const [authModal, setAuthModal] = useState({
     type: '',

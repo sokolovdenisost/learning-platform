@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { routes } from './hooks/routes';
+import { IState, IStateUser } from './interfaces/state';
 import { getAuth } from './store/actions/userAction';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     dispatch(getAuth());
   }, []);
 
-  const user = useSelector((state: any) => state.user);
+  const user: IStateUser = useSelector((state: IState) => state.user);
 
   return <>{routes(user.loading, user.user)}</>;
 }
