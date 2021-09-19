@@ -1,4 +1,5 @@
 import React from 'react';
+import { useData } from '../../hooks/data';
 import './Comment.scss';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
       };
     };
     comment: string;
+    date: string;
   };
 }
 
@@ -23,7 +25,10 @@ export const Comment = ({ info }: Props) => {
         <img src={info.user.avatar.photo_url} alt="" className="comment-user-image" />
       </div>
       <div className="comment-right">
-        <div className="comment-top">{info.user.firstName + ' ' + info.user.lastName}</div>
+        <div className="comment-top">
+          <div className="comment-fullname">{info.user.firstName + ' ' + info.user.lastName}</div>
+          <div className="comment-date">{useData(info.date)}</div>
+        </div>
         <div className="comment-body">{info.comment}</div>
       </div>
     </div>

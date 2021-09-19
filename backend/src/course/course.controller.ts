@@ -2,7 +2,15 @@ import { Body, Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { CourseService } from './course.service';
-import { CreateCourseDTO, DeleteCourseDTO, EditCourseDTO, FavoriteCourseDTO, JoinCourseDTO, RatingForCourseDTO } from './dto/course.dto';
+import {
+  CreateCourseDTO,
+  DeleteCourseDTO,
+  EditCourseDTO,
+  FavoriteCourseDTO,
+  JoinCourseDTO,
+  NextLessonDTO,
+  RatingForCourseDTO,
+} from './dto/course.dto';
 
 @Controller('course')
 export class CourseController {
@@ -52,6 +60,13 @@ export class CourseController {
   @Post('rating/:id')
   async setRatingForCourse(@Res() res: Response, @Body() body: RatingForCourseDTO, @Param('id') id: string): Promise<void> {
     const result = await this.courseService.ratingForCourse(body, id);
+
+    res.json(result).status(result.code);
+  }
+
+  @Post('next-lesson')
+  async nextLesson(@Res() res: Response, @Body() body: NextLessonDTO): Promise<void> {
+    const result = await this.courseService.nextLesson(body);
 
     res.json(result).status(result.code);
   }

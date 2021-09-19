@@ -12,6 +12,7 @@ import { Textarea } from '../../components/Textarea/Textarea';
 import { IState, IStateLesson } from '../../interfaces/state';
 import { IUser } from '../../interfaces/user';
 import { getLesson } from '../../store/actions/lessonAction';
+import { nextLessonHandler } from '../../utils/course';
 import { addCommentInLessonHandler } from '../../utils/lesson';
 import { Error404 } from '../404/404';
 import './Lesson.scss';
@@ -26,10 +27,14 @@ export const Lesson = () => {
   const { lesson, loading, error }: IStateLesson = useSelector((state: IState) => state.lesson);
   const user: IUser = useSelector((state: IState) => state.user.user);
   const params = window.location.pathname.split('/');
-  const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
+  const infoLesson = user.takeCourses.filter((course: any) => {
+    console.log(course, lesson.course._id);
+    return course.course === lesson.course._id;
+  });
 
   useEffect(() => {
     dispatch(getLesson(params[2]));
+    console.log(infoLesson);
   }, []);
 
   function watchAnotherLessons() {
@@ -87,7 +92,7 @@ export const Lesson = () => {
           </div>
           {mapBlocks}
           <div className="lesson-course-body-buttons">
-            <Button type="bold" color="primary" fontSize="14">
+            <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
               Next lesson
             </Button>
           </div>
@@ -108,7 +113,12 @@ export const Lesson = () => {
         </div>
         <div className="lesson-comments-all">{mapComments}</div>
         {active.active ? (
-          <WatchAnotherLesson currentLesson={infoLesson[0].currentLesson} course={lesson.course} active={active} setActive={setActive} />
+          <WatchAnotherLesson
+            currentLesson={infoLesson.length ? infoLesson[0].currentLesson : 1}
+            course={lesson.course}
+            active={active}
+            setActive={setActive}
+          />
         ) : null}
       </div>
     </Layout>

@@ -31,6 +31,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 12px 20px;
     border-radius: $r5;
     transition: $main-transition;
@@ -77,8 +78,13 @@
       justify-content: space-between;
       cursor: pointer;
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 500;
+      margin: 5px 0;
       color: $grey-main;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       svg {
         margin-left: 5px;

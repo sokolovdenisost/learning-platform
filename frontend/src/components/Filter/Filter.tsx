@@ -23,9 +23,9 @@ export const Filter = () => {
     <div className="filter">
       <div className="title">Filter by:</div>
       <div className="selects">
-        <FilterSelect options={SKILLS} title="Categories" />
-        <FilterSelect options={LANGUAGE} title="Language" />
-        <FilterSelect options={LEVEL} title="Level" />
+        <FilterSelect width="200px" options={SKILLS} title="Categories" />
+        <FilterSelect width="200px" options={LANGUAGE} title="Language" />
+        <FilterSelect width="200px" options={LEVEL} title="Level" />
       </div>
     </div>
   );

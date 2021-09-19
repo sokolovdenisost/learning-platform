@@ -13,7 +13,11 @@ export class Lesson {
   @Prop({ type: [{ typeForm: String, text: String }] })
   array: IArray[];
 
-  @Prop({ type: [{ user: { type: mongoose.Types.ObjectId, ref: 'User' }, comment: String }] })
+  @Prop({
+    type: [
+      { user: { type: mongoose.Types.ObjectId, ref: 'User' }, comment: String, date: { type: String, default: new Date().toLocaleDateString() } },
+    ],
+  })
   comments: IComment[];
 }
 
@@ -27,4 +31,5 @@ interface IArray {
 interface IComment {
   user: string;
   comment: string;
+  date?: string;
 }

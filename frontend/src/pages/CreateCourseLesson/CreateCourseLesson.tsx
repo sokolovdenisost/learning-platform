@@ -62,11 +62,11 @@ export const CreateCourseLesson = () => {
         <div className="create-lesson-forms">{mapCreateForms}</div>
         <Panel onCreate={createForm} />
         <div className="create-lesson-buttons">
-          <Button type="bold" color="cancel" fontSize="14" onClick={() => history.goBack()}>
-            Cancel
-          </Button>
           <Button type="bold" color="primary" fontSize="14" onClick={() => createLesson(stepForm, course_id)}>
             Create lesson
+          </Button>
+          <Button type="bold" color="cancel" fontSize="14" onClick={() => history.goBack()}>
+            Cancel
           </Button>
         </div>
       </div>

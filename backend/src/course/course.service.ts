@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
-import { CreateCourseDTO, EditCourseDTO, FavoriteCourseDTO, JoinCourseDTO, RatingForCourseDTO } from './dto/course.dto';
+import { CreateCourseDTO, EditCourseDTO, FavoriteCourseDTO, JoinCourseDTO, NextLessonDTO, RatingForCourseDTO } from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
@@ -197,6 +197,42 @@ export class CourseService {
       }
     } else {
       return { code: 400, text: 'For user and course is not valid id', type: 'Error' };
+    }
+  }
+
+  async nextLesson(body: NextLessonDTO): Promise<ISuccess | IError | any> {
+    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.user_id) && mongoose.isValidObjectId(body.lesson_id)) {
+      const course = await this.courseModel.findById(body.course_id);
+      const user = await this.userModel.findById(body.user_id);
+      const lesson = await this.lessonModel.findById(body.lesson_id);
+
+      if (course && user && lesson) {
+        const idxCourse = user.takeCourses.findIndex((crs) => String(crs.course) === String(course._id));
+
+        if (idxCourse >= 0) {
+          if (user.takeCourses[idxCourse].currentLesson - 1 <= course.lessons.length) {
+            const idxLesson = course.lessons.findIndex((les) => String(les) === body.lesson_id);
+
+            user.takeCourses[idxCourse] = {
+              ...user.takeCourses[idxCourse],
+              course,
+              currentLesson: idxLesson + 2,
+            };
+
+            await user.save();
+
+            return { code: 200, text: 'Text', type: 'Success', nextLessonId: course.lessons[idxLesson + 1] };
+          } else {
+            return { code: 200, text: 'Completed course', type: 'Success' };
+          }
+        } else {
+          return { code: 400, text: 'Take course not found', type: 'Error' };
+        }
+      } else {
+        return { code: 404, text: 'Course or user or lesson not found', type: 'Error' };
+      }
+    } else {
+      return { code: 400, text: 'Invalid id', type: 'Error' };
     }
   }
 }

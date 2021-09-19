@@ -6,9 +6,10 @@ import './Filter.scss';
 interface Props {
   title: string;
   options: Array<string>;
+  width: string;
 }
 
-export const FilterSelect = ({ title, options }: Props) => {
+export const FilterSelect = ({ title, options, width }: Props) => {
   const [active, setActive] = useState<Active>({
     tags: [],
     active: false,
@@ -49,7 +50,7 @@ export const FilterSelect = ({ title, options }: Props) => {
   }
 
   return (
-    <div ref={rootEl} className="filter-block">
+    <div ref={rootEl} className="filter-block" style={{ width }}>
       <div className={active.active ? 'filter-select active' : 'filter-select'} onClick={() => setActive({ ...active, active: !active.active })}>
         <div className="title">{title}</div>
         <div className="arrow">

@@ -136,6 +136,27 @@ export async function joinCourseHandler(course_id: string): Promise<any> {
   return result;
 }
 
+export async function nextLessonHandler(course_id: string, lesson_id: string) {
+  const user_id = localStorage.getItem('user_id');
+  const response = await fetch(`${API_URL}/course/next-lesson`, {
+    method: 'POST',
+    body: JSON.stringify({ course_id, user_id, lesson_id }),
+    headers: {
+      Accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  console.log(result);
+
+  if (result.type === 'Success' && result.nextLessonId) {
+    window.location.pathname = `/lesson/${result.nextLessonId}`;
+  }
+
+  return result;
+}
+
 interface ICourse {
   [key: string]: any;
   image: any;

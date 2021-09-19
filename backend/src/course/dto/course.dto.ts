@@ -34,4 +34,10 @@ export class JoinCourseDTO {
   course_id: string;
 }
 
+export class NextLessonDTO {
+  user_id: string;
+  course_id: string;
+  lesson_id: string;
+}
+
 type LevelCourse = 'Trainee' | 'Junior' | 'Middle' | 'Senior';

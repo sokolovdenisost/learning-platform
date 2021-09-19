@@ -1,6 +1,7 @@
 import { ICourse } from './course';
 
 export interface ILesson {
+  _id: string;
   array: IBlock[];
   course: ICourse;
   comments: Comment[];
@@ -23,4 +24,5 @@ interface Comment {
       public_id: string;
     };
   };
+  date: string;
 }
