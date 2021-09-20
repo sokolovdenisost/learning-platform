@@ -6,7 +6,7 @@
   "scripts": {
     "install": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
     "start:app": "concurrently \"npm start --prefix frontend\" \"npm run start:dev --prefix backend\"",
-    "start": "npm run install:backend && npm run install:frontend && npm run start:app"
+    "start": "npm run install && npm run start:app"
   },
   "repository": {
     "type": "git",
