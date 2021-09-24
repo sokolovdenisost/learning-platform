@@ -81,8 +81,8 @@ let AuthService = class AuthService {
     }
 };
 AuthService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(user_schema_1.User.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model, validate_service_1.ValidateService])
 ], AuthService);
 exports.AuthService = AuthService;

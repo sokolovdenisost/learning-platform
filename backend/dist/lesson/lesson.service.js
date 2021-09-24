@@ -37,7 +37,7 @@ let LessonService = class LessonService {
         return { code: 200, text: 'Lesson is added', type: 'Success' };
     }
     async editLesson(body) {
-        if (mongoose_2.isValidObjectId(body.course_id) && mongoose_2.isValidObjectId(body.lesson_id)) {
+        if ((0, mongoose_2.isValidObjectId)(body.course_id) && (0, mongoose_2.isValidObjectId)(body.lesson_id)) {
             const course = await this.courseModel.findById(body.course_id);
             if (course) {
                 const check = course.lessons.find((lesson) => String(lesson) === body.lesson_id);
@@ -55,7 +55,7 @@ let LessonService = class LessonService {
         }
     }
     async deleteLesson(body) {
-        if (mongoose_2.isValidObjectId(body.course_id) && mongoose_2.isValidObjectId(body.lesson_id)) {
+        if ((0, mongoose_2.isValidObjectId)(body.course_id) && (0, mongoose_2.isValidObjectId)(body.lesson_id)) {
             const course = await this.courseModel.findById(body.course_id);
             if (course) {
                 await this.lessonModel.findByIdAndDelete(body.lesson_id);
@@ -69,7 +69,7 @@ let LessonService = class LessonService {
         }
     }
     async getEditLessonByCourse(lesson_id, user_id) {
-        if (mongoose_2.isValidObjectId(lesson_id) && mongoose_2.isValidObjectId(user_id)) {
+        if ((0, mongoose_2.isValidObjectId)(lesson_id) && (0, mongoose_2.isValidObjectId)(user_id)) {
             const lesson = await this.lessonModel.findById(lesson_id).populate('course');
             if (lesson) {
                 const checkOwner = String(lesson.course.owner) === user_id;
@@ -89,7 +89,7 @@ let LessonService = class LessonService {
         }
     }
     async getLessonById(lesson_id, user_id) {
-        if (mongoose_2.isValidObjectId(lesson_id) && mongoose_2.isValidObjectId(user_id)) {
+        if ((0, mongoose_2.isValidObjectId)(lesson_id) && (0, mongoose_2.isValidObjectId)(user_id)) {
             const lesson = await this.lessonModel
                 .findById(lesson_id)
                 .populate({
@@ -135,7 +135,7 @@ let LessonService = class LessonService {
         }
     }
     async addCommentInLesson(lesson_id, body) {
-        if (mongoose_2.isValidObjectId(lesson_id) && body.user.trim() && body.comment.trim().length >= 5) {
+        if ((0, mongoose_2.isValidObjectId)(lesson_id) && body.user.trim() && body.comment.trim().length >= 5) {
             const lesson = await this.lessonModel.findById(lesson_id);
             if (lesson) {
                 lesson.comments.push({
@@ -155,11 +155,11 @@ let LessonService = class LessonService {
     }
 };
 LessonService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(course_schema_1.Course.name)),
-    __param(1, mongoose_1.InjectModel(lesson_schema_1.Lesson.name)),
-    __param(2, mongoose_1.InjectModel(photo_schema_1.Photo.name)),
-    __param(3, mongoose_1.InjectModel(user_schema_1.User.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
+    __param(1, (0, mongoose_1.InjectModel)(lesson_schema_1.Lesson.name)),
+    __param(2, (0, mongoose_1.InjectModel)(photo_schema_1.Photo.name)),
+    __param(3, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
         mongoose_2.Model,
         mongoose_2.Model,

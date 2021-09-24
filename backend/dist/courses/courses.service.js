@@ -24,7 +24,7 @@ let CoursesService = class CoursesService {
         this.userModel = userModel;
     }
     async getCreatedCoursesByUserId(id) {
-        if (mongoose_2.isValidObjectId(id)) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
             const courses = await this.courseModel.find({ owner: id }).populate('owner', 'firstName lastName');
             return { code: 200, text: 'All courses', type: 'Success', courses: courses };
         }
@@ -33,7 +33,7 @@ let CoursesService = class CoursesService {
         }
     }
     async getTakeCoursesByUserId(id) {
-        if (mongoose_2.isValidObjectId(id)) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
             const user = await this.userModel.findById(id).populate({
                 path: 'takeCourses',
                 populate: {
@@ -61,9 +61,9 @@ let CoursesService = class CoursesService {
     }
 };
 CoursesService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(course_schema_1.Course.name)),
-    __param(1, mongoose_1.InjectModel(user_schema_1.User.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
+    __param(1, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model, mongoose_2.Model])
 ], CoursesService);
 exports.CoursesService = CoursesService;

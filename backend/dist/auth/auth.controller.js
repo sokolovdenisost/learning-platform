@@ -39,31 +39,31 @@ let AuthController = class AuthController {
     }
 };
 __decorate([
-    common_1.Get(''),
-    __param(0, common_1.Req()),
-    __param(1, common_1.Res()),
+    (0, common_1.Get)(''),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "getAuth", null);
 __decorate([
-    common_1.Post('register'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('register'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, auth_dto_1.CreateUserDTO]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "registerUser", null);
 __decorate([
-    common_1.Post('login'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, auth_dto_1.LoginUserDTO]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "loginUser", null);
 AuthController = __decorate([
-    common_1.Controller('auth'),
+    (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;

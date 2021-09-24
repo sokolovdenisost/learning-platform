@@ -13,7 +13,7 @@ const cloudinary_service_1 = require("./cloudinary.service");
 let CloudinaryModule = class CloudinaryModule {
 };
 CloudinaryModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         providers: [cloudinary_provider_1.CloudinaryProvider, cloudinary_service_1.CloudinaryService],
         exports: [cloudinary_provider_1.CloudinaryProvider, cloudinary_service_1.CloudinaryService],
     })

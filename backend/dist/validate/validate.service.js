@@ -14,7 +14,7 @@ let ValidateService = class ValidateService {
     }
 };
 ValidateService = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], ValidateService);
 exports.ValidateService = ValidateService;
 //# sourceMappingURL=validate.service.js.map

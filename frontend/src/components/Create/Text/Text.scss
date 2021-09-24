@@ -1,6 +1,7 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .textarea {
+  margin-bottom: 20px;
   .textarea-ready {
     display: flex;
     justify-content: space-between;
@@ -21,7 +22,6 @@
       font-size: 16px;
       color: #5f5f5f;
       font-weight: 400;
-      margin-bottom: 20px;
       line-height: 25px;
     }
   }

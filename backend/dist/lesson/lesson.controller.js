@@ -46,56 +46,56 @@ let LessonController = class LessonController {
     }
 };
 __decorate([
-    common_1.Post('create-lesson'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('create-lesson'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, lesson_dto_1.CreateLessonDTO]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "createLesson", null);
 __decorate([
-    common_1.Post('edit-lesson'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('edit-lesson'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, lesson_dto_1.EditLessonDTO]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "editLesson", null);
 __decorate([
-    common_1.Get('edit-lesson/:lesson_id/:user_id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param()),
+    (0, common_1.Get)('edit-lesson/:lesson_id/:user_id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "getEditLessonByCourse", null);
 __decorate([
-    common_1.Post('delete-lesson'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('delete-lesson'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, lesson_dto_1.DeleteLessonDTO]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "deleteLesson", null);
 __decorate([
-    common_1.Get(':lesson_id/:user_id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param()),
+    (0, common_1.Get)(':lesson_id/:user_id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "getLessonById", null);
 __decorate([
-    common_1.Post(':lesson_id/add-comment'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('lesson_id')),
-    __param(2, common_1.Body()),
+    (0, common_1.Post)(':lesson_id/add-comment'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('lesson_id')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, lesson_dto_1.AddCommentIdLessonDTO]),
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "addCommentInLesson", null);
 LessonController = __decorate([
-    common_1.Controller('lesson'),
+    (0, common_1.Controller)('lesson'),
     __metadata("design:paramtypes", [lesson_service_1.LessonService])
 ], LessonController);
 exports.LessonController = LessonController;

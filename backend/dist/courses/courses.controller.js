@@ -33,30 +33,30 @@ let CoursesController = class CoursesController {
     }
 };
 __decorate([
-    common_1.Get(':id/created-courses'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('id')),
+    (0, common_1.Get)(':id/created-courses'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], CoursesController.prototype, "getCreatedCoursesByUserId", null);
 __decorate([
-    common_1.Get(':id/take-courses'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('id')),
+    (0, common_1.Get)(':id/take-courses'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], CoursesController.prototype, "getTakeCoursesByUserId", null);
 __decorate([
-    common_1.Get(''),
-    __param(0, common_1.Res()),
+    (0, common_1.Get)(''),
+    __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], CoursesController.prototype, "getAllCourses", null);
 CoursesController = __decorate([
-    common_1.Controller('courses'),
+    (0, common_1.Controller)('courses'),
     __metadata("design:paramtypes", [courses_service_1.CoursesService])
 ], CoursesController);
 exports.CoursesController = CoursesController;

@@ -17,6 +17,11 @@ export const LessonBlock = ({ title, _id, course, type }: Props) => {
       <div className="lesson-title">{title}</div>
       {type === 'edit' ? (
         <div className="lesson-buttons">
+          <a href={`/lesson/${_id}`}>
+            <Button type="outline" color="primary" fontSize="14">
+              Check
+            </Button>
+          </a>
           <a href={`/edit/${course}/lesson/${_id}`}>
             <Button type="outline" color="primary" fontSize="14">
               Edit

@@ -16,15 +16,15 @@ const course_schema_1 = require("./course.schema");
 let Lesson = class Lesson {
 };
 __decorate([
-    mongoose_1.Prop({ type: mongoose.Types.ObjectId, ref: 'Course' }),
+    (0, mongoose_1.Prop)({ type: mongoose.Types.ObjectId, ref: 'Course' }),
     __metadata("design:type", course_schema_1.Course)
 ], Lesson.prototype, "course", void 0);
 __decorate([
-    mongoose_1.Prop({ type: [{ typeForm: String, text: String }] }),
+    (0, mongoose_1.Prop)({ type: [{ typeForm: String, text: String }] }),
     __metadata("design:type", Array)
 ], Lesson.prototype, "array", void 0);
 __decorate([
-    mongoose_1.Prop({
+    (0, mongoose_1.Prop)({
         type: [
             { user: { type: mongoose.Types.ObjectId, ref: 'User' }, comment: String, date: { type: String, default: new Date().toLocaleDateString() } },
         ],
@@ -32,7 +32,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Lesson.prototype, "comments", void 0);
 Lesson = __decorate([
-    mongoose_1.Schema()
+    (0, mongoose_1.Schema)()
 ], Lesson);
 exports.Lesson = Lesson;
 exports.LessonSchema = mongoose_1.SchemaFactory.createForClass(Lesson);

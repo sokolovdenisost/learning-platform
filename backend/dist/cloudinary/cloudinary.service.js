@@ -35,7 +35,7 @@ let CloudinaryService = class CloudinaryService {
     }
 };
 CloudinaryService = __decorate([
-    common_1.Injectable()
+    (0, common_1.Injectable)()
 ], CloudinaryService);
 exports.CloudinaryService = CloudinaryService;
 //# sourceMappingURL=cloudinary.service.js.map

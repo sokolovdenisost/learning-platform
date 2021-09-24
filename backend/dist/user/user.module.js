@@ -22,7 +22,7 @@ let UserModule = class UserModule {
     }
 };
 UserModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 { name: user_schema_1.User.name, schema: user_schema_1.UserSchema },

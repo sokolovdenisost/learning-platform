@@ -9,6 +9,7 @@ import { Video } from '../../components/Lesson/Video/Video';
 import { WatchAnotherLesson } from '../../components/Lesson/WatchAnotherLesson/WatchAnotherLesson';
 import { Loader } from '../../components/Loader/Loader';
 import { Textarea } from '../../components/Textarea/Textarea';
+import { useProcent } from '../../hooks/procent';
 import { IState, IStateLesson } from '../../interfaces/state';
 import { IUser } from '../../interfaces/user';
 import { getLesson } from '../../store/actions/lessonAction';
@@ -27,23 +28,23 @@ export const Lesson = () => {
   const { lesson, loading, error }: IStateLesson = useSelector((state: IState) => state.lesson);
   const user: IUser = useSelector((state: IState) => state.user.user);
   const params = window.location.pathname.split('/');
-  const infoLesson = user.takeCourses.filter((course: any) => {
-    console.log(course, lesson.course._id);
-    return course.course === lesson.course._id;
-  });
+  const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
 
   useEffect(() => {
     dispatch(getLesson(params[2]));
-    console.log(infoLesson);
+    console.log(infoLesson[0])
+    console.log(lesson)
   }, []);
 
   function watchAnotherLessons() {
     setActive({ ...active, active: true });
   }
+  const procent = useProcent(infoLesson[0] ? infoLesson[0].currentLesson : 0, lesson.course.lessons ? lesson.course.lessons.length : 0);
 
   function changeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setComment(e.currentTarget.value);
   }
+
 
   const mapBlocks = lesson.array.map((block: IBlock) => {
     if (block.typeForm === 'title') {
@@ -62,6 +63,7 @@ export const Lesson = () => {
       return <Comment info={com} key={com._id} />;
     })
     .reverse();
+  
 
   if (error) {
     return <Error404 />;
@@ -71,17 +73,18 @@ export const Lesson = () => {
     return <Loader />;
   }
 
+
   return (
     <Layout>
       <div className="lesson-page">
         <div className="lesson-course-progress">
           <div className="course-progress-top">
             <div className="course-progress-title">{lesson.course.title}</div>
-            <div className="course-progress-procent">90%</div>
+            <div className="course-progress-procent">{procent}</div>
           </div>
           <div className="course-progress-lines">
             <div className="course-progress-line-fullprocent" />
-            <div className="course-progress-line-procent" />
+            <div className="course-progress-line-procent" style={{width: procent}} />
           </div>
         </div>
         <div className="lesson-course-body">

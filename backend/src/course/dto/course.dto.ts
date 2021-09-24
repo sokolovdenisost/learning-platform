@@ -12,7 +12,8 @@ export class EditCourseDTO {
   description: string;
   certificate: string;
   level: LevelCourse;
-  tags: string[];
+  tags: string;
+  user_id: string;
 }
 
 export class DeleteCourseDTO {

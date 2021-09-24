@@ -13,7 +13,7 @@ export declare class User {
     favorites: Course[];
     takeCourses: TakeCourse[];
 }
-export declare const UserSchema: mongoose.Schema<mongoose.Document<User, any, any>, mongoose.Model<mongoose.Document<User, any, any>, any, any>, {}>;
+export declare const UserSchema: mongoose.Schema<mongoose.Document<User, any, any>, mongoose.Model<mongoose.Document<User, any, any>, any, any, any>, {}>;
 interface TakeCourse {
     course: Course;
     currentLesson: number;

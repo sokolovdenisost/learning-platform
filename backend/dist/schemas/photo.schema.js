@@ -14,15 +14,15 @@ const mongoose_1 = require("@nestjs/mongoose");
 let Photo = class Photo {
 };
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], Photo.prototype, "photo_url", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], Photo.prototype, "public_id", void 0);
 Photo = __decorate([
-    mongoose_1.Schema()
+    (0, mongoose_1.Schema)()
 ], Photo);
 exports.Photo = Photo;
 exports.PhotoSchema = mongoose_1.SchemaFactory.createForClass(Photo);

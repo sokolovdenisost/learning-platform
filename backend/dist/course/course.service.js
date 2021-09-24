@@ -51,10 +51,23 @@ let CourseService = class CourseService {
             return { code: 404, text: 'Course is not found', type: 'Error' };
         }
     }
-    async editCourseById(body, id) {
+    async editCourseById(body, id, file) {
         if (mongoose.isValidObjectId(id)) {
-            await this.courseModel.findByIdAndUpdate(id, body);
-            return { code: 200, text: 'Course is update', type: 'Success' };
+            const course = await this.courseModel.findById(id);
+            if (course && String(course.owner) === body.user_id) {
+                const tags = JSON.parse(body.tags);
+                if (file) {
+                    const result = await this.cloudinaryService.uploadFunc(file);
+                    await this.courseModel.findByIdAndUpdate(id, Object.assign(Object.assign({}, body), { tags, image: { photo_url: result.url, public_id: result.public_id } }));
+                }
+                else {
+                    await this.courseModel.findByIdAndUpdate(id, Object.assign(Object.assign({}, body), { tags }));
+                }
+                return { code: 200, text: 'Course is update', type: 'Success' };
+            }
+            else {
+                return { code: 404, text: 'Course not found', type: 'Error' };
+            }
         }
     }
     async getCourseById(id) {
@@ -79,7 +92,11 @@ let CourseService = class CourseService {
                     return { code: 400, text: 'Title must have more than 10 characters but less than 50', type: 'Error' };
                 }
                 if (!this.validateService.validateLength(description, 1000, 100)) {
-                    return { code: 400, text: 'Description must have more than 100 characters but less than 1000', type: 'Error' };
+                    return {
+                        code: 400,
+                        text: 'Description must have more than 100 characters but less than 1000',
+                        type: 'Error',
+                    };
                 }
                 const uploadFile = await this.cloudinaryService.uploadImage(file);
                 const photo = await new this.photoModel({
@@ -87,7 +104,15 @@ let CourseService = class CourseService {
                     public_id: uploadFile.public_id,
                 });
                 await photo.save();
-                const course = await new this.courseModel({ owner: _id, certificate, description, image: photo, level, tags: JSON.parse(tags), title });
+                const course = await new this.courseModel({
+                    owner: _id,
+                    certificate,
+                    description,
+                    image: photo,
+                    level,
+                    tags: JSON.parse(tags),
+                    title,
+                });
                 await course.save();
                 return { code: 200, text: 'Course is created', type: 'Success', course_id: course._id.toString() };
             }
@@ -199,7 +224,9 @@ let CourseService = class CourseService {
         }
     }
     async nextLesson(body) {
-        if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.user_id) && mongoose.isValidObjectId(body.lesson_id)) {
+        if (mongoose.isValidObjectId(body.course_id) &&
+            mongoose.isValidObjectId(body.user_id) &&
+            mongoose.isValidObjectId(body.lesson_id)) {
             const course = await this.courseModel.findById(body.course_id);
             const user = await this.userModel.findById(body.user_id);
             const lesson = await this.lessonModel.findById(body.lesson_id);
@@ -230,11 +257,11 @@ let CourseService = class CourseService {
     }
 };
 CourseService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(course_schema_1.Course.name)),
-    __param(1, mongoose_1.InjectModel(lesson_schema_1.Lesson.name)),
-    __param(2, mongoose_1.InjectModel(photo_schema_1.Photo.name)),
-    __param(3, mongoose_1.InjectModel(user_schema_1.User.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
+    __param(1, (0, mongoose_1.InjectModel)(lesson_schema_1.Lesson.name)),
+    __param(2, (0, mongoose_1.InjectModel)(photo_schema_1.Photo.name)),
+    __param(3, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
         mongoose_2.Model,
         mongoose_2.Model,

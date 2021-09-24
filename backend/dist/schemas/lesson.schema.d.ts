@@ -7,7 +7,7 @@ export declare class Lesson {
     array: IArray[];
     comments: IComment[];
 }
-export declare const LessonSchema: mongoose.Schema<mongoose.Document<Lesson, any, any>, mongoose.Model<mongoose.Document<Lesson, any, any>, any, any>, {}>;
+export declare const LessonSchema: mongoose.Schema<mongoose.Document<Lesson, any, any>, mongoose.Model<mongoose.Document<Lesson, any, any>, any, any, any>, {}>;
 interface IArray {
     typeForm: string;
     text: string;

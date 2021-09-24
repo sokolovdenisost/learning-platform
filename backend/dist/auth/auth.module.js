@@ -22,7 +22,7 @@ let AuthModule = class AuthModule {
     }
 };
 AuthModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]), validate_module_1.ValidateModule],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService],

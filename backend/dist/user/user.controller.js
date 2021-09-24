@@ -25,15 +25,15 @@ let UserController = class UserController {
     }
 };
 __decorate([
-    common_1.Get(':id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('id')),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 UserController = __decorate([
-    common_1.Controller('user'),
+    (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;

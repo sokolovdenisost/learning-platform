@@ -35,33 +35,33 @@ let SettingsController = class SettingsController {
     }
 };
 __decorate([
-    common_1.Post('change-personal-data'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('change-personal-data'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, settings_dto_1.ChangePersonalDataDTO]),
     __metadata("design:returntype", Promise)
 ], SettingsController.prototype, "changePersonalData", null);
 __decorate([
-    common_1.Post('change-password'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('change-password'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, settings_dto_1.ChangePasswordDTO]),
     __metadata("design:returntype", Promise)
 ], SettingsController.prototype, "changePassword", null);
 __decorate([
-    common_1.Post('change-photo'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor('file')),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
-    __param(2, common_1.UploadedFile('file')),
+    (0, common_1.Post)('change-photo'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFile)('file')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], SettingsController.prototype, "changePhoto", null);
 SettingsController = __decorate([
-    common_1.Controller('settings'),
+    (0, common_1.Controller)('settings'),
     __metadata("design:paramtypes", [settings_service_1.SettingsService])
 ], SettingsController);
 exports.SettingsController = SettingsController;

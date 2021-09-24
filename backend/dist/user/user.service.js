@@ -24,7 +24,7 @@ let UserService = class UserService {
         this.courseModel = courseModel;
     }
     async getUserById(user_id) {
-        if (mongoose_2.isValidObjectId(user_id)) {
+        if ((0, mongoose_2.isValidObjectId)(user_id)) {
             const user = await this.userModel.findById(user_id);
             if (user) {
                 return { code: 200, text: 'User found', type: 'Success', user };
@@ -39,9 +39,9 @@ let UserService = class UserService {
     }
 };
 UserService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(user_schema_1.User.name)),
-    __param(1, mongoose_1.InjectModel(course_schema_1.Course.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
+    __param(1, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
     __metadata("design:paramtypes", [mongoose_2.Model, mongoose_2.Model])
 ], UserService);
 exports.UserService = UserService;

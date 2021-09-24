@@ -26,7 +26,7 @@ let CourseModule = class CourseModule {
     }
 };
 CourseModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 { name: course_schema_1.Course.name, schema: course_schema_1.CourseSchema },

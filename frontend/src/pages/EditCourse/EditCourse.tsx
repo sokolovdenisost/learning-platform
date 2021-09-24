@@ -38,14 +38,19 @@ export const EditCourse = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const id = window.location.pathname.split('/')[2];
+  const [photo, setPhoto] = useState<any>({})
   const { course, loading, error }: IStateCourse = useSelector((state: IState) => state.course);
 
   useEffect(() => {
     dispatch(getEditCourse(id));
   }, []);
 
+  useEffect(() => {
+    console.log(photo)
+  }, [photo])
+
   function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.currentTarget.files);
+    setPhoto({ [e.currentTarget.id]: e.currentTarget.files });
   }
 
   function selectedTags(e: React.MouseEvent<HTMLDivElement>) {
@@ -58,14 +63,11 @@ export const EditCourse = () => {
           course.tags.filter((c: string) => c !== key),
         ),
       );
-      // setCourse({ ...course, tags: course.tags.filter((c: string) => c !== key) });
     } else if (course.tags.length > 2) {
       course.tags.shift();
       dispatch(changeParams('tags', [...course.tags, key]));
-      // setCourse({ ...course, tags: [...course.tags, key] });
     } else if (!findKey && course.tags.length < 3) {
       dispatch(changeParams('tags', [...course.tags, key]));
-      // setCourse({ ...course, tags: [...course.tags, key] });
     }
   }
 
@@ -92,7 +94,7 @@ export const EditCourse = () => {
           <div className="edit-course-left">
             <div className="edit-course-item">
               <Block title="Main information on course" subtitle="In this block you  write main information on your course.">
-                <ChangePicture title="Course picture" img={course.image.photo_url} onChange={changeFile} />
+                <ChangePicture title="Course picture" img={photo.photo ? URL.createObjectURL(photo.photo[0]) : course.image.photo_url} onChange={changeFile} />
                 <Input
                   label="Name course"
                   id="title"
@@ -156,7 +158,7 @@ export const EditCourse = () => {
           <div className="edit-course-lessons-body">{mapLessons}</div>
         </div>
         <div className="edit-course-buttons">
-          <Button type="bold" color="primary" fontSize="14" onClick={() => editCourseHandler(course, course._id)}>
+          <Button type="bold" color="primary" fontSize="14" onClick={() => editCourseHandler(course, course._id, photo.photo)}>
             Save course
           </Button>
           <Button type="bold" color="danger" fontSize="14" onClick={() => deleteCourseHandler(course._id)}>

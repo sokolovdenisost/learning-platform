@@ -37,15 +37,25 @@ export class CourseController {
 
   @Post('create')
   @UseInterceptors(FileInterceptor('file'))
-  async createCourse(@Res() res: Response, @Body() body: CreateCourseDTO, @UploadedFile('file') file: Express.Multer.File): Promise<void> {
+  async createCourse(
+    @Res() res: Response,
+    @Body() body: CreateCourseDTO,
+    @UploadedFile('file') file: Express.Multer.File,
+  ): Promise<void> {
     const result = await this.courseService.createCourse(body, file);
 
     res.json(result).status(result.code);
   }
 
   @Post('edit-course/:id')
-  async editCourse(@Res() res: Response, @Body() body: EditCourseDTO, @Param('id') id: string): Promise<void> {
-    const result = await this.courseService.editCourseById(body, id);
+  @UseInterceptors(FileInterceptor('file'))
+  async editCourse(
+    @Res() res: Response,
+    @Body() body: EditCourseDTO,
+    @Param('id') id: string,
+    @UploadedFile('file') file: Express.Multer.File,
+  ): Promise<void> {
+    const result = await this.courseService.editCourseById(body, id, file);
 
     res.json(result).status(result.code);
   }
@@ -58,7 +68,11 @@ export class CourseController {
   }
 
   @Post('rating/:id')
-  async setRatingForCourse(@Res() res: Response, @Body() body: RatingForCourseDTO, @Param('id') id: string): Promise<void> {
+  async setRatingForCourse(
+    @Res() res: Response,
+    @Body() body: RatingForCourseDTO,
+    @Param('id') id: string,
+  ): Promise<void> {
     const result = await this.courseService.ratingForCourse(body, id);
 
     res.json(result).status(result.code);

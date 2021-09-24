@@ -16,7 +16,7 @@ const courses_service_1 = require("./courses.service");
 let CoursesModule = class CoursesModule {
 };
 CoursesModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 { name: course_schema_1.Course.name, schema: course_schema_1.CourseSchema },

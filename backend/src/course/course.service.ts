@@ -5,7 +5,14 @@ import * as mongoose from 'mongoose';
 import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { ISuccess, IError } from '../error.interface';
 import { Lesson, LessonDocument } from 'src/schemas/lesson.schema';
-import { CreateCourseDTO, EditCourseDTO, FavoriteCourseDTO, JoinCourseDTO, NextLessonDTO, RatingForCourseDTO } from './dto/course.dto';
+import {
+  CreateCourseDTO,
+  EditCourseDTO,
+  FavoriteCourseDTO,
+  JoinCourseDTO,
+  NextLessonDTO,
+  RatingForCourseDTO,
+} from './dto/course.dto';
 import { ValidateService } from 'src/validate/validate.service';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
@@ -40,11 +47,25 @@ export class CourseService {
     }
   }
 
-  async editCourseById(body: EditCourseDTO, id: string): Promise<ISuccess | IError> {
+  async editCourseById(body: EditCourseDTO, id: string, file: Express.Multer.File): Promise<ISuccess | IError> {
     if (mongoose.isValidObjectId(id)) {
-      await this.courseModel.findByIdAndUpdate(id, body);
-
-      return { code: 200, text: 'Course is update', type: 'Success' };
+      const course = await this.courseModel.findById(id);
+      if (course && String(course.owner) === body.user_id) {
+        const tags = JSON.parse(body.tags);
+        if (file) {
+          const result = await this.cloudinaryService.uploadFunc(file);
+          await this.courseModel.findByIdAndUpdate(id, {
+            ...body,
+            tags,
+            image: { photo_url: result.url, public_id: result.public_id },
+          });
+        } else {
+          await this.courseModel.findByIdAndUpdate(id, { ...body, tags });
+        }
+        return { code: 200, text: 'Course is update', type: 'Success' };
+      } else {
+        return { code: 404, text: 'Course not found', type: 'Error' };
+      }
     }
   }
 
@@ -71,7 +92,11 @@ export class CourseService {
         }
 
         if (!this.validateService.validateLength(description, 1000, 100)) {
-          return { code: 400, text: 'Description must have more than 100 characters but less than 1000', type: 'Error' };
+          return {
+            code: 400,
+            text: 'Description must have more than 100 characters but less than 1000',
+            type: 'Error',
+          };
         }
         const uploadFile = await this.cloudinaryService.uploadImage(file);
         const photo = await new this.photoModel({
@@ -80,7 +105,15 @@ export class CourseService {
         });
         await photo.save();
 
-        const course = await new this.courseModel({ owner: _id, certificate, description, image: photo, level, tags: JSON.parse(tags), title });
+        const course = await new this.courseModel({
+          owner: _id,
+          certificate,
+          description,
+          image: photo,
+          level,
+          tags: JSON.parse(tags),
+          title,
+        });
 
         await course.save();
 
@@ -201,7 +234,11 @@ export class CourseService {
   }
 
   async nextLesson(body: NextLessonDTO): Promise<ISuccess | IError | any> {
-    if (mongoose.isValidObjectId(body.course_id) && mongoose.isValidObjectId(body.user_id) && mongoose.isValidObjectId(body.lesson_id)) {
+    if (
+      mongoose.isValidObjectId(body.course_id) &&
+      mongoose.isValidObjectId(body.user_id) &&
+      mongoose.isValidObjectId(body.lesson_id)
+    ) {
       const course = await this.courseModel.findById(body.course_id);
       const user = await this.userModel.findById(body.user_id);
       const lesson = await this.lessonModel.findById(body.lesson_id);

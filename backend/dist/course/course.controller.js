@@ -37,8 +37,8 @@ let CourseController = class CourseController {
         const result = await this.courseService.createCourse(body, file);
         res.json(result).status(result.code);
     }
-    async editCourse(res, body, id) {
-        const result = await this.courseService.editCourseById(body, id);
+    async editCourse(res, body, id, file) {
+        const result = await this.courseService.editCourseById(body, id, file);
         res.json(result).status(result.code);
     }
     async toggleFavoriteCourse(res, body) {
@@ -59,84 +59,86 @@ let CourseController = class CourseController {
     }
 };
 __decorate([
-    common_1.Get(':id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('id')),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getCourseById", null);
 __decorate([
-    common_1.Get('edit/:id/:user_id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param()),
+    (0, common_1.Get)('edit/:id/:user_id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getCourseByIdAndUserId", null);
 __decorate([
-    common_1.Post('join'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('join'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, course_dto_1.JoinCourseDTO]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "joinCourse", null);
 __decorate([
-    common_1.Post('create'),
-    common_1.UseInterceptors(platform_express_1.FileInterceptor('file')),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
-    __param(2, common_1.UploadedFile('file')),
+    (0, common_1.Post)('create'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFile)('file')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, course_dto_1.CreateCourseDTO, Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "createCourse", null);
 __decorate([
-    common_1.Post('edit-course/:id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
-    __param(2, common_1.Param('id')),
+    (0, common_1.Post)('edit-course/:id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Param)('id')),
+    __param(3, (0, common_1.UploadedFile)('file')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, course_dto_1.EditCourseDTO, String]),
+    __metadata("design:paramtypes", [Object, course_dto_1.EditCourseDTO, String, Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "editCourse", null);
 __decorate([
-    common_1.Post('favorite'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('favorite'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, course_dto_1.FavoriteCourseDTO]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "toggleFavoriteCourse", null);
 __decorate([
-    common_1.Post('rating/:id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
-    __param(2, common_1.Param('id')),
+    (0, common_1.Post)('rating/:id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, course_dto_1.RatingForCourseDTO, String]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "setRatingForCourse", null);
 __decorate([
-    common_1.Post('next-lesson'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Body()),
+    (0, common_1.Post)('next-lesson'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, course_dto_1.NextLessonDTO]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "nextLesson", null);
 __decorate([
-    common_1.Post(':id'),
-    __param(0, common_1.Res()),
-    __param(1, common_1.Param('id')),
-    __param(2, common_1.Body()),
+    (0, common_1.Post)(':id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, course_dto_1.DeleteCourseDTO]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "deleteCourse", null);
 CourseController = __decorate([
-    common_1.Controller('course'),
+    (0, common_1.Controller)('course'),
     __metadata("design:paramtypes", [course_service_1.CourseService])
 ], CourseController);
 exports.CourseController = CourseController;

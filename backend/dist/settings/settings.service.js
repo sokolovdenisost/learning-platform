@@ -65,7 +65,7 @@ let SettingsService = class SettingsService {
         }
     }
     async changePhoto(user_id, file) {
-        if (file && mongoose_2.isValidObjectId(user_id)) {
+        if (file && (0, mongoose_2.isValidObjectId)(user_id)) {
             if (fileTypes.find((c) => c === file.mimetype)) {
                 const mb = file.size / 1024 / 1024;
                 if (mb <= 3) {
@@ -92,9 +92,9 @@ let SettingsService = class SettingsService {
     }
 };
 SettingsService = __decorate([
-    common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(user_schema_1.User.name)),
-    __param(1, mongoose_1.InjectModel(photo_schema_1.Photo.name)),
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
+    __param(1, (0, mongoose_1.InjectModel)(photo_schema_1.Photo.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
         mongoose_2.Model,
         cloudinary_service_1.CloudinaryService])

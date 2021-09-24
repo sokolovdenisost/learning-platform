@@ -9,7 +9,7 @@ export declare class CourseController {
     getCourseByIdAndUserId(res: Response, params: any): Promise<void>;
     joinCourse(res: Response, body: JoinCourseDTO): Promise<void>;
     createCourse(res: Response, body: CreateCourseDTO, file: Express.Multer.File): Promise<void>;
-    editCourse(res: Response, body: EditCourseDTO, id: string): Promise<void>;
+    editCourse(res: Response, body: EditCourseDTO, id: string, file: Express.Multer.File): Promise<void>;
     toggleFavoriteCourse(res: Response, body: FavoriteCourseDTO): Promise<void>;
     setRatingForCourse(res: Response, body: RatingForCourseDTO, id: string): Promise<void>;
     nextLesson(res: Response, body: NextLessonDTO): Promise<void>;

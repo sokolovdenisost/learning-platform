@@ -55,24 +55,17 @@ export const Create = () => {
           course.tags.filter((c: string) => c !== key),
         ),
       );
-      // setForm({ ...form, tags: form.tags.filter((c) => c !== key) });
     } else if (course.tags.length > 2) {
       course.tags.shift();
       dispatch(changeParams('tags', [...course.tags, key]));
-      // setForm({ ...form, tags: [...form.tags, key] });
     } else if (!findKey && course.tags.length < 3) {
       dispatch(changeParams('tags', [...course.tags, key]));
-      // setForm({ ...form, tags: [...form.tags, key] });
     }
   }
 
   function getSelected(title: string) {
     return course.tags.find((c: string) => c === title) ? true : false;
   }
-
-  // function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
-  //   setForm({ ...form, [e.currentTarget.id]: e.currentTarget.value });
-  // }
 
   async function createCourse() {
     setResult({

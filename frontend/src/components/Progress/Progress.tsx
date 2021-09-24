@@ -1,4 +1,5 @@
 import React from 'react';
+import { useProcent } from '../../hooks/procent';
 import { ICourse } from '../../interfaces/course';
 import { Button } from '../Button/Button';
 import { CardCourse } from '../CardCourse/CardCourse';
@@ -25,7 +26,7 @@ export const Progress = ({ takeCourse }: Props) => {
       <div className="progress-body">
         <div className="progress-title">Course passed on</div>
         <div className="progress-block">
-          <div className="progress-percent">75%</div>
+          <div className="progress-percent">{useProcent(takeCourse.currentLesson, takeCourse.course.lessons.length)}</div>
           <div className="line" />
           <div className="progress-info">
             <div className="progress-text">

@@ -14,7 +14,7 @@ export declare class Course {
     lessons: Lesson[];
     rating: IRating[];
 }
-export declare const CourseSchema: mongoose.Schema<mongoose.Document<Course, any, any>, mongoose.Model<mongoose.Document<Course, any, any>, any, any>, {}>;
+export declare const CourseSchema: mongoose.Schema<mongoose.Document<Course, any, any>, mongoose.Model<mongoose.Document<Course, any, any>, any, any, any>, {}>;
 interface IRating {
     user: string;
     ratingNum: number;

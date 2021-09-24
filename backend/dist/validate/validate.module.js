@@ -12,7 +12,7 @@ const validate_service_1 = require("./validate.service");
 let ValidateModule = class ValidateModule {
 };
 ValidateModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [],
         controllers: [],
         providers: [validate_service_1.ValidateService],

@@ -1,6 +1,6 @@
-import { Dispatch } from 'redux';
-import { API_URL } from '../../consts';
-import { GET_ALL_COURSES, GET_MY_CREATED_COURSES, GET_MY_TAKE_COURSES } from '../types';
+import { Dispatch } from "redux";
+import { API_URL } from "../../consts";
+import { GET_ALL_COURSES, GET_MY_CREATED_COURSES, GET_MY_TAKE_COURSES } from "../types";
 
 export const getAllCourses = () => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/courses`);
@@ -16,7 +16,7 @@ export const getAllCourses = () => async (dispatch: Dispatch) => {
 export const getCreatedCourses =
   (id: string | null = null) =>
   async (dispatch: Dispatch) => {
-    const user_id = localStorage.getItem('user_id');
+    const user_id = localStorage.getItem("user_id");
     const response = await fetch(`${API_URL}/courses/${id ? id : user_id}/created-courses`);
 
     const result = await response.json();
@@ -30,7 +30,7 @@ export const getCreatedCourses =
 export const getTakeCourses =
   (id: string | null = null) =>
   async (dispatch: Dispatch) => {
-    const user_id = localStorage.getItem('user_id');
+    const user_id = localStorage.getItem("user_id");
     const response = await fetch(`${API_URL}/courses/${id ? id : user_id}/take-courses`);
 
     const result = await response.json();
@@ -40,3 +40,5 @@ export const getTakeCourses =
       payload: result.courses.reverse(),
     });
   };
+
+// test

@@ -16,7 +16,7 @@ const photo_schema_1 = require("./photo.schema");
 let User = class User {
 };
 __decorate([
-    mongoose_1.Prop({
+    (0, mongoose_1.Prop)({
         type: photo_schema_1.Photo,
         default: {
             public_id: '',
@@ -26,35 +26,35 @@ __decorate([
     __metadata("design:type", photo_schema_1.Photo)
 ], User.prototype, "avatar", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, required: true }),
+    (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    mongoose_1.Prop({ type: String, default: new Date().toLocaleDateString() }),
+    (0, mongoose_1.Prop)({ type: String, default: new Date().toLocaleDateString() }),
     __metadata("design:type", String)
 ], User.prototype, "registered", void 0);
 __decorate([
-    mongoose_1.Prop({ type: [mongoose.Types.ObjectId], ref: 'Course' }),
+    (0, mongoose_1.Prop)({ type: [mongoose.Types.ObjectId], ref: 'Course' }),
     __metadata("design:type", Array)
 ], User.prototype, "favorites", void 0);
 __decorate([
-    mongoose_1.Prop({ type: [{ course: { type: mongoose.Types.ObjectId, ref: 'Course' }, currentLesson: Number }] }),
+    (0, mongoose_1.Prop)({ type: [{ course: { type: mongoose.Types.ObjectId, ref: 'Course' }, currentLesson: Number }] }),
     __metadata("design:type", Array)
 ], User.prototype, "takeCourses", void 0);
 User = __decorate([
-    mongoose_1.Schema()
+    (0, mongoose_1.Schema)()
 ], User);
 exports.User = User;
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
