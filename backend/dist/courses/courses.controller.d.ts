@@ -5,5 +5,6 @@ export declare class CoursesController {
     constructor(coursesService: CoursesService);
     getCreatedCoursesByUserId(res: Response, id: string): Promise<void>;
     getTakeCoursesByUserId(res: Response, id: string): Promise<void>;
+    getFavoriteCourses(res: Response, id: string): Promise<void>;
     getAllCourses(res: Response): Promise<void>;
 }

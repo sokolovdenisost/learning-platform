@@ -7,7 +7,10 @@ import { User, UserDocument } from 'src/schemas/user.schema';
 
 @Injectable()
 export class CoursesService {
-  constructor(@InjectModel(Course.name) private courseModel: Model<CourseDocument>, @InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+  ) {}
 
   async getCreatedCoursesByUserId(id: string): Promise<any> {
     if (isValidObjectId(id)) {
@@ -37,6 +40,16 @@ export class CoursesService {
       } else {
         return { code: 400, text: 'Error', type: 'Error' };
       }
+    } else {
+      return { code: 400, text: 'ID is not valid', type: 'Error' };
+    }
+  }
+
+  async getFavoriteCourses(id: string): Promise<any> {
+    if (isValidObjectId(id)) {
+      const courses = await this.courseModel.find({ favorites: { $all: [id] } });
+
+      return { code: 200, text: `Courses for ${id}`, type: 'Success', courses };
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };
     }

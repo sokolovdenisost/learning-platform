@@ -10,8 +10,8 @@ export declare class User {
     email: string;
     password: string;
     registered: string;
-    favorites: Course[];
     takeCourses: TakeCourse[];
+    completedCourses: Course[];
 }
 export declare const UserSchema: mongoose.Schema<mongoose.Document<User, any, any>, mongoose.Model<mongoose.Document<User, any, any>, any, any, any>, {}>;
 interface TakeCourse {

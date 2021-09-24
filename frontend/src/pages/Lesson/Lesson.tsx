@@ -73,6 +73,7 @@ export const Lesson = () => {
     return <Loader />;
   }
 
+  const nextLesson = lesson.course.lessons[lesson.course.lessons.findIndex(c => c === params[2]) + 1]
 
   return (
     <Layout>
@@ -95,9 +96,20 @@ export const Lesson = () => {
           </div>
           {mapBlocks}
           <div className="lesson-course-body-buttons">
+            <a href="#" className="backLesson">
+              <Button type="bold" color="primary" fontSize="14">Back lesson</Button>
+            </a>
+            {/* {lesson._id === lesson.course.lessons[0] ? null : <Button type="bold" color="primary" fontSize="14">Back lesson</Button>} */}
+            {nextLesson ? 
+            <a href={`/lesson/${nextLesson}`} className="nextLesson">
+              <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
+                {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
+              </Button>
+            </a> : 
             <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
-              Next lesson
+                {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
             </Button>
+              }
           </div>
         </div>
         <div className="lesson-course-comments">
@@ -119,6 +131,7 @@ export const Lesson = () => {
           <WatchAnotherLesson
             currentLesson={infoLesson.length ? infoLesson[0].currentLesson : 1}
             course={lesson.course}
+            lesson_id={lesson._id}
             active={active}
             setActive={setActive}
           />

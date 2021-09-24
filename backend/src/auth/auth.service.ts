@@ -12,7 +12,10 @@ const saltOrRounds = 10;
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private validateService: ValidateService) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private validateService: ValidateService,
+  ) {}
 
   async loginUser(data: ILoginUser): Promise<any> {
     if (data.email && data.password) {
@@ -66,10 +69,7 @@ export class AuthService {
 
   async findUserById(id: string): Promise<UserDocument> {
     if (mongoose.isValidObjectId(id)) {
-      return await this.userModel.findById(id).populate({
-        path: 'favorites',
-        populate: { path: 'owner', select: '_id lastName firstName' },
-      });
+      return await this.userModel.findById(id);
     }
   }
 }

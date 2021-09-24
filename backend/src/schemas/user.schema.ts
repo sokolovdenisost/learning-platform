@@ -32,11 +32,11 @@ export class User {
   @Prop({ type: String, default: new Date().toLocaleDateString() })
   registered: string;
 
-  @Prop({ type: [mongoose.Types.ObjectId], ref: 'Course' })
-  favorites: Course[];
-
   @Prop({ type: [{ course: { type: mongoose.Types.ObjectId, ref: 'Course' }, currentLesson: Number }] })
   takeCourses: TakeCourse[];
+
+  @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Course' }] })
+  completedCourses: Course[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

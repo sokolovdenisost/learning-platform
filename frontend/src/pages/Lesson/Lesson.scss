@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .lesson-page {
   .lesson-course-progress {
@@ -41,7 +41,9 @@
 
     .lesson-course-body-buttons {
       margin-bottom: 20px;
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 

@@ -54,14 +54,18 @@ export class CourseService {
         const tags = JSON.parse(body.tags);
         if (file) {
           const result = await this.cloudinaryService.uploadFunc(file);
+          const photo = await new this.photoModel({ photo_url: result.url, public_id: result.public_id });
           await this.courseModel.findByIdAndUpdate(id, {
             ...body,
             tags,
             image: { photo_url: result.url, public_id: result.public_id },
           });
+
+          await photo.save();
         } else {
           await this.courseModel.findByIdAndUpdate(id, { ...body, tags });
         }
+
         return { code: 200, text: 'Course is update', type: 'Success' };
       } else {
         return { code: 404, text: 'Course not found', type: 'Error' };
@@ -148,19 +152,19 @@ export class CourseService {
         const user = await this.userModel.findById(body.user_id);
 
         if (user) {
-          const check = user.favorites.filter((c) => String(c) === body.course_id);
+          const check = course.favorites.filter((c) => String(c) === body.user_id);
 
           if (check.length) {
-            const idx = user.favorites.findIndex((c) => c === course._id);
+            const idx = course.favorites.findIndex((c) => c === course._id);
 
-            user.favorites.splice(idx, 1);
-            await user.save();
+            course.favorites.splice(idx, 1);
+            await course.save();
 
             return { code: 200, text: 'Remove favorite', type: 'Success' };
           } else {
-            user.favorites.push(course);
+            course.favorites.push(user._id);
 
-            await user.save();
+            await course.save();
 
             return { code: 200, text: 'Add favorite', type: 'Success' };
           }
@@ -247,7 +251,7 @@ export class CourseService {
         const idxCourse = user.takeCourses.findIndex((crs) => String(crs.course) === String(course._id));
 
         if (idxCourse >= 0) {
-          if (user.takeCourses[idxCourse].currentLesson - 1 <= course.lessons.length) {
+          if (user.takeCourses[idxCourse].currentLesson - 1 < course.lessons.length) {
             const idxLesson = course.lessons.findIndex((les) => String(les) === body.lesson_id);
 
             user.takeCourses[idxCourse] = {
@@ -259,8 +263,18 @@ export class CourseService {
             await user.save();
 
             return { code: 200, text: 'Text', type: 'Success', nextLessonId: course.lessons[idxLesson + 1] };
-          } else {
-            return { code: 200, text: 'Completed course', type: 'Success' };
+          } else if (course.lessons.length === user.takeCourses[idxCourse].currentLesson - 1) {
+            const check = user.completedCourses.filter((c) => String(c) === String(course._id));
+
+            if (check.length) {
+              return { code: 200, text: 'Course is already completed', type: 'Success' };
+            } else {
+              user.completedCourses.push(course);
+
+              await user.save();
+
+              return { code: 200, text: 'Completed course', type: 'Success' };
+            }
           }
         } else {
           return { code: 400, text: 'Take course not found', type: 'Error' };

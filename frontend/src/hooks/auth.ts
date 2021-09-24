@@ -1,29 +1,28 @@
-import { useEffect, useState } from 'react';
-import { API_URL } from '../consts';
-import { IUser } from '../interfaces/user';
+import { useEffect, useState } from "react";
+import { API_URL } from "../consts";
+import { IUser } from "../interfaces/user";
 
 export const useAuth = (): AuthSuccess => {
   const [auth, setAuth] = useState<IUser>({
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    email: "",
     avatar: {
-      photo_url: '',
-      public_id: '',
+      photo_url: "",
+      public_id: "",
     },
-    _id: '',
-    favorites: [],
-    registered: '',
+    _id: "",
+    registered: "",
     takeCourses: [],
   });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
-  const user_id = localStorage.getItem('user_id');
+  const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
     fetch(`${API_URL}/auth`, {
       headers: {
-        Authorization: `USER_ID ${user_id ? user_id : ''}`,
+        Authorization: `USER_ID ${user_id ? user_id : ""}`,
       },
     })
       .then((res) => res.json())
@@ -31,7 +30,7 @@ export const useAuth = (): AuthSuccess => {
         if (res._id) {
           setAuth(res);
           setLoading(false);
-        } else if (res.type === 'Error') {
+        } else if (res.type === "Error") {
           setError(res);
           setLoading(false);
         }
@@ -58,4 +57,4 @@ interface IError {
   text: string;
 }
 
-type TypeResponse = 'Error' | 'Success';
+type TypeResponse = "Error" | "Success";

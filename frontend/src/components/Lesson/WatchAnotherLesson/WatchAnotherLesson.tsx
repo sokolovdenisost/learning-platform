@@ -9,12 +9,19 @@ interface Props {
   setActive: React.Dispatch<React.SetStateAction<IModal>>;
   course: ICourse;
   currentLesson: number;
+  lesson_id: string;
 }
 
-export const WatchAnotherLesson = ({ active, setActive, course, currentLesson }: Props) => {
+export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, lesson_id }: Props) => {
   const user_id = localStorage.getItem('user_id');
   const mapLessons = course.lessons.map((lesson, index) => {
-    if (course.owner._id === user_id) {
+    if (lesson_id === lesson) {
+      return (
+        <Button key={lesson} disable={true} type="bold" color="primary" fontSize="14">
+          {index + 1}
+        </Button>
+      )
+    } else if (course.owner._id === user_id) {
       return (
         <a key={lesson} href={`/lesson/${lesson}`} style={{ display: 'block' }}>
           <Button type="bold" color="primary" fontSize="14" width="100%">

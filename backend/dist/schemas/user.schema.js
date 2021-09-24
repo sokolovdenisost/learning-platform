@@ -46,13 +46,13 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "registered", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [mongoose.Types.ObjectId], ref: 'Course' }),
-    __metadata("design:type", Array)
-], User.prototype, "favorites", void 0);
-__decorate([
     (0, mongoose_1.Prop)({ type: [{ course: { type: mongoose.Types.ObjectId, ref: 'Course' }, currentLesson: Number }] }),
     __metadata("design:type", Array)
 ], User.prototype, "takeCourses", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [{ type: mongoose.Types.ObjectId, ref: 'Course' }] }),
+    __metadata("design:type", Array)
+], User.prototype, "completedCourses", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);

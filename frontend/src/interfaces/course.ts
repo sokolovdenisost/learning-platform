@@ -17,6 +17,7 @@ export interface ICourse {
     lastName: string;
   };
   rating: IRating[];
+  favorites: string[];
 }
 
 interface IRating {

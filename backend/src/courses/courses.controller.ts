@@ -20,6 +20,13 @@ export class CoursesController {
     res.json(result).status(result.code);
   }
 
+  @Get(':id/favorite-courses')
+  async getFavoriteCourses(@Res() res: Response, @Param('id') id: string): Promise<void> {
+    const result = await this.coursesService.getFavoriteCourses(id);
+
+    res.json(result).status(result.code);
+  }
+
   @Get('')
   async getAllCourses(@Res() res: Response): Promise<void> {
     const result = await this.coursesService.getAllCourses();

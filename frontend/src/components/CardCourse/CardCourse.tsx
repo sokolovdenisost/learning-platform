@@ -25,7 +25,7 @@ export const CardCourse = ({ translateY, styles, course }: Props) => {
     : {
         marginBottom: 15,
       };
-  const favorite = useFavorite(course._id);
+  const favorite = useFavorite(course);
   const rating = useRating(course.rating);
 
   const mapTags = course.tags.map((tag) => {

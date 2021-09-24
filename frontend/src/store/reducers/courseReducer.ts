@@ -1,26 +1,27 @@
-import { AnyAction } from 'redux';
-import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from '../types';
+import { AnyAction } from "redux";
+import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from "../types";
 
 const initialState = {
   loading: true,
   error: false,
   course: {
-    _id: '',
+    _id: "",
     tags: [],
-    level: '',
-    certificate: '',
-    description: '',
-    title: '',
+    level: "",
+    certificate: "",
+    description: "",
+    title: "",
     image: {
-      public_id: '',
-      photo_url: '',
+      public_id: "",
+      photo_url: "",
     },
     lessons: [],
     owner: {
-      _id: '',
-      firstName: '',
-      lastName: '',
+      _id: "",
+      firstName: "",
+      lastName: "",
     },
+    favorites: [],
     rating: [],
   },
 };
@@ -40,21 +41,21 @@ export const courseReducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         course: {
-          _id: '',
+          _id: "",
           tags: [],
-          level: '',
-          certificate: '',
-          description: '',
-          title: '',
+          level: "",
+          certificate: "",
+          description: "",
+          title: "",
           image: {
-            public_id: '',
-            photo_url: '',
+            public_id: "",
+            photo_url: "",
           },
           lessons: [],
           owner: {
-            _id: '',
-            firstName: '',
-            lastName: '',
+            _id: "",
+            firstName: "",
+            lastName: "",
           },
           rating: [],
         },

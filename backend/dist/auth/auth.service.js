@@ -73,17 +73,15 @@ let AuthService = class AuthService {
     }
     async findUserById(id) {
         if (mongoose.isValidObjectId(id)) {
-            return await this.userModel.findById(id).populate({
-                path: 'favorites',
-                populate: { path: 'owner', select: '_id lastName firstName' },
-            });
+            return await this.userModel.findById(id);
         }
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model, validate_service_1.ValidateService])
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        validate_service_1.ValidateService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

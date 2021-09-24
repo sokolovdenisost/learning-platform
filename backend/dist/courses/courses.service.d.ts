@@ -7,5 +7,6 @@ export declare class CoursesService {
     constructor(courseModel: Model<CourseDocument>, userModel: Model<UserDocument>);
     getCreatedCoursesByUserId(id: string): Promise<any>;
     getTakeCoursesByUserId(id: string): Promise<any>;
+    getFavoriteCourses(id: string): Promise<any>;
     getAllCourses(): Promise<any>;
 }

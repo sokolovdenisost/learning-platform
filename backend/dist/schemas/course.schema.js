@@ -51,6 +51,14 @@ __decorate([
     (0, mongoose_1.Prop)({ type: [{ user: { type: mongoose.Types.ObjectId, ref: 'User' }, ratingNum: Number }] }),
     __metadata("design:type", Array)
 ], Course.prototype, "rating", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [mongoose.Schema.Types.ObjectId], ref: 'User' }),
+    __metadata("design:type", Array)
+], Course.prototype, "favorites", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Boolean, default: false }),
+    __metadata("design:type", Boolean)
+], Course.prototype, "isVerification", void 0);
 Course = __decorate([
     (0, mongoose_1.Schema)()
 ], Course);

@@ -1,33 +1,31 @@
-import { AnyAction } from 'redux';
-import { IStateUser } from '../../interfaces/state';
-import { IUser } from '../../interfaces/user';
-import { ERROR, GET_AUTH, GET_USER } from '../types';
+import { AnyAction } from "redux";
+import { IStateUser } from "../../interfaces/state";
+import { IUser } from "../../interfaces/user";
+import { ERROR, GET_AUTH, GET_USER } from "../types";
 
 const initialState: IStateUser = {
   user: {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    email: "",
     avatar: {
-      photo_url: '',
-      public_id: '',
+      photo_url: "",
+      public_id: "",
     },
-    _id: '',
-    favorites: [],
-    registered: '',
+    _id: "",
+    registered: "",
     takeCourses: [],
   },
   profile: {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    email: "",
     avatar: {
-      photo_url: '',
-      public_id: '',
+      photo_url: "",
+      public_id: "",
     },
-    _id: '',
-    favorites: [],
-    registered: '',
+    _id: "",
+    registered: "",
     takeCourses: [],
   },
   loading: true,

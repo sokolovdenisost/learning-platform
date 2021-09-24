@@ -55,6 +55,15 @@ let CoursesService = class CoursesService {
             return { code: 400, text: 'ID is not valid', type: 'Error' };
         }
     }
+    async getFavoriteCourses(id) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
+            const courses = await this.courseModel.find({ favorites: { $all: [id] } });
+            return { code: 200, text: `Courses for ${id}`, type: 'Success', courses };
+        }
+        else {
+            return { code: 400, text: 'ID is not valid', type: 'Error' };
+        }
+    }
     async getAllCourses() {
         const courses = await this.courseModel.find({}).populate('owner', '_id firstName lastName');
         return { code: 200, text: 'This all courses', courses: courses.reverse() };
@@ -64,7 +73,8 @@ CoursesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
     __param(1, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model, mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model])
 ], CoursesService);
 exports.CoursesService = CoursesService;
 //# sourceMappingURL=courses.service.js.map

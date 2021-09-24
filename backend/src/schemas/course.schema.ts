@@ -35,6 +35,12 @@ export class Course {
 
   @Prop({ type: [{ user: { type: mongoose.Types.ObjectId, ref: 'User' }, ratingNum: Number }] })
   rating: IRating[];
+
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'User' })
+  favorites: User[];
+
+  @Prop({ type: Boolean, default: false })
+  isVerification: boolean;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);

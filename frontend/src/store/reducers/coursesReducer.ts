@@ -1,5 +1,5 @@
-import { AnyAction } from 'redux';
-import { GET_ALL_COURSES, GET_MY_CREATED_COURSES, GET_MY_TAKE_COURSES } from '../types';
+import { AnyAction } from "redux";
+import { GET_ALL_COURSES, GET_MY_CREATED_COURSES, GET_MY_FAVORITE_COURSES, GET_MY_TAKE_COURSES } from "../types";
 
 const initialState = {
   loading: true,
@@ -19,6 +19,9 @@ export const coursesReducer = (state = initialState, action: AnyAction) => {
 
     case GET_MY_TAKE_COURSES:
       return { ...state, takeCourses: action.payload, loading: false };
+
+    case GET_MY_FAVORITE_COURSES:
+      return { ...state, favoriteCourses: action.payload, loading: false };
 
     default:
       return state;
