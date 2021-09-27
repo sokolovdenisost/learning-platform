@@ -1,7 +1,8 @@
 import { AnyAction } from "redux";
+import { IStateCourse } from "../../interfaces/state";
 import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from "../types";
 
-const initialState = {
+const initialState: IStateCourse = {
   loading: true,
   error: false,
   course: {

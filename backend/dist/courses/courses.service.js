@@ -57,8 +57,25 @@ let CoursesService = class CoursesService {
     }
     async getFavoriteCourses(id) {
         if ((0, mongoose_2.isValidObjectId)(id)) {
-            const courses = await this.courseModel.find({ favorites: { $all: [id] } });
-            return { code: 200, text: `Courses for ${id}`, type: 'Success', courses };
+            const courses = await this.courseModel
+                .find({ favorites: { $all: [id] } })
+                .populate('owner', '_id firstName lastName');
+            return { code: 200, text: `Favorite courses`, type: 'Success', courses };
+        }
+        else {
+            return { code: 400, text: 'ID is not valid', type: 'Error' };
+        }
+    }
+    async getCompletedCourses(id) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
+            const user = await this.userModel.findById(id).populate({
+                path: 'completedCourses',
+                populate: {
+                    path: 'owner',
+                    select: '_id firstName lastName',
+                },
+            });
+            return { code: 200, text: `Completed courses`, type: 'Success', courses: user.completedCourses };
         }
         else {
             return { code: 400, text: 'ID is not valid', type: 'Error' };

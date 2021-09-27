@@ -1,11 +1,32 @@
-import { AnyAction } from 'redux';
-import { CHANGE_PARAMS, ERROR, GET_EDIT_LESSON, GET_LESSON } from '../types';
+import { AnyAction } from "redux";
+import { IStateLesson } from "../../interfaces/state";
+import { CHANGE_PARAMS, ERROR, GET_EDIT_LESSON, GET_LESSON } from "../types";
 
-const initialState = {
+const initialState: IStateLesson = {
   loading: true,
   lesson: {
+    _id: "",
     array: [],
-    course: {},
+    course: {
+      _id: "",
+      tags: [],
+      level: "",
+      certificate: "",
+      description: "",
+      title: "",
+      image: {
+        public_id: "",
+        photo_url: "",
+      },
+      lessons: [],
+      owner: {
+        _id: "",
+        firstName: "",
+        lastName: "",
+      },
+      rating: [],
+      favorites: [],
+    },
     comments: [],
   },
   error: false,

@@ -130,10 +130,27 @@ export class CourseService {
     }
   }
 
-  async deleteCourse(id: string, user_id: string): Promise<ISuccess | IError> {
+  async deleteCourse(id: string, user_id: string): Promise<ISuccess | IError | any> {
     if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
+      const completedCoursesForUsers = await this.userModel.find({ completedCourses: { $all: [id] } });
+      const takeCoursesForUsers = await this.userModel.find({ 'takeCourses.course': id });
+
       const course = await this.courseModel.findById(id);
       if (course && String(course.owner) === user_id) {
+        completedCoursesForUsers.forEach(async (user) => {
+          const idx = user.completedCourses.findIndex((id) => id === course._id);
+          user.completedCourses.splice(idx, 1);
+
+          await user.save();
+        });
+
+        takeCoursesForUsers.forEach(async (user) => {
+          const idx = user.takeCourses.findIndex((c) => c.course === course._id);
+          user.takeCourses.splice(idx, 1);
+
+          await user.save();
+        });
+
         await this.courseModel.findByIdAndDelete(id);
 
         return { code: 200, text: 'Course is delete', type: 'Success' };
@@ -251,9 +268,8 @@ export class CourseService {
         const idxCourse = user.takeCourses.findIndex((crs) => String(crs.course) === String(course._id));
 
         if (idxCourse >= 0) {
-          if (user.takeCourses[idxCourse].currentLesson - 1 < course.lessons.length) {
-            const idxLesson = course.lessons.findIndex((les) => String(les) === body.lesson_id);
-
+          const idxLesson = course.lessons.findIndex((les) => String(les) === body.lesson_id);
+          if (user.takeCourses[idxCourse].currentLesson < course.lessons.length) {
             user.takeCourses[idxCourse] = {
               ...user.takeCourses[idxCourse],
               course,
@@ -263,17 +279,23 @@ export class CourseService {
             await user.save();
 
             return { code: 200, text: 'Text', type: 'Success', nextLessonId: course.lessons[idxLesson + 1] };
-          } else if (course.lessons.length === user.takeCourses[idxCourse].currentLesson - 1) {
+          } else if (course.lessons.length === user.takeCourses[idxCourse].currentLesson) {
+            user.takeCourses[idxCourse] = {
+              ...user.takeCourses[idxCourse],
+              course,
+              currentLesson: idxLesson + 2,
+            };
+
+            user.completedCourses.push(course);
+
+            await user.save();
+
+            return { code: 200, text: 'Completed course', type: 'Success' };
+          } else if (user.takeCourses[idxCourse].currentLesson > course.lessons.length) {
             const check = user.completedCourses.filter((c) => String(c) === String(course._id));
 
             if (check.length) {
               return { code: 200, text: 'Course is already completed', type: 'Success' };
-            } else {
-              user.completedCourses.push(course);
-
-              await user.save();
-
-              return { code: 200, text: 'Completed course', type: 'Success' };
             }
           }
         } else {

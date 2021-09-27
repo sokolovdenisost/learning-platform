@@ -1,8 +1,8 @@
-import React from 'react';
-import { ICourse } from '../../../interfaces/course';
-import { Button } from '../../Button/Button';
-import { Modal } from '../../Modal/Modal';
-import './WatchAnotherLesson.scss';
+import React from "react";
+import { ICourse } from "../../../interfaces/course";
+import { Button } from "../../Button/Button";
+import { Modal } from "../../Modal/Modal";
+import "./WatchAnotherLesson.scss";
 
 interface Props {
   active: IModal;
@@ -13,17 +13,17 @@ interface Props {
 }
 
 export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, lesson_id }: Props) => {
-  const user_id = localStorage.getItem('user_id');
+  const user_id = localStorage.getItem("user_id");
   const mapLessons = course.lessons.map((lesson, index) => {
     if (lesson_id === lesson) {
       return (
         <Button key={lesson} disable={true} type="bold" color="primary" fontSize="14">
           {index + 1}
         </Button>
-      )
+      );
     } else if (course.owner._id === user_id) {
       return (
-        <a key={lesson} href={`/lesson/${lesson}`} style={{ display: 'block' }}>
+        <a key={lesson} href={`/lesson/${lesson}`} style={{ display: "block" }}>
           <Button type="bold" color="primary" fontSize="14" width="100%">
             {index + 1}
           </Button>
@@ -33,7 +33,7 @@ export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, l
       const check = course.lessons.findIndex((l) => course.lessons[currentLesson - 1] === l);
       if (index <= check) {
         return (
-          <a key={lesson} href={`/lesson/${lesson}`} style={{ display: 'block' }}>
+          <a key={lesson} href={`/lesson/${lesson}`} style={{ display: "block" }}>
             <Button type="bold" color="primary" fontSize="14" width="100%">
               {index + 1}
             </Button>

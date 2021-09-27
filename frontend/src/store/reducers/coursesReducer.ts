@@ -1,12 +1,14 @@
 import { AnyAction } from "redux";
-import { GET_ALL_COURSES, GET_MY_CREATED_COURSES, GET_MY_FAVORITE_COURSES, GET_MY_TAKE_COURSES } from "../types";
+import { IStateCourses } from "../../interfaces/state";
+import { GET_ALL_COURSES, GET_MY_COMPLETED_COURSES, GET_MY_CREATED_COURSES, GET_MY_FAVORITE_COURSES, GET_MY_TAKE_COURSES } from "../types";
 
-const initialState = {
+const initialState: IStateCourses = {
   loading: true,
   allCourses: [],
   takeCourses: [],
   favoriteCourses: [],
   createdCourses: [],
+  completedCourses: [],
 };
 
 export const coursesReducer = (state = initialState, action: AnyAction) => {
@@ -22,6 +24,9 @@ export const coursesReducer = (state = initialState, action: AnyAction) => {
 
     case GET_MY_FAVORITE_COURSES:
       return { ...state, favoriteCourses: action.payload, loading: false };
+
+    case GET_MY_COMPLETED_COURSES:
+      return { ...state, completedCourses: action.payload, loading: false };
 
     default:
       return state;

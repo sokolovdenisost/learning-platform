@@ -1,25 +1,30 @@
-import React, { useEffect } from 'react';
-import { Block } from '../../components/Block/Block';
-import { Button } from '../../components/Button/Button';
-import { Layout } from '../../components/Layout/Layout';
-import { AiFillStar } from 'react-icons/ai';
-import './Course.scss';
-import { Tag } from '../../components/Tag/Tag';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCourse } from '../../store/actions/courseAction';
-import { Loader } from '../../components/Loader/Loader';
-import { Error404 } from '../404/404';
-import { joinCourseHandler, setRatingForCourseHandler } from '../../utils/course';
-import { useRating } from '../../hooks/rating';
-import { LessonBlock } from '../../components/LessonBlock/LessonBlock';
-import { IState, IStateCourse } from '../../interfaces/state';
-import { IUser } from '../../interfaces/user';
+import React, { useEffect, useState } from "react";
+import { Block } from "../../components/Block/Block";
+import { Button } from "../../components/Button/Button";
+import { Layout } from "../../components/Layout/Layout";
+import { AiFillStar } from "react-icons/ai";
+import "./Course.scss";
+import { Tag } from "../../components/Tag/Tag";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourse } from "../../store/actions/courseAction";
+import { Loader } from "../../components/Loader/Loader";
+import { Error404 } from "../404/404";
+import { joinCourseHandler, setRatingForCourseHandler } from "../../utils/course";
+import { useRating } from "../../hooks/rating";
+import { LessonBlock } from "../../components/LessonBlock/LessonBlock";
+import { IState, IStateCourse } from "../../interfaces/state";
+import { IUser } from "../../interfaces/user";
+import { ReportModal } from "../../components/Modal/Modal";
 
 export const Course = () => {
+  const [modal, setModal] = useState({
+    active: false,
+    type: "",
+  });
   const dispatch = useDispatch();
   const user: IUser = useSelector((state: IState) => state.user.user);
   const { course, error, loading }: IStateCourse = useSelector((state: IState) => state.course);
-  const params = window.location.pathname.split('/');
+  const params = window.location.pathname.split("/");
   const rating = useRating(course.rating);
 
   useEffect(() => {
@@ -73,14 +78,14 @@ export const Course = () => {
                     <AiFillStar size={24} color="#fadf6b" />
                   </button>
                 </div>
-                <div className="course-rating-votes">{rating.ratings}</div>
+                <div className="course-rating-votes">{rating.ratings} ratings</div>
               </div>
             </div>
             <div className="course-right">
               <div className="course-title">{course.title}</div>
               <div className="course-description">{course.description}</div>
               <div className="course-created-by">
-                Created by <span>{course.owner.firstName + ' ' + course.owner.lastName}</span>
+                Created by <a href={`/user/${course.owner._id}`}>{course.owner.firstName + " " + course.owner.lastName}</a>
               </div>
               <div className="course-level">
                 This level for course - <span>{course.level}</span>
@@ -96,18 +101,25 @@ export const Course = () => {
         </Block>
         {user._id ? (
           <div className="course-buttons">
-            <Button disable={checkJoinedTheCourse()} type="bold" color="primary" fontSize="16" onClick={() => joinCourseHandler(course._id)}>
+            <Button
+              disable={checkJoinedTheCourse()}
+              type="bold"
+              color="primary"
+              fontSize="16"
+              onClick={() => joinCourseHandler(course._id)}
+            >
               Join course
             </Button>
-            <Button type="bold" color="danger" fontSize="16">
+            <Button type="bold" color="danger" fontSize="16" onClick={() => setModal({ ...modal, active: true })}>
               Report course
             </Button>
           </div>
         ) : null}
         <div className="course-lessons">
           <div className="course-lessons-title">Lessons</div>
-          <div className="course-lessons-all">{course.lessons.length ? mapLessons : 'Not lessons'}</div>
+          <div className="course-lessons-all">{course.lessons.length ? mapLessons : "Not lessons"}</div>
         </div>
+        {modal.active ? <ReportModal modal={modal} setModal={setModal} /> : null}
       </div>
     </Layout>
   );

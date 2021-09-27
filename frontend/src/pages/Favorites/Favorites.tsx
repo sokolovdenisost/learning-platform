@@ -17,6 +17,7 @@ export const Favorites = () => {
   }, [])
 
   const mapCourses = favoriteCourses.map((course: ICourse) => {
+    console.log(favoriteCourses)
     return <CardCourse key={course._id} course={course} />;
   });
 

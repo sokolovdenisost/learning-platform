@@ -45,6 +45,13 @@ export const Lesson = () => {
     setComment(e.currentTarget.value);
   }
 
+  function findNextBackLesson(type: string) {
+    if (type === 'next') {
+      return lesson.course.lessons[lesson.course.lessons.findIndex(c => c === params[2]) + 1]
+    }
+
+    return lesson.course.lessons[lesson.course.lessons.findIndex(c => c === params[2]) - 1]
+  }
 
   const mapBlocks = lesson.array.map((block: IBlock) => {
     if (block.typeForm === 'title') {
@@ -73,7 +80,8 @@ export const Lesson = () => {
     return <Loader />;
   }
 
-  const nextLesson = lesson.course.lessons[lesson.course.lessons.findIndex(c => c === params[2]) + 1]
+  const nextLesson = findNextBackLesson('next')
+  const backLesson = findNextBackLesson('back')
 
   return (
     <Layout>
@@ -96,10 +104,13 @@ export const Lesson = () => {
           </div>
           {mapBlocks}
           <div className="lesson-course-body-buttons">
-            <a href="#" className="backLesson">
+            {
+            lesson._id === lesson.course.lessons[0] 
+            ? <div></div> : 
+            <a className="backLesson" href={`/lesson/${backLesson}`}>
               <Button type="bold" color="primary" fontSize="14">Back lesson</Button>
             </a>
-            {/* {lesson._id === lesson.course.lessons[0] ? null : <Button type="bold" color="primary" fontSize="14">Back lesson</Button>} */}
+            }
             {nextLesson ? 
             <a href={`/lesson/${nextLesson}`} className="nextLesson">
               <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>

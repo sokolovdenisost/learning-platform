@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .modal-overlay {
   overflow: hidden;
@@ -21,26 +21,25 @@
   }
 
   .modal-block {
-    transform: translateY(-50px);
+    transform: translateY(-50px) scale(0.9);
     transition: all 0.3s ease;
     width: 400px;
     background: #fff;
-    padding: 30px 40px;
+    padding: 20px;
     border-radius: $r5;
     box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.1);
 
     &.active {
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
     .modal-header {
-      text-align: center;
       font-size: 22px;
       font-weight: 700;
     }
 
     .modal-body {
-      margin: 50px 0 0;
+      margin: 25px 0 0;
 
       .sign-in-form {
         margin-bottom: 50px;
@@ -60,6 +59,19 @@
             font-size: 16px;
             font-weight: 400;
             text-align: center;
+          }
+        }
+      }
+
+      .confirm-modal {
+        text-align: center;
+        .confirm-footer {
+          margin-top: 25px;
+
+          text-align: center;
+
+          button:first-child {
+            margin-right: 5px;
           }
         }
       }

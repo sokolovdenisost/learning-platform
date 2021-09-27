@@ -155,7 +155,7 @@ export async function nextLessonHandler(course_id: string, lesson_id: string) {
 
   if (result.type === "Success" && result.nextLessonId) {
     window.location.pathname = `/lesson/${result.nextLessonId}`;
-  } else if (result.type === "Success" && result.text === "Completed course") {
+  } else if (result.type === "Success" && (result.text === "Completed course" || "Course is already completed")) {
     window.location.pathname = "/my-courses";
   }
 

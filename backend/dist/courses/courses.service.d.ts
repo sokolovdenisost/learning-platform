@@ -8,5 +8,6 @@ export declare class CoursesService {
     getCreatedCoursesByUserId(id: string): Promise<any>;
     getTakeCoursesByUserId(id: string): Promise<any>;
     getFavoriteCourses(id: string): Promise<any>;
+    getCompletedCourses(id: string): Promise<any>;
     getAllCourses(): Promise<any>;
 }

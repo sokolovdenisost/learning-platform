@@ -1,6 +1,6 @@
-import { ICourse } from './course';
-import { ILesson } from './lesson';
-import { IUser } from './user';
+import { ICourse } from "./course";
+import { ILesson } from "./lesson";
+import { IUser } from "./user";
 
 export interface IState {
   user: IStateUser;
@@ -28,6 +28,7 @@ export interface IStateCourses {
   takeCourses: ITakeCourse[];
   favoriteCourses: ICourse[];
   createdCourses: ICourse[];
+  completedCourses: ICourse[];
 }
 
 export interface IStateCourse {

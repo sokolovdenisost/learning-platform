@@ -47,9 +47,27 @@ export class CoursesService {
 
   async getFavoriteCourses(id: string): Promise<any> {
     if (isValidObjectId(id)) {
-      const courses = await this.courseModel.find({ favorites: { $all: [id] } });
+      const courses = await this.courseModel
+        .find({ favorites: { $all: [id] } })
+        .populate('owner', '_id firstName lastName');
 
-      return { code: 200, text: `Courses for ${id}`, type: 'Success', courses };
+      return { code: 200, text: `Favorite courses`, type: 'Success', courses };
+    } else {
+      return { code: 400, text: 'ID is not valid', type: 'Error' };
+    }
+  }
+
+  async getCompletedCourses(id: string): Promise<any> {
+    if (isValidObjectId(id)) {
+      const user = await this.userModel.findById(id).populate({
+        path: 'completedCourses',
+        populate: {
+          path: 'owner',
+          select: '_id firstName lastName',
+        },
+      });
+
+      return { code: 200, text: `Completed courses`, type: 'Success', courses: user.completedCourses };
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };
     }

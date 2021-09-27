@@ -17,7 +17,11 @@ export const Progress = ({ takeCourse }: Props) => {
   function continueLearningCourse() {
     const lessonId = takeCourse.course.lessons[takeCourse.currentLesson - 1];
 
-    window.location.pathname = `/lesson/${lessonId}`;
+    if (lessonId) {
+      return window.location.pathname = `/lesson/${lessonId}`;
+    }
+
+    return window.location.pathname = `/lesson/${takeCourse.course.lessons[0]}`
   }
 
   return (
@@ -30,7 +34,7 @@ export const Progress = ({ takeCourse }: Props) => {
           <div className="line" />
           <div className="progress-info">
             <div className="progress-text">
-              {takeCourse.currentLesson} out of {takeCourse.course.lessons.length} - Lessons
+              {takeCourse.currentLesson - 1} out of {takeCourse.course.lessons.length} - Lessons
             </div>
             <div className="progress-text">50 out of 100 - Stars received</div>
             <div className="progress-text">10 out of 14 - Tasks completed</div>

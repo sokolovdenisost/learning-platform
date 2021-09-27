@@ -20,7 +20,7 @@ export declare class CourseService {
     editCourseById(body: EditCourseDTO, id: string, file: Express.Multer.File): Promise<ISuccess | IError>;
     getCourseById(id: string): Promise<any>;
     createCourse(body: CreateCourseDTO, file: Express.Multer.File): Promise<any>;
-    deleteCourse(id: string, user_id: string): Promise<ISuccess | IError>;
+    deleteCourse(id: string, user_id: string): Promise<ISuccess | IError | any>;
     toggleFavorite(body: FavoriteCourseDTO): Promise<ISuccess | IError>;
     ratingForCourse(body: RatingForCourseDTO, course_id: string): Promise<ISuccess | IError>;
     joinCourse(body: JoinCourseDTO): Promise<ISuccess | IError>;

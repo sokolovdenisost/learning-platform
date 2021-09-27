@@ -6,5 +6,6 @@ export declare class CoursesController {
     getCreatedCoursesByUserId(res: Response, id: string): Promise<void>;
     getTakeCoursesByUserId(res: Response, id: string): Promise<void>;
     getFavoriteCourses(res: Response, id: string): Promise<void>;
+    getCompletedCourses(res: Response, id: string): Promise<void>;
     getAllCourses(res: Response): Promise<void>;
 }

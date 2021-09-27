@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Tag } from '../Tag/Tag';
 import { HiOutlineBookmark, HiBookmark } from 'react-icons/hi';
 import { FiMoreVertical } from 'react-icons/fi';
@@ -25,6 +25,7 @@ export const CardCourse = ({ translateY, styles, course }: Props) => {
     : {
         marginBottom: 15,
       };
+
   const favorite = useFavorite(course);
   const rating = useRating(course.rating);
 

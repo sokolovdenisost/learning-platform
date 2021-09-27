@@ -26,7 +26,9 @@ export const Comment = ({ info }: Props) => {
       </div>
       <div className="comment-right">
         <div className="comment-top">
-          <div className="comment-fullname">{info.user.firstName + ' ' + info.user.lastName}</div>
+          <div className="comment-fullname">
+            <a href={`/user/${info.user._id}`}>{info.user.firstName + ' ' + info.user.lastName}</a>
+          </div>
           <div className="comment-date">{useData(info.date)}</div>
         </div>
         <div className="comment-body">{info.comment}</div>

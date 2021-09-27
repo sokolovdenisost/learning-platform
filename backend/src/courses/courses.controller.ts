@@ -27,6 +27,13 @@ export class CoursesController {
     res.json(result).status(result.code);
   }
 
+  @Get(':id/completed-courses')
+  async getCompletedCourses(@Res() res: Response, @Param('id') id: string): Promise<void> {
+    const result = await this.coursesService.getCompletedCourses(id);
+
+    res.json(result).status(result.code);
+  }
+
   @Get('')
   async getAllCourses(@Res() res: Response): Promise<void> {
     const result = await this.coursesService.getAllCourses();

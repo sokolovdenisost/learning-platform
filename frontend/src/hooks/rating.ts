@@ -1,5 +1,6 @@
 export const useRating = (rating: IRating[]): Rating => {
   let sumRating = 0;
+
   rating.forEach((r) => (sumRating += r.ratingNum));
   const avgRating = isNaN(sumRating / rating.length) ? 0 : sumRating / rating.length;
 

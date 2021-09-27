@@ -31,6 +31,10 @@ let CoursesController = class CoursesController {
         const result = await this.coursesService.getFavoriteCourses(id);
         res.json(result).status(result.code);
     }
+    async getCompletedCourses(res, id) {
+        const result = await this.coursesService.getCompletedCourses(id);
+        res.json(result).status(result.code);
+    }
     async getAllCourses(res) {
         const result = await this.coursesService.getAllCourses();
         res.json(result).status(result.code);
@@ -60,6 +64,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], CoursesController.prototype, "getFavoriteCourses", null);
+__decorate([
+    (0, common_1.Get)(':id/completed-courses'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], CoursesController.prototype, "getCompletedCourses", null);
 __decorate([
     (0, common_1.Get)(''),
     __param(0, (0, common_1.Res)()),
