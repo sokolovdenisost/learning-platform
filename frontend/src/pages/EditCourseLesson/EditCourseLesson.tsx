@@ -16,16 +16,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeLesson, getEditLesson } from '../../store/actions/lessonAction';
 import { Loader } from '../../components/Loader/Loader';
 import { IState, IStateLesson } from '../../interfaces/state';
+import { IUser } from '../../interfaces/user';
 
 type TypesForm = 'video' | 'text' | 'test' | 'code' | 'title';
 
 export const EditCourseLesson = () => {
   const params = window.location.pathname.split('/');
   const dispatch = useDispatch();
+  const user: IUser = useSelector((state: IState) => state.user.user)
   const { lesson, loading, error }: IStateLesson = useSelector((state: IState) => state.lesson);
 
   useEffect(() => {
-    dispatch(getEditLesson(params[4]));
+    dispatch(getEditLesson(user._id, params[4]));
   }, []);
 
   function createForm(typeForm: TypesForm) {

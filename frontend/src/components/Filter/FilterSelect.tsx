@@ -53,7 +53,7 @@ export const FilterSelect = ({ title, options, width }: Props) => {
     <div ref={rootEl} className="filter-block" style={{ width }}>
       <div className={active.active ? 'filter-select active' : 'filter-select'} onClick={() => setActive({ ...active, active: !active.active })}>
         <div className="title">{title}</div>
-        <div className="arrow">
+        <div className={active.active ? 'arrow active' : 'arrow'}>
           <RiArrowDownSLine size={24} />
         </div>
       </div>

@@ -6,17 +6,18 @@ import { Loader } from "../../components/Loader/Loader";
 import { Progress } from "../../components/Progress/Progress";
 import { ICourse } from "../../interfaces/course";
 import { IState, IStateCourses } from "../../interfaces/state";
+import { IUser } from "../../interfaces/user";
 import { getCreatedCourses, getTakeCourses } from "../../store/actions/coursesAction";
 import "./MyCourses.scss";
 
 export const MyCourses = () => {
   const dispatch = useDispatch();
-  const user_id = localStorage.getItem("user_id");
+  const user: IUser = useSelector((state: IState) => state.user.user)
   const { createdCourses, takeCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
 
   useEffect(() => {
-    dispatch(getCreatedCourses(String(user_id)));
-    dispatch(getTakeCourses(String(user_id)));
+    dispatch(getCreatedCourses(String(user._id)));
+    dispatch(getTakeCourses(String(user._id)));
   }, []);
 
   const mapCreatedCourses = createdCourses.map((course: ICourse) => {

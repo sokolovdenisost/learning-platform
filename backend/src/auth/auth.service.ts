@@ -7,6 +7,7 @@ import { User, UserDocument } from 'src/schemas/user.schema';
 import { ICreateUser, ILoginUser } from './interface/auth.interface';
 import { IError, ISuccess } from '../error.interface';
 import { ValidateService } from 'src/validate/validate.service';
+import { JwtService } from '@nestjs/jwt';
 
 const saltOrRounds = 10;
 
@@ -15,7 +16,14 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private validateService: ValidateService,
+    private jwtService: JwtService,
   ) {}
+
+  async getAuth(token: string): Promise<any> {
+    const onToken = this.jwtService.decode(token)
+  
+    return await this.findUserById(onToken['_id'])
+  }
 
   async loginUser(data: ILoginUser): Promise<any> {
     if (data.email && data.password) {
@@ -25,7 +33,9 @@ export class AuthService {
         const checkPassword = bcrypt.compareSync(data.password, user.password);
 
         if (checkPassword) {
-          return { code: 200, type: 'Success', text: 'Signed into account', user_id: user._id };
+          const payload = { firstName: user.firstName, lastName: user.lastName, email: user.email, _id: user._id };
+
+          return { code: 200, type: 'Success', text: 'Signed into account', access_token: this.jwtService.sign(payload), };
         } else {
           return { code: 400, type: 'Error', text: 'Data is incorrect' };
         }
@@ -69,7 +79,7 @@ export class AuthService {
 
   async findUserById(id: string): Promise<UserDocument> {
     if (mongoose.isValidObjectId(id)) {
-      return await this.userModel.findById(id);
+      return await this.userModel.findById(id).select('-password')
     }
   }
 }

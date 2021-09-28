@@ -7,10 +7,10 @@ import './UserMenu.scss';
 interface Props {
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  user_id: string;
 }
 
-export const UserMenu = ({ active, setActive }: Props) => {
-  const user_id = localStorage.getItem('user_id');
+export const UserMenu = ({ user_id, active, setActive }: Props) => {
   const linksUserMenu = [
     {
       icon: <CgProfile size={24} />,

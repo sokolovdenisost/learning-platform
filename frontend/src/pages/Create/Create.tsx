@@ -14,6 +14,7 @@ import { changeParams, goEmpty } from '../../store/actions/courseAction';
 import { useTranslation } from 'react-i18next';
 import { createCourseHandler } from '../../utils/course';
 import './Create.scss';
+import { IUser } from '../../interfaces/user';
 
 const TAGS = [
   'Web design',
@@ -31,7 +32,6 @@ const TAGS = [
 
 export const Create = () => {
   const { t } = useTranslation();
-
   const [file, setFile] = useState<any>({});
   const dispatch = useDispatch();
   const { course }: IStateCourse = useSelector((state: IState) => state.course);

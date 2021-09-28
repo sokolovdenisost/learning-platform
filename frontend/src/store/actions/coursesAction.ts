@@ -25,7 +25,6 @@ export const getCreatedCourses = (id: string) => async (dispatch: Dispatch) => {
 };
 
 export const getTakeCourses = (id: string) => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem("user_id");
   const response = await fetch(`${API_URL}/courses/${id}/take-courses`);
 
   const result = await response.json();
@@ -36,8 +35,7 @@ export const getTakeCourses = (id: string) => async (dispatch: Dispatch) => {
   });
 };
 
-export const getFavoriteCourses = () => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem("user_id");
+export const getFavoriteCourses = (user_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/courses/${user_id}/favorite-courses`);
 
   const result = await response.json();
@@ -49,12 +47,9 @@ export const getFavoriteCourses = () => async (dispatch: Dispatch) => {
 };
 
 export const getCompletedCourses = (id: string) => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem("user_id");
   const response = await fetch(`${API_URL}/courses/${id}/completed-courses`);
 
   const result = await response.json();
-
-  console.log(result);
 
   dispatch({
     type: GET_MY_COMPLETED_COURSES,

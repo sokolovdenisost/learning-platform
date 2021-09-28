@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Res, Req, Session, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Req, Session, Param, UseGuards } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { CreateUserDTO, LoginUserDTO } from './dto/auth.dto';
 import { AuthService } from './auth.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -9,9 +10,9 @@ export class AuthController {
 
   @Get('')
   async getAuth(@Req() req: Request, @Res() res: Response): Promise<void> {
-    const user_id = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
-    if (user_id) {
-      res.json(await this.authService.findUserById(user_id)).status(200);
+    const token = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
+    if (token) {
+      res.json(await this.authService.getAuth(token)).status(200);
     } else {
       res.json({ code: 401, type: 'Error', text: 'Unauthorized' }).status(401);
     }

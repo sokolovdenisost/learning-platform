@@ -3,14 +3,19 @@ import { API_URL } from '../../consts';
 import { ERROR, GET_AUTH, GET_USER } from '../types';
 
 export const getAuth = () => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
+  const token = localStorage.getItem('token');
+
   const response = await fetch(`${API_URL}/auth`, {
     headers: {
-      Authorization: `USER_ID ${user_id ? user_id : ''}`,
+      Authorization: `Bearer ${token ? token : ''}`,
     },
   });
 
   const result = await response.json();
+
+  if (result._id) {
+    localStorage.setItem('user_id', result._id)
+  }
 
   dispatch({
     type: GET_AUTH,

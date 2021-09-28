@@ -16,10 +16,6 @@ function App() {
     dispatch(getAuth());
   }, []);
 
-  useEffect(() => {
-    console.log(lang);
-  }, [lang]);
-
   const user: IStateUser = useSelector((state: IState) => state.user);
   return (
     <Suspense fallback={<Loader />}>

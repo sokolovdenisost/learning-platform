@@ -19,6 +19,7 @@ import { changeParams, getEditCourse } from '../../store/actions/courseAction';
 import { Loader } from '../../components/Loader/Loader';
 import { IState, IStateCourse } from '../../interfaces/state';
 import { useTranslation } from 'react-i18next';
+import { IUser } from '../../interfaces/user';
 
 const TAGS = [
   'Web design',
@@ -37,17 +38,15 @@ const TAGS = [
 export const EditCourse = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const user: IUser = useSelector((state: IState) => state.user.user)
   const id = window.location.pathname.split('/')[2];
   const [photo, setPhoto] = useState<any>({})
   const { course, loading, error }: IStateCourse = useSelector((state: IState) => state.course);
 
   useEffect(() => {
-    dispatch(getEditCourse(id));
+    dispatch(getEditCourse(user._id, id));
   }, []);
 
-  useEffect(() => {
-    console.log(photo)
-  }, [photo])
 
   function changeFile(e: React.ChangeEvent<HTMLInputElement>) {
     setPhoto({ [e.currentTarget.id]: e.currentTarget.files });

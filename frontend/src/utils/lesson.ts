@@ -73,7 +73,6 @@ export async function addCommentInLessonHandler(lesson_id: string, comment: stri
     });
 
     const result = await response.json();
-    console.log(result);
 
     if (result.type === 'Success') {
       window.location.reload();

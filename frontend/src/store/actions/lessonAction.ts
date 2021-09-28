@@ -2,8 +2,7 @@ import { Dispatch } from 'redux';
 import { API_URL } from '../../consts';
 import { CHANGE_PARAMS, ERROR, GET_EDIT_LESSON, GET_LESSON } from '../types';
 
-export const getLesson = (lesson_id: string) => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
+export const getLesson = (user_id: string, lesson_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/lesson/${lesson_id}/${user_id}`);
 
   const result = await response.json();
@@ -21,8 +20,7 @@ export const getLesson = (lesson_id: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export const getEditLesson = (lesson_id: string) => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
+export const getEditLesson = (user_id: string, lesson_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/lesson/edit-lesson/${lesson_id}/${user_id}`);
 
   const result = await response.json();

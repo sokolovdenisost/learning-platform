@@ -2,8 +2,7 @@ import { Dispatch } from 'redux';
 import { API_URL } from '../../consts';
 import { CHANGE_PARAMS, ERROR, GET_COURSE, GET_EDIT_COURSE, GO_EMPTY } from '../types';
 
-export const getEditCourse = (course_id: string) => async (dispatch: Dispatch) => {
-  const user_id = localStorage.getItem('user_id');
+export const getEditCourse = (user_id: string, course_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/course/edit/${course_id}/${user_id}`);
 
   const result = await response.json();

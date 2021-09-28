@@ -8,6 +8,9 @@ import { ICourse } from '../../interfaces/course';
 import { favoriteCourseHandler, setRatingForCourseHandler } from '../../utils/course';
 import { useFavorite } from '../../hooks/favorite';
 import { useRating } from '../../hooks/rating';
+import { IUser } from '../../interfaces/user';
+import { useSelector } from 'react-redux';
+import { IState } from '../../interfaces/state';
 
 interface Props {
   translateY?: number;
@@ -16,6 +19,7 @@ interface Props {
 }
 
 export const CardCourse = ({ translateY, styles, course }: Props) => {
+  const user: IUser = useSelector((state: IState) => state.user.user)
   const styleCard = styles
     ? {
         transform: `translateY(-${translateY}px) scale(${styles.scale})`,
@@ -26,7 +30,7 @@ export const CardCourse = ({ translateY, styles, course }: Props) => {
         marginBottom: 15,
       };
 
-  const favorite = useFavorite(course);
+  const favorite = useFavorite(user._id, course);
   const rating = useRating(course.rating);
 
   const mapTags = course.tags.map((tag) => {

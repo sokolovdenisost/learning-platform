@@ -1,5 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { ICourse } from "../../../interfaces/course";
+import { IState } from "../../../interfaces/state";
+import { IUser } from "../../../interfaces/user";
 import { Button } from "../../Button/Button";
 import { Modal } from "../../Modal/Modal";
 import "./WatchAnotherLesson.scss";
@@ -13,7 +16,8 @@ interface Props {
 }
 
 export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, lesson_id }: Props) => {
-  const user_id = localStorage.getItem("user_id");
+  const user: IUser = useSelector((state: IState) => state.user.user)
+
   const mapLessons = course.lessons.map((lesson, index) => {
     if (lesson_id === lesson) {
       return (
@@ -21,7 +25,7 @@ export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, l
           {index + 1}
         </Button>
       );
-    } else if (course.owner._id === user_id) {
+    } else if (course.owner._id === user._id) {
       return (
         <a key={lesson} href={`/lesson/${lesson}`} style={{ display: "block" }}>
           <Button type="bold" color="primary" fontSize="14" width="100%">

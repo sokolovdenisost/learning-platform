@@ -15,11 +15,10 @@ interface Props {
 export const Created = ({ id }: Props) => {
   const dispatch = useDispatch();
   const { createdCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
-  const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
     dispatch(getCreatedCourses(id));
-  }, [user_id]);
+  }, []);
 
   const mapCreatedCourses = createdCourses.map((course: ICourse) => {
     return <CardCourse course={course} key={course._id} />;

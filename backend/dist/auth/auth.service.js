@@ -20,11 +20,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const user_schema_1 = require("../schemas/user.schema");
 const validate_service_1 = require("../validate/validate.service");
+const jwt_1 = require("@nestjs/jwt");
 const saltOrRounds = 10;
 let AuthService = class AuthService {
-    constructor(userModel, validateService) {
+    constructor(userModel, validateService, jwtService) {
         this.userModel = userModel;
         this.validateService = validateService;
+        this.jwtService = jwtService;
+    }
+    async getAuth(token) {
+        const onToken = this.jwtService.decode(token);
+        return await this.findUserById(onToken['_id']);
     }
     async loginUser(data) {
         if (data.email && data.password) {
@@ -32,7 +38,8 @@ let AuthService = class AuthService {
             if (user) {
                 const checkPassword = bcrypt.compareSync(data.password, user.password);
                 if (checkPassword) {
-                    return { code: 200, type: 'Success', text: 'Signed into account', user_id: user._id };
+                    const payload = { firstName: user.firstName, lastName: user.lastName, email: user.email, _id: user._id };
+                    return { code: 200, type: 'Success', text: 'Signed into account', access_token: this.jwtService.sign(payload), };
                 }
                 else {
                     return { code: 400, type: 'Error', text: 'Data is incorrect' };
@@ -73,7 +80,7 @@ let AuthService = class AuthService {
     }
     async findUserById(id) {
         if (mongoose.isValidObjectId(id)) {
-            return await this.userModel.findById(id);
+            return await this.userModel.findById(id).select('-password');
         }
     }
 };
@@ -81,7 +88,8 @@ AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        validate_service_1.ValidateService])
+        validate_service_1.ValidateService,
+        jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

@@ -2,6 +2,7 @@ import { API_URL } from "../consts";
 
 export async function createCourseHandler(body: ICourse, file: any): Promise<any> {
   const formData = new FormData();
+  const user_id = localStorage.getItem('user_id')
 
   for (let elem in body) {
     if (elem === "tags") {
@@ -11,7 +12,6 @@ export async function createCourseHandler(body: ICourse, file: any): Promise<any
     }
   }
 
-  const user_id = localStorage.getItem("user_id");
   formData.append("_id", String(user_id));
   formData.append("file", file["0"]);
 
@@ -30,7 +30,7 @@ export async function createCourseHandler(body: ICourse, file: any): Promise<any
 }
 
 export async function deleteCourseHandler(id: string): Promise<any> {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = localStorage.getItem('user_id')
   const response = await fetch(`${API_URL}/course/${id}`, {
     method: "Post",
     body: JSON.stringify({ user_id }),
@@ -51,7 +51,7 @@ export async function deleteCourseHandler(id: string): Promise<any> {
 
 export async function editCourseHandler(body: ICourse, id: string, file: any): Promise<any> {
   const formData = new FormData();
-  const user_id = localStorage.getItem("user_id");
+  const user_id = localStorage.getItem('user_id')
 
   for (let elem in body) {
     if (elem === "tags") {
@@ -112,9 +112,6 @@ export async function setRatingForCourseHandler(course_id: string, rating: numbe
 
   const result = await response.json();
 
-  // if (result.type === 'Success') {
-  //   window.location.reload();
-  // }
 
   return result;
 }
@@ -151,7 +148,6 @@ export async function nextLessonHandler(course_id: string, lesson_id: string) {
   });
 
   const result = await response.json();
-  console.log(result);
 
   if (result.type === "Success" && result.nextLessonId) {
     window.location.pathname = `/lesson/${result.nextLessonId}`;

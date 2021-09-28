@@ -31,9 +31,7 @@ export const Lesson = () => {
   const infoLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
 
   useEffect(() => {
-    dispatch(getLesson(params[2]));
-    console.log(infoLesson[0])
-    console.log(lesson)
+    dispatch(getLesson(user._id, params[2]));
   }, []);
 
   function watchAnotherLessons() {

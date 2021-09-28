@@ -30,13 +30,14 @@ export async function loginHandler(data: ILogin): Promise<any> {
     window.location.reload();
   }
 
-  localStorage.setItem('user_id', result.user_id);
+  localStorage.setItem('token', result.access_token);
 
   return result;
 }
 
 export async function logoutHandler(): Promise<void> {
   localStorage.removeItem('user_id');
+  localStorage.removeItem('token');
   window.location.reload();
 }
 
