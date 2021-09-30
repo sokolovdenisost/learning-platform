@@ -1,12 +1,12 @@
-import { API_URL } from '../consts';
+import { API_URL } from "../consts";
 
 export async function registerHandler(data: IRegister): Promise<ISuccess | IError> {
   const response = await fetch(`${API_URL}/auth/register`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({ ...data }),
     headers: {
-      'Content-Type': 'application/json',
-      Accept: '*/*',
+      "Content-Type": "application/json",
+      Accept: "*/*",
     },
   });
 
@@ -16,28 +16,28 @@ export async function registerHandler(data: IRegister): Promise<ISuccess | IErro
 
 export async function loginHandler(data: ILogin): Promise<any> {
   const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({ ...data }),
     headers: {
-      'Content-Type': 'application/json',
-      Accept: '*/*',
+      "Content-Type": "application/json",
+      Accept: "*/*",
     },
   });
 
   const result = await response.json();
 
-  if (result.type === 'Success') {
+  if (result.type === "Success") {
     window.location.reload();
   }
 
-  localStorage.setItem('token', result.access_token);
+  localStorage.setItem("token", result.access_token);
 
   return result;
 }
 
 export async function logoutHandler(): Promise<void> {
-  localStorage.removeItem('user_id');
-  localStorage.removeItem('token');
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("token");
   window.location.reload();
 }
 
@@ -65,4 +65,4 @@ interface IError {
   text: string;
 }
 
-type TypeResponse = 'Error' | 'Success';
+type TypeResponse = "Error" | "Success";

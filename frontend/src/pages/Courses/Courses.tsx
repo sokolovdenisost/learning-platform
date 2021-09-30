@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { CardCourse } from '../../components/CardCourse/CardCourse';
-import { Filter } from '../../components/Filter/Filter';
-import { Layout } from '../../components/Layout/Layout';
-import { Loader } from '../../components/Loader/Loader';
-import { API_URL } from '../../consts';
-import { ICourse } from '../../interfaces/course';
-import { IState, IStateCourses } from '../../interfaces/state';
-import { useTranslation } from 'react-i18next';
-import { getAllCourses } from '../../store/actions/coursesAction';
-import './Courses.scss';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CardCourse } from "../../components/CardCourse/CardCourse";
+import { Filter } from "../../components/Filter/Filter";
+import { Layout } from "../../components/Layout/Layout";
+import { Loader } from "../../components/Loader/Loader";
+import { API_URL } from "../../consts";
+import { ICourse } from "../../interfaces/course";
+import { IState, IStateCourses } from "../../interfaces/state";
+import { useTranslation } from "react-i18next";
+import { getAllCourses } from "../../store/actions/coursesAction";
+import "./Courses.scss";
+import { test } from "../../utils/course";
 
 export const Courses = () => {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ export const Courses = () => {
 
   return (
     <Layout title="All courses">
+      <button onClick={test}>test</button>
       <div className="courses-page">
         <Filter />
         {mapCourses}

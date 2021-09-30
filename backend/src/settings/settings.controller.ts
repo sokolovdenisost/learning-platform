@@ -22,7 +22,11 @@ export class SettingsController {
 
   @Post('change-photo')
   @UseInterceptors(FileInterceptor('file'))
-  async changePhoto(@Res() res: Response, @Body() body: any, @UploadedFile('file') file: Express.Multer.File): Promise<void> {
+  async changePhoto(
+    @Res() res: Response,
+    @Body() body: any,
+    @UploadedFile('file') file: Express.Multer.File,
+  ): Promise<void> {
     const result = await this.settingsService.changePhoto(body.user_id, file);
 
     res.json(result).status(result.code);

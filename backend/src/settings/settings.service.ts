@@ -21,7 +21,7 @@ export class SettingsService {
 
   async changePersonalData(body: IChangePersonalData): Promise<ISuccess | IError> {
     if (body._id) {
-      if (body.firstName.trim() || body.lastName.trim() || body.email.trim()) {
+      if (body.firstName.trim() && body.lastName.trim() && body.email.trim()) {
         await this.userModel.findByIdAndUpdate(body._id, body);
         return { code: 200, text: 'Changed personal data', type: 'Success' };
       } else {

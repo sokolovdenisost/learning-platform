@@ -22,9 +22,9 @@ export const Completed = ({ id }: Props) => {
     return <CardCourse course={course} key={course._id} />;
   });
 
-  if (loading) {
+  if (loading || !completedCourses.length) {
     return <LoaderSection />;
   }
 
-  return <div>{completedCourses.length ? mapCompletedCourses : "No completed courses"}</div>;
+  return <div>{completedCourses.length ? mapCompletedCourses : 'No completed courses'}</div>;
 };

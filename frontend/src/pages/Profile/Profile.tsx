@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Block } from "../../components/Block/Block";
 import { Button } from "../../components/Button/Button";
 import { Layout } from "../../components/Layout/Layout";
-import { Loader } from "../../components/Loader/Loader";
 import { Completed } from "../../components/ProfileSections/Completed/Completed";
 import { Created } from "../../components/ProfileSections/Created/Created";
 import { Take } from "../../components/ProfileSections/Take/Take";
@@ -47,13 +46,13 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="profile-right">
+            {/* <div className="profile-right">
               <SocialButton social="fb" />
               <SocialButton social="ok" />
               <SocialButton social="vk" />
               <SocialButton social="ok" />
               <SocialButton social="vk" />
-            </div>
+            </div> */}
           </div>
         </Block>
         <div className="profile-body">

@@ -1,14 +1,12 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .notification {
   position: fixed;
   right: 15px;
   bottom: 15px;
-  padding: 30px 40px;
+  width: 300px;
   border-radius: $r5;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
+  background: #fff;
   transform: translateY(-50%);
   opacity: 0;
   transition: all 0.3s ease;
@@ -23,11 +21,24 @@
     }
   }
 
-  &.Error {
-    background: $danger;
+  .notification-image {
+    border-radius: $r5 $r5 0 0;
+    text-align: center;
+    padding: 20px 0;
+
+    &.Error {
+      background: $danger;
+    }
+
+    &.Success {
+      background: $success;
+    }
   }
 
-  &.Success {
-    background: $success;
+  .notification-text {
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
   }
 }

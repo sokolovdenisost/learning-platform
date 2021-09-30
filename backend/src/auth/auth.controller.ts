@@ -11,7 +11,7 @@ export class AuthController {
   @Get('')
   async getAuth(@Req() req: Request, @Res() res: Response): Promise<void> {
     const token = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
-    if (token) {
+    if (token !== undefined) {
       res.json(await this.authService.getAuth(token)).status(200);
     } else {
       res.json({ code: 401, type: 'Error', text: 'Unauthorized' }).status(401);

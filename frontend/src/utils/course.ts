@@ -2,7 +2,7 @@ import { API_URL } from "../consts";
 
 export async function createCourseHandler(body: ICourse, file: any): Promise<any> {
   const formData = new FormData();
-  const user_id = localStorage.getItem('user_id')
+  const user_id = localStorage.getItem("user_id");
 
   for (let elem in body) {
     if (elem === "tags") {
@@ -30,7 +30,7 @@ export async function createCourseHandler(body: ICourse, file: any): Promise<any
 }
 
 export async function deleteCourseHandler(id: string): Promise<any> {
-  const user_id = localStorage.getItem('user_id')
+  const user_id = localStorage.getItem("user_id");
   const response = await fetch(`${API_URL}/course/${id}`, {
     method: "Post",
     body: JSON.stringify({ user_id }),
@@ -51,7 +51,7 @@ export async function deleteCourseHandler(id: string): Promise<any> {
 
 export async function editCourseHandler(body: ICourse, id: string, file: any): Promise<any> {
   const formData = new FormData();
-  const user_id = localStorage.getItem('user_id')
+  const user_id = localStorage.getItem("user_id");
 
   for (let elem in body) {
     if (elem === "tags") {
@@ -112,7 +112,6 @@ export async function setRatingForCourseHandler(course_id: string, rating: numbe
 
   const result = await response.json();
 
-
   return result;
 }
 
@@ -129,7 +128,7 @@ export async function joinCourseHandler(course_id: string): Promise<any> {
 
   const result = await response.json();
 
-  if (result.type === "Success") {
+  if (result.type === "Success" && result.text === "Joined the course") {
     window.location.pathname = "/my-courses";
   }
 
@@ -154,6 +153,8 @@ export async function nextLessonHandler(course_id: string, lesson_id: string) {
   } else if (result.type === "Success" && (result.text === "Completed course" || "Course is already completed")) {
     window.location.pathname = "/my-courses";
   }
+
+  console.log(result);
 
   return result;
 }
@@ -180,3 +181,13 @@ interface IEditLesson {
 }
 
 type LevelCourse = "Trainee" | "Junior" | "Middle" | "Senior";
+
+export async function test() {
+  const response = await fetch(`${API_URL}/course/test`);
+
+  const result = await response.json();
+
+  console.log(result);
+
+  return result;
+}

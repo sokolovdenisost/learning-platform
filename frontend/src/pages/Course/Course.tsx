@@ -32,8 +32,9 @@ export const Course = () => {
   }, []);
 
   function checkJoinedTheCourse(): boolean {
-    const check = user.takeCourses.filter((c: any) => c.course === course._id);
-    return check.length ? true : false;
+    const checkTakeCourses = user.takeCourses.filter((c: any) => c.course === course._id);
+    const checkCompletedCourses = user.completedCourses.filter((c: string) => c === String(course._id));
+    return checkCompletedCourses.length || checkTakeCourses.length ? true : false;
   }
 
   const mapTags = course.tags.map((tag: string, index: number) => {
@@ -58,7 +59,7 @@ export const Course = () => {
         <Block width="100%">
           <div className="course-info">
             <div className="course-left">
-              <img className="course-image" alt="" src={course.image.photo_url} />
+              <img className="course-image" alt={course.image.public_id} src={course.image.photo_url} />
               <div className="course-rating">
                 <div className="course-rating-number">{rating.rating}</div>
                 <div className="course-rating-stars">

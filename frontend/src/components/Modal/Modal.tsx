@@ -29,7 +29,6 @@ export const Modal = ({ modal, setModal, title, children }: Props) => {
       <div className={activeModal ? "modal-block active" : "modal-block"} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">{title}</div>
         <div className="modal-body">{children}</div>
-        <div className="modal-footer"></div>
       </div>
     </div>
   );
@@ -60,20 +59,10 @@ export const SignInModal = ({ modal, setModal }: Props) => {
     });
     const result = await loginHandler(data);
     setResult(result);
+  }
 
-    // if (result.type === 'Success') {
-    //   window.location.reload(true);
-    // }
-
-    setTimeout(
-      () =>
-        setResult({
-          type: "",
-          text: "",
-          code: 0,
-        }),
-      5000,
-    );
+  if (result.type) {
+    setTimeout(() => setResult({ type: "", text: "", code: 0 }), 5000);
   }
 
   return (
@@ -132,7 +121,7 @@ export const SignUpModal = ({ modal, setModal }: Props) => {
           text: "",
           code: 0,
         }),
-      5000,
+      5000
     );
   }
 

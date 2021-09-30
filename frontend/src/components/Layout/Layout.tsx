@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { IoNotificationsOutline } from 'react-icons/io5';
-import { RiArrowDownSLine } from 'react-icons/ri';
-import { Button } from '../Button/Button';
-import { SignInModal, SignUpModal } from '../Modal/Modal';
-import { UserMenu } from '../UserMenu/UserMenu';
-import { useTranslation } from 'react-i18next';
-import './Layout.scss';
+import React, { useState } from "react";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { RiArrowDownSLine } from "react-icons/ri";
+import { Button } from "../Button/Button";
+import { SignInModal, SignUpModal } from "../Modal/Modal";
+import { UserMenu } from "../UserMenu/UserMenu";
+import { useTranslation } from "react-i18next";
+import "./Layout.scss";
 
-import ru_flag from '../../assets/ru_flag.png';
-import en_flag from '../../assets/en_flag.png';
-import { useSelector } from 'react-redux';
-import { IState, IStateUser } from '../../interfaces/state';
+import ru_flag from "../../assets/ru_flag.png";
+import en_flag from "../../assets/en_flag.png";
+import { useSelector } from "react-redux";
+import { IState, IStateUser } from "../../interfaces/state";
 
 interface Props {
   title?: string;
@@ -22,11 +22,11 @@ export const Layout = ({ title, children }: Props) => {
   const user: IStateUser = useSelector((state: IState) => state.user);
 
   const [authModal, setAuthModal] = useState({
-    type: '',
+    type: "",
     active: false,
   });
   const [active, setActive] = useState(false);
-  const lang = localStorage.getItem('lang');
+  const lang = localStorage.getItem("lang");
 
   if (user.loading) {
     return null;
@@ -37,7 +37,7 @@ export const Layout = ({ title, children }: Props) => {
   }
 
   const changeLanguage = (lang: string) => {
-    localStorage.setItem('lang', lang);
+    localStorage.setItem("lang", lang);
     window.location.reload();
     i18n.changeLanguage(lang);
   };
@@ -47,13 +47,13 @@ export const Layout = ({ title, children }: Props) => {
       <div className="layout">
         <div className="layout-top">
           <div className="layout-logo"></div>
-          {user.user.firstName ? (
+          {user.user._id ? (
             <div className="layout-rigth">
               <div className="layout-language">
-                {lang === 'ru' ? (
-                  <img alt="" src={ru_flag} className="language-flag" data-flag="en" onClick={() => changeLanguage('en')} />
+                {lang === "ru" ? (
+                  <img alt="" src={ru_flag} className="language-flag" data-flag="en" onClick={() => changeLanguage("en")} />
                 ) : (
-                  <img alt="" src={en_flag} className="language-flag" data-flag="ru" onClick={() => changeLanguage('ru')} />
+                  <img alt="" src={en_flag} className="language-flag" data-flag="ru" onClick={() => changeLanguage("ru")} />
                 )}
               </div>
               <div className="layout-notification">
@@ -71,10 +71,10 @@ export const Layout = ({ title, children }: Props) => {
             </div>
           ) : (
             <div className="layout-auth">
-              <Button type="outline" color="main" fontSize="16" onClick={() => setModalOptions('signUp')}>
+              <Button type="outline" color="main" fontSize="16" onClick={() => setModalOptions("signUp")}>
                 Sign up
               </Button>
-              <Button type="bold" color="main" fontSize="16" onClick={() => setModalOptions('signIn')}>
+              <Button type="bold" color="main" fontSize="16" onClick={() => setModalOptions("signIn")}>
                 Sign in
               </Button>
             </div>
@@ -85,9 +85,9 @@ export const Layout = ({ title, children }: Props) => {
           <div className="layout-body">{children}</div>
         </div>
       </div>
-      {authModal.active && authModal.type === 'signIn' ? (
+      {authModal.active && authModal.type === "signIn" ? (
         <SignInModal modal={authModal} setModal={setAuthModal} />
-      ) : authModal.active && authModal.type === 'signUp' ? (
+      ) : authModal.active && authModal.type === "signUp" ? (
         <SignUpModal modal={authModal} setModal={setAuthModal} />
       ) : null}
     </>

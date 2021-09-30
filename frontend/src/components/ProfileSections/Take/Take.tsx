@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ICourse } from "../../../interfaces/course";
 import { IState, IStateCourses } from "../../../interfaces/state";
+import { goEmpty } from "../../../store/actions/courseAction";
 import { getTakeCourses } from "../../../store/actions/coursesAction";
 import { CardCourse } from "../../CardCourse/CardCourse";
 import { LoaderSection } from "../../Loader/Loader";
@@ -25,7 +26,7 @@ export const Take = ({ id }: Props) => {
     return <LoaderSection />;
   }
 
-  return <div>{takeCourses.length ? mapTakeCourses : "No take courses"}</div>;
+  return <div>{takeCourses.length ? mapTakeCourses : 'No take courses'}</div>;
 };
 
 interface ITakeCourse {

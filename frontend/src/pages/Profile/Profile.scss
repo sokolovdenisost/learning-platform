@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .profile-page {
   .profile-top {
@@ -52,8 +52,14 @@
     margin-top: 25px;
 
     .profile-sections-buttons {
+      text-align: center;
+
       button {
         margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
 

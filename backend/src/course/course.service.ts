@@ -29,6 +29,36 @@ export class CourseService {
     private cloudinaryService: CloudinaryService,
   ) {}
 
+  async test(): Promise<any> {
+    const courses = await this.courseModel.find();
+    const users = await this.userModel.find();
+    const photos = await this.photoModel.find();
+
+    const allUsePhotos: string[] = [];
+    const allPhotos = [];
+    const allDeletePhotoIDS = [];
+    const array = [1, 2, 3];
+
+    courses.forEach((course) => allUsePhotos.push(course.image.public_id));
+    users.forEach((user) => allUsePhotos.push(user.avatar.public_id));
+    photos.forEach((photo) => allPhotos.push(photo));
+
+    for (let elem of allPhotos) {
+      const check = allUsePhotos.find((c) => c === elem.public_id);
+
+      if (check === undefined) {
+        allDeletePhotoIDS.push(elem);
+      }
+    }
+
+    allDeletePhotoIDS.forEach(async (photo) => {
+      await this.photoModel.findByIdAndDelete(photo._id);
+      await this.cloudinaryService.removeImage(photo.public_id);
+    });
+
+    return { code: 200, text: 'Photos that are not in use deleted', type: 'Success' };
+  }
+
   async getCourseByIdAndUserId(id: string, user_id: string): Promise<any> {
     if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
       const course = await this.courseModel.findById(id).populate('lessons');
@@ -233,8 +263,9 @@ export class CourseService {
       const user = await this.userModel.findById(body.user_id);
       const course = await this.courseModel.findById(body.course_id);
       if (user && course) {
-        const check = user.takeCourses.filter((c) => String(c.course) === String(course._id));
-        if (check.length) {
+        const checkTakeCourse = user.takeCourses.filter((c) => String(c.course) === String(course._id));
+        const checkCompletedCourse = user.completedCourses.filter((c) => String(c) === String(course._id));
+        if (checkTakeCourse.length || checkCompletedCourse.length) {
           return { code: 200, text: 'You are already taking this course', type: 'Success' };
         } else {
           user.takeCourses.push({
@@ -280,11 +311,7 @@ export class CourseService {
 
             return { code: 200, text: 'Text', type: 'Success', nextLessonId: course.lessons[idxLesson + 1] };
           } else if (course.lessons.length === user.takeCourses[idxCourse].currentLesson) {
-            user.takeCourses[idxCourse] = {
-              ...user.takeCourses[idxCourse],
-              course,
-              currentLesson: idxLesson + 2,
-            };
+            user.takeCourses.splice(idxCourse, 1);
 
             user.completedCourses.push(course);
 
@@ -295,6 +322,10 @@ export class CourseService {
             const check = user.completedCourses.filter((c) => String(c) === String(course._id));
 
             if (check.length) {
+              user.takeCourses.splice(idxCourse, 1);
+
+              await user.save();
+
               return { code: 200, text: 'Course is already completed', type: 'Success' };
             }
           }

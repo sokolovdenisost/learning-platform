@@ -21,6 +21,10 @@ let CourseController = class CourseController {
     constructor(courseService) {
         this.courseService = courseService;
     }
+    async test(res) {
+        const result = await this.courseService.test();
+        res.json(result).status(result.code);
+    }
     async getCourseById(res, id) {
         const result = await this.courseService.getCourseById(id);
         res.json(result).status(result.code);
@@ -58,6 +62,13 @@ let CourseController = class CourseController {
         res.json(result).status(result.code);
     }
 };
+__decorate([
+    (0, common_1.Get)('test'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "test", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Res)()),

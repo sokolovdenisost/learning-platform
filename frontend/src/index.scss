@@ -39,10 +39,10 @@ $testing-bg: #eceff1;
 $testing: #455a64;
 
 // Fonts
-$baloo: 'Baloo Bhai 2', cursive;
-$balso: 'Balsamiq Sans', cursive;
-$nunito: 'Nunito', sans-serif;
-$comfort: 'Comfortaa', cursive;
+$baloo: "Baloo Bhai 2", cursive;
+$balso: "Balsamiq Sans", cursive;
+$nunito: "Nunito", sans-serif;
+$comfort: "Comfortaa", cursive;
 
 // Radius
 $r5: 5px;
@@ -56,7 +56,7 @@ a {
 }
 
 * {
-  line-height: 100%;
+  line-height: 110%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

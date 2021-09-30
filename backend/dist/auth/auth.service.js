@@ -30,7 +30,10 @@ let AuthService = class AuthService {
     }
     async getAuth(token) {
         const onToken = this.jwtService.decode(token);
-        return await this.findUserById(onToken['_id']);
+        if (onToken['_id']) {
+            return await this.findUserById(onToken['_id']);
+        }
+        return null;
     }
     async loginUser(data) {
         if (data.email && data.password) {
@@ -39,7 +42,12 @@ let AuthService = class AuthService {
                 const checkPassword = bcrypt.compareSync(data.password, user.password);
                 if (checkPassword) {
                     const payload = { firstName: user.firstName, lastName: user.lastName, email: user.email, _id: user._id };
-                    return { code: 200, type: 'Success', text: 'Signed into account', access_token: this.jwtService.sign(payload), };
+                    return {
+                        code: 200,
+                        type: 'Success',
+                        text: 'Signed into account',
+                        access_token: this.jwtService.sign(payload),
+                    };
                 }
                 else {
                     return { code: 400, type: 'Error', text: 'Data is incorrect' };

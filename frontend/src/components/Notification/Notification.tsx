@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import './Notification.scss';
+import React, { useState } from "react";
+import { RiErrorWarningLine } from "react-icons/ri";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import "./Notification.scss";
 
 interface Props {
   text: string;
@@ -13,9 +15,16 @@ export const Notification = ({ type, text }: Props) => {
     setActive(true);
   }, 300);
 
-  setTimeout(() => {
-    setActive(false);
-  }, 4700);
-
-  return <div className={active ? `notification active ${type}` : `notification ${type}`}>{text}</div>;
+  return (
+    <div className={type !== "" && active ? `notification active` : `notification active noactive`}>
+      <div className={`notification-image ${type}`}>
+        {type === "Error" ? (
+          <RiErrorWarningLine size={100} color="#fff" />
+        ) : type === "Success" ? (
+          <AiOutlineCheckCircle size={100} color="#fff" />
+        ) : null}
+      </div>
+      <div className="notification-text">{text}</div>
+    </div>
+  );
 };

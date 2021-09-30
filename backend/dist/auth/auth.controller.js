@@ -22,7 +22,7 @@ let AuthController = class AuthController {
     }
     async getAuth(req, res) {
         const token = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : null;
-        if (token) {
+        if (token !== undefined) {
             res.json(await this.authService.getAuth(token)).status(200);
         }
         else {

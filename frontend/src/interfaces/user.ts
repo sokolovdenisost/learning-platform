@@ -9,6 +9,7 @@ export interface IUser {
   _id: string;
   registered: string;
   takeCourses: TakeCourses[];
+  completedCourses: string[];
 }
 
 interface TakeCourses {

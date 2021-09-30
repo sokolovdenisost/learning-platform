@@ -15,6 +15,7 @@ const initialState: IStateUser = {
     _id: "",
     registered: "",
     takeCourses: [],
+    completedCourses: [],
   },
   profile: {
     firstName: "",
@@ -27,6 +28,7 @@ const initialState: IStateUser = {
     _id: "",
     registered: "",
     takeCourses: [],
+    completedCourses: [],
   },
   loading: true,
   error: false,

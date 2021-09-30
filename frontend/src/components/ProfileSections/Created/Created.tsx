@@ -28,5 +28,5 @@ export const Created = ({ id }: Props) => {
     return <Loader />;
   }
 
-  return <div>{createdCourses.length ? mapCreatedCourses : "No created courses"}</div>;
+  return <div>{createdCourses.length ? mapCreatedCourses : 'No created courses'}</div>;
 };

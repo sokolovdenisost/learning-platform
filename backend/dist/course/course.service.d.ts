@@ -16,6 +16,7 @@ export declare class CourseService {
     private validateService;
     private cloudinaryService;
     constructor(courseModel: Model<CourseDocument>, lessonModel: Model<LessonDocument>, photoModel: Model<PhotoDocument>, userModel: Model<UserDocument>, validateService: ValidateService, cloudinaryService: CloudinaryService);
+    test(): Promise<any>;
     getCourseByIdAndUserId(id: string, user_id: string): Promise<any>;
     editCourseById(body: EditCourseDTO, id: string, file: Express.Multer.File): Promise<ISuccess | IError>;
     getCourseById(id: string): Promise<any>;

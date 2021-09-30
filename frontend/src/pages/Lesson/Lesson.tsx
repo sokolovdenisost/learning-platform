@@ -68,7 +68,7 @@ export const Lesson = () => {
       return <Comment info={com} key={com._id} />;
     })
     .reverse();
-  
+
 
   if (error) {
     return <Error404 />;
@@ -91,7 +91,7 @@ export const Lesson = () => {
           </div>
           <div className="course-progress-lines">
             <div className="course-progress-line-fullprocent" />
-            <div className="course-progress-line-procent" style={{width: procent}} />
+            <div className="course-progress-line-procent" style={{ width: procent }} />
           </div>
         </div>
         <div className="lesson-course-body">
@@ -100,25 +100,27 @@ export const Lesson = () => {
               Watch another lesson
             </Button>
           </div>
-          {mapBlocks}
+          <div className="lesson-body-blocks">
+            {mapBlocks}
+          </div>
           <div className="lesson-course-body-buttons">
             {
-            lesson._id === lesson.course.lessons[0] 
-            ? <div></div> : 
-            <a className="backLesson" href={`/lesson/${backLesson}`}>
-              <Button type="bold" color="primary" fontSize="14">Back lesson</Button>
-            </a>
+              lesson._id === lesson.course.lessons[0]
+                ? <div></div> :
+                <a className="backLesson" href={`/lesson/${backLesson}`}>
+                  <Button type="bold" color="primary" fontSize="14">Back lesson</Button>
+                </a>
             }
-            {nextLesson ? 
-            <a href={`/lesson/${nextLesson}`} className="nextLesson">
+            {nextLesson ?
+              <a href={`/lesson/${nextLesson}`} className="nextLesson">
+                <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
+                  {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
+                </Button>
+              </a> :
               <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
                 {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
               </Button>
-            </a> : 
-            <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
-                {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
-            </Button>
-              }
+            }
           </div>
         </div>
         <div className="lesson-course-comments">
