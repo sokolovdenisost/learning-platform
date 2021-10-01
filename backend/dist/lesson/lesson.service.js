@@ -112,10 +112,11 @@ let LessonService = class LessonService {
                 return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
             }
             if (course && lesson && user) {
-                const check = user.takeCourses.filter((c) => String(c.course) === String(course._id));
-                if (check) {
+                const checkTaked = user.takeCourses.filter((c) => String(c.course) === String(course._id));
+                const checkCompleted = user.completedCourses.filter((c) => String(c) === String(course._id));
+                if (checkTaked || checkCompleted) {
                     const checkAccess = course.lessons.findIndex((l) => String(l) === String(lesson._id));
-                    if (checkAccess <= check[0].currentLesson - 1) {
+                    if (checkCompleted || checkAccess <= checkTaked[0]['currentLesson'] - 1) {
                         return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
                     }
                     else {

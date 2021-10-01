@@ -269,32 +269,34 @@ let CourseService = class CourseService {
             const user = await this.userModel.findById(body.user_id);
             const lesson = await this.lessonModel.findById(body.lesson_id);
             if (course && user && lesson) {
-                const idxCourse = user.takeCourses.findIndex((crs) => String(crs.course) === String(course._id));
-                if (idxCourse >= 0) {
+                const idxCourseTaked = user.takeCourses.findIndex((crs) => String(crs.course) === String(course._id));
+                const idxCourseCompleted = user.completedCourses.findIndex((crs) => String(crs) === String(course._id));
+                if (idxCourseTaked >= 0) {
                     const idxLesson = course.lessons.findIndex((les) => String(les) === body.lesson_id);
-                    if (user.takeCourses[idxCourse].currentLesson < course.lessons.length) {
-                        user.takeCourses[idxCourse] = Object.assign(Object.assign({}, user.takeCourses[idxCourse]), { course, currentLesson: idxLesson + 2 });
+                    if (user.takeCourses[idxCourseTaked].currentLesson < course.lessons.length) {
+                        user.takeCourses[idxCourseTaked] = Object.assign(Object.assign({}, user.takeCourses[idxCourseTaked]), { course, currentLesson: idxLesson + 2 });
                         await user.save();
                         return { code: 200, text: 'Text', type: 'Success', nextLessonId: course.lessons[idxLesson + 1] };
                     }
-                    else if (course.lessons.length === user.takeCourses[idxCourse].currentLesson) {
-                        user.takeCourses.splice(idxCourse, 1);
+                    else if (course.lessons.length === user.takeCourses[idxCourseTaked].currentLesson) {
+                        user.takeCourses.splice(idxCourseTaked, 1);
                         user.completedCourses.push(course);
                         await user.save();
                         return { code: 200, text: 'Completed course', type: 'Success' };
                     }
-                    else if (user.takeCourses[idxCourse].currentLesson > course.lessons.length) {
+                    else if (user.takeCourses[idxCourseTaked].currentLesson > course.lessons.length) {
                         const check = user.completedCourses.filter((c) => String(c) === String(course._id));
                         if (check.length) {
-                            user.takeCourses.splice(idxCourse, 1);
+                            user.takeCourses.splice(idxCourseTaked, 1);
                             await user.save();
                             return { code: 200, text: 'Course is already completed', type: 'Success' };
                         }
                     }
                 }
-                else {
-                    return { code: 400, text: 'Take course not found', type: 'Error' };
+                else if (idxCourseCompleted >= 0) {
+                    return { code: 200, text: 'Course is already completed', type: 'Success' };
                 }
+                return { code: 400, text: 'Take course not found', type: 'Error' };
             }
             else {
                 return { code: 404, text: 'Course or user or lesson not found', type: 'Error' };

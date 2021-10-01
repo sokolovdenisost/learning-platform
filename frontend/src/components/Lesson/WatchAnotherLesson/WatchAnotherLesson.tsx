@@ -11,12 +11,12 @@ interface Props {
   active: IModal;
   setActive: React.Dispatch<React.SetStateAction<IModal>>;
   course: ICourse;
-  currentLesson: number;
+  currentLesson: number | null;
   lesson_id: string;
 }
 
 export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, lesson_id }: Props) => {
-  const user: IUser = useSelector((state: IState) => state.user.user)
+  const user: IUser = useSelector((state: IState) => state.user.user);
 
   const mapLessons = course.lessons.map((lesson, index) => {
     if (lesson_id === lesson) {
@@ -34,7 +34,7 @@ export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, l
         </a>
       );
     } else {
-      const check = course.lessons.findIndex((l) => course.lessons[currentLesson - 1] === l);
+      const check = course.lessons.findIndex((l) => course.lessons[Number(currentLesson) - 1] === l);
       if (index <= check) {
         return (
           <a key={lesson} href={`/lesson/${lesson}`} style={{ display: "block" }}>
@@ -43,7 +43,16 @@ export const WatchAnotherLesson = ({ active, setActive, course, currentLesson, l
             </Button>
           </a>
         );
+      } else if (!currentLesson) {
+        return (
+          <a key={lesson} href={`/lesson/${lesson}`} style={{ display: "block" }}>
+            <Button key={lesson} type="bold" color="primary" fontSize="14">
+              {index + 1}
+            </Button>
+          </a>
+        );
       }
+
       return (
         <Button key={lesson} disable={true} type="bold" color="primary" fontSize="14">
           {index + 1}
