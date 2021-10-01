@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardCourse } from "../../components/CardCourse/CardCourse";
+import { CardCourseCompleted } from "../../components/CardCourseCompleted/CardCourseCompleted";
 import { CardCourseCreated } from "../../components/CardCourseCreated/CardCourseCreated";
 import { Layout } from "../../components/Layout/Layout";
 import { Loader } from "../../components/Loader/Loader";
@@ -13,7 +14,7 @@ import "./MyCourses.scss";
 
 export const MyCourses = () => {
   const dispatch = useDispatch();
-  const user: IUser = useSelector((state: IState) => state.user.user)
+  const user: IUser = useSelector((state: IState) => state.user.user);
   const { createdCourses, takeCourses, completedCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
 
   useEffect(() => {
@@ -31,8 +32,8 @@ export const MyCourses = () => {
   });
 
   const mapCompletedCourses = completedCourses.map((course: ICourse) => {
-    return <CardCourse course={course} key={course._id} />
-  })
+    return <CardCourseCompleted course={course} key={course._id} />;
+  });
 
   if (loading) {
     return <Loader />;
