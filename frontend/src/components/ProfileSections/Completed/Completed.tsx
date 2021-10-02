@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IState, IStateCourses } from "../../../interfaces/state";
+import { goEmpty } from "../../../store/actions/courseAction";
 import { getCompletedCourses } from "../../../store/actions/coursesAction";
 import { CardCourse } from "../../CardCourse/CardCourse";
 import { LoaderSection } from "../../Loader/Loader";
@@ -22,9 +23,9 @@ export const Completed = ({ id }: Props) => {
     return <CardCourse course={course} key={course._id} />;
   });
 
-  if (loading || !completedCourses.length) {
+  if (loading) {
     return <LoaderSection />;
   }
 
-  return <div>{completedCourses.length ? mapCompletedCourses : 'No completed courses'}</div>;
+  return <div>{completedCourses.length ? mapCompletedCourses : "No completed courses"}</div>;
 };

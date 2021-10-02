@@ -5,7 +5,6 @@ import { CreateCourseDTO, DeleteCourseDTO, EditCourseDTO, FavoriteCourseDTO, Joi
 export declare class CourseController {
     private courseService;
     constructor(courseService: CourseService);
-    test(res: Response): Promise<void>;
     getCourseById(res: Response, id: string): Promise<void>;
     getCourseByIdAndUserId(res: Response, params: any): Promise<void>;
     joinCourse(res: Response, body: JoinCourseDTO): Promise<void>;

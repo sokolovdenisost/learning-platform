@@ -16,13 +16,6 @@ import {
 export class CourseController {
   constructor(private courseService: CourseService) {}
 
-  @Get('test')
-  async test(@Res() res: Response): Promise<void> {
-    const result = await this.courseService.test();
-
-    res.json(result).status(result.code);
-  }
-
   @Get(':id')
   async getCourseById(@Res() res: Response, @Param('id') id: string): Promise<void> {
     const result = await this.courseService.getCourseById(id);

@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .layout {
   .layout-top {
@@ -13,6 +13,8 @@
       align-items: center;
 
       .layout-language {
+        display: flex;
+        align-items: center;
         margin-right: 25px;
         cursor: pointer;
       }

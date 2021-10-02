@@ -57,7 +57,9 @@ export const Layout = ({ title, children }: Props) => {
                 )}
               </div>
               <div className="layout-notification">
-                <IoNotificationsOutline size={30} />
+                <a href="/notifications">
+                  <IoNotificationsOutline size={30} />
+                </a>
               </div>
               <div className="layout-user">
                 <div className="layout-user-section" onClick={() => setActive(!active)}>

@@ -29,6 +29,7 @@ export const Lesson = () => {
   const user: IUser = useSelector((state: IState) => state.user.user);
   const params = window.location.pathname.split("/");
   const infoTakeLesson = user.takeCourses.filter((course: any) => course.course === lesson.course._id);
+  const infoCompletedCourse = user.completedCourses.filter((course) => course === lesson.course._id);
 
   useEffect(() => {
     dispatch(getLesson(user._id, params[2]));
@@ -117,14 +118,14 @@ export const Lesson = () => {
             {nextLesson ? (
               <a href={`/lesson/${nextLesson}`} className="nextLesson">
                 <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
-                  {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
+                  Next lesson
                 </Button>
               </a>
-            ) : (
+            ) : !infoCompletedCourse.length ? (
               <Button type="bold" color="primary" fontSize="14" onClick={() => nextLessonHandler(lesson.course._id, lesson._id)}>
-                {lesson._id === lesson.course.lessons[lesson.course.lessons.length - 1] ? "Completed course!" : "Next lesson"}
+                Completed course!
               </Button>
-            )}
+            ) : null}
           </div>
         </div>
         <div className="lesson-course-comments">

@@ -29,36 +29,6 @@ export class CourseService {
     private cloudinaryService: CloudinaryService,
   ) {}
 
-  async test(): Promise<any> {
-    const courses = await this.courseModel.find();
-    const users = await this.userModel.find();
-    const photos = await this.photoModel.find();
-
-    const allUsePhotos: string[] = [];
-    const allPhotos = [];
-    const allDeletePhotoIDS = [];
-    const array = [1, 2, 3];
-
-    courses.forEach((course) => allUsePhotos.push(course.image.public_id));
-    users.forEach((user) => allUsePhotos.push(user.avatar.public_id));
-    photos.forEach((photo) => allPhotos.push(photo));
-
-    for (let elem of allPhotos) {
-      const check = allUsePhotos.find((c) => c === elem.public_id);
-
-      if (check === undefined) {
-        allDeletePhotoIDS.push(elem);
-      }
-    }
-
-    allDeletePhotoIDS.forEach(async (photo) => {
-      await this.photoModel.findByIdAndDelete(photo._id);
-      await this.cloudinaryService.removeImage(photo.public_id);
-    });
-
-    return { code: 200, text: 'Photos that are not in use deleted', type: 'Success' };
-  }
-
   async getCourseByIdAndUserId(id: string, user_id: string): Promise<any> {
     if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
       const course = await this.courseModel.findById(id).populate('lessons');

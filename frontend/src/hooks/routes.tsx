@@ -1,111 +1,116 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { Loader } from '../components/Loader/Loader';
-import { Navigator } from '../components/Navigator/Navigator';
-import { Error404 } from '../pages/404/404';
-import { Course } from '../pages/Course/Course';
-import { Courses } from '../pages/Courses/Courses';
-import { Create } from '../pages/Create/Create';
-import { CreateCourseLesson } from '../pages/CreateCourseLesson/CreateCourseLesson';
-import { EditCourse } from '../pages/EditCourse/EditCourse';
-import { EditCourseLesson } from '../pages/EditCourseLesson/EditCourseLesson';
-import { Favorites } from '../pages/Favorites/Favorites';
-import { Lesson } from '../pages/Lesson/Lesson';
-import { MyCourses } from '../pages/MyCourses/MyCourses';
-import { NewCourses } from '../pages/NewCourses/NewCourses';
-import { News } from '../pages/News/News';
-import { PopularCourses } from '../pages/PopularCourses/PopularCourses';
-import { Profile } from '../pages/Profile/Profile';
-import { Settings } from '../pages/Settings/Settings';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { Loader } from "../components/Loader/Loader";
+import { Navigator } from "../components/Navigator/Navigator";
+import { Error404 } from "../pages/404/404";
+import { Course } from "../pages/Course/Course";
+import { Courses } from "../pages/Courses/Courses";
+import { Create } from "../pages/Create/Create";
+import { CreateCourseLesson } from "../pages/CreateCourseLesson/CreateCourseLesson";
+import { EditCourse } from "../pages/EditCourse/EditCourse";
+import { EditCourseLesson } from "../pages/EditCourseLesson/EditCourseLesson";
+import { Favorites } from "../pages/Favorites/Favorites";
+import { Lesson } from "../pages/Lesson/Lesson";
+import { MyCourses } from "../pages/MyCourses/MyCourses";
+import { NewCourses } from "../pages/NewCourses/NewCourses";
+import { News } from "../pages/News/News";
+import { Notification } from "../pages/Notification/Notification";
+import { PopularCourses } from "../pages/PopularCourses/PopularCourses";
+import { Profile } from "../pages/Profile/Profile";
+import { Settings } from "../pages/Settings/Settings";
 
 export const routes = (loading: boolean, auth: any) => {
   const routesNoAuth = [
     {
-      path: '/',
+      path: "/",
       component: <News />,
     },
     {
-      path: '/courses',
+      path: "/courses",
       component: <Courses />,
     },
     {
-      path: '/new-courses',
+      path: "/new-courses",
       component: <NewCourses />,
     },
     {
-      path: '/popular-courses',
+      path: "/popular-courses",
       component: <PopularCourses />,
     },
     {
-      path: '/course/:id',
+      path: "/course/:id",
       component: <Course />,
     },
     {
-      path: '/404',
+      path: "/404",
       component: <Error404 />,
     },
   ];
 
   const routesAuth = [
     {
-      path: '/',
+      path: "/",
       component: <News />,
     },
     {
-      path: '/courses',
+      path: "/courses",
       component: <Courses />,
     },
     {
-      path: '/my-courses',
+      path: "/my-courses",
       component: <MyCourses />,
     },
     {
-      path: '/favorites',
+      path: "/favorites",
       component: <Favorites />,
     },
     {
-      path: '/create',
+      path: "/create",
       component: <Create />,
     },
     {
-      path: '/settings',
+      path: "/settings",
       component: <Settings />,
     },
     {
-      path: '/new-courses',
+      path: "/new-courses",
       component: <NewCourses />,
     },
     {
-      path: '/popular-courses',
+      path: "/popular-courses",
       component: <PopularCourses />,
     },
     {
-      path: '/course/:id',
+      path: "/course/:id",
       component: <Course />,
     },
     {
-      path: '/user/:id',
+      path: "/user/:id",
       component: <Profile />,
     },
     {
-      path: '/edit/:id',
+      path: "/edit/:id",
       component: <EditCourse />,
     },
     {
-      path: '/edit/:id/lesson/:id',
+      path: "/edit/:id/lesson/:id",
       component: <EditCourseLesson />,
     },
     {
-      path: '/create/:id/lesson',
+      path: "/create/:id/lesson",
       component: <CreateCourseLesson />,
     },
     {
-      path: '/404',
+      path: "/404",
       component: <Error404 />,
     },
     {
-      path: '/lesson/:id',
+      path: "/lesson/:id",
       component: <Lesson />,
+    },
+    {
+      path: "/notifications",
+      component: <Notification />,
     },
   ];
 

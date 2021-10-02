@@ -9,6 +9,9 @@ import { CoursesModule } from './courses/courses.module';
 import { ValidateModule } from './validate/validate.module';
 import { LessonModule } from './lesson/lesson.module';
 import { UserModule } from './user/user.module';
+import { AdminController } from './admin/admin.controller';
+import { AdminService } from './admin/admin.service';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -21,6 +24,7 @@ import { UserModule } from './user/user.module';
     ValidateModule,
     LessonModule,
     UserModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [CloudinaryProvider],

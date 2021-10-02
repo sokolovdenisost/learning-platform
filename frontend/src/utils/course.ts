@@ -182,6 +182,7 @@ interface IEditLesson {
 
 type LevelCourse = "Trainee" | "Junior" | "Middle" | "Senior";
 
+// deletes dont use images
 export async function test() {
   const response = await fetch(`${API_URL}/course/test`);
 
