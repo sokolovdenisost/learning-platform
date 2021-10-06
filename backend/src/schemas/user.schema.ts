@@ -37,6 +37,9 @@ export class User {
 
   @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: 'Course' }] })
   completedCourses: Course[];
+
+  @Prop({ type: String, default: 'user' })
+  role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

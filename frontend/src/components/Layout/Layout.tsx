@@ -69,7 +69,7 @@ export const Layout = ({ title, children }: Props) => {
                   </div>
                 </div>
               </div>
-              {active ? <UserMenu user_id={user.user._id} active={active} setActive={setActive} /> : null}
+              {active ? <UserMenu active={active} setActive={setActive} /> : null}
             </div>
           ) : (
             <div className="layout-auth">

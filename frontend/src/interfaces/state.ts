@@ -18,6 +18,7 @@ export interface IStateLesson {
 export interface IStateUser {
   user: IUser;
   profile: IUser;
+  users: IUser[];
   loading: boolean;
   error: boolean;
 }

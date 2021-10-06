@@ -53,6 +53,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: [{ type: mongoose.Types.ObjectId, ref: 'Course' }] }),
     __metadata("design:type", Array)
 ], User.prototype, "completedCourses", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, default: 'user' }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);

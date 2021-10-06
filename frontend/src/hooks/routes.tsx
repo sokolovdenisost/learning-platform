@@ -1,5 +1,10 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+
+import { Admin } from "../Admin/pages/Admin/Admin";
+import { AdminCourses } from "../Admin/pages/AdminCourses/AdminCourses";
+import { AdminUsers } from "../Admin/pages/AdminUsers/AdminUsers";
+
 import { Loader } from "../components/Loader/Loader";
 import { Navigator } from "../components/Navigator/Navigator";
 import { Error404 } from "../pages/404/404";
@@ -114,7 +119,30 @@ export const routes = (loading: boolean, auth: any) => {
     },
   ];
 
+  const adminRoutes = [
+    {
+      path: "/admin",
+      component: <Admin />,
+    },
+    {
+      path: "/admin/users",
+      component: <AdminUsers />,
+    },
+    {
+      path: "/admin/courses",
+      component: <AdminCourses />,
+    },
+  ];
+
   const mapAuthRoutes = routesAuth.map((c) => {
+    return (
+      <Route key={c.path} path={c.path} exact>
+        {c.component}
+      </Route>
+    );
+  });
+
+  const mapAdminRoutes = [...adminRoutes, ...routesAuth].map((c) => {
     return (
       <Route key={c.path} path={c.path} exact>
         {c.component}
@@ -134,6 +162,20 @@ export const routes = (loading: boolean, auth: any) => {
     return <Loader />;
   }
 
+  console.log(auth);
+
+  if (auth.role === "admin") {
+    return (
+      <>
+        <Navigator auth={auth} />
+        <Switch>
+          {mapAdminRoutes}
+          <Redirect to="/" />
+        </Switch>
+      </>
+    );
+  }
+
   if (auth._id) {
     return (
       <>
@@ -145,6 +187,7 @@ export const routes = (loading: boolean, auth: any) => {
       </>
     );
   }
+
   return (
     <>
       <Navigator auth={auth} />

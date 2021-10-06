@@ -10,6 +10,7 @@ export interface IUser {
   registered: string;
   takeCourses: TakeCourses[];
   completedCourses: string[];
+  role: string;
 }
 
 interface TakeCourses {

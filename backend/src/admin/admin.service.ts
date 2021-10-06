@@ -43,4 +43,10 @@ export class AdminService {
       return { code: 500, text: e.message, type: 'Error' };
     }
   }
+
+  async getAllUsers(): Promise<any> {
+    const users = await this.userModel.find();
+
+    return { code: 200, text: 'All users', type: 'Success', users };
+  }
 }

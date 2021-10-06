@@ -23,6 +23,10 @@ let AdminController = class AdminController {
         const result = await this.adminService.deletesImageDontUse();
         res.json(result).status(result.code);
     }
+    async getAllUsers(res) {
+        const result = await this.adminService.getAllUsers();
+        res.json(result).status(result.code);
+    }
 };
 __decorate([
     (0, common_1.Post)('delete-images'),
@@ -31,6 +35,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "deleteImagesDontUse", null);
+__decorate([
+    (0, common_1.Get)('users'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "getAllUsers", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),
     __metadata("design:paramtypes", [admin_service_1.AdminService])

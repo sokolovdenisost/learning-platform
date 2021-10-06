@@ -10,4 +10,5 @@ export declare class AdminService {
     private cloudinaryService;
     constructor(courseModel: Model<CourseDocument>, photoModel: Model<PhotoDocument>, userModel: Model<UserDocument>, cloudinaryService: CloudinaryService);
     deletesImageDontUse(): Promise<any>;
+    getAllUsers(): Promise<any>;
 }

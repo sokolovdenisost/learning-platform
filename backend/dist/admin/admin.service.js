@@ -54,6 +54,10 @@ let AdminService = class AdminService {
             return { code: 500, text: e.message, type: 'Error' };
         }
     }
+    async getAllUsers() {
+        const users = await this.userModel.find();
+        return { code: 200, text: 'All users', type: 'Success', users };
+    }
 };
 AdminService = __decorate([
     (0, common_1.Injectable)(),

@@ -12,6 +12,7 @@ export declare class User {
     registered: string;
     takeCourses: TakeCourse[];
     completedCourses: Course[];
+    role: string;
 }
 export declare const UserSchema: mongoose.Schema<mongoose.Document<User, any, any>, mongoose.Model<mongoose.Document<User, any, any>, any, any, any>, {}>;
 interface TakeCourse {
