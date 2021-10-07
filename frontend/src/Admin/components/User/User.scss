@@ -1,0 +1,49 @@
+@import "../../../index.scss";
+
+.user-block {
+  display: flex;
+
+  .user-block-left {
+    .user-block-image {
+      width: 150px;
+      height: 150px;
+      border-radius: $r5;
+      object-fit: cover;
+    }
+  }
+
+  .user-block-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 25px;
+
+    .user-block-info {
+      .user-block-fullname {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .user-block-register-date {
+        font-size: 16px;
+        color: $grey-main;
+        margin-top: 5px;
+
+        span {
+          font-size: 16px;
+          color: #000;
+          display: block;
+        }
+      }
+    }
+
+    .user-block-buttons {
+      button {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+  }
+}

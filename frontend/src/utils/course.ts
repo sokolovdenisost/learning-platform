@@ -154,8 +154,6 @@ export async function nextLessonHandler(course_id: string, lesson_id: string) {
     window.location.pathname = "/my-courses";
   }
 
-  console.log(result);
-
   return result;
 }
 
@@ -187,8 +185,6 @@ export async function test() {
   const response = await fetch(`${API_URL}/course/test`);
 
   const result = await response.json();
-
-  console.log(result);
 
   return result;
 }

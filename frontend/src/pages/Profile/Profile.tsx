@@ -7,7 +7,7 @@ import { Completed } from "../../components/ProfileSections/Completed/Completed"
 import { Created } from "../../components/ProfileSections/Created/Created";
 import { Take } from "../../components/ProfileSections/Take/Take";
 import { SocialButton } from "../../components/Social/Social";
-import { useData } from "../../hooks/data";
+import { useDate } from "../../hooks/data";
 import { IState } from "../../interfaces/state";
 import { IUser } from "../../interfaces/user";
 import { getUser } from "../../store/actions/userAction";
@@ -42,7 +42,7 @@ export const Profile = () => {
               <div className="profile-info">
                 <div className="profile-fullname">{profile.firstName + " " + profile.lastName}</div>
                 <div className="profile-registered">
-                  Registered <br /> <span>{useData(profile.registered)}</span>
+                  Registered <br /> <span>{useDate(profile.registered)}</span>
                 </div>
               </div>
             </div>

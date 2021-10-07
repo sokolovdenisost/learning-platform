@@ -30,6 +30,8 @@ export interface IStateCourses {
   favoriteCourses: ICourse[];
   createdCourses: ICourse[];
   completedCourses: ICourse[];
+  provenCourses: ICourse[];
+  untestedCourses: ICourse[];
 }
 
 export interface IStateCourse {

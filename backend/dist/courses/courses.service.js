@@ -81,6 +81,14 @@ let CoursesService = class CoursesService {
             return { code: 400, text: 'ID is not valid', type: 'Error' };
         }
     }
+    async getProvenCourses() {
+        const courses = await this.courseModel.find({ isVerification: true });
+        return { code: 200, text: 'Proven courses', type: 'Success', courses };
+    }
+    async getUntestedCourses() {
+        const courses = await this.courseModel.find({ isVerification: false });
+        return { code: 200, text: 'Untested courses', type: 'Success', courses };
+    }
     async getAllCourses() {
         const courses = await this.courseModel.find({}).populate('owner', '_id firstName lastName');
         return { code: 200, text: 'This all courses', courses: courses.reverse() };

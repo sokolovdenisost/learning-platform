@@ -7,8 +7,6 @@ export const getLesson = (user_id: string, lesson_id: string) => async (dispatch
 
   const result = await response.json();
 
-  console.log(result);
-
   if (result.type === "Error") {
     dispatch({
       type: ERROR,

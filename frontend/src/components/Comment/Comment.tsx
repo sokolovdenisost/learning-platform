@@ -1,6 +1,6 @@
-import React from 'react';
-import { useData } from '../../hooks/data';
-import './Comment.scss';
+import React from "react";
+import { useDate } from "../../hooks/data";
+import "./Comment.scss";
 
 interface Props {
   info: {
@@ -27,9 +27,9 @@ export const Comment = ({ info }: Props) => {
       <div className="comment-right">
         <div className="comment-top">
           <div className="comment-fullname">
-            <a href={`/user/${info.user._id}`}>{info.user.firstName + ' ' + info.user.lastName}</a>
+            <a href={`/user/${info.user._id}`}>{info.user.firstName + " " + info.user.lastName}</a>
           </div>
-          <div className="comment-date">{useData(info.date)}</div>
+          <div className="comment-date">{useDate(info.date)}</div>
         </div>
         <div className="comment-body">{info.comment}</div>
       </div>

@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Admin } from "../Admin/pages/Admin/Admin";
 import { AdminCourses } from "../Admin/pages/AdminCourses/AdminCourses";
+import { AdminProvenCourses } from "../Admin/pages/AdminProvenCourses/AdminProvenCourses";
+import { AdminUntestedCourses } from "../Admin/pages/AdminUntestedCourses/AdminUntestedCourses";
 import { AdminUsers } from "../Admin/pages/AdminUsers/AdminUsers";
 
 import { Loader } from "../components/Loader/Loader";
@@ -132,6 +134,14 @@ export const routes = (loading: boolean, auth: any) => {
       path: "/admin/courses",
       component: <AdminCourses />,
     },
+    {
+      path: "/admin/untested-courses",
+      component: <AdminUntestedCourses />,
+    },
+    {
+      path: "/admin/proven-courses",
+      component: <AdminProvenCourses />,
+    },
   ];
 
   const mapAuthRoutes = routesAuth.map((c) => {
@@ -161,8 +171,6 @@ export const routes = (loading: boolean, auth: any) => {
   if (loading) {
     return <Loader />;
   }
-
-  console.log(auth);
 
   if (auth.role === "admin") {
     return (

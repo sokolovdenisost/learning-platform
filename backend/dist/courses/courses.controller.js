@@ -19,6 +19,14 @@ let CoursesController = class CoursesController {
     constructor(coursesService) {
         this.coursesService = coursesService;
     }
+    async getProvenCourses(res) {
+        const result = await this.coursesService.getProvenCourses();
+        res.json(result).status(result.code);
+    }
+    async getUntestedCourses(res) {
+        const result = await this.coursesService.getUntestedCourses();
+        res.json(result).status(result.code);
+    }
     async getCreatedCoursesByUserId(res, id) {
         const result = await this.coursesService.getCreatedCoursesByUserId(id);
         res.json(result).status(result.code);
@@ -40,6 +48,20 @@ let CoursesController = class CoursesController {
         res.json(result).status(result.code);
     }
 };
+__decorate([
+    (0, common_1.Get)('proven-courses'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CoursesController.prototype, "getProvenCourses", null);
+__decorate([
+    (0, common_1.Get)('untested-courses'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CoursesController.prototype, "getUntestedCourses", null);
 __decorate([
     (0, common_1.Get)(':id/created-courses'),
     __param(0, (0, common_1.Res)()),

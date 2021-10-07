@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .button {
   border-radius: $r5;
@@ -42,6 +42,10 @@
       background: $noactive;
       color: $noactive-color;
     }
+
+    &.warning {
+      background: $warning;
+    }
   }
 
   &.outline {
@@ -72,6 +76,11 @@
     &.cancel {
       color: $cancel;
       border-color: $cancel;
+    }
+
+    &.warning {
+      color: $warning;
+      border-color: $warning;
     }
   }
 }

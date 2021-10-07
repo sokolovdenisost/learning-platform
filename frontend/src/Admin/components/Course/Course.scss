@@ -1,0 +1,59 @@
+@import "../../../index.scss";
+
+.course-block {
+  display: flex;
+
+  .course-block-left {
+    width: 250px;
+    height: 200px;
+    .course-block-image {
+      width: 250px;
+      height: 200px;
+      border-radius: $r5;
+      object-fit: cover;
+    }
+  }
+
+  .course-block-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 25px;
+
+    .course-block-info {
+      .course-block-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .course-block-description {
+        margin: 10px 0;
+        width: 350px;
+        word-wrap: break-word;
+        margin: 15px 0;
+        letter-spacing: 1.5px;
+        color: #b3b3c1;
+        font-size: 16px;
+        font-weight: 400;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 90px;
+        line-height: 18px;
+      }
+
+      .course-block-tags {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .course-block-buttons {
+      button {
+        width: 100%;
+        display: block;
+        margin: 5px 0;
+      }
+    }
+  }
+}

@@ -73,6 +73,18 @@ export class CoursesService {
     }
   }
 
+  async getProvenCourses(): Promise<any> {
+    const courses = await this.courseModel.find({ isVerification: true });
+
+    return { code: 200, text: 'Proven courses', type: 'Success', courses };
+  }
+
+  async getUntestedCourses(): Promise<any> {
+    const courses = await this.courseModel.find({ isVerification: false });
+
+    return { code: 200, text: 'Untested courses', type: 'Success', courses };
+  }
+
   async getAllCourses(): Promise<any> {
     const courses = await this.courseModel.find({}).populate('owner', '_id firstName lastName');
     return { code: 200, text: 'This all courses', courses: courses.reverse() };

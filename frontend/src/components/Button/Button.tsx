@@ -1,5 +1,5 @@
-import React from 'react';
-import './Button.scss';
+import React from "react";
+import "./Button.scss";
 
 interface Props {
   children: React.ReactNode;
@@ -11,12 +11,12 @@ interface Props {
   disable?: boolean;
 }
 
-type FontSize = '14' | '16' | '18';
-type Types = 'bold' | 'outline';
-type Colors = 'main' | 'primary' | 'danger' | 'success' | 'cancel' | 'noactive';
+type FontSize = "14" | "16" | "18";
+type Types = "bold" | "outline";
+type Colors = "main" | "primary" | "danger" | "success" | "cancel" | "noactive" | "warning";
 
 export const Button = ({ children, type, color, fontSize, onClick, width, disable }: Props) => {
-  const styles = disable ? 'disable' : `${type} ${color}`;
+  const styles = disable ? "disable" : `${type} ${color}`;
   return (
     <button disabled={disable} className={`button ${styles}`} style={{ fontSize: `${fontSize}px`, width: width }} onClick={onClick}>
       {children}

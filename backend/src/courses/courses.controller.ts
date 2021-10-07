@@ -6,6 +6,20 @@ import { CoursesService } from './courses.service';
 export class CoursesController {
   constructor(private coursesService: CoursesService) {}
 
+  @Get('proven-courses')
+  async getProvenCourses(@Res() res: Response): Promise<void> {
+    const result = await this.coursesService.getProvenCourses();
+
+    res.json(result).status(result.code);
+  }
+
+  @Get('untested-courses')
+  async getUntestedCourses(@Res() res: Response): Promise<void> {
+    const result = await this.coursesService.getUntestedCourses();
+
+    res.json(result).status(result.code);
+  }
+
   @Get(':id/created-courses')
   async getCreatedCoursesByUserId(@Res() res: Response, @Param('id') id: string): Promise<void> {
     const result = await this.coursesService.getCreatedCoursesByUserId(id);
