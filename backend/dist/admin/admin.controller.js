@@ -15,12 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminController = void 0;
 const common_1 = require("@nestjs/common");
 const admin_service_1 = require("./admin.service");
+const admin_dto_1 = require("./dto/admin.dto");
 let AdminController = class AdminController {
     constructor(adminService) {
         this.adminService = adminService;
     }
     async deleteImagesDontUse(res) {
         const result = await this.adminService.deletesImageDontUse();
+        res.json(result).status(result.code);
+    }
+    async setVerified(res, body) {
+        const result = await this.adminService.setVerified(body.id);
+        res.json(result).status(result.code);
+    }
+    async sendNotification(res, body) {
+        const result = await this.adminService.sendNotification(body);
         res.json(result).status(result.code);
     }
     async getAllUsers(res) {
@@ -35,6 +44,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "deleteImagesDontUse", null);
+__decorate([
+    (0, common_1.Post)('set-verified'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, admin_dto_1.SetVerifiedDTO]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "setVerified", null);
+__decorate([
+    (0, common_1.Post)('send-notification'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, admin_dto_1.SendNotification]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "sendNotification", null);
 __decorate([
     (0, common_1.Get)('users'),
     __param(0, (0, common_1.Res)()),

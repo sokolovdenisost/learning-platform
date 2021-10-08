@@ -18,13 +18,15 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 const course_schema_1 = require("../schemas/course.schema");
+const notification_schema_1 = require("../schemas/notification.schema");
 const photo_schema_1 = require("../schemas/photo.schema");
 const user_schema_1 = require("../schemas/user.schema");
 let AdminService = class AdminService {
-    constructor(courseModel, photoModel, userModel, cloudinaryService) {
+    constructor(courseModel, photoModel, userModel, notificationModel, cloudinaryService) {
         this.courseModel = courseModel;
         this.photoModel = photoModel;
         this.userModel = userModel;
+        this.notificationModel = notificationModel;
         this.cloudinaryService = cloudinaryService;
     }
     async deletesImageDontUse() {
@@ -58,13 +60,39 @@ let AdminService = class AdminService {
         const users = await this.userModel.find();
         return { code: 200, text: 'All users', type: 'Success', users };
     }
+    async setVerified(id) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
+            await this.courseModel.findByIdAndUpdate(id, { isVerification: true });
+            return { code: 200, text: 'Course is verified!', type: 'Success' };
+        }
+        else {
+            return { code: 400, text: 'ID is not valid', type: 'Error' };
+        }
+    }
+    async sendNotification(body) {
+        if ((0, mongoose_2.isValidObjectId)(body.user_id)) {
+            if (body.text.trim() && body.type.trim()) {
+                const notification = await new this.notificationModel(body);
+                await notification.save();
+                return { code: 200, text: 'Notification is created!', type: 'Success' };
+            }
+            else {
+                return { code: 400, text: 'Not all fields are filled', type: 'Error' };
+            }
+        }
+        else {
+            return { code: 400, text: 'ID is not valid', type: 'Error' };
+        }
+    }
 };
 AdminService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
     __param(1, (0, mongoose_1.InjectModel)(photo_schema_1.Photo.name)),
     __param(2, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
+    __param(3, (0, mongoose_1.InjectModel)(notification_schema_1.Notification.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model,
         mongoose_2.Model,
         mongoose_2.Model,
         cloudinary_service_1.CloudinaryService])

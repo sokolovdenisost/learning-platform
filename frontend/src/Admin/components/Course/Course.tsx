@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "../../../components/Button/Button";
 import { Tag } from "../../../components/Tag/Tag";
 import { ICourse } from "../../../interfaces/course";
+import { setVerifiedHandler } from "../../../utils/admin";
 import { Block } from "../Block/Block";
 import "./Course.scss";
 
@@ -27,7 +28,14 @@ export const Course = ({ course }: Props) => {
             </div>
           </div>
           <div className="course-block-buttons">
-            <Button width="120px" type="bold" color="success" fontSize="14">
+            <Button
+              width="120px"
+              disable={course.isVerification}
+              type="bold"
+              color="success"
+              fontSize="14"
+              onClick={() => setVerifiedHandler(course._id)}
+            >
               Set verified
             </Button>
             <Button width="120px" type="bold" color="primary" fontSize="14">

@@ -17,11 +17,13 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const course_schema_1 = require("../schemas/course.schema");
+const notification_schema_1 = require("../schemas/notification.schema");
 const user_schema_1 = require("../schemas/user.schema");
 let UserService = class UserService {
-    constructor(userModel, courseModel) {
+    constructor(userModel, courseModel, notificationModel) {
         this.userModel = userModel;
         this.courseModel = courseModel;
+        this.notificationModel = notificationModel;
     }
     async getUserById(user_id) {
         if ((0, mongoose_2.isValidObjectId)(user_id)) {
@@ -37,12 +39,24 @@ let UserService = class UserService {
             return { code: 400, text: 'Invalid id', type: 'Error' };
         }
     }
+    async getNotifications(id) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
+            const notifications = await this.notificationModel.find({ user_id: id });
+            return { code: 200, text: 'All notifications', type: 'Success', notifications };
+        }
+        else {
+            return { code: 400, text: 'Invalid id', type: 'Error' };
+        }
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __param(1, (0, mongoose_1.InjectModel)(course_schema_1.Course.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model, mongoose_2.Model])
+    __param(2, (0, mongoose_1.InjectModel)(notification_schema_1.Notification.name)),
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model,
+        mongoose_2.Model])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

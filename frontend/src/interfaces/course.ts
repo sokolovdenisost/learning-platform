@@ -18,6 +18,7 @@ export interface ICourse {
   };
   rating: IRating[];
   favorites: string[];
+  isVerification: boolean;
 }
 
 interface IRating {

@@ -19,11 +19,23 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
+    async getNotifications(res, id) {
+        const result = await this.userService.getNotifications(id);
+        res.json(result).status(result.code);
+    }
     async getUser(res, id) {
         const result = await this.userService.getUserById(id);
         res.json(result).status(result.code);
     }
 };
+__decorate([
+    (0, common_1.Get)('notifications/:id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getNotifications", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Res)()),

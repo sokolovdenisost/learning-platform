@@ -24,6 +24,7 @@ const initialState: IStateCourse = {
     },
     favorites: [],
     rating: [],
+    isVerification: false,
   },
 };
 

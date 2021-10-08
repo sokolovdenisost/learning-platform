@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const cloudinary_module_1 = require("../cloudinary/cloudinary.module");
 const course_schema_1 = require("../schemas/course.schema");
+const notification_schema_1 = require("../schemas/notification.schema");
 const photo_schema_1 = require("../schemas/photo.schema");
 const user_schema_1 = require("../schemas/user.schema");
 const admin_controller_1 = require("./admin.controller");
@@ -30,6 +31,7 @@ AdminModule = __decorate([
                 { name: course_schema_1.Course.name, schema: course_schema_1.CourseSchema },
                 { name: photo_schema_1.Photo.name, schema: photo_schema_1.PhotoSchema },
                 { name: user_schema_1.User.name, schema: user_schema_1.UserSchema },
+                { name: notification_schema_1.Notification.name, schema: notification_schema_1.NotificationSchema },
             ]),
             cloudinary_module_1.CloudinaryModule,
         ],

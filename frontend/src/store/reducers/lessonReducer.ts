@@ -26,6 +26,7 @@ const initialState: IStateLesson = {
       },
       rating: [],
       favorites: [],
+      isVerification: false,
     },
     comments: [],
   },

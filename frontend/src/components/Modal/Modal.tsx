@@ -209,6 +209,10 @@ export const ReportModal = ({ modal, setModal }: ICreateModal) => {
   );
 };
 
+export const SendNotificationModal = ({ modal, setModal }: ICreateModal) => {
+  return <Modal modal={modal} setModal={setModal} title="Send notification"></Modal>;
+};
+
 interface IConfirmModal {
   modal: IModal;
   setModal: React.Dispatch<React.SetStateAction<IModal>>;
