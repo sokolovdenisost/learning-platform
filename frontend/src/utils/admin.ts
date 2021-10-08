@@ -20,6 +20,7 @@ export const setVerifiedHandler = async (id: string) => {
 };
 
 export const sendNotification = async (body: ISendNotification) => {
+  console.log(body);
   const response = await fetch(`${API_URL}/admin/send-notification`, {
     method: "POST",
     body: JSON.stringify({ ...body }),
@@ -30,6 +31,8 @@ export const sendNotification = async (body: ISendNotification) => {
   });
 
   const result = await response.json();
+
+  console.log(result);
 
   return result;
 };

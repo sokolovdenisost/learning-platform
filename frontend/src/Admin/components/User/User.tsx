@@ -43,7 +43,7 @@ export const User = ({ user }: Props) => {
           </div>
         </div>
       </Block>
-      {modal.active ? <SendNotificationModal modal={modal} setModal={setModal} /> : null}
+      {modal.active ? <SendNotificationModal user_id={user._id} modal={modal} setModal={setModal} /> : null}
     </>
   );
 };

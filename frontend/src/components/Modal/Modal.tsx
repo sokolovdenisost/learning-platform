@@ -6,6 +6,8 @@ import { Textarea } from "../Textarea/Textarea";
 import { Notification } from "../Notification/Notification";
 import "./Modal.scss";
 import { changeInputHandler } from "../../hooks/change";
+import { Select } from "../Select/Select";
+import { sendNotification } from "../../utils/admin";
 
 interface Props {
   modal: IModal;
@@ -209,8 +211,32 @@ export const ReportModal = ({ modal, setModal }: ICreateModal) => {
   );
 };
 
-export const SendNotificationModal = ({ modal, setModal }: ICreateModal) => {
-  return <Modal modal={modal} setModal={setModal} title="Send notification"></Modal>;
+export const SendNotificationModal = ({ modal, setModal, user_id }: INotificationModal) => {
+  const [form, setForm] = useState({
+    type: "",
+    text: "",
+    user_id: user_id,
+  });
+
+  return (
+    <Modal modal={modal} setModal={setModal} title="Send notification">
+      <Select
+        title="Type"
+        id="type"
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => changeInputHandler(e, form, setForm)}
+        options={["test", "test1"]}
+      />
+      <Textarea
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => changeInputHandler(e, form, setForm)}
+        placeholder="Test"
+        maxHeight="500px"
+        id="text"
+      />
+      <Button type="bold" color="primary" fontSize="14" width="100%" onClick={() => sendNotification(form)}>
+        Send notification
+      </Button>
+    </Modal>
+  );
 };
 
 interface IConfirmModal {
@@ -224,4 +250,10 @@ interface ICreateModal {
   setModal: React.Dispatch<React.SetStateAction<IModal>>;
   title?: string;
   children?: JSX.Element | JSX.Element[];
+}
+
+interface INotificationModal {
+  modal: IModal;
+  setModal: React.Dispatch<React.SetStateAction<IModal>>;
+  user_id: string;
 }
