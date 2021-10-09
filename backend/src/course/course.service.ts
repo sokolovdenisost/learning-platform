@@ -132,11 +132,12 @@ export class CourseService {
 
   async deleteCourse(id: string, user_id: string): Promise<ISuccess | IError | any> {
     if (mongoose.isValidObjectId(id) && mongoose.isValidObjectId(user_id)) {
+      const user = await this.userModel.findById(user_id);
       const completedCoursesForUsers = await this.userModel.find({ completedCourses: { $all: [id] } });
       const takeCoursesForUsers = await this.userModel.find({ 'takeCourses.course': id });
 
       const course = await this.courseModel.findById(id);
-      if (course && String(course.owner) === user_id) {
+      if ((course && String(course.owner) === user_id) || user.role === 'admin') {
         completedCoursesForUsers.forEach(async (user) => {
           const idx = user.completedCourses.findIndex((id) => id === course._id);
           user.completedCourses.splice(idx, 1);

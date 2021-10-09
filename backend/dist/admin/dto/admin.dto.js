@@ -1,10 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SendNotification = exports.SetVerifiedDTO = void 0;
+exports.BanUserDTO = exports.SendNotificationDTO = exports.SetVerifiedDTO = void 0;
 class SetVerifiedDTO {
 }
 exports.SetVerifiedDTO = SetVerifiedDTO;
-class SendNotification {
+class SendNotificationDTO {
 }
-exports.SendNotification = SendNotification;
+exports.SendNotificationDTO = SendNotificationDTO;
+class BanUserDTO {
+}
+exports.BanUserDTO = BanUserDTO;
 //# sourceMappingURL=admin.dto.js.map

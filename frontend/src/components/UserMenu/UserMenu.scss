@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .user-menu {
   position: absolute;
@@ -13,6 +13,7 @@
   background: #fff;
 
   &.active {
+    z-index: 1;
     transform: translateY(0);
   }
 

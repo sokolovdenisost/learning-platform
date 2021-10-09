@@ -4,7 +4,7 @@ import { CourseDocument } from 'src/schemas/course.schema';
 import { NotificationDocument } from 'src/schemas/notification.schema';
 import { PhotoDocument } from 'src/schemas/photo.schema';
 import { UserDocument } from 'src/schemas/user.schema';
-import { SendNotification } from './dto/admin.dto';
+import { SendNotificationDTO } from './dto/admin.dto';
 export declare class AdminService {
     private courseModel;
     private photoModel;
@@ -15,5 +15,6 @@ export declare class AdminService {
     deletesImageDontUse(): Promise<any>;
     getAllUsers(): Promise<any>;
     setVerified(id: string): Promise<any>;
-    sendNotification(body: SendNotification): Promise<any>;
+    sendNotification(body: SendNotificationDTO): Promise<any>;
+    banUser(id: string): Promise<any>;
 }

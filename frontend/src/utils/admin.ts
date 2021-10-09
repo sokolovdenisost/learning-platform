@@ -32,7 +32,9 @@ export const sendNotification = async (body: ISendNotification) => {
 
   const result = await response.json();
 
-  console.log(result);
+  if (result.type === "Success") {
+    window.location.reload();
+  }
 
   return result;
 };

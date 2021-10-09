@@ -15,7 +15,7 @@ export const CardCourseCompleted = ({ course }: Props) => {
       <div className="card-course-completed-buttons">
         <a href={`/lesson/${course.lessons[0]}`}>
           <Button type="bold" fontSize="14" color="primary">
-            CONTINUE
+            Check
           </Button>
         </a>
       </div>

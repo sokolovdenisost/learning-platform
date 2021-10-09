@@ -84,6 +84,15 @@ let AdminService = class AdminService {
             return { code: 400, text: 'ID is not valid', type: 'Error' };
         }
     }
+    async banUser(id) {
+        if ((0, mongoose_2.isValidObjectId)(id)) {
+            this.userModel.findByIdAndUpdate(id, { ban: true });
+            return { code: 200, text: 'This user is banned', type: 'Success' };
+        }
+        else {
+            return { code: 400, text: 'ID is not valid', type: 'Error' };
+        }
+    }
 };
 AdminService = __decorate([
     (0, common_1.Injectable)(),

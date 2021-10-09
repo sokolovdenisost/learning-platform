@@ -57,6 +57,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String, default: 'user' }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Boolean, default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "ban", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);

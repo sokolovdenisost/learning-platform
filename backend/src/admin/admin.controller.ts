@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AdminService } from './admin.service';
-import { SendNotification, SetVerifiedDTO } from './dto/admin.dto';
+import { BanUserDTO, SendNotificationDTO, SetVerifiedDTO } from './dto/admin.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -22,10 +22,15 @@ export class AdminController {
   }
 
   @Post('send-notification')
-  async sendNotification(@Res() res: Response, @Body() body: SendNotification): Promise<void> {
+  async sendNotification(@Res() res: Response, @Body() body: SendNotificationDTO): Promise<void> {
     const result = await this.adminService.sendNotification(body);
 
     res.json(result).status(result.code);
+  }
+
+  @Post('ban-user')
+  async banUser(@Res() res: Response, @Body() body: BanUserDTO): Promise<void> {
+    const result = await this.adminService.banUser(body.id);
   }
 
   @Get('users')

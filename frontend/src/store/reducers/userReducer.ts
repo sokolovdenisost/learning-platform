@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { IStateUser } from "../../interfaces/state";
-import { ERROR, GET_ALL_USERS, GET_AUTH, GET_USER } from "../types";
+import { ERROR, GET_ALL_USERS, GET_AUTH, GET_NOTIFICATIONS, GET_USER } from "../types";
 
 const initialState: IStateUser = {
   user: {
@@ -32,6 +32,7 @@ const initialState: IStateUser = {
     role: "",
   },
   users: [],
+  notifications: [],
   loading: true,
   error: false,
 };
@@ -49,6 +50,9 @@ export const userReducer = (state: IStateUser = initialState, action: AnyAction)
 
     case GET_ALL_USERS:
       return { ...state, users: action.payload, loading: false };
+
+    case GET_NOTIFICATIONS:
+      return { ...state, notifications: action.payload, loading: false };
 
     default:
       return state;

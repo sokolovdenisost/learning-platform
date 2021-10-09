@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { API_URL } from "../../consts";
-import { ERROR, GET_ALL_USERS, GET_AUTH, GET_USER } from "../types";
+import { ERROR, GET_ALL_USERS, GET_AUTH, GET_NOTIFICATIONS, GET_USER } from "../types";
 
 export const getAuth = () => async (dispatch: Dispatch) => {
   const token = localStorage.getItem("token");
@@ -49,5 +49,18 @@ export const getAllUsers = () => async (dispatch: Dispatch) => {
   dispatch({
     type: GET_ALL_USERS,
     payload: result.users,
+  });
+};
+
+export const getNotifications = (user_id: string) => async (dispatch: Dispatch) => {
+  const response = await fetch(`${API_URL}/user/notifications/${user_id}`);
+
+  const result = await response.json();
+
+  console.log(result);
+
+  dispatch({
+    type: GET_NOTIFICATIONS,
+    payload: result.notifications,
   });
 };

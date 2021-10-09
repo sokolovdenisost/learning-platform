@@ -3,6 +3,7 @@ import { Button } from "../../../components/Button/Button";
 import { Tag } from "../../../components/Tag/Tag";
 import { ICourse } from "../../../interfaces/course";
 import { setVerifiedHandler } from "../../../utils/admin";
+import { deleteCourseHandler } from "../../../utils/course";
 import { Block } from "../Block/Block";
 import "./Course.scss";
 
@@ -38,10 +39,12 @@ export const Course = ({ course }: Props) => {
             >
               Set verified
             </Button>
-            <Button width="120px" type="bold" color="primary" fontSize="14">
-              Check
-            </Button>
-            <Button width="120px" type="bold" color="danger" fontSize="14">
+            <a href={`/lesson/${course.lessons[0]}`}>
+              <Button width="120px" type="bold" color="primary" fontSize="14">
+                Check
+              </Button>
+            </a>
+            <Button width="120px" type="bold" color="danger" fontSize="14" onClick={() => deleteCourseHandler(course._id)}>
               Delete
             </Button>
           </div>

@@ -19,6 +19,7 @@ export interface IStateUser {
   user: IUser;
   profile: IUser;
   users: IUser[];
+  notifications: INotification[];
   loading: boolean;
   error: boolean;
 }
@@ -38,6 +39,13 @@ export interface IStateCourse {
   loading: boolean;
   error: boolean;
   course: ICourse;
+}
+
+interface INotification {
+  _id: string;
+  type: string;
+  text: string;
+  user_id: string;
 }
 
 interface ITakeCourse {

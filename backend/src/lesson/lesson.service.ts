@@ -105,16 +105,18 @@ export class LessonService {
       const course = await this.courseModel.findById(lesson.course);
       const user = await this.userModel.findById(user_id);
 
-      if (String(course.owner) === String(user._id)) {
+      if (String(course.owner) === String(user._id) || user.role === 'admin') {
         return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
       }
 
       if (course && lesson && user) {
         const checkTaked = user.takeCourses.filter((c) => String(c.course) === String(course._id));
         const checkCompleted = user.completedCourses.filter((c) => String(c) === String(course._id));
-        if (checkTaked || checkCompleted) {
+        if (checkTaked.length || checkCompleted.length) {
           const checkAccess = course.lessons.findIndex((l) => String(l) === String(lesson._id));
-          if (checkCompleted || checkAccess <= checkTaked[0]['currentLesson'] - 1) {
+          if (checkCompleted.length || checkAccess <= checkTaked[0]['currentLesson'] - 1) {
+            console.log('test #2');
+
             return { code: 200, text: `Lesson ${lesson_id}`, type: 'Success', lesson };
           } else {
             return { code: 400, text: 'No access to the lesson', type: 'Error' };

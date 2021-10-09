@@ -6,7 +6,7 @@ import { Course, CourseDocument } from 'src/schemas/course.schema';
 import { Notification, NotificationDocument } from 'src/schemas/notification.schema';
 import { Photo, PhotoDocument } from 'src/schemas/photo.schema';
 import { User, UserDocument } from 'src/schemas/user.schema';
-import { SendNotification } from './dto/admin.dto';
+import { SendNotificationDTO } from './dto/admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -63,7 +63,7 @@ export class AdminService {
     }
   }
 
-  async sendNotification(body: SendNotification): Promise<any> {
+  async sendNotification(body: SendNotificationDTO): Promise<any> {
     if (isValidObjectId(body.user_id)) {
       if (body.text.trim() && body.type.trim()) {
         const notification = await new this.notificationModel(body);
@@ -74,6 +74,16 @@ export class AdminService {
       } else {
         return { code: 400, text: 'Not all fields are filled', type: 'Error' };
       }
+    } else {
+      return { code: 400, text: 'ID is not valid', type: 'Error' };
+    }
+  }
+
+  async banUser(id: string): Promise<any> {
+    if (isValidObjectId(id)) {
+      this.userModel.findByIdAndUpdate(id, { ban: true });
+
+      return { code: 200, text: 'This user is banned', type: 'Success' };
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };
     }

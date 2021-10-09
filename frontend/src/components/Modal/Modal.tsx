@@ -196,8 +196,11 @@ export const CreateModal = ({ modal, setModal }: ICreateModal) => {
 export const ReportModal = ({ modal, setModal }: ICreateModal) => {
   return (
     <Modal title="Report course" modal={modal} setModal={setModal}>
-      <div className="report-course">
-        <div className="report-body">this place for textbox</div>
+      <div className="report-modal">
+        <div className="report-body">
+          <Select title="Type" id="type" options={["ban", "warning"]} onChange={() => {}} />
+          <Textarea maxHeight="500px" onChange={() => {}} id="text" placeholder="Text" />
+        </div>
         <div className="report-footer">
           <Button type="bold" color="primary" fontSize="14">
             Send

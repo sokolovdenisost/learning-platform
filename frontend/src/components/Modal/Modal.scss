@@ -79,6 +79,19 @@
           }
         }
       }
+
+      .report-modal {
+        .report-body {
+        }
+
+        .report-footer {
+          text-align: right;
+
+          button:first-child {
+            margin-right: 5px;
+          }
+        }
+      }
     }
   }
 }
