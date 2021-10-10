@@ -7,6 +7,7 @@ export interface IState {
   lesson: IStateLesson;
   courses: IStateCourses;
   course: IStateCourse;
+  admin: IStateAdmin;
 }
 
 export interface IStateLesson {
@@ -31,14 +32,21 @@ export interface IStateCourses {
   favoriteCourses: ICourse[];
   createdCourses: ICourse[];
   completedCourses: ICourse[];
-  provenCourses: ICourse[];
-  untestedCourses: ICourse[];
 }
 
 export interface IStateCourse {
   loading: boolean;
   error: boolean;
   course: ICourse;
+}
+
+export interface IStateAdmin {
+  loading: boolean;
+  error: boolean;
+  banUsers: IUser[];
+  users: IUser[];
+  provenCourses: ICourse[];
+  untestedCourses: ICourse[];
 }
 
 interface INotification {

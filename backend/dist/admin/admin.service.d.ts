@@ -14,6 +14,7 @@ export declare class AdminService {
     constructor(courseModel: Model<CourseDocument>, photoModel: Model<PhotoDocument>, userModel: Model<UserDocument>, notificationModel: Model<NotificationDocument>, cloudinaryService: CloudinaryService);
     deletesImageDontUse(): Promise<any>;
     getAllUsers(): Promise<any>;
+    getBanUsers(): Promise<any>;
     setVerified(id: string): Promise<any>;
     sendNotification(body: SendNotificationDTO): Promise<any>;
     banUser(id: string): Promise<any>;

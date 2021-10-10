@@ -60,6 +60,10 @@ let AdminService = class AdminService {
         const users = await this.userModel.find();
         return { code: 200, text: 'All users', type: 'Success', users };
     }
+    async getBanUsers() {
+        const users = await this.userModel.find({ ban: true }).select('-password');
+        return { code: 200, text: 'All ban users', type: 'Success', users };
+    }
     async setVerified(id) {
         if ((0, mongoose_2.isValidObjectId)(id)) {
             await this.courseModel.findByIdAndUpdate(id, { isVerification: true });
@@ -86,8 +90,14 @@ let AdminService = class AdminService {
     }
     async banUser(id) {
         if ((0, mongoose_2.isValidObjectId)(id)) {
-            this.userModel.findByIdAndUpdate(id, { ban: true });
-            return { code: 200, text: 'This user is banned', type: 'Success' };
+            const user = await this.userModel.findById(id);
+            if (user.ban) {
+                return { code: 200, text: 'This user has already been banned', type: 'Success' };
+            }
+            else {
+                await this.userModel.findByIdAndUpdate(id, { ban: true });
+                return { code: 200, text: 'This user is banned', type: 'Success' };
+            }
         }
         else {
             return { code: 400, text: 'ID is not valid', type: 'Error' };

@@ -5,6 +5,7 @@ import { useDate } from "../../../hooks/data";
 import { IUser } from "../../../interfaces/user";
 import "./User.scss";
 import { SendNotificationModal } from "../../../components/Modal/Modal";
+import { banUser } from "../../../utils/admin";
 
 interface Props {
   user: IUser;
@@ -36,9 +37,15 @@ export const User = ({ user }: Props) => {
               <Button type="bold" color="warning" fontSize="14" onClick={() => setModal({ ...modal, active: true })}>
                 Send notification
               </Button>
-              <Button type="bold" color="danger" fontSize="14">
-                Ban user
-              </Button>
+              {user.ban ? (
+                <Button type="bold" color="success" fontSize="14">
+                  Unban user
+                </Button>
+              ) : (
+                <Button type="bold" color="danger" fontSize="14" onClick={() => banUser(user._id)}>
+                  Ban user
+                </Button>
+              )}
             </div>
           </div>
         </div>

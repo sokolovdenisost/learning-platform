@@ -53,6 +53,12 @@ export class AdminService {
     return { code: 200, text: 'All users', type: 'Success', users };
   }
 
+  async getBanUsers(): Promise<any> {
+    const users = await this.userModel.find({ ban: true }).select('-password');
+
+    return { code: 200, text: 'All ban users', type: 'Success', users };
+  }
+
   async setVerified(id: string): Promise<any> {
     if (isValidObjectId(id)) {
       await this.courseModel.findByIdAndUpdate(id, { isVerification: true });
@@ -81,9 +87,15 @@ export class AdminService {
 
   async banUser(id: string): Promise<any> {
     if (isValidObjectId(id)) {
-      this.userModel.findByIdAndUpdate(id, { ban: true });
+      const user = await this.userModel.findById(id);
 
-      return { code: 200, text: 'This user is banned', type: 'Success' };
+      if (user.ban) {
+        return { code: 200, text: 'This user has already been banned', type: 'Success' };
+      } else {
+        await this.userModel.findByIdAndUpdate(id, { ban: true });
+
+        return { code: 200, text: 'This user is banned', type: 'Success' };
+      }
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };
     }

@@ -16,6 +16,7 @@ const initialState: IStateUser = {
     takeCourses: [],
     completedCourses: [],
     role: "",
+    ban: false,
   },
   profile: {
     firstName: "",
@@ -30,6 +31,7 @@ const initialState: IStateUser = {
     takeCourses: [],
     completedCourses: [],
     role: "",
+    ban: false,
   },
   users: [],
   notifications: [],

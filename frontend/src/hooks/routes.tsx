@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Admin } from "../Admin/pages/Admin/Admin";
+import { AdminBanUsers } from "../Admin/pages/AdminBanUsers/AdminBanUsers";
 import { AdminCourses } from "../Admin/pages/AdminCourses/AdminCourses";
 import { AdminProvenCourses } from "../Admin/pages/AdminProvenCourses/AdminProvenCourses";
 import { AdminUntestedCourses } from "../Admin/pages/AdminUntestedCourses/AdminUntestedCourses";
@@ -141,6 +142,10 @@ export const routes = (loading: boolean, auth: any) => {
     {
       path: "/admin/proven-courses",
       component: <AdminProvenCourses />,
+    },
+    {
+      path: "/admin/ban-users",
+      component: <AdminBanUsers />,
     },
   ];
 

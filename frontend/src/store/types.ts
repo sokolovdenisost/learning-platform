@@ -19,3 +19,5 @@ export const GET_USER = "GET_USER";
 export const GET_MY_COMPLETED_COURSES = "GET_MY_COMPLETED_COURSES";
 
 export const GO_EMPTY = "GO_EMPTY";
+
+export const GET_ALL_BAN_USERS = "GET_ALL_BAN_USERS";

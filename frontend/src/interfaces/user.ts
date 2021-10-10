@@ -11,6 +11,7 @@ export interface IUser {
   takeCourses: TakeCourses[];
   completedCourses: string[];
   role: string;
+  ban: boolean;
 }
 
 interface TakeCourses {

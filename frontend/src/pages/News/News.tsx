@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Layout } from '../../components/Layout/Layout';
-import { Loader } from '../../components/Loader/Loader';
-import { Slider } from '../../components/Slider/Slider';
-import { API_URL } from '../../consts';
-import { ICourse } from '../../interfaces/course';
-import { IState, IStateCourses } from '../../interfaces/state';
-import { getAllCourses } from '../../store/actions/coursesAction';
-import { useTranslation } from 'react-i18next';
-import './News.scss';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Layout } from "../../components/Layout/Layout";
+import { Loader } from "../../components/Loader/Loader";
+import { Slider } from "../../components/Slider/Slider";
+import { API_URL } from "../../consts";
+import { ICourse } from "../../interfaces/course";
+import { IState, IStateCourses } from "../../interfaces/state";
+import { getAllCourses } from "../../store/actions/coursesAction";
+import { useTranslation } from "react-i18next";
+import "./News.scss";
 
 export const News = () => {
   const { t } = useTranslation();

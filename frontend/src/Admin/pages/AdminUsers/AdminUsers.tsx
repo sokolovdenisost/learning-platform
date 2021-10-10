@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "../../../components/Layout/Layout";
 import { Loader } from "../../../components/Loader/Loader";
 import { IState, IStateUser } from "../../../interfaces/state";
-import { getAllUsers } from "../../../store/actions/userAction";
+import { getAllUsers } from "../../../store/actions/adminAction";
 import { User } from "../../components/User/User";
 import "./AdminUsers.scss";
 

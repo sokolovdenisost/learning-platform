@@ -41,17 +41,6 @@ export const getUser = (user_id: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export const getAllUsers = () => async (dispatch: Dispatch) => {
-  const response = await fetch(`${API_URL}/admin/users`);
-
-  const result = await response.json();
-
-  dispatch({
-    type: GET_ALL_USERS,
-    payload: result.users,
-  });
-};
-
 export const getNotifications = (user_id: string) => async (dispatch: Dispatch) => {
   const response = await fetch(`${API_URL}/user/notifications/${user_id}`);
 

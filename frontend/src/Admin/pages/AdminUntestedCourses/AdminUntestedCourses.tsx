@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "../../../components/Layout/Layout";
 import { Loader } from "../../../components/Loader/Loader";
-import { IState, IStateCourses } from "../../../interfaces/state";
-import { getUntestedCourses } from "../../../store/actions/coursesAction";
+import { IState, IStateAdmin, IStateCourses } from "../../../interfaces/state";
+import { getUntestedCourses } from "../../../store/actions/adminAction";
 import { Course } from "../../components/Course/Course";
 import "./AdminUntestedCourses.scss";
 
 export const AdminUntestedCourses = () => {
-  const { untestedCourses, loading }: IStateCourses = useSelector((state: IState) => state.courses);
+  const { untestedCourses, loading }: IStateAdmin = useSelector((state: IState) => state.admin);
   const dispatch = useDispatch();
 
   useEffect(() => {

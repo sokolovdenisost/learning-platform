@@ -18,8 +18,6 @@ const initialState: IStateCourses = {
   favoriteCourses: [],
   createdCourses: [],
   completedCourses: [],
-  provenCourses: [],
-  untestedCourses: [],
 };
 
 export const coursesReducer = (state = initialState, action: AnyAction) => {
@@ -38,12 +36,6 @@ export const coursesReducer = (state = initialState, action: AnyAction) => {
 
     case GET_MY_COMPLETED_COURSES:
       return { ...state, completedCourses: action.payload, loading: false };
-
-    case GET_ALL_PROVEN_COURSES:
-      return { ...state, provenCourses: action.payload, loading: false };
-
-    case GET_ALL_UNTESTED_COURSES:
-      return { ...state, untestedCourses: action.payload, loading: false };
 
     case GO_EMPTY:
       return { ...state, loading: true };

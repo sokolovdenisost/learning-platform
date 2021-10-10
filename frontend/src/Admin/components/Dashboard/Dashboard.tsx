@@ -2,6 +2,7 @@ import React from "react";
 import { FaUsers } from "react-icons/fa";
 import { HiOutlineBookOpen } from "react-icons/hi";
 import { VscVerified, VscUnverified } from "react-icons/vsc";
+import { IoBanOutline } from "react-icons/io5";
 import "./Dashboard.scss";
 
 interface Props {
@@ -20,12 +21,16 @@ const icons: Icons = {
     color: "#fce6e4",
   },
   Untested: {
-    icon: <VscUnverified size={40} color="#d32f2f" />,
-    color: "#ffebee",
+    icon: <VscUnverified size={40} color="#455a64" />,
+    color: "#eceff1",
   },
   Proven: {
     icon: <VscVerified size={40} color="#0288d1" />,
     color: "#e1f5fe",
+  },
+  Ban: {
+    icon: <IoBanOutline size={40} color="#d32f2f" />,
+    color: "#fce6e4",
   },
 };
 

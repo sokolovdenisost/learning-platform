@@ -20,7 +20,6 @@ export const setVerifiedHandler = async (id: string) => {
 };
 
 export const sendNotification = async (body: ISendNotification) => {
-  console.log(body);
   const response = await fetch(`${API_URL}/admin/send-notification`, {
     method: "POST",
     body: JSON.stringify({ ...body }),
@@ -33,6 +32,25 @@ export const sendNotification = async (body: ISendNotification) => {
   const result = await response.json();
 
   if (result.type === "Success") {
+    window.location.reload();
+  }
+
+  return result;
+};
+
+export const banUser = async (user_id: string) => {
+  const response = await fetch(`${API_URL}/admin/ban-user`, {
+    method: "POST",
+    body: JSON.stringify({ id: user_id }),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*/*",
+    },
+  });
+
+  const result = await response.json();
+
+  if (result.text === "This user is banned") {
     window.location.reload();
   }
 
