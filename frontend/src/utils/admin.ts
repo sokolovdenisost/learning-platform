@@ -38,7 +38,7 @@ export const sendNotification = async (body: ISendNotification) => {
   return result;
 };
 
-export const banUser = async (user_id: string) => {
+export const toggleBanUser = async (user_id: string) => {
   const response = await fetch(`${API_URL}/admin/ban-user`, {
     method: "POST",
     body: JSON.stringify({ id: user_id }),
@@ -56,6 +56,18 @@ export const banUser = async (user_id: string) => {
 
   return result;
 };
+
+export async function deleteDontUseImages() {
+  const response = await fetch(`${API_URL}/admin/delete-images`, {
+    method: "POST",
+  });
+
+  const result = await response.json();
+
+  console.log(result);
+
+  return result;
+}
 
 interface ISendNotification {
   type: string;

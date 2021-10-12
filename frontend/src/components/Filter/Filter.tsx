@@ -1,31 +1,37 @@
-import React from 'react';
-import './Filter.scss';
-import { FilterSelect } from './FilterSelect';
+import React from "react";
+import { Tags } from "../../pages/Courses/Courses";
+import "./Filter.scss";
+import { FilterSelect } from "./FilterSelect";
 
 const SKILLS = [
-  'Design',
-  'Web design',
-  'UI Design',
-  'UX Design',
-  'Front-end',
-  'Back-End',
-  'Mobile-development',
-  'Web-development',
-  'CMS',
-  'Testing',
-  'Gamedev',
+  "Web design",
+  "Design",
+  "UI Design",
+  "UX Design",
+  "Web development",
+  "Front-end",
+  "Back-end",
+  "Mobile development",
+  "CMS",
+  "Gamedev",
+  "Testing",
 ];
-const LANGUAGE = ['Russian', 'English'];
-const LEVEL = ['Intern', 'Junior', 'Middle', 'Senior'];
+const LANGUAGE = ["Russian", "English"];
+const LEVEL = ["Trainee", "Junior", "Middle", "Senior"];
 
-export const Filter = () => {
+interface Props {
+  setTags: React.Dispatch<React.SetStateAction<Tags>>;
+  tags: Tags;
+}
+
+export const Filter = ({ setTags, tags }: Props) => {
   return (
     <div className="filter">
       <div className="title">Filter by:</div>
       <div className="selects">
-        <FilterSelect width="200px" options={SKILLS} title="Categories" />
-        <FilterSelect width="200px" options={LANGUAGE} title="Language" />
-        <FilterSelect width="200px" options={LEVEL} title="Level" />
+        <FilterSelect width="200px" setTags={setTags} tags={tags} options={SKILLS} title="Categories" />
+        <FilterSelect width="200px" setTags={setTags} tags={tags} options={LANGUAGE} title="Language" />
+        <FilterSelect width="200px" setTags={setTags} tags={tags} options={LEVEL} title="Level" />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { getAllCourses } from "../../../store/actions/coursesAction";
 import { getAllUsers, getBanUsers, getProvenCourses, getUntestedCourses } from "../../../store/actions/adminAction";
 import { Dashboard } from "../../components/Dashboard/Dashboard";
 import "./Admin.scss";
+import { deleteDontUseImages } from "../../../utils/admin";
 
 export const Admin = () => {
   const courses: IStateCourses = useSelector((state: IState) => state.courses);
@@ -39,7 +40,7 @@ export const Admin = () => {
         <div className="admin-page-buttons">
           <div className="admin-title">Admin buttons</div>
           <div className="admin-buttons">
-            <Button type="bold" color="main" fontSize="16">
+            <Button type="bold" color="main" fontSize="16" onClick={() => deleteDontUseImages()}>
               Delete no use images
             </Button>
           </div>

@@ -29,8 +29,8 @@ export class AdminController {
   }
 
   @Post('ban-user')
-  async banUser(@Res() res: Response, @Body() body: BanUserDTO): Promise<void> {
-    const result = await this.adminService.banUser(body.id);
+  async toggleBanUser(@Res() res: Response, @Body() body: BanUserDTO): Promise<void> {
+    const result = await this.adminService.toggleBanUser(body.id);
 
     res.json(result).status(result.code);
   }

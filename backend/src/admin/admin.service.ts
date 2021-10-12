@@ -85,17 +85,13 @@ export class AdminService {
     }
   }
 
-  async banUser(id: string): Promise<any> {
+  async toggleBanUser(id: string): Promise<any> {
     if (isValidObjectId(id)) {
       const user = await this.userModel.findById(id);
 
-      if (user.ban) {
-        return { code: 200, text: 'This user has already been banned', type: 'Success' };
-      } else {
-        await this.userModel.findByIdAndUpdate(id, { ban: true });
+      await this.userModel.findByIdAndUpdate(id, { ban: !user.ban });
 
-        return { code: 200, text: 'This user is banned', type: 'Success' };
-      }
+      return { code: 200, text: 'This user is banned', type: 'Success' };
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };
     }

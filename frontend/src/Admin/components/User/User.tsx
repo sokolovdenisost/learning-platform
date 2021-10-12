@@ -5,7 +5,7 @@ import { useDate } from "../../../hooks/data";
 import { IUser } from "../../../interfaces/user";
 import "./User.scss";
 import { SendNotificationModal } from "../../../components/Modal/Modal";
-import { banUser } from "../../../utils/admin";
+import { toggleBanUser } from "../../../utils/admin";
 
 interface Props {
   user: IUser;
@@ -38,11 +38,11 @@ export const User = ({ user }: Props) => {
                 Send notification
               </Button>
               {user.ban ? (
-                <Button type="bold" color="success" fontSize="14">
+                <Button type="bold" color="success" fontSize="14" onClick={() => toggleBanUser(user._id)}>
                   Unban user
                 </Button>
               ) : (
-                <Button type="bold" color="danger" fontSize="14" onClick={() => banUser(user._id)}>
+                <Button type="bold" color="danger" fontSize="14" onClick={() => toggleBanUser(user._id)}>
                   Ban user
                 </Button>
               )}

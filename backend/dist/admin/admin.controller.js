@@ -32,8 +32,8 @@ let AdminController = class AdminController {
         const result = await this.adminService.sendNotification(body);
         res.json(result).status(result.code);
     }
-    async banUser(res, body) {
-        const result = await this.adminService.banUser(body.id);
+    async toggleBanUser(res, body) {
+        const result = await this.adminService.toggleBanUser(body.id);
         res.json(result).status(result.code);
     }
     async getBanUsers(res) {
@@ -75,7 +75,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, admin_dto_1.BanUserDTO]),
     __metadata("design:returntype", Promise)
-], AdminController.prototype, "banUser", null);
+], AdminController.prototype, "toggleBanUser", null);
 __decorate([
     (0, common_1.Get)('ban-users'),
     __param(0, (0, common_1.Res)()),

@@ -88,16 +88,11 @@ let AdminService = class AdminService {
             return { code: 400, text: 'ID is not valid', type: 'Error' };
         }
     }
-    async banUser(id) {
+    async toggleBanUser(id) {
         if ((0, mongoose_2.isValidObjectId)(id)) {
             const user = await this.userModel.findById(id);
-            if (user.ban) {
-                return { code: 200, text: 'This user has already been banned', type: 'Success' };
-            }
-            else {
-                await this.userModel.findByIdAndUpdate(id, { ban: true });
-                return { code: 200, text: 'This user is banned', type: 'Success' };
-            }
+            await this.userModel.findByIdAndUpdate(id, { ban: !user.ban });
+            return { code: 200, text: 'This user is banned', type: 'Success' };
         }
         else {
             return { code: 400, text: 'ID is not valid', type: 'Error' };

@@ -7,7 +7,7 @@ export declare class AdminController {
     deleteImagesDontUse(res: Response): Promise<void>;
     setVerified(res: Response, body: SetVerifiedDTO): Promise<void>;
     sendNotification(res: Response, body: SendNotificationDTO): Promise<void>;
-    banUser(res: Response, body: BanUserDTO): Promise<void>;
+    toggleBanUser(res: Response, body: BanUserDTO): Promise<void>;
     getBanUsers(res: Response): Promise<void>;
     getAllUsers(res: Response): Promise<void>;
 }

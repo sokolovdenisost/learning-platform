@@ -17,5 +17,5 @@ export declare class AdminService {
     getBanUsers(): Promise<any>;
     setVerified(id: string): Promise<any>;
     sendNotification(body: SendNotificationDTO): Promise<any>;
-    banUser(id: string): Promise<any>;
+    toggleBanUser(id: string): Promise<any>;
 }
