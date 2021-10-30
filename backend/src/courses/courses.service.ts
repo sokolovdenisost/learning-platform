@@ -67,6 +67,8 @@ export class CoursesService {
         },
       });
 
+      console.log(user);
+
       return { code: 200, text: `Completed courses`, type: 'Success', courses: user.completedCourses };
     } else {
       return { code: 400, text: 'ID is not valid', type: 'Error' };

@@ -134,7 +134,7 @@ let CourseService = class CourseService {
             const course = await this.courseModel.findById(id);
             if ((course && String(course.owner) === user_id) || user.role === 'admin') {
                 completedCoursesForUsers.forEach(async (user) => {
-                    const idx = user.completedCourses.findIndex((id) => id === course._id);
+                    const idx = user.completedCourses.findIndex((id) => String(id) === String(course._id));
                     user.completedCourses.splice(idx, 1);
                     await user.save();
                 });

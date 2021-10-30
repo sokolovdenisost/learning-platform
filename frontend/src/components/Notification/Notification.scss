@@ -42,3 +42,27 @@
     font-weight: 700;
   }
 }
+
+.notification-item {
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 2px solid #eee;
+  display: flex;
+  align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .notification-image {
+    width: 70px;
+    height: 70px;
+    margin-right: 25px;
+  }
+
+  .notification-text {
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+  }
+}

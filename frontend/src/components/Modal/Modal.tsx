@@ -227,7 +227,7 @@ export const SendNotificationModal = ({ modal, setModal, user_id }: INotificatio
         title="Type"
         id="type"
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => changeInputHandler(e, form, setForm)}
-        options={["test", "test1"]}
+        options={["warning", "success", "info", "error"]}
       />
       <Textarea
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => changeInputHandler(e, form, setForm)}
